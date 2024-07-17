@@ -17,7 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import androidx.compose.foundation.text.input.internal.RecordingInputConnection$$ExternalSyntheticOutline0;
+import androidx.compose.ui.text.input.RecordingInputConnection$$ExternalSyntheticOutline0;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.viewpager.widget.PagerAdapter;
 import com.android.app.viewcapture.data.ViewNode;
@@ -38,7 +38,7 @@ import java.util.stream.IntStream;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class CardPagerAdapter extends PagerAdapter {
     public static final Companion Companion = new Object();
     public final List _aodTargets = new ArrayList();
@@ -64,7 +64,7 @@ public final class CardPagerAdapter extends PagerAdapter {
     public String uiSurface;
     public final SparseArray viewHolders = new SparseArray();
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public enum TransitionType {
         ;
 
@@ -77,7 +77,7 @@ public final class CardPagerAdapter extends PagerAdapter {
         }
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class ViewHolder {
         public final BaseTemplateCard card;
         public final BcSmartspaceCard legacyCard;
@@ -208,9 +208,9 @@ public final class CardPagerAdapter extends PagerAdapter {
                     subItemInfo = null;
                 }
                 if (subItemInfo == null || (SmartspaceUtils.isEmpty(subItemInfo.getText()) && subItemInfo.getIcon() == null)) {
-                    i2 = 2131559021;
+                    i2 = 2131559015;
                 } else {
-                    i2 = 2131559020;
+                    i2 = 2131559014;
                 }
                 LayoutInflater from = LayoutInflater.from(viewGroup.getContext());
                 BaseTemplateCard baseTemplateCard2 = (BaseTemplateCard) from.inflate(i2, viewGroup2, false);
@@ -227,22 +227,22 @@ public final class CardPagerAdapter extends PagerAdapter {
                 if (templateData != null) {
                     switch (templateData.getTemplateType()) {
                         case 2:
-                            i3 = 2131559043;
+                            i3 = 2131559037;
                             break;
                         case 3:
-                            i3 = 2131559044;
-                            break;
-                        case 4:
-                            i3 = 2131559036;
-                            break;
-                        case 5:
-                            i3 = 2131559041;
-                            break;
-                        case 6:
                             i3 = 2131559038;
                             break;
+                        case 4:
+                            i3 = 2131559030;
+                            break;
+                        case 5:
+                            i3 = 2131559035;
+                            break;
+                        case 6:
+                            i3 = 2131559032;
+                            break;
                         case ViewNode.WIDTH_FIELD_NUMBER:
-                            i3 = 2131559042;
+                            i3 = 2131559036;
                             break;
                         default:
                             i3 = 0;
@@ -256,8 +256,8 @@ public final class CardPagerAdapter extends PagerAdapter {
                             baseTemplateCard2.mSecondaryCard = bcSmartspaceCardSecondary;
                             BcSmartspaceTemplateDataUtils.updateVisibility(viewGroup3, 8);
                             baseTemplateCard2.mSecondaryCardPane.removeAllViews();
-                            ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(baseTemplateCard2.getResources().getDimensionPixelSize(2131165912));
-                            layoutParams.setMarginStart(baseTemplateCard2.getResources().getDimensionPixelSize(2131165923));
+                            ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(-2, baseTemplateCard2.getResources().getDimensionPixelSize(2131165880));
+                            layoutParams.setMarginStart(baseTemplateCard2.getResources().getDimensionPixelSize(2131165891));
                             layoutParams.startToStart = 0;
                             layoutParams.topToTop = 0;
                             layoutParams.bottomToBottom = 0;
@@ -280,7 +280,7 @@ public final class CardPagerAdapter extends PagerAdapter {
                 LayoutInflater from2 = LayoutInflater.from(viewGroup.getContext());
                 int baseLegacyCardRes = companion.getBaseLegacyCardRes(featureType);
                 if (baseLegacyCardRes == 0) {
-                    RecordingInputConnection$$ExternalSyntheticOutline0.m("No legacy card can be created for feature type: ", "SsCardPagerAdapter", featureType);
+                    RecordingInputConnection$$ExternalSyntheticOutline0.m("No legacy card can be created for feature type: ", featureType, "SsCardPagerAdapter");
                     bcSmartspaceCard2 = null;
                 } else {
                     BcSmartspaceCard bcSmartspaceCard3 = (BcSmartspaceCard) from2.inflate(baseLegacyCardRes, viewGroup2, false);
@@ -302,8 +302,8 @@ public final class CardPagerAdapter extends PagerAdapter {
                             bcSmartspaceCard3.mSecondaryCard = bcSmartspaceCardSecondary2;
                             BcSmartspaceTemplateDataUtils.updateVisibility(viewGroup4, 8);
                             bcSmartspaceCard3.mSecondaryCardGroup.removeAllViews();
-                            ConstraintLayout.LayoutParams layoutParams2 = new ConstraintLayout.LayoutParams(bcSmartspaceCard3.getResources().getDimensionPixelSize(2131165912));
-                            layoutParams2.setMarginStart(bcSmartspaceCard3.getResources().getDimensionPixelSize(2131165923));
+                            ConstraintLayout.LayoutParams layoutParams2 = new ConstraintLayout.LayoutParams(-2, bcSmartspaceCard3.getResources().getDimensionPixelSize(2131165880));
+                            layoutParams2.setMarginStart(bcSmartspaceCard3.getResources().getDimensionPixelSize(2131165891));
                             layoutParams2.startToStart = 0;
                             layoutParams2.topToTop = 0;
                             layoutParams2.bottomToBottom = 0;
@@ -593,7 +593,7 @@ public final class CardPagerAdapter extends PagerAdapter {
             BcSmartspaceTemplateDataUtils.updateVisibility(viewGroup6, i6);
             Icon icon = headerAction.getIcon();
             Context context = bcSmartspaceCard.getContext();
-            Drawable iconDrawableWithCustomSize = BcSmartSpaceUtil.getIconDrawableWithCustomSize(icon, context, context.getResources().getDimensionPixelSize(2131165919));
+            Drawable iconDrawableWithCustomSize = BcSmartSpaceUtil.getIconDrawableWithCustomSize(icon, context, context.getResources().getDimensionPixelSize(2131165887));
             if (iconDrawableWithCustomSize != null) {
                 z2 = true;
             } else {
@@ -629,7 +629,7 @@ public final class CardPagerAdapter extends PagerAdapter {
             } else {
                 Icon icon2 = baseAction.getIcon();
                 Context context2 = bcSmartspaceCard.getContext();
-                drawable = BcSmartSpaceUtil.getIconDrawableWithCustomSize(icon2, context2, context2.getResources().getDimensionPixelSize(2131165919));
+                drawable = BcSmartSpaceUtil.getIconDrawableWithCustomSize(icon2, context2, context2.getResources().getDimensionPixelSize(2131165887));
             }
             bcSmartspaceCard.mBaseActionIconDrawable.setIcon(drawable);
             if (drawable == null) {
@@ -812,7 +812,7 @@ public final class CardPagerAdapter extends PagerAdapter {
             if (r0 == 0) goto L_0x0084
             java.lang.String r0 = r9.uiSurface
             java.lang.String r1 = "home"
-            boolean r0 = kotlin.text.StringsKt__StringsJVMKt.equals(r0, r1, r3)
+            boolean r0 = kotlin.text.StringsKt__StringsKt.equals(r0, r1, r3)
             if (r0 != 0) goto L_0x0084
             java.util.List r0 = r9.smartspaceTargets
             boolean r0 = r0.isEmpty()
@@ -827,7 +827,7 @@ public final class CardPagerAdapter extends PagerAdapter {
         throw new UnsupportedOperationException("Method not decompiled: com.google.android.systemui.smartspace.CardPagerAdapter.updateTargetVisibility():void");
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class Companion {
         public static int getFeatureType(SmartspaceTarget smartspaceTarget) {
             List actionChips = smartspaceTarget.getActionChips();
@@ -898,57 +898,57 @@ public final class CardPagerAdapter extends PagerAdapter {
 
         public final int getBaseLegacyCardRes(int i) {
             if (i == -2 || i == -1) {
-                return 2131559022;
+                return 2131559016;
             }
             if (i == 1) {
                 return 0;
             }
             if (i == 2 || i == 3 || i == 4 || i == 6 || i == 18 || i == 20 || i == 30 || i == 9 || i == 10) {
-                return 2131559022;
+                return 2131559016;
             }
             switch (i) {
             }
-            return 2131559022;
+            return 2131559016;
         }
 
         public final int getLegacySecondaryCardRes(int i) {
             if (i == -2) {
-                return 2131559024;
+                return 2131559018;
             }
             if (i == -1) {
-                return 2131559023;
+                return 2131559017;
             }
             if (i == 1 || i == 2) {
                 return 0;
             }
             if (i != 3) {
                 if (i == 4) {
-                    return 2131559026;
+                    return 2131559020;
                 }
                 if (i == 6) {
                     return 0;
                 }
                 if (i != 18) {
                     if (i == 20 || i == 30) {
-                        return 2131559025;
+                        return 2131559019;
                     }
                     if (i == 9) {
-                        return 2131559032;
+                        return 2131559026;
                     }
                     if (i == 10) {
-                        return 2131559033;
+                        return 2131559027;
                     }
                     switch (i) {
                         case ViewNode.SCALEX_FIELD_NUMBER:
-                            return 2131559031;
+                            return 2131559025;
                         case ViewNode.SCALEY_FIELD_NUMBER:
-                            return 2131559030;
+                            return 2131559024;
                         default:
                             return 0;
                     }
                 }
             }
-            return 2131559028;
+            return 2131559022;
         }
 
         public final boolean useRecycledViewForNewTarget(SmartspaceTarget smartspaceTarget, SmartspaceTarget smartspaceTarget2) {

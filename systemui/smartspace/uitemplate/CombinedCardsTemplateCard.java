@@ -16,7 +16,7 @@ import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggerUtil
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo;
 import java.util.List;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class CombinedCardsTemplateCard extends BcSmartspaceCardSecondary {
     public ConstraintLayout mFirstSubCard;
     public ConstraintLayout mSecondSubCard;
@@ -27,8 +27,8 @@ public class CombinedCardsTemplateCard extends BcSmartspaceCardSecondary {
 
     public final void onFinishInflate() {
         super.onFinishInflate();
-        this.mFirstSubCard = (ConstraintLayout) findViewById(2131362594);
-        this.mSecondSubCard = (ConstraintLayout) findViewById(2131363565);
+        this.mFirstSubCard = (ConstraintLayout) findViewById(2131362574);
+        this.mSecondSubCard = (ConstraintLayout) findViewById(2131363536);
     }
 
     public final void resetUi() {
@@ -81,22 +81,22 @@ public class CombinedCardsTemplateCard extends BcSmartspaceCardSecondary {
         }
         switch (baseTemplateData.getTemplateType()) {
             case 2:
-                i = 2131559043;
+                i = 2131559037;
                 break;
             case 3:
-                i = 2131559044;
-                break;
-            case 4:
-                i = 2131559036;
-                break;
-            case 5:
-                i = 2131559041;
-                break;
-            case 6:
                 i = 2131559038;
                 break;
+            case 4:
+                i = 2131559030;
+                break;
+            case 5:
+                i = 2131559035;
+                break;
+            case 6:
+                i = 2131559032;
+                break;
             case ViewNode.WIDTH_FIELD_NUMBER:
-                i = 2131559042;
+                i = 2131559036;
                 break;
             default:
                 i = 0;
@@ -110,7 +110,7 @@ public class CombinedCardsTemplateCard extends BcSmartspaceCardSecondary {
         BcSmartspaceCardSecondary bcSmartspaceCardSecondary = (BcSmartspaceCardSecondary) LayoutInflater.from(constraintLayout.getContext()).inflate(i, constraintLayout, false);
         bcSmartspaceCardSecondary.setSmartspaceActions(new SmartspaceTarget.Builder(smartspaceTarget.getSmartspaceTargetId(), smartspaceTarget.getComponentName(), smartspaceTarget.getUserHandle()).setTemplateData(baseTemplateData).build(), smartspaceEventNotifier, bcSmartspaceCardLoggingInfo);
         constraintLayout.removeAllViews();
-        ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(getResources().getDimensionPixelSize(2131165912));
+        ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(-2, getResources().getDimensionPixelSize(2131165880));
         layoutParams.startToStart = 0;
         layoutParams.endToEnd = 0;
         layoutParams.topToTop = 0;

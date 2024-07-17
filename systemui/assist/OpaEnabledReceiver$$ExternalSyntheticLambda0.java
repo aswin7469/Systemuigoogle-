@@ -15,7 +15,7 @@ import com.android.systemui.util.Assert;
 import java.util.Arrays;
 import java.util.concurrent.Executor;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final /* synthetic */ class OpaEnabledReceiver$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ OpaEnabledReceiver f$0;
     public final /* synthetic */ boolean f$1;
@@ -34,14 +34,14 @@ public final /* synthetic */ class OpaEnabledReceiver$$ExternalSyntheticLambda0 
         boolean z4;
         int i;
         String str;
+        boolean z5;
         OpaEnabledReceiver opaEnabledReceiver = this.f$0;
-        boolean z5 = this.f$1;
+        boolean z6 = this.f$1;
         BroadcastReceiver.PendingResult pendingResult = this.f$2;
         OpaEnabledSettings opaEnabledSettings = opaEnabledReceiver.mOpaEnabledSettings;
         opaEnabledSettings.getClass();
         Assert.isNotMainThread();
         Context context = opaEnabledSettings.mContext;
-        boolean z6 = false;
         if (Settings.Secure.getIntForUser(context.getContentResolver(), "systemui.google.opa_enabled", 0, ActivityManager.getCurrentUser()) != 0) {
             z = true;
         } else {
@@ -66,7 +66,7 @@ public final /* synthetic */ class OpaEnabledReceiver$$ExternalSyntheticLambda0 
         }
         opaEnabledReceiver.mIsOpaEnabled = z3;
         int[] iArr = opaEnabledReceiver.mAssistOverrideInvocationTypes;
-        if (iArr == null || !Arrays.stream(iArr).anyMatch(new OpaEnabledReceiver$$ExternalSyntheticLambda3())) {
+        if (iArr == null || !Arrays.stream(iArr).anyMatch(new OpaEnabledReceiver$$ExternalSyntheticLambda2())) {
             z4 = false;
         } else {
             z4 = true;
@@ -74,9 +74,9 @@ public final /* synthetic */ class OpaEnabledReceiver$$ExternalSyntheticLambda0 
         Assert.isNotMainThread();
         Resources resources = context.getResources();
         if (z4) {
-            i = 17891841;
+            i = 17891834;
         } else {
-            i = 17891381;
+            i = 17891380;
         }
         boolean z7 = resources.getBoolean(i);
         ContentResolver contentResolver = context.getContentResolver();
@@ -86,11 +86,13 @@ public final /* synthetic */ class OpaEnabledReceiver$$ExternalSyntheticLambda0 
             str = "assist_long_press_home_enabled";
         }
         if (Settings.Secure.getInt(contentResolver, str, z7 ? 1 : 0) != 0) {
-            z6 = true;
+            z5 = true;
+        } else {
+            z5 = false;
         }
-        opaEnabledReceiver.mIsLongPressHomeEnabled = z6;
+        opaEnabledReceiver.mIsLongPressHomeEnabled = z5;
         Executor executor = opaEnabledReceiver.mFgExecutor;
-        if (z5) {
+        if (z6) {
             executor.execute(new OpaEnabledReceiver$$ExternalSyntheticLambda1(0, opaEnabledReceiver));
         }
         if (pendingResult != null) {

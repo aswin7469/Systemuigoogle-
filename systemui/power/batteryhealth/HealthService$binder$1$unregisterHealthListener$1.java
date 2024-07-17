@@ -10,7 +10,7 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 final class HealthService$binder$1$unregisterHealthListener$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ String[] $callerPackage;
     final /* synthetic */ IHealthListener $listener;
@@ -43,7 +43,8 @@ final class HealthService$binder$1$unregisterHealthListener$1 extends SuspendLam
             Log.i("HealthService", "unregisterHealthListener: " + arrays);
             this.this$0.healthListeners.unregister(this.$listener);
             HealthService healthService = this.this$0;
-            healthService.registeredListenerNum$delegate.setValue(healthService, HealthService.$$delegatedProperties[0], Integer.valueOf(healthService.healthListeners.getRegisteredCallbackCount()));
+            int registeredCallbackCount = healthService.healthListeners.getRegisteredCallbackCount();
+            healthService.registeredListenerNum$delegate.setValue(healthService, Integer.valueOf(registeredCallbackCount), HealthService.$$delegatedProperties[0]);
             return Unit.INSTANCE;
         }
         throw new IllegalStateException("call to 'resume' before 'invoke' with coroutine");

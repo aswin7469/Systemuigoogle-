@@ -13,7 +13,7 @@ import com.google.android.material.shadow.ShadowRenderer;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ShapePath {
     public float currentShadowAngle;
     public float endShadowAngle;
@@ -24,7 +24,7 @@ public final class ShapePath {
     public float startX;
     public float startY;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class ArcShadowOperation extends ShadowCompatOperation {
         public final PathArcOperation operation;
 
@@ -88,7 +88,7 @@ public final class ShapePath {
         }
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class LineShadowOperation extends ShadowCompatOperation {
         public final PathLineOperation operation;
         public final float startX;
@@ -136,7 +136,7 @@ public final class ShapePath {
         }
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class PathArcOperation extends PathOperation {
         public static final RectF rectF = new RectF();
         public final float bottom;
@@ -164,7 +164,7 @@ public final class ShapePath {
         }
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class PathLineOperation extends PathOperation {
         public float x;
         public float y;
@@ -178,14 +178,14 @@ public final class ShapePath {
         }
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public abstract class PathOperation {
         public final Matrix matrix = new Matrix();
 
         public abstract void applyToPath(Matrix matrix2, Path path);
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public abstract class ShadowCompatOperation {
         public static final Matrix IDENTITY_MATRIX = new Matrix();
         public final Matrix renderMatrix = new Matrix();
@@ -194,7 +194,37 @@ public final class ShapePath {
     }
 
     public ShapePath() {
-        reset(0.0f, 270.0f, 0.0f);
+        reset(0.0f, 0.0f, 270.0f, 0.0f);
+    }
+
+    public final void addArc(float f, float f2, float f3, float f4, float f5, float f6) {
+        boolean z;
+        float f7;
+        PathArcOperation pathArcOperation = new PathArcOperation(f, f2, f3, f4);
+        pathArcOperation.startAngle = f5;
+        pathArcOperation.sweepAngle = f6;
+        this.operations.add(pathArcOperation);
+        ArcShadowOperation arcShadowOperation = new ArcShadowOperation(pathArcOperation);
+        float f8 = f5 + f6;
+        if (f6 < 0.0f) {
+            z = true;
+        } else {
+            z = false;
+        }
+        if (z) {
+            f5 = (f5 + 180.0f) % 360.0f;
+        }
+        if (z) {
+            f7 = (180.0f + f8) % 360.0f;
+        } else {
+            f7 = f8;
+        }
+        addConnectingShadowIfNecessary(f5);
+        this.shadowCompatOperations.add(arcShadowOperation);
+        this.currentShadowAngle = f7;
+        double d = (double) f8;
+        this.endX = (((f3 - f) / 2.0f) * ((float) Math.cos(Math.toRadians(d)))) + ((f + f3) * 0.5f);
+        this.endY = (((f4 - f2) / 2.0f) * ((float) Math.sin(Math.toRadians(d)))) + ((f2 + f4) * 0.5f);
     }
 
     public final void addConnectingShadowIfNecessary(float f) {
@@ -235,13 +265,13 @@ public final class ShapePath {
         this.endY = f2;
     }
 
-    public final void reset(float f, float f2, float f3) {
-        this.startX = 0.0f;
-        this.startY = f;
-        this.endX = 0.0f;
-        this.endY = f;
-        this.currentShadowAngle = f2;
-        this.endShadowAngle = (f2 + f3) % 360.0f;
+    public final void reset(float f, float f2, float f3, float f4) {
+        this.startX = f;
+        this.startY = f2;
+        this.endX = f;
+        this.endY = f2;
+        this.currentShadowAngle = f3;
+        this.endShadowAngle = (f3 + f4) % 360.0f;
         this.operations.clear();
         this.shadowCompatOperations.clear();
     }

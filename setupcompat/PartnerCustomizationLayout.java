@@ -10,6 +10,9 @@ import android.os.Parcelable;
 import android.os.PersistableBundle;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import androidx.appsearch.app.DocumentClassFactoryRegistry$$ExternalSyntheticOutline0;
 import com.google.android.setupcompat.internal.ClockProvider;
@@ -30,21 +33,20 @@ import com.google.android.setupcompat.template.StatusBarMixin;
 import com.google.android.setupcompat.template.SystemNavBarMixin;
 import com.google.android.setupcompat.util.Logger;
 import com.google.android.setupcompat.util.WizardManagerHelper;
-import com.google.android.setupdesign.GlifLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
-public abstract class PartnerCustomizationLayout extends TemplateLayout {
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
+public class PartnerCustomizationLayout extends TemplateLayout {
     public static final Logger LOG = new Logger("PartnerCustomizationLayout");
     public Activity activity;
     public boolean useDynamicColor;
     public boolean useFullDynamicColorAttr;
     public boolean usePartnerResourceAttr;
-    final ViewTreeObserver.OnWindowFocusChangeListener windowFocusChangeListener = new PartnerCustomizationLayout$$ExternalSyntheticLambda0((GlifLayout) this);
+    final ViewTreeObserver.OnWindowFocusChangeListener windowFocusChangeListener = new PartnerCustomizationLayout$$ExternalSyntheticLambda0(this, 1);
 
     public static void $r8$lambda$LkXYrnw5DYvjSfWXKSuSlNqcyss(PartnerCustomizationLayout partnerCustomizationLayout, boolean z) {
         SetupCompatServiceInvoker setupCompatServiceInvoker = SetupCompatServiceInvoker.get(partnerCustomizationLayout.getContext());
@@ -66,14 +68,21 @@ public abstract class PartnerCustomizationLayout extends TemplateLayout {
 
     public PartnerCustomizationLayout(Context context, int i, int i2) {
         super(context, i, i2);
-        init$1((AttributeSet) null, 2130970022);
+        init$3((AttributeSet) null, 2130970022);
+    }
+
+    public ViewGroup findContainer(int i) {
+        if (i == 0) {
+            i = 2131363711;
+        }
+        return (ViewGroup) findViewById(i);
     }
 
     public PersistableBundle getLayoutTypeMetrics() {
         return null;
     }
 
-    public final void init$1(AttributeSet attributeSet, int i) {
+    public final void init$3(AttributeSet attributeSet, int i) {
         if (!isInEditMode()) {
             TypedArray obtainStyledAttributes = getContext().obtainStyledAttributes(attributeSet, R$styleable.SucPartnerCustomizationLayout, i, 0);
             boolean z = obtainStyledAttributes.getBoolean(1, true);
@@ -92,7 +101,6 @@ public abstract class PartnerCustomizationLayout extends TemplateLayout {
         }
     }
 
-    /* JADX WARNING: type inference failed for: r5v3, types: [android.app.Fragment, com.google.android.setupcompat.internal.LifecycleFragment] */
     public final void onAttachedToWindow() {
         String str;
         super.onAttachedToWindow();
@@ -114,19 +122,17 @@ public abstract class PartnerCustomizationLayout extends TemplateLayout {
             if (fragmentManager != null && !fragmentManager.isDestroyed()) {
                 Fragment findFragmentByTag = fragmentManager.findFragmentByTag("lifecycle_monitor");
                 if (findFragmentByTag == null) {
-                    ? fragment = new Fragment();
-                    fragment.durationInNanos = 0;
-                    fragment.setRetainInstance(true);
+                    LifecycleFragment lifecycleFragment = new LifecycleFragment();
                     try {
-                        fragmentManager.beginTransaction().add(fragment, "lifecycle_monitor").commitNow();
-                        findFragmentByTag = fragment;
+                        fragmentManager.beginTransaction().add(lifecycleFragment, "lifecycle_monitor").commitNow();
+                        findFragmentByTag = lifecycleFragment;
                     } catch (IllegalStateException e2) {
                         Log.e("LifecycleFragment", "Error occurred when attach to Activity:" + activity2.getComponentName(), e2);
                     }
                 } else if (!(findFragmentByTag instanceof LifecycleFragment)) {
                     Log.wtf("LifecycleFragment", activity2.getClass().getSimpleName().concat(" Incorrect instance on lifecycle fragment."));
                 }
-                LifecycleFragment lifecycleFragment = (LifecycleFragment) findFragmentByTag;
+                LifecycleFragment lifecycleFragment2 = (LifecycleFragment) findFragmentByTag;
             }
         }
         if (WizardManagerHelper.isAnySetupWizard(this.activity.getIntent())) {
@@ -233,6 +239,13 @@ public abstract class PartnerCustomizationLayout extends TemplateLayout {
         getViewTreeObserver().removeOnWindowFocusChangeListener(this.windowFocusChangeListener);
     }
 
+    public View onInflateTemplate(LayoutInflater layoutInflater, int i) {
+        if (i == 0) {
+            i = 2131558862;
+        }
+        return inflateTemplate(layoutInflater, 0, i);
+    }
+
     public final boolean shouldApplyDynamicColor() {
         if (this.useDynamicColor && PartnerConfigHelper.get(getContext()).isAvailable()) {
             return true;
@@ -256,11 +269,11 @@ public abstract class PartnerCustomizationLayout extends TemplateLayout {
 
     public PartnerCustomizationLayout(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
-        init$1(attributeSet, 2130970022);
+        init$3(attributeSet, 2130970022);
     }
 
     public PartnerCustomizationLayout(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
-        init$1(attributeSet, i);
+        init$3(attributeSet, i);
     }
 }

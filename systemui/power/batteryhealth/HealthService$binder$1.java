@@ -10,7 +10,7 @@ import kotlin.coroutines.EmptyCoroutineContext;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineStart;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class HealthService$binder$1 extends Binder implements IInterface {
     public final /* synthetic */ HealthService this$0;
 
@@ -21,6 +21,7 @@ public final class HealthService$binder$1 extends Binder implements IInterface {
 
     /* JADX WARNING: type inference failed for: r8v3, types: [com.google.android.systemui.power.batteryhealth.IHealthListener$Stub$Proxy, java.lang.Object] */
     /* JADX WARNING: type inference failed for: r8v8, types: [com.google.android.systemui.power.batteryhealth.IHealthListener$Stub$Proxy, java.lang.Object] */
+    /* renamed from: onTransact$com$google$android$systemui$power$batteryhealth$IHealthService$Stub */
     public final boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) {
         IHealthListener iHealthListener;
         IHealthListener iHealthListener2;

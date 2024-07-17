@@ -16,18 +16,18 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import androidx.compose.animation.AndroidFlingSpline$$ExternalSyntheticOutline0;
-import androidx.core.graphics.ColorUtils;
 import androidx.core.math.MathUtils;
 import androidx.core.text.TextDirectionHeuristicsCompat;
 import androidx.core.view.ViewCompat;
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 import com.google.android.material.animation.AnimationUtils;
+import com.google.android.material.color.MaterialColors;
 import com.google.android.material.resources.CancelableFontCallback;
 import com.google.android.material.resources.TextAppearance;
 import com.google.android.material.resources.TypefaceUtils;
 import java.util.WeakHashMap;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class CollapsingTextHelper {
     public boolean boundsChanged;
     public final Rect collapsedBounds;
@@ -80,14 +80,15 @@ public final class CollapsingTextHelper {
     public boolean fadeModeEnabled;
     public float fadeModeStartFraction;
     public float fadeModeThresholdFraction;
-    public final int hyphenationFrequency = 1;
+    public int hyphenationFrequency = 1;
     public boolean isRtl;
     public boolean isRtlTextDirectionHeuristicsEnabled = true;
-    public final float lineSpacingMultiplier = 1.0f;
+    public float lineSpacingMultiplier = 1.0f;
     public int maxLines = 1;
     public TimeInterpolator positionInterpolator;
     public float scale;
     public int[] state;
+    public StaticLayoutBuilderConfigurer staticLayoutBuilderConfigurer;
     public CharSequence text;
     public StaticLayout textLayout;
     public final TextPaint textPaint;
@@ -120,15 +121,14 @@ public final class CollapsingTextHelper {
         if (timeInterpolator != null) {
             f3 = timeInterpolator.getInterpolation(f3);
         }
-        TimeInterpolator timeInterpolator2 = AnimationUtils.LINEAR_INTERPOLATOR;
-        return AndroidFlingSpline$$ExternalSyntheticOutline0.m(f2, f, f3, f);
+        return AnimationUtils.lerp(f, f2, f3);
     }
 
     public final boolean calculateIsRtl(CharSequence charSequence) {
         TextDirectionHeuristicsCompat.TextDirectionHeuristicInternal textDirectionHeuristicInternal;
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
         boolean z = true;
-        if (this.view.getLayoutDirection() != 1) {
+        if (ViewCompat.Api17Impl.getLayoutDirection(this.view) != 1) {
             z = false;
         }
         if (!this.isRtlTextDirectionHeuristicsEnabled) {
@@ -139,7 +139,7 @@ public final class CollapsingTextHelper {
         } else {
             textDirectionHeuristicInternal = TextDirectionHeuristicsCompat.FIRSTSTRONG_LTR;
         }
-        return textDirectionHeuristicInternal.isRtl(charSequence.length(), charSequence);
+        return textDirectionHeuristicInternal.isRtl(charSequence, charSequence.length());
     }
 
     public final void calculateUsingTextSize(float f, boolean z) {
@@ -267,6 +267,7 @@ public final class CollapsingTextHelper {
                 staticLayoutBuilderCompat.lineSpacingAdd = 0.0f;
                 staticLayoutBuilderCompat.lineSpacingMultiplier = f8;
                 staticLayoutBuilderCompat.hyphenationFrequency = this.hyphenationFrequency;
+                staticLayoutBuilderCompat.staticLayoutBuilderConfigurer = this.staticLayoutBuilderConfigurer;
                 StaticLayout build = staticLayoutBuilderCompat.build();
                 build.getClass();
                 this.textLayout = build;
@@ -296,22 +297,14 @@ public final class CollapsingTextHelper {
                     canvas.translate(this.currentDrawX - ((float) this.textLayout.getLineStart(0)), f2);
                     float f4 = (float) alpha;
                     textPaint2.setAlpha((int) (this.expandedTextBlend * f4));
-                    float f5 = this.currentShadowRadius;
-                    float f6 = this.currentShadowDx;
-                    float f7 = this.currentShadowDy;
-                    int i = this.currentShadowColor;
-                    textPaint2.setShadowLayer(f5, f6, f7, ColorUtils.setAlphaComponent(i, (Color.alpha(i) * textPaint2.getAlpha()) / 255));
+                    textPaint2.setShadowLayer(this.currentShadowRadius, this.currentShadowDx, this.currentShadowDy, MaterialColors.compositeARGBWithAlpha(this.currentShadowColor, textPaint2.getAlpha()));
                     this.textLayout.draw(canvas);
                     textPaint2.setAlpha((int) (this.collapsedTextBlend * f4));
-                    float f8 = this.currentShadowRadius;
-                    float f9 = this.currentShadowDx;
-                    float f10 = this.currentShadowDy;
-                    int i2 = this.currentShadowColor;
-                    textPaint2.setShadowLayer(f8, f9, f10, ColorUtils.setAlphaComponent(i2, (Color.alpha(i2) * textPaint2.getAlpha()) / 255));
+                    textPaint2.setShadowLayer(this.currentShadowRadius, this.currentShadowDx, this.currentShadowDy, MaterialColors.compositeARGBWithAlpha(this.currentShadowColor, textPaint2.getAlpha()));
                     int lineBaseline = this.textLayout.getLineBaseline(0);
                     CharSequence charSequence = this.textToDrawCollapsed;
-                    float f11 = (float) lineBaseline;
-                    canvas.drawText(charSequence, 0, charSequence.length(), 0.0f, f11, textPaint2);
+                    float f5 = (float) lineBaseline;
+                    canvas.drawText(charSequence, 0, charSequence.length(), 0.0f, f5, textPaint2);
                     textPaint2.setShadowLayer(this.currentShadowRadius, this.currentShadowDx, this.currentShadowDy, this.currentShadowColor);
                     if (!this.fadeModeEnabled) {
                         String trim = this.textToDrawCollapsed.toString().trim();
@@ -320,7 +313,7 @@ public final class CollapsingTextHelper {
                         }
                         String str = trim;
                         textPaint2.setAlpha(alpha);
-                        canvas.drawText(str, 0, Math.min(this.textLayout.getLineEnd(0), str.length()), 0.0f, f11, textPaint2);
+                        canvas.drawText(str, 0, Math.min(this.textLayout.getLineEnd(0), str.length()), 0.0f, f5, textPaint2);
                     }
                 }
                 canvas.restoreToCount(save);
@@ -491,9 +484,9 @@ public final class CollapsingTextHelper {
             FastOutSlowInInterpolator fastOutSlowInInterpolator = AnimationUtils.FAST_OUT_SLOW_IN_INTERPOLATOR;
             this.collapsedTextBlend = 1.0f - lerp(0.0f, 1.0f, 1.0f - f5, fastOutSlowInInterpolator);
             WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-            view2.postInvalidateOnAnimation();
+            ViewCompat.Api16Impl.postInvalidateOnAnimation(view2);
             this.expandedTextBlend = lerp(1.0f, 0.0f, f5, fastOutSlowInInterpolator);
-            view2.postInvalidateOnAnimation();
+            ViewCompat.Api16Impl.postInvalidateOnAnimation(view2);
             ColorStateList colorStateList = this.collapsedTextColor;
             ColorStateList colorStateList2 = this.expandedTextColor;
             if (colorStateList != colorStateList2) {
@@ -524,7 +517,7 @@ public final class CollapsingTextHelper {
                 }
                 textPaint2.setAlpha((int) (f4 * ((float) alpha)));
             }
-            view2.postInvalidateOnAnimation();
+            ViewCompat.Api16Impl.postInvalidateOnAnimation(view2);
         }
     }
 
@@ -551,30 +544,11 @@ public final class CollapsingTextHelper {
         if (cancelableFontCallback != null) {
             cancelableFontCallback.cancelled = true;
         }
-        AnonymousClass1 r2 = new Object(this, 0) {
+        AnonymousClass1 r2 = new CancelableFontCallback.ApplyFont(this, 0) {
             public final /* synthetic */ CollapsingTextHelper this$0;
 
             {
                 this.this$0 = r1;
-            }
-
-            public final void apply(Typeface typeface) {
-                switch (1) {
-                    case 0:
-                        CollapsingTextHelper collapsingTextHelper = this.this$0;
-                        if (collapsingTextHelper.setCollapsedTypefaceInternal(typeface)) {
-                            collapsingTextHelper.recalculate(false);
-                            return;
-                        }
-                        return;
-                    default:
-                        CollapsingTextHelper collapsingTextHelper2 = this.this$0;
-                        if (collapsingTextHelper2.setExpandedTypefaceInternal(typeface)) {
-                            collapsingTextHelper2.recalculate(false);
-                            return;
-                        }
-                        return;
-                }
             }
         };
         textAppearance.createFallbackFont();
@@ -631,34 +605,15 @@ public final class CollapsingTextHelper {
         if (cancelableFontCallback != null) {
             cancelableFontCallback.cancelled = true;
         }
-        AnonymousClass1 r2 = new Object(this, 1) {
+        AnonymousClass1 r3 = new CancelableFontCallback.ApplyFont(this, 1) {
             public final /* synthetic */ CollapsingTextHelper this$0;
 
             {
                 this.this$0 = r1;
             }
-
-            public final void apply(Typeface typeface) {
-                switch (1) {
-                    case 0:
-                        CollapsingTextHelper collapsingTextHelper = this.this$0;
-                        if (collapsingTextHelper.setCollapsedTypefaceInternal(typeface)) {
-                            collapsingTextHelper.recalculate(false);
-                            return;
-                        }
-                        return;
-                    default:
-                        CollapsingTextHelper collapsingTextHelper2 = this.this$0;
-                        if (collapsingTextHelper2.setExpandedTypefaceInternal(typeface)) {
-                            collapsingTextHelper2.recalculate(false);
-                            return;
-                        }
-                        return;
-                }
-            }
         };
         textAppearance.createFallbackFont();
-        this.expandedFontCallback = new CancelableFontCallback(r2, textAppearance.font);
+        this.expandedFontCallback = new CancelableFontCallback(r3, textAppearance.font);
         textAppearance.getFontAsync(view2.getContext(), this.expandedFontCallback);
         recalculate(false);
     }
@@ -684,7 +639,7 @@ public final class CollapsingTextHelper {
     public final void setExpansionFraction(float f) {
         float f2;
         float f3;
-        float clamp = MathUtils.clamp(f);
+        float clamp = MathUtils.clamp(f, 0.0f, 1.0f);
         if (clamp != this.expandedFraction) {
             this.expandedFraction = clamp;
             boolean z = this.fadeModeEnabled;
@@ -722,9 +677,9 @@ public final class CollapsingTextHelper {
             this.collapsedTextBlend = 1.0f - lerp(0.0f, 1.0f, 1.0f - clamp, fastOutSlowInInterpolator);
             WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
             View view2 = this.view;
-            view2.postInvalidateOnAnimation();
+            ViewCompat.Api16Impl.postInvalidateOnAnimation(view2);
             this.expandedTextBlend = lerp(1.0f, 0.0f, clamp, fastOutSlowInInterpolator);
-            view2.postInvalidateOnAnimation();
+            ViewCompat.Api16Impl.postInvalidateOnAnimation(view2);
             ColorStateList colorStateList = this.collapsedTextColor;
             ColorStateList colorStateList2 = this.expandedTextColor;
             TextPaint textPaint2 = this.textPaint;
@@ -756,13 +711,13 @@ public final class CollapsingTextHelper {
                 }
                 textPaint2.setAlpha((int) (f3 * ((float) alpha)));
             }
-            view2.postInvalidateOnAnimation();
+            ViewCompat.Api16Impl.postInvalidateOnAnimation(view2);
         }
     }
 
     public final void setInterpolatedTextSize(float f) {
         calculateUsingTextSize(f, false);
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-        this.view.postInvalidateOnAnimation();
+        ViewCompat.Api16Impl.postInvalidateOnAnimation(this.view);
     }
 }

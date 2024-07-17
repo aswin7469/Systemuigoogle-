@@ -1,22 +1,22 @@
 package com.google.android.systemui.fingerprint;
 
 import android.content.Context;
+import com.android.systemui.biometrics.FingerprintInteractiveToAuthProvider;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import com.android.systemui.util.settings.SecureSettings;
 import kotlin.coroutines.Continuation;
-import kotlinx.coroutines.CoroutineDispatcher;
-import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt;
+import kotlinx.coroutines.flow.internal.ChannelFlowTransformLatest;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
-public final class FingerprintInteractiveToAuthProviderGoogle {
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
+public final class FingerprintInteractiveToAuthProviderGoogle implements FingerprintInteractiveToAuthProvider {
     public final Context context;
-    public final Flow enabledForCurrentUser;
+    public final ChannelFlowTransformLatest enabledForCurrentUser;
     public final SecureSettings secureSettings;
 
-    public FingerprintInteractiveToAuthProviderGoogle(CoroutineDispatcher coroutineDispatcher, Context context2, SecureSettings secureSettings2, SelectedUserInteractor selectedUserInteractor) {
+    public FingerprintInteractiveToAuthProviderGoogle(Context context2, SecureSettings secureSettings2, SelectedUserInteractor selectedUserInteractor) {
         this.context = context2;
         this.secureSettings = secureSettings2;
-        this.enabledForCurrentUser = FlowKt.flowOn(FlowKt.transformLatest(selectedUserInteractor.selectedUser, new FingerprintInteractiveToAuthProviderGoogle$special$$inlined$flatMapLatest$1((Continuation) null, this)), coroutineDispatcher);
+        this.enabledForCurrentUser = FlowKt.transformLatest(selectedUserInteractor.selectedUser, new FingerprintInteractiveToAuthProviderGoogle$special$$inlined$flatMapLatest$1((Continuation) null, this));
     }
 }

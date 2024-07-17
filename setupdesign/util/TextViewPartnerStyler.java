@@ -1,10 +1,8 @@
 package com.google.android.setupdesign.util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,10 +14,10 @@ import com.google.android.setupcompat.util.Logger;
 import com.google.android.setupdesign.GlifLayout;
 import com.google.android.setupdesign.view.RichTextView;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public abstract class TextViewPartnerStyler {
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class TextPartnerConfigs {
         public final PartnerConfig textColorConfig;
         public final PartnerConfig textFontFamilyConfig;
@@ -45,33 +43,26 @@ public abstract class TextViewPartnerStyler {
     }
 
     public static void applyPartnerCustomizationStyle(TextView textView, TextPartnerConfigs textPartnerConfigs) {
+        Typeface typeface;
         PartnerConfig partnerConfig;
         Typeface create;
         PartnerConfig partnerConfig2;
         boolean z;
         int color;
-        TemplateLayout templateLayout;
-        View findViewById;
         int color2;
         Context context = textView.getContext();
         PartnerConfig partnerConfig3 = textPartnerConfigs.textColorConfig;
         if (!(partnerConfig3 == null || !PartnerConfigHelper.get(context).isPartnerConfigAvailable(partnerConfig3) || (color2 = PartnerConfigHelper.get(context).getColor(context, partnerConfig3)) == 0)) {
             textView.setTextColor(color2);
         }
-        Typeface typeface = null;
         PartnerConfig partnerConfig4 = textPartnerConfigs.textLinkedColorConfig;
         if (partnerConfig4 != null && PartnerConfigHelper.get(context).isPartnerConfigAvailable(partnerConfig4)) {
             Context context2 = textView.getContext();
             try {
                 Logger logger = PartnerCustomizationLayout.LOG;
-                Activity lookupActivityFromContext = PartnerConfigHelper.lookupActivityFromContext(context2);
-                if (lookupActivityFromContext == null || (findViewById = lookupActivityFromContext.findViewById(2131363747)) == null) {
-                    templateLayout = null;
-                } else {
-                    templateLayout = (TemplateLayout) findViewById.getParent();
-                }
-                if (templateLayout instanceof GlifLayout) {
-                    z = ((GlifLayout) templateLayout).shouldApplyDynamicColor();
+                TemplateLayout findLayoutFromActivity = PartnerStyleHelper.findLayoutFromActivity(PartnerConfigHelper.lookupActivityFromContext(context2));
+                if (findLayoutFromActivity instanceof GlifLayout) {
+                    z = ((GlifLayout) findLayoutFromActivity).shouldApplyDynamicColor();
                     if (!z && (color = PartnerConfigHelper.get(context).getColor(context, partnerConfig4)) != 0) {
                         textView.setLinkTextColor(color);
                     }
@@ -92,7 +83,9 @@ public abstract class TextViewPartnerStyler {
             }
         }
         PartnerConfig partnerConfig6 = textPartnerConfigs.textFontFamilyConfig;
-        if (partnerConfig6 != null && PartnerConfigHelper.get(context).isPartnerConfigAvailable(partnerConfig6)) {
+        if (partnerConfig6 == null || !PartnerConfigHelper.get(context).isPartnerConfigAvailable(partnerConfig6)) {
+            typeface = null;
+        } else {
             typeface = Typeface.create(PartnerConfigHelper.get(context).getString(context, partnerConfig6), 0);
         }
         if (PartnerConfigHelper.isFontWeightEnabled(context) && (partnerConfig2 = textPartnerConfigs.textFontWeightConfig) != null && PartnerConfigHelper.get(context).isPartnerConfigAvailable(partnerConfig2)) {

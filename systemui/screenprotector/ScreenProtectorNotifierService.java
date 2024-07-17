@@ -25,13 +25,11 @@ import android.util.Log;
 import androidx.activity.ComponentActivity$activityResultRegistry$1$$ExternalSyntheticOutline0;
 import androidx.appsearch.app.GenericDocument$$ExternalSyntheticOutline0;
 import androidx.constraintlayout.motion.widget.MotionLayout$$ExternalSyntheticOutline0;
-import com.android.keyguard.logging.BiometricUnlockLogger$logCalculateModeForFingerprintUnlockingAllowed$2$$ExternalSyntheticOutline0;
 import com.google.input.algos.spd.IScreenProtectorDetectorListener;
 import com.google.input.algos.spd.IScreenProtectorDetectorService;
-import com.google.input.algos.spd.ScreenProtectorDetectorPacket;
 import com.google.input.algos.spd.ScreenProtectorNotifierPacket;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ScreenProtectorNotifierService {
     public static final String INTERFACE_NAME = ComponentActivity$activityResultRegistry$1$$ExternalSyntheticOutline0.m(new StringBuilder(), IScreenProtectorDetectorService.DESCRIPTOR, "/default");
     public final Context mContext;
@@ -46,16 +44,16 @@ public final class ScreenProtectorNotifierService {
     public byte mStatus = -1;
 
     /* renamed from: -$$Nest$mupdateScreenProtectorNotification  reason: not valid java name */
-    public static void m1751$$Nest$mupdateScreenProtectorNotification(ScreenProtectorNotifierService screenProtectorNotifierService, int i) {
+    public static void m1713$$Nest$mupdateScreenProtectorNotification(ScreenProtectorNotifierService screenProtectorNotifierService, int i) {
         String str;
         ScreenProtectorNotifierService screenProtectorNotifierService2 = screenProtectorNotifierService;
         int i2 = i;
         Context context = screenProtectorNotifierService2.mContext;
-        String string = context.getString(2131953747);
+        String string = context.getString(2131953705);
         if (i2 == 1) {
-            str = context.getString(2131953748);
+            str = context.getString(2131953706);
         } else if (i2 == 2) {
-            str = context.getString(2131953743);
+            str = context.getString(2131953701);
         } else {
             return;
         }
@@ -71,7 +69,7 @@ public final class ScreenProtectorNotifierService {
         PendingIntent activityAsUser = PendingIntent.getActivityAsUser(screenProtectorNotifierService2.mContext, 0, intent, 201326592, (Bundle) null, UserHandle.CURRENT);
         NotificationChannel notificationChannel = new NotificationChannel("ScreenProtectorNotificationChannel", string, 2);
         Notification.Builder style = new Notification.Builder(context, "ScreenProtectorNotificationChannel").setAutoCancel(true).setContentIntent(activityAsUser).setContentTitle(string).setContentText(str).setVisibility(1).setSmallIcon(17301642).setStyle(new Notification.BigTextStyle().bigText(str));
-        String string2 = context.getString(17040966);
+        String string2 = context.getString(17040952);
         Bundle bundle = new Bundle();
         bundle.putString("android.substName", string2);
         style.addExtras(bundle);
@@ -108,7 +106,7 @@ public final class ScreenProtectorNotifierService {
                                     ScreenProtectorNotifierService screenProtectorNotifierService = ScreenProtectorNotifierService.this;
                                     byte b = (byte) ScreenProtectorSharedPreferenceUtils.getSharedPreferences(screenProtectorNotifierService.mContext).getInt("notification_response", -1);
                                     if (b != -1) {
-                                        StringBuilder m = GenericDocument$$ExternalSyntheticOutline0.m("updateNotificationResponse() response = ", ", status = ", (int) b);
+                                        StringBuilder m = GenericDocument$$ExternalSyntheticOutline0.m("updateNotificationResponse() response = ", (int) b, ", status = ");
                                         m.append(screenProtectorNotifierService.mStatus);
                                         Log.i("ScreenProtectorNotifierService", m.toString());
                                         ScreenProtectorNotifierPacket screenProtectorNotifierPacket = new ScreenProtectorNotifierPacket();
@@ -150,88 +148,10 @@ public final class ScreenProtectorNotifierService {
                 Log.i("ScreenProtectorNotifierService", "IServiceCallback registered - " + ScreenProtectorNotifierService.INTERFACE_NAME);
             }
         };
-        this.mListener = new IScreenProtectorDetectorListener() {
+        this.mListener = new IScreenProtectorDetectorListener.Stub() {
             {
                 markVintfStability();
                 attachInterface(this, IScreenProtectorDetectorListener.DESCRIPTOR);
-            }
-
-            public final int getMaxTransactionId() {
-                return 16777214;
-            }
-
-            public final String getTransactionName(int i) {
-                if (i == 1) {
-                    return "onScreenProtectorDetectorStatusUpdated";
-                }
-                switch (i) {
-                    case 16777214:
-                        return "getInterfaceHash";
-                    case 16777215:
-                        return "getInterfaceVersion";
-                    default:
-                        return null;
-                }
-            }
-
-            public final boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) {
-                boolean z;
-                String str;
-                String str2 = IScreenProtectorDetectorListener.DESCRIPTOR;
-                if (i >= 1 && i <= 16777215) {
-                    parcel.enforceInterface(str2);
-                }
-                if (i == 1598968902) {
-                    parcel2.writeString(str2);
-                    return true;
-                } else if (i == 16777215) {
-                    parcel2.writeNoException();
-                    parcel2.writeInt(2);
-                    return true;
-                } else if (i == 16777214) {
-                    parcel2.writeNoException();
-                    parcel2.writeString("aca4c2d71594b00b5aa82cf5554538a829bca02a");
-                    return true;
-                } else if (i != 1) {
-                    return super.onTransact(i, parcel, parcel2, i2);
-                } else {
-                    ScreenProtectorDetectorPacket screenProtectorDetectorPacket = (ScreenProtectorDetectorPacket) parcel.readTypedObject(ScreenProtectorDetectorPacket.CREATOR);
-                    parcel.enforceNoDataAvail();
-                    boolean z2 = false;
-                    if (Settings.Secure.getInt(ScreenProtectorNotifierService.this.mContext.getContentResolver(), "adaptive_touch_sensitivity_enabled", 0) != 0) {
-                        z = true;
-                    } else {
-                        z = false;
-                    }
-                    if (Settings.Secure.getInt(ScreenProtectorNotifierService.this.mContext.getContentResolver(), "touch_sensitivity_enabled", 0) != 0) {
-                        z2 = true;
-                    }
-                    if (screenProtectorDetectorPacket.status == 1) {
-                        str = "PRESENT";
-                    } else {
-                        str = "ABSENT";
-                    }
-                    StringBuilder m = BiometricUnlockLogger$logCalculateModeForFingerprintUnlockingAllowed$2$$ExternalSyntheticOutline0.m("ATS=", ", SPM=", ", SPD=", z, z2);
-                    m.append(str);
-                    Log.i("ScreenProtectorNotifierService", m.toString());
-                    if (!ScreenProtectorSharedPreferenceUtils.getSharedPreferences(ScreenProtectorNotifierService.this.mContext).getBoolean("notification_enabled", true)) {
-                        Log.i("ScreenProtectorNotifierService", "Skip detector's packet due to notification disabled by user.");
-                    } else {
-                        ScreenProtectorNotifierService screenProtectorNotifierService = ScreenProtectorNotifierService.this;
-                        byte b = screenProtectorDetectorPacket.status;
-                        screenProtectorNotifierService.mStatus = b;
-                        if (z2 && b == 0) {
-                            ScreenProtectorNotifierService.m1751$$Nest$mupdateScreenProtectorNotification(screenProtectorNotifierService, 2);
-                        } else if (!z2 && b == 1) {
-                            ScreenProtectorNotifierService.m1751$$Nest$mupdateScreenProtectorNotification(screenProtectorNotifierService, 1);
-                        }
-                    }
-                    return true;
-                }
-            }
-
-            public final IBinder asBinder() {
-                return this;
             }
         };
         this.mContext = context;

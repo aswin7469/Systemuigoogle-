@@ -14,21 +14,20 @@ import android.util.Log;
 import android.util.TypedValue;
 import androidx.window.embedding.ActivityEmbeddingController;
 import androidx.window.embedding.EmbeddingCompat;
+import androidx.window.embedding.EmbeddingInterfaceCompat;
 import androidx.window.embedding.ExtensionEmbeddingBackend;
 import com.google.android.setupcompat.partnerconfig.PartnerConfig;
 import com.google.android.setupcompat.util.BuildCompatUtils;
 import java.util.EnumMap;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class PartnerConfigHelper {
     public static final String EMBEDDED_ACTIVITY_RESOURCE_SUFFIX = "_embedded_activity";
-    static final String FORCE_TWO_PANE_SUFFIX = "_two_pane";
     public static final String GET_SUW_DEFAULT_THEME_STRING_METHOD = "suwDefaultThemeString";
     public static final String IS_DYNAMIC_COLOR_ENABLED_METHOD = "isDynamicColorEnabled";
     public static final String IS_EMBEDDED_ACTIVITY_ONE_PANE_ENABLED_METHOD = "isEmbeddedActivityOnePaneEnabled";
     public static final String IS_EXTENDED_PARTNER_CONFIG_ENABLED_METHOD = "isExtendedPartnerConfigEnabled";
     public static final String IS_FONT_WEIGHT_ENABLED_METHOD = "isFontWeightEnabled";
-    public static final String IS_FORCE_TWO_PANE_ENABLED_METHOD = "isForceTwoPaneEnabled";
     public static final String IS_FULL_DYNAMIC_COLOR_ENABLED_METHOD = "isFullDynamicColorEnabled";
     public static final String IS_MATERIAL_YOU_STYLE_ENABLED_METHOD = "IsMaterialYouStyleEnabled";
     public static final String IS_NEUTRAL_BUTTON_STYLE_ENABLED_METHOD = "isNeutralButtonStyleEnabled";
@@ -41,7 +40,6 @@ public final class PartnerConfigHelper {
     public static Bundle applyEmbeddedActivityOnePaneBundle = null;
     public static Bundle applyExtendedPartnerConfigBundle = null;
     public static Bundle applyFontWeightBundle = null;
-    public static Bundle applyForceTwoPaneBundle = null;
     public static Bundle applyFullDynamicColorBundle = null;
     public static Bundle applyMaterialYouConfigBundle = null;
     public static Bundle applyNeutralButtonStyleBundle = null;
@@ -59,7 +57,7 @@ public final class PartnerConfigHelper {
     Bundle resultBundle = null;
 
     /* renamed from: com.google.android.setupcompat.partnerconfig.PartnerConfigHelper$1  reason: invalid class name */
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class AnonymousClass1 extends ContentObserver {
         public final void onChange(boolean z) {
             super.onChange(z);
@@ -128,7 +126,7 @@ public final class PartnerConfigHelper {
         return new Uri.Builder().scheme("content").authority("com.google.android.setupwizard.partner").build();
     }
 
-    public static TypedValue getTypedValueFromResource(int i, Resources resources) {
+    public static TypedValue getTypedValueFromResource(Resources resources, int i) {
         TypedValue typedValue = new TypedValue();
         resources.getValue(i, typedValue, true);
         if (typedValue.type == 5) {
@@ -169,22 +167,6 @@ public final class PartnerConfigHelper {
             return false;
         }
         return true;
-    }
-
-    public static boolean isForceTwoPaneEnabled(Context context) {
-        Bundle bundle = applyForceTwoPaneBundle;
-        if (bundle == null || bundle.isEmpty()) {
-            try {
-                applyForceTwoPaneBundle = context.getContentResolver().call(getContentUri(), IS_FORCE_TWO_PANE_ENABLED_METHOD, (String) null, (Bundle) null);
-            } catch (IllegalArgumentException | SecurityException unused) {
-                Log.w("PartnerConfigHelper", "isForceTwoPaneEnabled status is unknown; return as false.");
-            }
-        }
-        Bundle bundle2 = applyForceTwoPaneBundle;
-        if (bundle2 == null || bundle2.isEmpty()) {
-            return false;
-        }
-        return applyForceTwoPaneBundle.getBoolean(IS_FORCE_TWO_PANE_ENABLED_METHOD, false);
     }
 
     public static boolean isSetupWizardDayNightEnabled(Context context) {
@@ -263,7 +245,6 @@ public final class PartnerConfigHelper {
             applyEmbeddedActivityOnePaneBundle = null;
             suwDefaultThemeBundle = null;
             applyTransitionBundle = null;
-            applyForceTwoPaneBundle = null;
         }
     }
 
@@ -336,7 +317,7 @@ public final class PartnerConfigHelper {
                 Resources resources = resourceEntryFromKey.resources;
                 int i = resourceEntryFromKey.resourceId;
                 float dimension = resources.getDimension(i);
-                this.partnerResourceCache.put(partnerConfig, getTypedValueFromResource(i, resources));
+                this.partnerResourceCache.put(partnerConfig, getTypedValueFromResource(resources, i));
                 return ((TypedValue) this.partnerResourceCache.get(partnerConfig)).getDimension(context.getResources().getDisplayMetrics());
             } catch (Resources.NotFoundException | NullPointerException unused) {
                 return f;
@@ -403,12 +384,12 @@ public final class PartnerConfigHelper {
         }
     }
 
-    /* JADX WARNING: Code restructure failed: missing block: B:56:0x00fc, code lost:
+    /* JADX WARNING: Code restructure failed: missing block: B:40:0x00a8, code lost:
         r1 = r3.getResourceTypeName(r9.resourceId);
         r4 = r9.resourceName.concat(MATERIAL_YOU_RESOURCE_SUFFIX);
      */
     /* JADX WARNING: No exception handlers in catch block: Catch:{  } */
-    /* JADX WARNING: Removed duplicated region for block: B:64:0x0139  */
+    /* JADX WARNING: Removed duplicated region for block: B:48:0x00e4  */
     /* Code decompiled incorrectly, please refer to instructions dump. */
     public com.google.android.setupcompat.partnerconfig.ResourceEntry getResourceEntryFromKey(android.content.Context r8, java.lang.String r9) {
         /*
@@ -426,105 +407,70 @@ public final class PartnerConfigHelper {
             boolean r0 = com.google.android.setupcompat.util.BuildCompatUtils.isAtLeastU()
             java.lang.String r1 = "com.google.android.setupwizard"
             java.lang.String r2 = "PartnerConfigHelper"
-            if (r0 == 0) goto L_0x0072
+            if (r0 == 0) goto L_0x0071
             boolean r7 = r7.isActivityEmbedded(r8)
-            if (r7 == 0) goto L_0x0072
+            if (r7 == 0) goto L_0x0071
             java.lang.String r7 = "use embedded activity resource:"
-            android.content.res.Resources r0 = r9.resources     // Catch:{  }
+            android.content.res.Resources r0 = r9.resources     // Catch:{ NameNotFoundException | NotFoundException -> 0x00d8 }
             java.lang.String r3 = r9.packageName
-            int r4 = r9.resourceId     // Catch:{  }
-            java.lang.String r4 = r0.getResourceTypeName(r4)     // Catch:{  }
-            java.lang.String r5 = r9.resourceName     // Catch:{  }
+            int r4 = r9.resourceId     // Catch:{ NameNotFoundException | NotFoundException -> 0x00d8 }
+            java.lang.String r4 = r0.getResourceTypeName(r4)     // Catch:{ NameNotFoundException | NotFoundException -> 0x00d8 }
+            java.lang.String r5 = r9.resourceName     // Catch:{ NameNotFoundException | NotFoundException -> 0x00d8 }
             java.lang.String r6 = "_embedded_activity"
-            java.lang.String r5 = r5.concat(r6)     // Catch:{  }
-            int r6 = r0.getIdentifier(r5, r4, r3)     // Catch:{  }
+            java.lang.String r5 = r5.concat(r6)     // Catch:{ NameNotFoundException | NotFoundException -> 0x00d8 }
+            int r6 = r0.getIdentifier(r5, r4, r3)     // Catch:{ NameNotFoundException | NotFoundException -> 0x00d8 }
             if (r6 == 0) goto L_0x005c
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder     // Catch:{  }
-            r1.<init>(r7)     // Catch:{  }
-            r1.append(r5)     // Catch:{  }
-            java.lang.String r7 = r1.toString()     // Catch:{  }
-            android.util.Log.i(r2, r7)     // Catch:{  }
-            com.google.android.setupcompat.partnerconfig.ResourceEntry r7 = new com.google.android.setupcompat.partnerconfig.ResourceEntry     // Catch:{  }
-            r7.<init>(r3, r5, r6, r0)     // Catch:{  }
+            java.lang.StringBuilder r1 = new java.lang.StringBuilder     // Catch:{ NameNotFoundException | NotFoundException -> 0x00d8 }
+            r1.<init>(r7)     // Catch:{ NameNotFoundException | NotFoundException -> 0x00d8 }
+            r1.append(r5)     // Catch:{ NameNotFoundException | NotFoundException -> 0x00d8 }
+            java.lang.String r7 = r1.toString()     // Catch:{ NameNotFoundException | NotFoundException -> 0x00d8 }
+            android.util.Log.i(r2, r7)     // Catch:{ NameNotFoundException | NotFoundException -> 0x00d8 }
+            com.google.android.setupcompat.partnerconfig.ResourceEntry r7 = new com.google.android.setupcompat.partnerconfig.ResourceEntry     // Catch:{ NameNotFoundException | NotFoundException -> 0x00d8 }
+            r7.<init>(r3, r5, r6, r0)     // Catch:{ NameNotFoundException | NotFoundException -> 0x00d8 }
         L_0x0059:
             r9 = r7
-            goto L_0x012d
+            goto L_0x00d8
         L_0x005c:
-            android.content.pm.PackageManager r7 = r8.getPackageManager()     // Catch:{  }
-            android.content.res.Resources r7 = r7.getResourcesForApplication(r1)     // Catch:{  }
-            int r0 = r7.getIdentifier(r5, r4, r1)     // Catch:{  }
-            if (r0 == 0) goto L_0x012d
-            com.google.android.setupcompat.partnerconfig.ResourceEntry r2 = new com.google.android.setupcompat.partnerconfig.ResourceEntry     // Catch:{  }
-            r2.<init>(r1, r5, r0, r7)     // Catch:{  }
-        L_0x006f:
+            android.content.pm.PackageManager r7 = r8.getPackageManager()     // Catch:{ NameNotFoundException | NotFoundException -> 0x00d8 }
+            android.content.res.Resources r7 = r7.getResourcesForApplication(r1)     // Catch:{ NameNotFoundException | NotFoundException -> 0x00d8 }
+            int r0 = r7.getIdentifier(r5, r4, r1)     // Catch:{ NameNotFoundException | NotFoundException -> 0x00d8 }
+            if (r0 == 0) goto L_0x00d8
+            com.google.android.setupcompat.partnerconfig.ResourceEntry r2 = new com.google.android.setupcompat.partnerconfig.ResourceEntry     // Catch:{ NameNotFoundException | NotFoundException -> 0x00d8 }
+            r2.<init>(r1, r5, r0, r7)     // Catch:{ NameNotFoundException | NotFoundException -> 0x00d8 }
             r9 = r2
-            goto L_0x012d
-        L_0x0072:
-            boolean r7 = com.google.android.setupcompat.util.BuildCompatUtils.isAtLeastU()
-            if (r7 == 0) goto L_0x00c5
-            boolean r7 = isForceTwoPaneEnabled(r8)
-            if (r7 == 0) goto L_0x00c5
-            java.lang.String r7 = "two pane resource="
-            if (r8 != 0) goto L_0x0084
-            goto L_0x012d
-        L_0x0084:
-            android.content.res.Resources r0 = r9.resources     // Catch:{ NameNotFoundException | NotFoundException -> 0x012d }
-            java.lang.String r3 = r9.packageName
-            int r4 = r9.resourceId     // Catch:{ NameNotFoundException | NotFoundException -> 0x012d }
-            java.lang.String r4 = r0.getResourceTypeName(r4)     // Catch:{ NameNotFoundException | NotFoundException -> 0x012d }
-            java.lang.String r5 = r9.resourceName     // Catch:{ NameNotFoundException | NotFoundException -> 0x012d }
-            java.lang.String r6 = "_two_pane"
-            java.lang.String r5 = r5.concat(r6)     // Catch:{ NameNotFoundException | NotFoundException -> 0x012d }
-            int r6 = r0.getIdentifier(r5, r4, r3)     // Catch:{ NameNotFoundException | NotFoundException -> 0x012d }
-            if (r6 == 0) goto L_0x00b1
-            java.lang.StringBuilder r1 = new java.lang.StringBuilder     // Catch:{ NameNotFoundException | NotFoundException -> 0x012d }
-            r1.<init>(r7)     // Catch:{ NameNotFoundException | NotFoundException -> 0x012d }
-            r1.append(r5)     // Catch:{ NameNotFoundException | NotFoundException -> 0x012d }
-            java.lang.String r7 = r1.toString()     // Catch:{ NameNotFoundException | NotFoundException -> 0x012d }
-            android.util.Log.i(r2, r7)     // Catch:{ NameNotFoundException | NotFoundException -> 0x012d }
-            com.google.android.setupcompat.partnerconfig.ResourceEntry r7 = new com.google.android.setupcompat.partnerconfig.ResourceEntry     // Catch:{ NameNotFoundException | NotFoundException -> 0x012d }
-            r7.<init>(r3, r5, r6, r0)     // Catch:{ NameNotFoundException | NotFoundException -> 0x012d }
-            goto L_0x0059
-        L_0x00b1:
-            android.content.pm.PackageManager r7 = r8.getPackageManager()     // Catch:{ NameNotFoundException | NotFoundException -> 0x012d }
-            android.content.res.Resources r7 = r7.getResourcesForApplication(r1)     // Catch:{ NameNotFoundException | NotFoundException -> 0x012d }
-            int r0 = r7.getIdentifier(r5, r4, r1)     // Catch:{ NameNotFoundException | NotFoundException -> 0x012d }
-            if (r0 == 0) goto L_0x012d
-            com.google.android.setupcompat.partnerconfig.ResourceEntry r2 = new com.google.android.setupcompat.partnerconfig.ResourceEntry     // Catch:{ NameNotFoundException | NotFoundException -> 0x012d }
-            r2.<init>(r1, r5, r0, r7)     // Catch:{ NameNotFoundException | NotFoundException -> 0x012d }
-            goto L_0x006f
-        L_0x00c5:
+            goto L_0x00d8
+        L_0x0071:
             android.os.Bundle r7 = applyMaterialYouConfigBundle
             java.lang.String r0 = "IsMaterialYouStyleEnabled"
-            if (r7 == 0) goto L_0x00d1
+            if (r7 == 0) goto L_0x007d
             boolean r7 = r7.isEmpty()
-            if (r7 == 0) goto L_0x00e5
-        L_0x00d1:
+            if (r7 == 0) goto L_0x0091
+        L_0x007d:
             r7 = 0
-            android.content.ContentResolver r3 = r8.getContentResolver()     // Catch:{ IllegalArgumentException | SecurityException -> 0x0126 }
-            android.net.Uri r4 = getContentUri()     // Catch:{ IllegalArgumentException | SecurityException -> 0x0126 }
-            android.os.Bundle r3 = r3.call(r4, r0, r7, r7)     // Catch:{ IllegalArgumentException | SecurityException -> 0x0126 }
-            applyMaterialYouConfigBundle = r3     // Catch:{ IllegalArgumentException | SecurityException -> 0x0126 }
-            if (r3 == 0) goto L_0x00e5
-            r3.isEmpty()     // Catch:{ IllegalArgumentException | SecurityException -> 0x0126 }
-        L_0x00e5:
+            android.content.ContentResolver r3 = r8.getContentResolver()     // Catch:{ IllegalArgumentException | SecurityException -> 0x00d1 }
+            android.net.Uri r4 = getContentUri()     // Catch:{ IllegalArgumentException | SecurityException -> 0x00d1 }
+            android.os.Bundle r3 = r3.call(r4, r0, r7, r7)     // Catch:{ IllegalArgumentException | SecurityException -> 0x00d1 }
+            applyMaterialYouConfigBundle = r3     // Catch:{ IllegalArgumentException | SecurityException -> 0x00d1 }
+            if (r3 == 0) goto L_0x0091
+            r3.isEmpty()     // Catch:{ IllegalArgumentException | SecurityException -> 0x00d1 }
+        L_0x0091:
             android.os.Bundle r7 = applyMaterialYouConfigBundle
-            if (r7 == 0) goto L_0x012d
+            if (r7 == 0) goto L_0x00d8
             r3 = 0
             boolean r7 = r7.getBoolean(r0, r3)
-            if (r7 == 0) goto L_0x012d
+            if (r7 == 0) goto L_0x00d8
             java.lang.String r7 = "use material you resource:"
             java.lang.String r0 = r9.packageName     // Catch:{  }
             android.content.res.Resources r3 = r9.resources
             boolean r1 = java.util.Objects.equals(r0, r1)     // Catch:{  }
-            if (r1 == 0) goto L_0x012d
+            if (r1 == 0) goto L_0x00d8
             int r1 = r9.resourceId     // Catch:{  }
             java.lang.String r1 = r3.getResourceTypeName(r1)     // Catch:{  }
             java.lang.String r4 = r9.resourceName     // Catch:{  }
             java.lang.String r5 = "_material_you"
             java.lang.String r4 = r4.concat(r5)     // Catch:{  }
             int r1 = r3.getIdentifier(r4, r1, r0)     // Catch:{  }
-            if (r1 == 0) goto L_0x012d
+            if (r1 == 0) goto L_0x00d8
             java.lang.StringBuilder r5 = new java.lang.StringBuilder     // Catch:{  }
             r5.<init>(r7)     // Catch:{  }
             r5.append(r4)     // Catch:{  }
@@ -533,25 +479,25 @@ public final class PartnerConfigHelper {
             com.google.android.setupcompat.partnerconfig.ResourceEntry r7 = new com.google.android.setupcompat.partnerconfig.ResourceEntry     // Catch:{  }
             r7.<init>(r0, r4, r1, r3)     // Catch:{  }
             goto L_0x0059
-        L_0x0126:
+        L_0x00d1:
             java.lang.String r0 = "SetupWizard Material You configs supporting status unknown; return as false."
             android.util.Log.w(r2, r0)
             applyMaterialYouConfigBundle = r7
-        L_0x012d:
+        L_0x00d8:
             android.content.res.Resources r7 = r9.resources
             android.content.res.Configuration r0 = r7.getConfiguration()
             boolean r8 = isSetupWizardDayNightEnabled(r8)
-            if (r8 != 0) goto L_0x014e
+            if (r8 != 0) goto L_0x00f9
             int r8 = r0.uiMode
             r1 = r8 & 48
             r2 = 32
-            if (r1 != r2) goto L_0x014e
+            if (r1 != r2) goto L_0x00f9
             r8 = r8 & -49
             r8 = r8 | 16
             r0.uiMode = r8
             android.util.DisplayMetrics r8 = r7.getDisplayMetrics()
             r7.updateConfiguration(r0, r8)
-        L_0x014e:
+        L_0x00f9:
             return r9
         */
         throw new UnsupportedOperationException("Method not decompiled: com.google.android.setupcompat.partnerconfig.PartnerConfigHelper.getResourceEntryFromKey(android.content.Context, java.lang.String):com.google.android.setupcompat.partnerconfig.ResourceEntry");
@@ -576,10 +522,10 @@ public final class PartnerConfigHelper {
     }
 
     public boolean isActivityEmbedded(Context context) {
-        EmbeddingCompat embeddingCompat;
+        EmbeddingInterfaceCompat embeddingInterfaceCompat;
         try {
             Activity lookupActivityFromContext = lookupActivityFromContext(context);
-            if (!isEmbeddedActivityOnePaneEnabled(context) || (embeddingCompat = ((ExtensionEmbeddingBackend) ActivityEmbeddingController.getInstance(lookupActivityFromContext).backend).embeddingExtension) == null || !embeddingCompat.embeddingExtension.isActivityEmbedded(lookupActivityFromContext)) {
+            if (!isEmbeddedActivityOnePaneEnabled(context) || (embeddingInterfaceCompat = ((ExtensionEmbeddingBackend) ActivityEmbeddingController.getInstance(lookupActivityFromContext).backend).embeddingExtension) == null || !((EmbeddingCompat) embeddingInterfaceCompat).embeddingExtension.isActivityEmbedded(lookupActivityFromContext)) {
                 return false;
             }
             return true;

@@ -5,13 +5,13 @@ import com.google.android.systemui.columbus.fetchers.GateFetcher;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.function.Function;
-import kotlin.collections.CollectionsKt;
-import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.collections.CollectionsKt__IteratorsJVMKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.SharingStarted;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class GateFetcher$getBlockingGateFlow$1 implements Function {
     public final /* synthetic */ GateFetcher this$0;
 
@@ -21,10 +21,10 @@ public final class GateFetcher$getBlockingGateFlow$1 implements Function {
 
     public final Object apply(Object obj) {
         Iterable iterable = ((GateFetcher.GateCollectionKey) obj).gateSet;
-        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(iterable));
+        ArrayList arrayList = new ArrayList(CollectionsKt__IteratorsJVMKt.collectionSizeOrDefault(iterable));
         Iterator it = iterable.iterator();
         if (!it.hasNext()) {
-            return FlowKt.stateIn(new GateFetcher$getBlockingGateFlow$1$apply$$inlined$combine$1((Flow[]) CollectionsKt.toList(arrayList).toArray(new Flow[0])), this.this$0.coroutineScope, SharingStarted.Companion.WhileSubscribed$default(3), (Object) null);
+            return FlowKt.stateIn(new GateFetcher$getBlockingGateFlow$1$apply$$inlined$combine$1((Flow[]) CollectionsKt___CollectionsKt.toList(arrayList).toArray(new Flow[0])), this.this$0.coroutineScope, SharingStarted.Companion.WhileSubscribed$default(3), (Object) null);
         }
         WindowDecorActionBar$$ExternalSyntheticThrowCCEIfNotNull0.m(it.next());
         throw null;

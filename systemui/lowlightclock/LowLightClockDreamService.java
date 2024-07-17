@@ -19,7 +19,7 @@ import com.android.systemui.statusbar.CrossFadeHelper;
 import com.google.android.systemui.lowlightclock.ChargingStatusProvider;
 import com.google.hardware.pixel.display.IDisplay;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class LowLightClockDreamService extends DreamService {
     public Animator mAnimationIn;
     public Animator mAnimationOut;
@@ -43,9 +43,9 @@ public class LowLightClockDreamService extends DreamService {
         boolean z = false;
         setInteractive(false);
         setFullscreen(true);
-        setContentView(LayoutInflater.from(getApplicationContext()).inflate(2131558744, (ViewGroup) null));
-        this.mTextClock = (TextClock) findViewById(2131362943);
-        this.mChargingStatusTextView = (TextView) findViewById(2131362249);
+        setContentView(LayoutInflater.from(getApplicationContext()).inflate(2131558738, (ViewGroup) null));
+        this.mTextClock = (TextClock) findViewById(2131362919);
+        this.mChargingStatusTextView = (TextView) findViewById(2131362233);
         ChargingStatusProvider chargingStatusProvider = this.mChargingStatusProvider;
         LowLightClockDreamService$$ExternalSyntheticLambda0 lowLightClockDreamService$$ExternalSyntheticLambda0 = new LowLightClockDreamService$$ExternalSyntheticLambda0(this);
         if (chargingStatusProvider.mCallback == null) {

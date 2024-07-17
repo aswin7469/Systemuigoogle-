@@ -13,7 +13,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class WeatherSmartspaceDataProvider implements BcSmartspaceDataPlugin {
     public static final boolean DEBUG = Log.isLoggable("WeatherSSDataProvider", 3);
     public BcSmartspaceDataPlugin.SmartspaceEventNotifier mEventNotifier = null;
@@ -21,7 +21,7 @@ public final class WeatherSmartspaceDataProvider implements BcSmartspaceDataPlug
     public final List mSmartspaceTargets = new ArrayList();
 
     public final BcSmartspaceDataPlugin.SmartspaceView getView(ViewGroup viewGroup) {
-        return (BcSmartspaceDataPlugin.SmartspaceView) LayoutInflater.from(viewGroup.getContext()).inflate(2131559209, viewGroup, false);
+        return (BcSmartspaceDataPlugin.SmartspaceView) LayoutInflater.from(viewGroup.getContext()).inflate(2131559191, viewGroup, false);
     }
 
     public final void notifySmartspaceEvent(SmartspaceTargetEvent smartspaceTargetEvent) {

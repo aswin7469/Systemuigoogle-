@@ -7,7 +7,7 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 final class BatteryEventService$notifyBroadcastBatteryEventsUpdate$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ BatteryEvents $events;
     long J$0;
@@ -72,7 +72,7 @@ final class BatteryEventService$notifyBroadcastBatteryEventsUpdate$2 extends Sus
             java.util.concurrent.CopyOnWriteArraySet r6 = r13.broadcastIntentBatteryEventsListener
             int r6 = r6.size()
             java.lang.String r7 = "BatteryEventsListener (broadcast) count: "
-            androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0.m(r7, r2, r6)
+            androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0.m(r7, r6, r2)
             java.util.concurrent.CopyOnWriteArraySet r6 = r13.broadcastIntentBatteryEventsListener
             java.util.Iterator r6 = r6.iterator()
             r8 = r13
@@ -87,7 +87,7 @@ final class BatteryEventService$notifyBroadcastBatteryEventsUpdate$2 extends Sus
             java.lang.Iterable r13 = (java.lang.Iterable) r13
             java.util.Set r9 = r7.eventTypes
             java.lang.Iterable r9 = (java.lang.Iterable) r9
-            java.util.Set r13 = kotlin.collections.CollectionsKt.intersect(r13, r9)
+            java.util.Set r13 = kotlin.collections.CollectionsKt___CollectionsKt.intersect(r13, r9)
             r12.L$0 = r8
             r12.L$1 = r7
             r12.L$2 = r6
@@ -110,7 +110,7 @@ final class BatteryEventService$notifyBroadcastBatteryEventsUpdate$2 extends Sus
             java.util.Set r1 = r13.needNotifiedEvents
             java.lang.Iterable r1 = (java.lang.Iterable) r1
             java.util.ArrayList r10 = new java.util.ArrayList
-            int r11 = kotlin.collections.CollectionsKt__IterablesKt.collectionSizeOrDefault(r1)
+            int r11 = kotlin.collections.CollectionsKt__IteratorsJVMKt.collectionSizeOrDefault(r1)
             r10.<init>(r11)
             java.util.Iterator r1 = r1.iterator()
         L_0x0095:

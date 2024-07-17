@@ -22,6 +22,7 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
+import com.android.systemui.BootCompleteCache;
 import com.android.systemui.BootCompleteCacheImpl;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.statusbar.policy.BatteryController;
@@ -33,7 +34,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 import vendor.google.wireless_charger.IWirelessCharger;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ReverseChargingController extends BroadcastReceiver implements CallbackController {
     public static final boolean DEBUG = Log.isLoggable("ReverseChargingControl", 3);
     public static final long DURATION_TO_ADVANCED_ACCESSORY_DEVICE_RECONNECTED_TIME_OUT;
@@ -43,7 +44,7 @@ public final class ReverseChargingController extends BroadcastReceiver implement
     public static final long DURATION_TO_REVERSE_RX_REMOVAL_TIME_OUT;
     public static final long DURATION_TO_REVERSE_TIME_OUT;
     public static final long DURATION_WAIT_NFC_SERVICE;
-    public final ReverseChargingController$$ExternalSyntheticLambda3 mAccessoryDeviceRemovedTimeoutAlarmAction = new ReverseChargingController$$ExternalSyntheticLambda3(this, 4);
+    public final ReverseChargingController$$ExternalSyntheticLambda2 mAccessoryDeviceRemovedTimeoutAlarmAction = new ReverseChargingController$$ExternalSyntheticLambda2(this, 4);
     public final AlarmManager mAlarmManager;
     final BatteryController.BatteryStateChangeCallback mBatteryStateChangeCallback = new BatteryController.BatteryStateChangeCallback() {
         public final void onPowerSaveChanged(boolean z) {
@@ -55,13 +56,13 @@ public final class ReverseChargingController extends BroadcastReceiver implement
         }
     };
     public final Executor mBgExecutor;
-    public final BootCompleteCacheImpl mBootCompleteCache;
-    public final ReverseChargingController$$ExternalSyntheticLambda2 mBootCompleteListener = new ReverseChargingController$$ExternalSyntheticLambda2(this);
+    public final BootCompleteCache mBootCompleteCache;
+    public final ReverseChargingController$$ExternalSyntheticLambda1 mBootCompleteListener = new ReverseChargingController$$ExternalSyntheticLambda1(this);
     boolean mBootCompleted;
     public final BroadcastDispatcher mBroadcastDispatcher;
     public boolean mCacheIsReverseSupported;
     public final ArrayList mChangeCallbacks = new ArrayList();
-    public final ReverseChargingController$$ExternalSyntheticLambda3 mCheckNfcConflictWithUsbAudioAlarmAction = new ReverseChargingController$$ExternalSyntheticLambda3(this, 2);
+    public final ReverseChargingController$$ExternalSyntheticLambda2 mCheckNfcConflictWithUsbAudioAlarmAction = new ReverseChargingController$$ExternalSyntheticLambda2(this, 2);
     public final Context mContext;
     int mCurrentRtxMode = 0;
     public int mCurrentRtxReceiverType = 0;
@@ -77,14 +78,14 @@ public final class ReverseChargingController extends BroadcastReceiver implement
     public boolean mPluggedAc;
     public boolean mPowerSave;
     public boolean mProvidingBattery = false;
-    public final ReverseChargingController$$ExternalSyntheticLambda3 mReconnectedTimeoutAlarmAction = new ReverseChargingController$$ExternalSyntheticLambda3(this, 3);
+    public final ReverseChargingController$$ExternalSyntheticLambda2 mReconnectedTimeoutAlarmAction = new ReverseChargingController$$ExternalSyntheticLambda2(this, 3);
     boolean mRestoreUsbNfcPollingMode;
     public boolean mRestoreWlcNfcPollingMode;
     boolean mReverse;
     public long mReverseStartTime = 0;
     public final Optional mRtxChargerManagerOptional;
-    public final ReverseChargingController$$ExternalSyntheticLambda3 mRtxFinishAlarmAction = new ReverseChargingController$$ExternalSyntheticLambda3(this, 0);
-    public final ReverseChargingController$$ExternalSyntheticLambda3 mRtxFinishRxFullAlarmAction = new ReverseChargingController$$ExternalSyntheticLambda3(this, 1);
+    public final ReverseChargingController$$ExternalSyntheticLambda2 mRtxFinishAlarmAction = new ReverseChargingController$$ExternalSyntheticLambda2(this, 0);
+    public final ReverseChargingController$$ExternalSyntheticLambda2 mRtxFinishRxFullAlarmAction = new ReverseChargingController$$ExternalSyntheticLambda2(this, 1);
     public int mRtxLevel;
     IThermalEventListener mSkinThermalEventListener;
     public boolean mStartReconnected;
@@ -94,11 +95,11 @@ public final class ReverseChargingController extends BroadcastReceiver implement
     public boolean mUseRxRemovalTimeOut;
     public boolean mWirelessCharging;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public interface ReverseChargingChangeCallback {
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     final class SkinThermalEventListener extends IThermalEventListener.Stub {
         public SkinThermalEventListener() {
         }
@@ -125,7 +126,7 @@ public final class ReverseChargingController extends BroadcastReceiver implement
         DURATION_WAIT_NFC_SERVICE = timeUnit2.toMillis(10);
     }
 
-    public ReverseChargingController(Context context, BroadcastDispatcher broadcastDispatcher, Optional optional, AlarmManager alarmManager, Optional optional2, Executor executor, Executor executor2, BootCompleteCacheImpl bootCompleteCacheImpl, IThermalService iThermalService) {
+    public ReverseChargingController(Context context, BroadcastDispatcher broadcastDispatcher, Optional optional, AlarmManager alarmManager, Optional optional2, Executor executor, Executor executor2, BootCompleteCache bootCompleteCache, IThermalService iThermalService) {
         new Binder();
         this.mContext = context;
         this.mBroadcastDispatcher = broadcastDispatcher;
@@ -135,11 +136,11 @@ public final class ReverseChargingController extends BroadcastReceiver implement
         this.mUsbManagerOptional = optional2;
         this.mMainExecutor = executor;
         this.mBgExecutor = executor2;
-        this.mBootCompleteCache = bootCompleteCacheImpl;
+        this.mBootCompleteCache = bootCompleteCache;
         this.mThermalService = iThermalService;
-        int[] intArray = context.getResources().getIntArray(2130903111);
+        int[] intArray = context.getResources().getIntArray(2130903110);
         this.mNfcUsbVendorIds = intArray;
-        int[] intArray2 = context.getResources().getIntArray(2130903110);
+        int[] intArray2 = context.getResources().getIntArray(2130903109);
         this.mNfcUsbProductIds = intArray2;
         if (intArray.length == intArray2.length) {
             this.mDoesNfcConflictWithUsbAudio = context.getResources().getBoolean(2131034155);
@@ -182,14 +183,14 @@ public final class ReverseChargingController extends BroadcastReceiver implement
             i = 4096;
         }
         if (DEBUG) {
-            ExifInterface$$ExternalSyntheticOutline0.m("Change NFC reader mode to flags: ", "ReverseChargingControl", i);
+            ExifInterface$$ExternalSyntheticOutline0.m("Change NFC reader mode to flags: ", i, "ReverseChargingControl");
         }
         this.mBgExecutor.execute(new ReverseChargingController$$ExternalSyntheticLambda0(this, z, 1));
     }
 
     public final void fireReverseChanged$1() {
         synchronized (this.mChangeCallbacks) {
-            this.mMainExecutor.execute(new ReverseChargingController$$ExternalSyntheticLambda10(this));
+            this.mMainExecutor.execute(new ReverseChargingController$$ExternalSyntheticLambda5(this));
         }
     }
 
@@ -314,7 +315,7 @@ public final class ReverseChargingController extends BroadcastReceiver implement
         intentFilter.addAction("android.hardware.usb.action.USB_DEVICE_ATTACHED");
         intentFilter.addAction("android.hardware.usb.action.USB_DEVICE_DETACHED");
         this.mBroadcastDispatcher.registerReceiver(this, intentFilter);
-        this.mBootCompleteCache.addListener(this.mBootCompleteListener);
+        ((BootCompleteCacheImpl) this.mBootCompleteCache).addListener(this.mBootCompleteListener);
         if (this.mRtxChargerManagerOptional.isPresent()) {
             if (this.mRtxChargerManagerOptional.isPresent()) {
                 this.mBgExecutor.execute(new ReverseChargingController$$ExternalSyntheticLambda0(this, false, 0));
@@ -332,9 +333,9 @@ public final class ReverseChargingController extends BroadcastReceiver implement
                 reverseWirelessCharger2.mRtxInformationCallbacks.add(obj2);
             }
             ReverseWirelessCharger reverseWirelessCharger3 = (ReverseWirelessCharger) this.mRtxChargerManagerOptional.get();
-            ReverseChargingController$$ExternalSyntheticLambda9 reverseChargingController$$ExternalSyntheticLambda9 = new ReverseChargingController$$ExternalSyntheticLambda9(this);
+            ReverseChargingController$$ExternalSyntheticLambda4 reverseChargingController$$ExternalSyntheticLambda4 = new ReverseChargingController$$ExternalSyntheticLambda4(this);
             synchronized (reverseWirelessCharger3.mLock) {
-                reverseWirelessCharger3.mRtxStatusCallbacks.add(reverseChargingController$$ExternalSyntheticLambda9);
+                reverseWirelessCharger3.mRtxStatusCallbacks.add(reverseChargingController$$ExternalSyntheticLambda4);
             }
             try {
                 if (this.mSkinThermalEventListener == null) {
@@ -363,11 +364,13 @@ public final class ReverseChargingController extends BroadcastReceiver implement
         boolean z = false;
         if (this.mRtxChargerManagerOptional.isPresent()) {
             ReverseWirelessCharger reverseWirelessCharger = (ReverseWirelessCharger) this.mRtxChargerManagerOptional.get();
-            if (reverseWirelessCharger.initHALInterface()) {
+            reverseWirelessCharger.initHALInterface();
+            IWirelessCharger iWirelessCharger = reverseWirelessCharger.mWirelessCharger;
+            if (iWirelessCharger != null) {
                 try {
-                    z = ((IWirelessCharger.Stub.Proxy) reverseWirelessCharger.mWirelessCharger).isRtxSupported();
+                    z = ((IWirelessCharger.Stub.Proxy) iWirelessCharger).isRtxSupported();
                 } catch (Exception e) {
-                    Log.w("ReverseWirelessCharger", "isRtxSupported fail: ", e);
+                    Log.i("ReverseWirelessCharger", "isRtxSupported fail: ", e);
                 }
             }
             this.mIsReverseSupported = z;
@@ -382,7 +385,7 @@ public final class ReverseChargingController extends BroadcastReceiver implement
 
     public final void logReverseStartEvent(int i) {
         if (DEBUG) {
-            ExifInterface$$ExternalSyntheticOutline0.m("logReverseStartEvent: ", "ReverseChargingControl", i);
+            ExifInterface$$ExternalSyntheticOutline0.m("logReverseStartEvent: ", i, "ReverseChargingControl");
         }
         this.mReverseStartTime = SystemClock.uptimeMillis();
         int i2 = this.mLevel;
@@ -399,7 +402,7 @@ public final class ReverseChargingController extends BroadcastReceiver implement
 
     public final void logReverseStopEvent(int i) {
         if (DEBUG) {
-            ExifInterface$$ExternalSyntheticOutline0.m("logReverseStopEvent: ", "ReverseChargingControl", i);
+            ExifInterface$$ExternalSyntheticOutline0.m("logReverseStopEvent: ", i, "ReverseChargingControl");
         }
         long uptimeMillis = SystemClock.uptimeMillis();
         int i2 = this.mLevel;
@@ -436,7 +439,7 @@ public final class ReverseChargingController extends BroadcastReceiver implement
         sb.append(" this=");
         sb.append(this);
         Log.i("ReverseChargingControl", sb.toString());
-        this.mBgExecutor.execute(new ReverseChargingController$$ExternalSyntheticLambda8(this, bundle));
+        this.mBgExecutor.execute(new ReverseChargingController$$ExternalSyntheticLambda3(this, bundle));
     }
 
     public void playSound(Ringtone ringtone) {
@@ -493,14 +496,14 @@ public final class ReverseChargingController extends BroadcastReceiver implement
         int i2 = i;
         if (i2 == 0) {
             AlarmManager alarmManager = this.mAlarmManager;
-            ReverseChargingController$$ExternalSyntheticLambda3 reverseChargingController$$ExternalSyntheticLambda3 = this.mRtxFinishAlarmAction;
-            alarmManager.setExact(2, SystemClock.elapsedRealtime() + j, "ReverseChargingControl", reverseChargingController$$ExternalSyntheticLambda3, (Handler) null);
+            ReverseChargingController$$ExternalSyntheticLambda2 reverseChargingController$$ExternalSyntheticLambda2 = this.mRtxFinishAlarmAction;
+            alarmManager.setExact(2, SystemClock.elapsedRealtime() + j, "ReverseChargingControl", reverseChargingController$$ExternalSyntheticLambda2, (Handler) null);
         } else if (i2 == 1) {
             this.mAlarmManager.setExact(2, SystemClock.elapsedRealtime() + j, "ReverseChargingControl", this.mRtxFinishRxFullAlarmAction, (Handler) null);
         } else if (i2 == 2) {
             AlarmManager alarmManager2 = this.mAlarmManager;
-            ReverseChargingController$$ExternalSyntheticLambda3 reverseChargingController$$ExternalSyntheticLambda32 = this.mCheckNfcConflictWithUsbAudioAlarmAction;
-            alarmManager2.setExact(2, SystemClock.elapsedRealtime() + j, "ReverseChargingControl", reverseChargingController$$ExternalSyntheticLambda32, (Handler) null);
+            ReverseChargingController$$ExternalSyntheticLambda2 reverseChargingController$$ExternalSyntheticLambda22 = this.mCheckNfcConflictWithUsbAudioAlarmAction;
+            alarmManager2.setExact(2, SystemClock.elapsedRealtime() + j, "ReverseChargingControl", reverseChargingController$$ExternalSyntheticLambda22, (Handler) null);
         } else if (i2 == 3) {
             this.mAlarmManager.setExact(2, SystemClock.elapsedRealtime() + j, "ReverseChargingControl", this.mReconnectedTimeoutAlarmAction, (Handler) null);
         } else if (i2 == 4) {

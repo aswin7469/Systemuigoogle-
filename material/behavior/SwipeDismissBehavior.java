@@ -10,7 +10,7 @@ import androidx.core.view.accessibility.AccessibilityViewCommand;
 import androidx.customview.widget.ViewDragHelper;
 import java.util.WeakHashMap;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class SwipeDismissBehavior extends CoordinatorLayout.Behavior {
     public float alphaEndSwipeDistance = 0.5f;
     public float alphaStartSwipeDistance = 0.0f;
@@ -24,7 +24,7 @@ public class SwipeDismissBehavior extends CoordinatorLayout.Behavior {
             int i3;
             int width;
             WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-            if (view.getLayoutDirection() == 1) {
+            if (ViewCompat.Api17Impl.getLayoutDirection(view) == 1) {
                 z = true;
             } else {
                 z = false;
@@ -108,7 +108,7 @@ public class SwipeDismissBehavior extends CoordinatorLayout.Behavior {
                 r4 = 0
                 if (r1 == 0) goto L_0x0039
                 java.util.WeakHashMap r5 = androidx.core.view.ViewCompat.sViewPropertyAnimatorMap
-                int r5 = r9.getLayoutDirection()
+                int r5 = androidx.core.view.ViewCompat.Api17Impl.getLayoutDirection(r9)
                 if (r5 != r2) goto L_0x001a
                 r5 = r2
                 goto L_0x001b
@@ -173,7 +173,7 @@ public class SwipeDismissBehavior extends CoordinatorLayout.Behavior {
                 com.google.android.material.behavior.SwipeDismissBehavior$SettleRunnable r8 = new com.google.android.material.behavior.SwipeDismissBehavior$SettleRunnable
                 r8.<init>(r9, r2)
                 java.util.WeakHashMap r10 = androidx.core.view.ViewCompat.sViewPropertyAnimatorMap
-                r9.postOnAnimation(r8)
+                androidx.core.view.ViewCompat.Api16Impl.postOnAnimation(r9, r8)
             L_0x007f:
                 return
             */
@@ -193,11 +193,11 @@ public class SwipeDismissBehavior extends CoordinatorLayout.Behavior {
     public int swipeDirection = 2;
     public ViewDragHelper viewDragHelper;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public interface OnDismissListener {
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class SettleRunnable implements Runnable {
         public final boolean dismiss;
         public final View view;
@@ -212,7 +212,7 @@ public class SwipeDismissBehavior extends CoordinatorLayout.Behavior {
             if (viewDragHelper != null && viewDragHelper.continueSettling()) {
                 View view2 = this.view;
                 WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-                view2.postOnAnimation(this);
+                ViewCompat.Api16Impl.postOnAnimation(view2, this);
             } else if (this.dismiss) {
                 SwipeDismissBehavior.this.getClass();
             }
@@ -247,8 +247,8 @@ public class SwipeDismissBehavior extends CoordinatorLayout.Behavior {
 
     public final boolean onLayoutChild(CoordinatorLayout coordinatorLayout, View view, int i) {
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-        if (view.getImportantForAccessibility() == 0) {
-            view.setImportantForAccessibility(1);
+        if (ViewCompat.Api16Impl.getImportantForAccessibility(view) == 0) {
+            ViewCompat.Api16Impl.setImportantForAccessibility(view, 1);
             ViewCompat.removeActionWithId(view, 1048576);
             ViewCompat.notifyViewAccessibilityStateChangedIfNeeded(view, 0);
             if (canSwipeDismissView(view)) {
@@ -261,7 +261,7 @@ public class SwipeDismissBehavior extends CoordinatorLayout.Behavior {
                             return false;
                         }
                         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-                        if (view.getLayoutDirection() == 1) {
+                        if (ViewCompat.Api17Impl.getLayoutDirection(view) == 1) {
                             z = true;
                         }
                         int i2 = swipeDismissBehavior.swipeDirection;

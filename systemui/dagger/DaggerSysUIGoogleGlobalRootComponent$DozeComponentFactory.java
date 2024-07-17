@@ -5,7 +5,7 @@ import com.android.keyguard.KeyguardStatusView;
 import com.android.systemui.mediaprojection.appselector.MediaProjectionAppSelectorComponent$Factory;
 import com.android.systemui.qs.dagger.QSSceneComponent$Factory;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class DaggerSysUIGoogleGlobalRootComponent$DozeComponentFactory implements MediaProjectionAppSelectorComponent$Factory, QSSceneComponent$Factory {
     public final DaggerSysUIGoogleGlobalRootComponent$SysUIGoogleGlobalRootComponentImpl sysUIGoogleGlobalRootComponentImpl;
     public final DaggerSysUIGoogleGlobalRootComponent$SysUIGoogleSysUIComponentImpl sysUIGoogleSysUIComponentImpl;
@@ -15,9 +15,13 @@ public final class DaggerSysUIGoogleGlobalRootComponent$DozeComponentFactory imp
         this.sysUIGoogleSysUIComponentImpl = daggerSysUIGoogleGlobalRootComponent$SysUIGoogleSysUIComponentImpl;
     }
 
-    public DaggerSysUIGoogleGlobalRootComponent$KeyguardStatusViewComponentImpl build(KeyguardStatusView keyguardStatusView, Display display) {
+    public final DaggerSysUIGoogleGlobalRootComponent$KeyguardStatusViewComponentImpl build(KeyguardStatusView keyguardStatusView, Display display) {
         keyguardStatusView.getClass();
         display.getClass();
         return new DaggerSysUIGoogleGlobalRootComponent$KeyguardStatusViewComponentImpl(this.sysUIGoogleGlobalRootComponentImpl, this.sysUIGoogleSysUIComponentImpl, keyguardStatusView, display);
+    }
+
+    public /* synthetic */ DaggerSysUIGoogleGlobalRootComponent$DozeComponentFactory(DaggerSysUIGoogleGlobalRootComponent$SysUIGoogleGlobalRootComponentImpl daggerSysUIGoogleGlobalRootComponent$SysUIGoogleGlobalRootComponentImpl, DaggerSysUIGoogleGlobalRootComponent$SysUIGoogleSysUIComponentImpl daggerSysUIGoogleGlobalRootComponent$SysUIGoogleSysUIComponentImpl, DaggerSysUIGoogleGlobalRootComponent$WMComponentImpl$$ExternalSyntheticOutline0 daggerSysUIGoogleGlobalRootComponent$WMComponentImpl$$ExternalSyntheticOutline0) {
+        this(daggerSysUIGoogleGlobalRootComponent$SysUIGoogleGlobalRootComponentImpl, daggerSysUIGoogleGlobalRootComponent$SysUIGoogleSysUIComponentImpl);
     }
 }

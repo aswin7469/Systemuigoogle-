@@ -7,7 +7,7 @@ import androidx.core.graphics.ColorUtils;
 import com.google.android.material.color.MaterialColors;
 import com.google.android.material.resources.MaterialAttributes;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ElevationOverlayProvider {
     public static final int OVERLAY_ACCENT_COLOR_ALPHA = ((int) Math.round(5.1000000000000005d));
     public final int colorSurface;
@@ -18,51 +18,20 @@ public final class ElevationOverlayProvider {
 
     public ElevationOverlayProvider(Context context) {
         boolean z;
-        int i;
-        int i2;
         TypedValue resolve = MaterialAttributes.resolve(2130969047, context);
-        int i3 = 0;
         if (resolve == null || resolve.type != 18 || resolve.data == 0) {
             z = false;
         } else {
             z = true;
         }
-        TypedValue resolve2 = MaterialAttributes.resolve(2130969046, context);
-        if (resolve2 != null) {
-            int i4 = resolve2.resourceId;
-            if (i4 != 0) {
-                i = context.getColor(i4);
-            } else {
-                i = resolve2.data;
-            }
-        } else {
-            i = 0;
-        }
-        TypedValue resolve3 = MaterialAttributes.resolve(2130969045, context);
-        if (resolve3 != null) {
-            int i5 = resolve3.resourceId;
-            if (i5 != 0) {
-                i2 = context.getColor(i5);
-            } else {
-                i2 = resolve3.data;
-            }
-        } else {
-            i2 = 0;
-        }
-        TypedValue resolve4 = MaterialAttributes.resolve(2130968887, context);
-        if (resolve4 != null) {
-            int i6 = resolve4.resourceId;
-            if (i6 != 0) {
-                i3 = context.getColor(i6);
-            } else {
-                i3 = resolve4.data;
-            }
-        }
+        int color = MaterialColors.getColor(context, 2130969046, 0);
+        int color2 = MaterialColors.getColor(context, 2130969045, 0);
+        int color3 = MaterialColors.getColor(context, 2130968887, 0);
         float f = context.getResources().getDisplayMetrics().density;
         this.elevationOverlayEnabled = z;
-        this.elevationOverlayColor = i;
-        this.elevationOverlayAccentColor = i2;
-        this.colorSurface = i3;
+        this.elevationOverlayColor = color;
+        this.elevationOverlayAccentColor = color2;
+        this.colorSurface = color3;
         this.displayDensity = f;
     }
 

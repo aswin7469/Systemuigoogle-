@@ -1,5 +1,6 @@
 package com.google.android.systemui.power;
 
+import android.app.Notification;
 import android.content.Context;
 import android.os.UserHandle;
 import androidx.core.app.NotificationCompat$Builder;
@@ -7,7 +8,7 @@ import com.google.android.systemui.googlebattery.AdaptiveChargingManager;
 import com.google.android.systemui.power.AdaptiveChargingNotification;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final /* synthetic */ class AdaptiveChargingNotification$1$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ AdaptiveChargingNotification.AnonymousClass1 f$0;
     public final /* synthetic */ String f$1;
@@ -38,13 +39,14 @@ public final /* synthetic */ class AdaptiveChargingNotification$1$$ExternalSynth
             NotificationCompat$Builder notificationCompat$Builder = new NotificationCompat$Builder(context);
             notificationCompat$Builder.mShowWhen = false;
             notificationCompat$Builder.mSilent = true;
-            notificationCompat$Builder.mNotification.icon = 2131232472;
-            notificationCompat$Builder.mContentTitle = NotificationCompat$Builder.limitCharSequenceLength(context.getString(2131951877));
-            notificationCompat$Builder.mContentText = NotificationCompat$Builder.limitCharSequenceLength(context.getString(2131951875, new Object[]{formatTimeToFull}));
-            notificationCompat$Builder.addAction(context.getString(2131951878), PowerUtils.createPendingIntent(context, "PNW.acChargeNormally"));
-            notificationCompat$Builder.mNotification.deleteIntent = PowerUtils.createPendingIntent(context, "systemui.power.action.dismissAdaptiveChargingWarning");
-            PowerUtils.overrideNotificationAppName(context, notificationCompat$Builder);
-            adaptiveChargingNotification.mNotificationManager.notifyAsUser("adaptive_charging", 2131951877, notificationCompat$Builder.build(), UserHandle.ALL);
+            Notification notification = notificationCompat$Builder.mNotification;
+            notification.icon = 2131232458;
+            notificationCompat$Builder.mContentTitle = NotificationCompat$Builder.limitCharSequenceLength(context.getString(2131951869));
+            notificationCompat$Builder.mContentText = NotificationCompat$Builder.limitCharSequenceLength(context.getString(2131951867, new Object[]{formatTimeToFull}));
+            notificationCompat$Builder.addAction(context.getString(2131951870), PowerUtils.createPendingIntent(context, "PNW.acChargeNormally"));
+            notification.deleteIntent = PowerUtils.createPendingIntent(context, "systemui.power.action.dismissAdaptiveChargingWarning");
+            PowerUtils.overrideNotificationAppName(context, notificationCompat$Builder, 17039674);
+            adaptiveChargingNotification.mNotificationManager.notifyAsUser("adaptive_charging", 2131951869, notificationCompat$Builder.build(), UserHandle.ALL);
             adaptiveChargingNotification.mUiEventLogger.log(BatteryMetricEvent.ADAPTIVE_CHARGING_NOTIFICATION);
             adaptiveChargingNotification.mWasActive = true;
         }

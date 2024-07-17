@@ -1,17 +1,12 @@
 package com.google.android.systemui.power;
 
-import android.os.Binder;
-import android.os.IBinder;
-import android.os.Parcel;
-import com.google.android.systemui.power.batteryevent.aidl.BatteryEventType;
 import com.google.android.systemui.power.batteryevent.aidl.IBatteryEventsListener;
-import java.util.ArrayList;
 import java.util.List;
 import kotlin.collections.EmptyList;
 import kotlin.jvm.functions.Function3;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
-public final class BatteryEventClient$listener$1 extends Binder implements IBatteryEventsListener {
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
+public final class BatteryEventClient$listener$1 extends IBatteryEventsListener.Stub {
     public final /* synthetic */ BatteryEventClient this$0;
 
     public BatteryEventClient$listener$1(BatteryEventClient batteryEventClient) {
@@ -27,29 +22,5 @@ public final class BatteryEventClient$listener$1 extends Binder implements IBatt
             list = EmptyList.INSTANCE;
         }
         function3.invoke(list, Integer.valueOf(i), Integer.valueOf(i2));
-    }
-
-    public final boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) {
-        if (i >= 1 && i <= 16777215) {
-            parcel.enforceInterface("com.google.android.systemui.power.batteryevent.aidl.IBatteryEventsListener");
-        }
-        if (i == 1598968902) {
-            parcel2.writeString("com.google.android.systemui.power.batteryevent.aidl.IBatteryEventsListener");
-            return true;
-        } else if (i != 1) {
-            return super.onTransact(i, parcel, parcel2, i2);
-        } else {
-            ArrayList createTypedArrayList = parcel.createTypedArrayList(BatteryEventType.CREATOR);
-            int readInt = parcel.readInt();
-            int readInt2 = parcel.readInt();
-            parcel.enforceNoDataAvail();
-            onBatteryEventChanged(readInt, readInt2, createTypedArrayList);
-            parcel2.writeNoException();
-            return true;
-        }
-    }
-
-    public final IBinder asBinder() {
-        return this;
     }
 }

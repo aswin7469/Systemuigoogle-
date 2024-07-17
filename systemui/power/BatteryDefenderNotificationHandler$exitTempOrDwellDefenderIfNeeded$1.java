@@ -6,7 +6,7 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 final class BatteryDefenderNotificationHandler$exitTempOrDwellDefenderIfNeeded$1 extends SuspendLambda implements Function2 {
     long J$0;
     int label;
@@ -125,7 +125,7 @@ final class BatteryDefenderNotificationHandler$exitTempOrDwellDefenderIfNeeded$1
             java.lang.String r8 = "battery defender, startTime: "
             java.lang.String r9 = ", endTime:"
             java.lang.String r10 = ", duration:"
-            java.lang.StringBuilder r8 = com.android.compose.PlatformSliderColors$$ExternalSyntheticOutline0.m(r8, r2, r9, r7, r10)
+            java.lang.StringBuilder r8 = com.android.keyguard.logging.KeyguardUpdateMonitorLogger$logServiceStateIntent$2$$ExternalSyntheticOutline0.m(r8, r2, r9, r7, r10)
             r8.append(r12)
             java.lang.String r9 = " ms"
             r8.append(r9)

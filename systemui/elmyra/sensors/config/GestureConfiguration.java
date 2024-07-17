@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class GestureConfiguration {
     public static final Range SENSITIVITY_RANGE = Range.create(Float.valueOf(0.0f), Float.valueOf(1.0f));
     public final GestureConfiguration$$ExternalSyntheticLambda0 mAdjustmentCallback = new GestureConfiguration$$ExternalSyntheticLambda0(this, 0);
@@ -19,7 +19,7 @@ public final class GestureConfiguration {
     public Listener mListener;
     public float mSensitivity;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public interface Listener {
         void onGestureConfigurationChanged(GestureConfiguration gestureConfiguration);
     }
@@ -30,7 +30,7 @@ public final class GestureConfiguration {
         this.mAdjustments = arrayList;
         arrayList.forEach(new GestureConfiguration$$ExternalSyntheticLambda0(this, 1));
         new UserContentObserver(context, Settings.Secure.getUriFor("assist_gesture_sensitivity"), new GestureConfiguration$$ExternalSyntheticLambda0(this, 2), true);
-        Float f = (Float) DejankUtils.whitelistIpcs((Supplier) new GestureConfiguration$$ExternalSyntheticLambda3(this));
+        Float f = (Float) DejankUtils.whitelistIpcs((Supplier) new GestureConfiguration$$ExternalSyntheticLambda1(this));
         this.mSensitivity = !SENSITIVITY_RANGE.contains(f) ? 0.5f : f.floatValue();
     }
 

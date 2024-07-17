@@ -9,15 +9,16 @@ import com.android.systemui.qs.ReduceBrightColorsController;
 import com.android.systemui.statusbar.phone.AutoTileManager;
 import com.android.systemui.statusbar.phone.ManagedProfileControllerImpl;
 import com.android.systemui.statusbar.policy.BatteryController;
+import com.android.systemui.statusbar.policy.BatteryControllerImpl;
 import com.android.systemui.statusbar.policy.CastController;
-import com.android.systemui.statusbar.policy.DataSaverControllerImpl;
-import com.android.systemui.statusbar.policy.DeviceControlsControllerImpl;
+import com.android.systemui.statusbar.policy.DataSaverController;
+import com.android.systemui.statusbar.policy.DeviceControlsController;
 import com.android.systemui.statusbar.policy.HotspotController;
 import com.android.systemui.statusbar.policy.SafetyController;
-import com.android.systemui.statusbar.policy.WalletControllerImpl;
+import com.android.systemui.statusbar.policy.WalletController;
 import com.android.systemui.util.settings.SecureSettings;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class AutoTileManagerGoogle extends AutoTileManager {
     public final BatteryController mBatteryController;
     public final AnonymousClass1 mBatteryControllerCallback = new BatteryController.BatteryStateChangeCallback() {
@@ -31,8 +32,20 @@ public final class AutoTileManagerGoogle extends AutoTileManager {
         }
     };
 
-    public AutoTileManagerGoogle(Context context, AutoAddTracker.Builder builder, QSHost qSHost, Handler handler, SecureSettings secureSettings, HotspotController hotspotController, DataSaverControllerImpl dataSaverControllerImpl, ManagedProfileControllerImpl managedProfileControllerImpl, NightDisplayListenerModule$Builder nightDisplayListenerModule$Builder, CastController castController, BatteryController batteryController, ReduceBrightColorsController reduceBrightColorsController, DeviceControlsControllerImpl deviceControlsControllerImpl, WalletControllerImpl walletControllerImpl, SafetyController safetyController, boolean z) {
-        super(context, builder, qSHost, handler, secureSettings, hotspotController, dataSaverControllerImpl, managedProfileControllerImpl, nightDisplayListenerModule$Builder, castController, reduceBrightColorsController, deviceControlsControllerImpl, walletControllerImpl, safetyController, z);
+    public AutoTileManagerGoogle(Context context, AutoAddTracker.Builder builder, QSHost qSHost, Handler handler, SecureSettings secureSettings, HotspotController hotspotController, DataSaverController dataSaverController, ManagedProfileControllerImpl managedProfileControllerImpl, NightDisplayListenerModule$Builder nightDisplayListenerModule$Builder, CastController castController, BatteryController batteryController, ReduceBrightColorsController reduceBrightColorsController, DeviceControlsController deviceControlsController, WalletController walletController, SafetyController safetyController, boolean z) {
+        super(context, builder, qSHost, handler, secureSettings, hotspotController, dataSaverController, managedProfileControllerImpl, nightDisplayListenerModule$Builder, castController, reduceBrightColorsController, deviceControlsController, walletController, safetyController, z);
         this.mBatteryController = batteryController;
+    }
+
+    public final void startControllersAndSettingsListeners() {
+        super.startControllersAndSettingsListeners();
+        if (!this.mAutoTracker.isAdded("reverse")) {
+            this.mBatteryController.addCallback(this.mBatteryControllerCallback);
+        }
+    }
+
+    public final void stopListening() {
+        super.stopListening();
+        ((BatteryControllerImpl) this.mBatteryController).removeCallback(this.mBatteryControllerCallback);
     }
 }

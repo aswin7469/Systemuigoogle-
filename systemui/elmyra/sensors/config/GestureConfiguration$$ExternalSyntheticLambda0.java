@@ -6,7 +6,7 @@ import com.google.android.systemui.elmyra.sensors.config.GestureConfiguration;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final /* synthetic */ class GestureConfiguration$$ExternalSyntheticLambda0 implements Consumer {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ GestureConfiguration f$0;
@@ -18,17 +18,18 @@ public final /* synthetic */ class GestureConfiguration$$ExternalSyntheticLambda
 
     public final void accept(Object obj) {
         int i = this.$r8$classId;
+        float f = 0.5f;
         GestureConfiguration gestureConfiguration = this.f$0;
         switch (i) {
             case 0:
                 ScreenStateAdjustment screenStateAdjustment = (ScreenStateAdjustment) obj;
                 gestureConfiguration.getClass();
-                Float f = (Float) DejankUtils.whitelistIpcs((Supplier) new GestureConfiguration$$ExternalSyntheticLambda3(gestureConfiguration));
-                float floatValue = f.floatValue();
-                if (!GestureConfiguration.SENSITIVITY_RANGE.contains(f)) {
-                    floatValue = 0.5f;
+                Float f2 = (Float) DejankUtils.whitelistIpcs((Supplier) new GestureConfiguration$$ExternalSyntheticLambda1(gestureConfiguration));
+                float floatValue = f2.floatValue();
+                if (GestureConfiguration.SENSITIVITY_RANGE.contains(f2)) {
+                    f = floatValue;
                 }
-                gestureConfiguration.mSensitivity = floatValue;
+                gestureConfiguration.mSensitivity = f;
                 GestureConfiguration.Listener listener = gestureConfiguration.mListener;
                 if (listener != null) {
                     listener.onGestureConfigurationChanged(gestureConfiguration);
@@ -41,12 +42,12 @@ public final /* synthetic */ class GestureConfiguration$$ExternalSyntheticLambda
             default:
                 Uri uri = (Uri) obj;
                 gestureConfiguration.getClass();
-                Float f2 = (Float) DejankUtils.whitelistIpcs((Supplier) new GestureConfiguration$$ExternalSyntheticLambda3(gestureConfiguration));
-                float floatValue2 = f2.floatValue();
-                if (!GestureConfiguration.SENSITIVITY_RANGE.contains(f2)) {
-                    floatValue2 = 0.5f;
+                Float f3 = (Float) DejankUtils.whitelistIpcs((Supplier) new GestureConfiguration$$ExternalSyntheticLambda1(gestureConfiguration));
+                float floatValue2 = f3.floatValue();
+                if (GestureConfiguration.SENSITIVITY_RANGE.contains(f3)) {
+                    f = floatValue2;
                 }
-                gestureConfiguration.mSensitivity = floatValue2;
+                gestureConfiguration.mSensitivity = f;
                 GestureConfiguration.Listener listener2 = gestureConfiguration.mListener;
                 if (listener2 != null) {
                     listener2.onGestureConfigurationChanged(gestureConfiguration);

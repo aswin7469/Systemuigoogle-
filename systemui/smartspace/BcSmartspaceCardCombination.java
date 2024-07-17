@@ -17,7 +17,7 @@ import com.android.systemui.plugins.BcSmartspaceDataPlugin;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo;
 import java.util.List;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class BcSmartspaceCardCombination extends BcSmartspaceCardSecondary {
     public ConstraintLayout mFirstSubCard;
     public ConstraintLayout mSecondSubCard;
@@ -30,8 +30,8 @@ public class BcSmartspaceCardCombination extends BcSmartspaceCardSecondary {
         boolean z;
         CharSequence charSequence;
         ConstraintLayout constraintLayout2 = constraintLayout;
-        TextView textView = (TextView) constraintLayout.findViewById(2131363735);
-        ImageView imageView = (ImageView) constraintLayout.findViewById(2131363734);
+        TextView textView = (TextView) constraintLayout.findViewById(2131363702);
+        ImageView imageView = (ImageView) constraintLayout.findViewById(2131363701);
         if (textView == null) {
             Log.w("BcSmartspaceCardCombination", "No sub-card text field to update");
             return false;
@@ -42,7 +42,7 @@ public class BcSmartspaceCardCombination extends BcSmartspaceCardSecondary {
             BcSmartSpaceUtil.setOnClickListener((View) constraintLayout, smartspaceTarget, smartspaceAction, smartspaceEventNotifier, "BcSmartspaceCardCombination", bcSmartspaceCardLoggingInfo, 0);
             Icon icon = smartspaceAction.getIcon();
             Context context = getContext();
-            Drawable iconDrawableWithCustomSize = BcSmartSpaceUtil.getIconDrawableWithCustomSize(icon, context, context.getResources().getDimensionPixelSize(2131165919));
+            Drawable iconDrawableWithCustomSize = BcSmartSpaceUtil.getIconDrawableWithCustomSize(icon, context, context.getResources().getDimensionPixelSize(2131165887));
             boolean z2 = true;
             if (iconDrawableWithCustomSize == null) {
                 BcSmartspaceTemplateDataUtils.updateVisibility(imageView, 8);
@@ -77,8 +77,8 @@ public class BcSmartspaceCardCombination extends BcSmartspaceCardSecondary {
 
     public final void onFinishInflate() {
         super.onFinishInflate();
-        this.mFirstSubCard = (ConstraintLayout) findViewById(2131362593);
-        this.mSecondSubCard = (ConstraintLayout) findViewById(2131363564);
+        this.mFirstSubCard = (ConstraintLayout) findViewById(2131362573);
+        this.mSecondSubCard = (ConstraintLayout) findViewById(2131363535);
     }
 
     public final void resetUi() {

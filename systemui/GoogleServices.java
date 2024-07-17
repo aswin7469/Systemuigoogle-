@@ -17,7 +17,7 @@ import dagger.Lazy;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class GoogleServices extends VendorServices {
     public final AutorotateDataService mAutorotateDataService;
     public final Lazy mColumbusStarter;
@@ -72,10 +72,10 @@ public final class GoogleServices extends VendorServices {
         if (context.getPackageManager().hasSystemFeature("com.google.android.feature.QUICK_TAP")) {
             addService(this.mColumbusStarter.get());
         }
-        if (context.getResources().getBoolean(2131034174)) {
+        if (context.getResources().getBoolean(2131034176)) {
             addService(new ScreenProtectorNotifierService(context));
         }
-        if (context.getResources().getBoolean(2131034196)) {
+        if (context.getResources().getBoolean(2131034198)) {
             addService(new TouchContextService(context));
         }
     }

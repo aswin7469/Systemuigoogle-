@@ -19,13 +19,14 @@ import com.google.common.util.concurrent.ListenableFuture;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class ChipsContainer extends LinearLayout implements TranscriptionController.TranscriptionSpaceView {
     public final int CHIP_MARGIN;
-    public final ValueAnimator mAnimator;
+    public final int START_DELTA;
+    public ValueAnimator mAnimator;
     public int mAvailableWidth;
     public final List mChipViews;
-    public final List mChips;
+    public List mChips;
     public boolean mDarkBackground;
 
     public ChipsContainer(Context context) {
@@ -51,88 +52,93 @@ public class ChipsContainer extends LinearLayout implements TranscriptionControl
     }
 
     public final void onMeasure(int i, int i2) {
-        ChipView chipView;
-        Drawable drawable;
-        int i3;
         Display defaultDisplay = DisplayUtils.getDefaultDisplay(getContext());
         Point point = new Point();
         defaultDisplay.getRealSize(point);
-        int i4 = point.x;
-        if (i4 != this.mAvailableWidth) {
-            this.mAvailableWidth = i4;
-            int i5 = 0;
-            for (Bundle bundle : this.mChips) {
-                if (i5 < ((ArrayList) this.mChipViews).size()) {
-                    chipView = (ChipView) ((ArrayList) this.mChipViews).get(i5);
-                } else {
-                    chipView = (ChipView) LayoutInflater.from(getContext()).inflate(2131558465, this, false);
-                    this.mChipViews.add(chipView);
-                }
-                chipView.getClass();
-                Icon icon = (Icon) bundle.getParcelable("icon");
-                String string = bundle.getString("label");
-                if (icon == null && (string == null || string.length() == 0)) {
-                    Log.w("ChipView", "Neither icon nor label provided; ignoring chip");
-                } else {
-                    if (icon == null) {
-                        chipView.mIconView.setVisibility(8);
-                        chipView.mSpaceView.setVisibility(8);
-                        chipView.mLabelView.setText(string);
-                        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) chipView.mLabelView.getLayoutParams();
-                        int i6 = layoutParams.rightMargin;
-                        layoutParams.setMargins(i6, layoutParams.topMargin, i6, layoutParams.bottomMargin);
-                    } else if (string == null || string.length() == 0) {
-                        chipView.mLabelView.setVisibility(8);
-                        chipView.mSpaceView.setVisibility(8);
-                        chipView.mIconView.setImageIcon(icon);
-                        LinearLayout.LayoutParams layoutParams2 = (LinearLayout.LayoutParams) chipView.mIconView.getLayoutParams();
-                        int i7 = layoutParams2.leftMargin;
-                        layoutParams2.setMargins(i7, layoutParams2.topMargin, i7, layoutParams2.bottomMargin);
-                    } else {
-                        chipView.mIconView.setImageIcon(icon);
-                        chipView.mLabelView.setText(string);
-                    }
-                    if (bundle.getParcelable("tap_action") == null) {
-                        Log.w("ChipView", "No tap action provided; ignoring chip");
-                    } else {
-                        chipView.setOnClickListener(new ChipView$$ExternalSyntheticLambda0((PendingIntent) bundle.getParcelable("tap_action")));
-                        boolean z = this.mDarkBackground;
-                        LinearLayout linearLayout = chipView.mChip;
-                        if (z) {
-                            drawable = chipView.BACKGROUND_DARK;
-                        } else {
-                            drawable = chipView.BACKGROUND_LIGHT;
-                        }
-                        linearLayout.setBackground(drawable);
-                        TextView textView = chipView.mLabelView;
-                        if (z) {
-                            i3 = chipView.TEXT_COLOR_DARK;
-                        } else {
-                            i3 = chipView.TEXT_COLOR_LIGHT;
-                        }
-                        textView.setTextColor(i3);
-                        chipView.measure(0, 0);
-                        int measuredWidth = (this.CHIP_MARGIN * 2) + chipView.getMeasuredWidth();
-                        if (measuredWidth < i4) {
-                            if (chipView.getParent() == null) {
-                                chipView.setVisibility(0);
-                                addView(chipView);
-                            }
-                            i4 -= measuredWidth;
-                            i5++;
-                        }
-                    }
-                }
-            }
-            if (i5 < ((ArrayList) this.mChipViews).size()) {
-                while (i5 < ((ArrayList) this.mChipViews).size()) {
-                    ((ChipView) ((ArrayList) this.mChipViews).get(i5)).setVisibility(8);
-                    i5++;
-                }
-            }
-            requestLayout();
+        int i3 = point.x;
+        if (i3 != this.mAvailableWidth) {
+            this.mAvailableWidth = i3;
+            setChipsInternal();
         }
         super.onMeasure(i, i2);
+    }
+
+    public final void setChipsInternal() {
+        ChipView chipView;
+        Drawable drawable;
+        int i;
+        int i2 = this.mAvailableWidth;
+        int i3 = 0;
+        for (Bundle bundle : this.mChips) {
+            if (i3 < ((ArrayList) this.mChipViews).size()) {
+                chipView = (ChipView) ((ArrayList) this.mChipViews).get(i3);
+            } else {
+                chipView = (ChipView) LayoutInflater.from(getContext()).inflate(2131558464, this, false);
+                this.mChipViews.add(chipView);
+            }
+            chipView.getClass();
+            Icon icon = (Icon) bundle.getParcelable("icon");
+            String string = bundle.getString("label");
+            if (icon == null && (string == null || string.length() == 0)) {
+                Log.w("ChipView", "Neither icon nor label provided; ignoring chip");
+            } else {
+                if (icon == null) {
+                    chipView.mIconView.setVisibility(8);
+                    chipView.mSpaceView.setVisibility(8);
+                    chipView.mLabelView.setText(string);
+                    LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) chipView.mLabelView.getLayoutParams();
+                    int i4 = layoutParams.rightMargin;
+                    layoutParams.setMargins(i4, layoutParams.topMargin, i4, layoutParams.bottomMargin);
+                } else if (string == null || string.length() == 0) {
+                    chipView.mLabelView.setVisibility(8);
+                    chipView.mSpaceView.setVisibility(8);
+                    chipView.mIconView.setImageIcon(icon);
+                    LinearLayout.LayoutParams layoutParams2 = (LinearLayout.LayoutParams) chipView.mIconView.getLayoutParams();
+                    int i5 = layoutParams2.leftMargin;
+                    layoutParams2.setMargins(i5, layoutParams2.topMargin, i5, layoutParams2.bottomMargin);
+                } else {
+                    chipView.mIconView.setImageIcon(icon);
+                    chipView.mLabelView.setText(string);
+                }
+                if (bundle.getParcelable("tap_action") == null) {
+                    Log.w("ChipView", "No tap action provided; ignoring chip");
+                } else {
+                    chipView.setOnClickListener(new ChipView$$ExternalSyntheticLambda0((PendingIntent) bundle.getParcelable("tap_action")));
+                    boolean z = this.mDarkBackground;
+                    LinearLayout linearLayout = chipView.mChip;
+                    if (z) {
+                        drawable = chipView.BACKGROUND_DARK;
+                    } else {
+                        drawable = chipView.BACKGROUND_LIGHT;
+                    }
+                    linearLayout.setBackground(drawable);
+                    TextView textView = chipView.mLabelView;
+                    if (z) {
+                        i = chipView.TEXT_COLOR_DARK;
+                    } else {
+                        i = chipView.TEXT_COLOR_LIGHT;
+                    }
+                    textView.setTextColor(i);
+                    chipView.measure(0, 0);
+                    int measuredWidth = (this.CHIP_MARGIN * 2) + chipView.getMeasuredWidth();
+                    if (measuredWidth < i2) {
+                        if (chipView.getParent() == null) {
+                            chipView.setVisibility(0);
+                            addView(chipView);
+                        }
+                        i2 -= measuredWidth;
+                        i3++;
+                    }
+                }
+            }
+        }
+        if (i3 < ((ArrayList) this.mChipViews).size()) {
+            while (i3 < ((ArrayList) this.mChipViews).size()) {
+                ((ChipView) ((ArrayList) this.mChipViews).get(i3)).setVisibility(8);
+                i3++;
+            }
+        }
+        requestLayout();
     }
 
     public final void setHasDarkBackground(boolean z) {
@@ -174,6 +180,6 @@ public class ChipsContainer extends LinearLayout implements TranscriptionControl
         this.mChipViews = new ArrayList();
         this.mAnimator = new ValueAnimator();
         this.CHIP_MARGIN = (int) getResources().getDimension(2131165342);
-        getResources().getDimension(2131165351);
+        this.START_DELTA = (int) getResources().getDimension(2131165351);
     }
 }

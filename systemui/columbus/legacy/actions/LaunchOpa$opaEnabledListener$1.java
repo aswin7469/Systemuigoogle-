@@ -5,7 +5,7 @@ import android.util.Log;
 import com.android.keyguard.logging.BiometricUnlockLogger$logCalculateModeForFingerprintUnlockingAllowed$2$$ExternalSyntheticOutline0;
 import com.google.android.systemui.assist.OpaEnabledListener;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class LaunchOpa$opaEnabledListener$1 implements OpaEnabledListener {
     public final /* synthetic */ LaunchOpa this$0;
 
@@ -22,7 +22,7 @@ public final class LaunchOpa$opaEnabledListener$1 implements OpaEnabledListener 
         } else {
             z5 = false;
         }
-        StringBuilder m = BiometricUnlockLogger$logCalculateModeForFingerprintUnlockingAllowed$2$$ExternalSyntheticOutline0.m("eligible: ", ", supported: ", ", opa: ", z, z5);
+        StringBuilder m = BiometricUnlockLogger$logCalculateModeForFingerprintUnlockingAllowed$2$$ExternalSyntheticOutline0.m("eligible: ", z, ", supported: ", z5, ", opa: ");
         m.append(z3);
         Log.i("Columbus/LaunchOpa", m.toString());
         if (!z || !z5 || !z3) {

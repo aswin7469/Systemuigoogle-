@@ -20,54 +20,63 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class BundleUtils {
     public static Bundle createClassificationsRequest(String str, String str2, int i, long j, Bundle bundle, InteractionContextParcelables$InteractionContext interactionContextParcelables$InteractionContext, ContentParcelables$Contents contentParcelables$Contents) {
         String str3;
         Bundle bundle2;
+        ContentParcelables$Contents contentParcelables$Contents2;
         Bundle bundle3;
+        Bundle bundle4;
+        Bundle bundle5;
         String str4;
         String str5;
         Iterator it;
-        Bundle bundle4;
+        Bundle bundle6;
+        Bundle bundle7;
         String str6;
         Iterator it2;
         String str7;
+        Bundle bundle8;
+        Bundle bundle9;
         Iterator it3;
         Iterator it4;
-        Bundle bundle5;
-        ContentParcelables$Contents contentParcelables$Contents2 = contentParcelables$Contents;
-        Bundle bundle6 = new Bundle();
-        bundle6.putString("PackageName", str);
-        bundle6.putString("ActivityName", str2);
-        bundle6.putInt("TaskId", i);
-        bundle6.putLong("CaptureTimestampMs", j);
-        bundle6.putBundle("AssistBundle", bundle);
-        Bundle bundle7 = new Bundle();
+        Bundle bundle10;
+        ContentParcelables$Contents contentParcelables$Contents3 = contentParcelables$Contents;
+        Bundle bundle11 = new Bundle();
+        bundle11.putString("PackageName", str);
+        bundle11.putString("ActivityName", str2);
+        bundle11.putInt("TaskId", i);
+        bundle11.putLong("CaptureTimestampMs", j);
+        bundle11.putBundle("AssistBundle", bundle);
+        Bundle bundle12 = new Bundle();
         String str8 = "id";
-        bundle7.putString(str8, contentParcelables$Contents2.id);
-        bundle7.putLong("screenSessionId", contentParcelables$Contents2.screenSessionId);
+        bundle12.putString(str8, contentParcelables$Contents3.id);
+        bundle12.putLong("screenSessionId", contentParcelables$Contents3.screenSessionId);
         ArrayList arrayList = null;
         String str9 = "opaquePayload";
-        if (contentParcelables$Contents2.contentGroups == null) {
-            bundle7.putParcelableArrayList("contentGroups", (ArrayList) null);
-            bundle2 = bundle6;
+        if (contentParcelables$Contents3.contentGroups == null) {
+            bundle12.putParcelableArrayList("contentGroups", (ArrayList) null);
+            bundle2 = bundle11;
             str3 = str9;
+            contentParcelables$Contents2 = contentParcelables$Contents3;
+            bundle3 = bundle12;
         } else {
-            ArrayList arrayList2 = new ArrayList(((ArrayList) contentParcelables$Contents2.contentGroups).size());
-            Iterator it5 = contentParcelables$Contents2.contentGroups.iterator();
+            ArrayList arrayList2 = new ArrayList(((ArrayList) contentParcelables$Contents3.contentGroups).size());
+            Iterator it5 = contentParcelables$Contents3.contentGroups.iterator();
             while (it5.hasNext()) {
                 ContentParcelables$ContentGroup contentParcelables$ContentGroup = (ContentParcelables$ContentGroup) it5.next();
                 if (contentParcelables$ContentGroup == null) {
                     arrayList2.add(arrayList);
-                    bundle4 = bundle6;
+                    bundle6 = bundle11;
+                    bundle5 = bundle12;
                     str5 = str8;
                     str4 = str9;
                     it = it5;
                 } else {
-                    Bundle bundle8 = new Bundle();
+                    Bundle bundle13 = new Bundle();
                     if (contentParcelables$ContentGroup.contentRects == null) {
-                        bundle8.putParcelableArrayList("contentRects", arrayList);
+                        bundle13.putParcelableArrayList("contentRects", arrayList);
                     } else {
                         ArrayList arrayList3 = new ArrayList(((ArrayList) contentParcelables$ContentGroup.contentRects).size());
                         for (SuggestParcelables$ContentRect suggestParcelables$ContentRect : contentParcelables$ContentGroup.contentRects) {
@@ -77,11 +86,11 @@ public final class BundleUtils {
                                 arrayList3.add(suggestParcelables$ContentRect.writeToBundle());
                             }
                         }
-                        bundle8.putParcelableArrayList("contentRects", arrayList3);
+                        bundle13.putParcelableArrayList("contentRects", arrayList3);
                     }
                     if (contentParcelables$ContentGroup.selections == null) {
-                        bundle8.putParcelableArrayList("selections", arrayList);
-                        bundle4 = bundle6;
+                        bundle13.putParcelableArrayList("selections", arrayList);
+                        bundle6 = bundle11;
                         it = it5;
                     } else {
                         ArrayList arrayList4 = new ArrayList(((ArrayList) contentParcelables$ContentGroup.selections).size());
@@ -90,48 +99,49 @@ public final class BundleUtils {
                             ContentParcelables$Selection contentParcelables$Selection = (ContentParcelables$Selection) it6.next();
                             if (contentParcelables$Selection == null) {
                                 arrayList4.add(arrayList);
-                                bundle5 = bundle6;
+                                bundle10 = bundle11;
                                 it4 = it5;
                                 it3 = it6;
                             } else {
-                                Bundle bundle9 = new Bundle();
+                                Bundle bundle14 = new Bundle();
                                 it4 = it5;
                                 it3 = it6;
                                 if (contentParcelables$Selection.rectIndices == null) {
-                                    bundle9.putIntegerArrayList("rectIndices", (ArrayList) null);
-                                    bundle5 = bundle6;
+                                    bundle14.putIntegerArrayList("rectIndices", (ArrayList) null);
+                                    bundle10 = bundle11;
                                 } else {
-                                    bundle5 = bundle6;
-                                    bundle9.putIntegerArrayList("rectIndices", new ArrayList(contentParcelables$Selection.rectIndices));
+                                    bundle10 = bundle11;
+                                    bundle14.putIntegerArrayList("rectIndices", new ArrayList(contentParcelables$Selection.rectIndices));
                                 }
-                                bundle9.putString(str8, contentParcelables$Selection.id);
-                                bundle9.putBoolean("isSmartSelection", contentParcelables$Selection.isSmartSelection);
-                                bundle9.putInt("suggestedPresentationMode", contentParcelables$Selection.suggestedPresentationMode);
-                                bundle9.putString(str9, contentParcelables$Selection.opaquePayload);
+                                bundle14.putString(str8, contentParcelables$Selection.id);
+                                bundle14.putBoolean("isSmartSelection", contentParcelables$Selection.isSmartSelection);
+                                bundle14.putInt("suggestedPresentationMode", contentParcelables$Selection.suggestedPresentationMode);
+                                bundle14.putString(str9, contentParcelables$Selection.opaquePayload);
                                 SuggestParcelables$InteractionType suggestParcelables$InteractionType = contentParcelables$Selection.interactionType;
                                 if (suggestParcelables$InteractionType == null) {
-                                    bundle9.putBundle("interactionType", (Bundle) null);
+                                    bundle14.putBundle("interactionType", (Bundle) null);
                                 } else {
-                                    Bundle bundle10 = new Bundle();
-                                    bundle10.putInt("value", suggestParcelables$InteractionType.value);
-                                    bundle9.putBundle("interactionType", bundle10);
+                                    Bundle bundle15 = new Bundle();
+                                    bundle15.putInt("value", suggestParcelables$InteractionType.value);
+                                    bundle14.putBundle("interactionType", bundle15);
                                 }
-                                bundle9.putInt("contentGroupIndex", contentParcelables$Selection.contentGroupIndex);
-                                arrayList4.add(bundle9);
+                                bundle14.putInt("contentGroupIndex", contentParcelables$Selection.contentGroupIndex);
+                                arrayList4.add(bundle14);
                             }
                             it5 = it4;
                             it6 = it3;
-                            bundle6 = bundle5;
+                            bundle11 = bundle10;
                             arrayList = null;
                         }
-                        bundle4 = bundle6;
+                        bundle6 = bundle11;
                         it = it5;
-                        bundle8.putParcelableArrayList("selections", arrayList4);
+                        bundle13.putParcelableArrayList("selections", arrayList4);
                     }
-                    bundle8.putString("text", contentParcelables$ContentGroup.text);
-                    bundle8.putInt("numLines", contentParcelables$ContentGroup.numLines);
+                    bundle13.putString("text", contentParcelables$ContentGroup.text);
+                    bundle13.putInt("numLines", contentParcelables$ContentGroup.numLines);
                     if (contentParcelables$ContentGroup.searchSuggestions == null) {
-                        bundle8.putParcelableArrayList("searchSuggestions", (ArrayList) null);
+                        bundle13.putParcelableArrayList("searchSuggestions", (ArrayList) null);
+                        bundle5 = bundle12;
                         str5 = str8;
                         str4 = str9;
                     } else {
@@ -141,116 +151,139 @@ public final class BundleUtils {
                             ContentParcelables$SearchSuggestion contentParcelables$SearchSuggestion = (ContentParcelables$SearchSuggestion) it7.next();
                             if (contentParcelables$SearchSuggestion == null) {
                                 arrayList5.add((Object) null);
+                                bundle7 = bundle12;
                                 str7 = str8;
                                 str6 = str9;
                                 it2 = it7;
                             } else {
-                                Bundle bundle11 = new Bundle();
+                                Bundle bundle16 = new Bundle();
                                 ContentParcelables$AppActionSuggestion contentParcelables$AppActionSuggestion = contentParcelables$SearchSuggestion.appActionSuggestion;
                                 if (contentParcelables$AppActionSuggestion == null) {
-                                    bundle11.putBundle("appActionSuggestion", (Bundle) null);
+                                    bundle16.putBundle("appActionSuggestion", (Bundle) null);
                                     str7 = str8;
                                     it2 = it7;
                                 } else {
-                                    Bundle bundle12 = new Bundle();
+                                    Bundle bundle17 = new Bundle();
                                     str7 = str8;
                                     it2 = it7;
-                                    bundle12.putString("displayText", contentParcelables$AppActionSuggestion.displayText);
-                                    bundle12.putString("subtitle", contentParcelables$AppActionSuggestion.subtitle);
-                                    bundle11.putBundle("appActionSuggestion", bundle12);
+                                    bundle17.putString("displayText", contentParcelables$AppActionSuggestion.displayText);
+                                    bundle17.putString("subtitle", contentParcelables$AppActionSuggestion.subtitle);
+                                    bundle16.putBundle("appActionSuggestion", bundle17);
                                 }
                                 ContentParcelables$AppIcon contentParcelables$AppIcon = contentParcelables$SearchSuggestion.appIcon;
                                 if (contentParcelables$AppIcon == null) {
-                                    bundle11.putBundle("appIcon", (Bundle) null);
+                                    bundle16.putBundle("appIcon", (Bundle) null);
+                                    bundle7 = bundle12;
                                     str6 = str9;
                                 } else {
-                                    Bundle bundle13 = new Bundle();
-                                    bundle13.putString("iconUri", contentParcelables$AppIcon.iconUri);
+                                    Bundle bundle18 = new Bundle();
+                                    str6 = str9;
+                                    bundle18.putString("iconUri", contentParcelables$AppIcon.iconUri);
                                     ContentParcelables$AppPackage contentParcelables$AppPackage = contentParcelables$AppIcon.appPackage;
                                     if (contentParcelables$AppPackage == null) {
-                                        str6 = str9;
-                                        bundle13.putBundle("appPackage", (Bundle) null);
+                                        bundle7 = bundle12;
+                                        bundle18.putBundle("appPackage", (Bundle) null);
                                     } else {
-                                        str6 = str9;
-                                        Bundle bundle14 = new Bundle();
-                                        bundle14.putString("packageName", contentParcelables$AppPackage.packageName);
-                                        bundle13.putBundle("appPackage", bundle14);
+                                        bundle7 = bundle12;
+                                        switch (contentParcelables$AppPackage.$r8$classId) {
+                                            case 0:
+                                                bundle9 = new Bundle();
+                                                bundle9.putString("packageName", contentParcelables$AppPackage.packageName);
+                                                break;
+                                            default:
+                                                bundle9 = new Bundle();
+                                                bundle9.putString("deeplinkUri", contentParcelables$AppPackage.packageName);
+                                                break;
+                                        }
+                                        bundle18.putBundle("appPackage", bundle9);
                                     }
                                     ContentParcelables$AppIconType contentParcelables$AppIconType = contentParcelables$AppIcon.appIconType;
                                     if (contentParcelables$AppIconType == null) {
-                                        bundle13.putBundle("appIconType", (Bundle) null);
+                                        bundle18.putBundle("appIconType", (Bundle) null);
                                     } else {
-                                        Bundle bundle15 = new Bundle();
-                                        bundle15.putInt("value", contentParcelables$AppIconType.value);
-                                        bundle13.putBundle("appIconType", bundle15);
+                                        Bundle bundle19 = new Bundle();
+                                        bundle19.putInt("value", contentParcelables$AppIconType.value);
+                                        bundle18.putBundle("appIconType", bundle19);
                                     }
-                                    bundle11.putBundle("appIcon", bundle13);
+                                    bundle16.putBundle("appIcon", bundle18);
                                 }
                                 ContentParcelables$AppPackage contentParcelables$AppPackage2 = contentParcelables$SearchSuggestion.executionInfo;
                                 if (contentParcelables$AppPackage2 == null) {
-                                    bundle11.putBundle("executionInfo", (Bundle) null);
+                                    bundle16.putBundle("executionInfo", (Bundle) null);
                                 } else {
-                                    Bundle bundle16 = new Bundle();
-                                    bundle16.putString("deeplinkUri", contentParcelables$AppPackage2.packageName);
-                                    bundle11.putBundle("executionInfo", bundle16);
+                                    switch (contentParcelables$AppPackage2.$r8$classId) {
+                                        case 0:
+                                            bundle8 = new Bundle();
+                                            bundle8.putString("packageName", contentParcelables$AppPackage2.packageName);
+                                            break;
+                                        default:
+                                            bundle8 = new Bundle();
+                                            bundle8.putString("deeplinkUri", contentParcelables$AppPackage2.packageName);
+                                            break;
+                                    }
+                                    bundle16.putBundle("executionInfo", bundle8);
                                 }
-                                bundle11.putFloat("confScore", contentParcelables$SearchSuggestion.confScore);
-                                arrayList5.add(bundle11);
+                                bundle16.putFloat("confScore", contentParcelables$SearchSuggestion.confScore);
+                                arrayList5.add(bundle16);
                             }
                             str8 = str7;
                             it7 = it2;
                             str9 = str6;
-                            ContentParcelables$Contents contentParcelables$Contents3 = contentParcelables$Contents;
+                            bundle12 = bundle7;
+                            ContentParcelables$Contents contentParcelables$Contents4 = contentParcelables$Contents;
                         }
+                        bundle5 = bundle12;
                         str5 = str8;
                         str4 = str9;
-                        bundle8.putParcelableArrayList("searchSuggestions", arrayList5);
+                        bundle13.putParcelableArrayList("searchSuggestions", arrayList5);
                     }
-                    arrayList2.add(bundle8);
+                    arrayList2.add(bundle13);
                 }
                 it5 = it;
                 str8 = str5;
                 str9 = str4;
-                ContentParcelables$Contents contentParcelables$Contents4 = contentParcelables$Contents;
-                bundle6 = bundle4;
+                bundle12 = bundle5;
+                ContentParcelables$Contents contentParcelables$Contents5 = contentParcelables$Contents;
+                bundle11 = bundle6;
                 arrayList = null;
             }
-            bundle2 = bundle6;
+            bundle2 = bundle11;
+            bundle3 = bundle12;
             str3 = str9;
-            bundle7.putParcelableArrayList("contentGroups", arrayList2);
+            bundle3.putParcelableArrayList("contentGroups", arrayList2);
             contentParcelables$Contents2 = contentParcelables$Contents;
         }
         SuggestParcelables$Stats suggestParcelables$Stats = contentParcelables$Contents2.stats;
         if (suggestParcelables$Stats == null) {
-            bundle3 = null;
-            bundle7.putBundle("stats", (Bundle) null);
+            bundle4 = null;
+            bundle3.putBundle("stats", (Bundle) null);
         } else {
-            bundle3 = null;
-            bundle7.putBundle("stats", suggestParcelables$Stats.writeToBundle());
+            bundle4 = null;
+            bundle3.putBundle("stats", suggestParcelables$Stats.writeToBundle());
         }
         if (contentParcelables$Contents2.debugInfo == null) {
-            bundle7.putBundle("debugInfo", bundle3);
+            bundle3.putBundle("debugInfo", bundle4);
         } else {
-            bundle7.putBundle("debugInfo", new Bundle());
+            bundle3.putBundle("debugInfo", new Bundle());
         }
-        bundle7.putString(str3, contentParcelables$Contents2.opaquePayload);
+        bundle3.putString(str3, contentParcelables$Contents2.opaquePayload);
         SuggestParcelables$SetupInfo suggestParcelables$SetupInfo = contentParcelables$Contents2.setupInfo;
         if (suggestParcelables$SetupInfo == null) {
-            bundle7.putBundle("setupInfo", (Bundle) null);
+            bundle3.putBundle("setupInfo", (Bundle) null);
         } else {
-            bundle7.putBundle("setupInfo", suggestParcelables$SetupInfo.writeToBundle());
+            bundle3.putBundle("setupInfo", suggestParcelables$SetupInfo.writeToBundle());
         }
-        bundle7.putString("contentUri", contentParcelables$Contents2.contentUri);
-        Bundle bundle17 = bundle2;
-        bundle17.putBundle("Contents", bundle7);
+        bundle3.putString("contentUri", contentParcelables$Contents2.contentUri);
+        Bundle bundle20 = bundle2;
+        bundle20.putBundle("Contents", bundle3);
         if (interactionContextParcelables$InteractionContext == null) {
-            bundle17.putBundle("InteractionContext", (Bundle) null);
+            bundle20.putBundle("InteractionContext", (Bundle) null);
         } else {
-            bundle17.putBundle("InteractionContext", interactionContextParcelables$InteractionContext.writeToBundle());
+            bundle20.putBundle("InteractionContext", interactionContextParcelables$InteractionContext.writeToBundle());
         }
-        bundle17.putInt("Version", 4);
-        bundle17.putInt("BundleTypedVersion", 3);
-        return bundle17;
+        bundle20.putInt("Version", 4);
+        bundle20.putInt("BundleTypedVersion", 3);
+        return bundle20;
     }
 
     /* JADX WARNING: Removed duplicated region for block: B:35:0x00e0  */
@@ -501,13 +534,11 @@ public final class BundleUtils {
     /* JADX WARNING: type inference failed for: r6v3, types: [com.google.android.apps.miphone.aiai.matchmaker.overview.api.generatedv2.ContentParcelables$AppActionSuggestion, com.google.android.apps.miphone.aiai.matchmaker.overview.api.generatedv2.ContentParcelables$AppPackage, java.lang.Object, com.google.android.apps.miphone.aiai.matchmaker.overview.api.generatedv2.ContentParcelables$AppIcon] */
     /* JADX WARNING: type inference failed for: r6v4 */
     /* JADX WARNING: type inference failed for: r11v0, types: [com.google.android.apps.miphone.aiai.matchmaker.overview.api.generatedv2.ContentParcelables$SearchSuggestion, java.lang.Object] */
-    /* JADX WARNING: type inference failed for: r12v4, types: [com.google.android.apps.miphone.aiai.matchmaker.overview.api.generatedv2.ContentParcelables$AppPackage, java.lang.Object] */
     /* JADX WARNING: type inference failed for: r13v3, types: [java.lang.Object, com.google.android.apps.miphone.aiai.matchmaker.overview.api.generatedv2.ContentParcelables$AppIcon] */
-    /* JADX WARNING: type inference failed for: r15v2, types: [com.google.android.apps.miphone.aiai.matchmaker.overview.api.generatedv2.ContentParcelables$AppPackage, java.lang.Object] */
     /* JADX WARNING: type inference failed for: r13v4, types: [com.google.android.apps.miphone.aiai.matchmaker.overview.api.generatedv2.ContentParcelables$AppActionSuggestion, java.lang.Object] */
     /* JADX WARNING: type inference failed for: r12v13, types: [com.google.android.apps.miphone.aiai.matchmaker.overview.api.generatedv2.ContentParcelables$Selection, java.lang.Object] */
     /* JADX WARNING: type inference failed for: r0v4, types: [com.google.android.apps.miphone.aiai.matchmaker.overview.api.generatedv2.ContentParcelables$Contents, java.lang.Object] */
-    /* JADX WARNING: type inference failed for: r6v20 */
+    /* JADX WARNING: type inference failed for: r6v17 */
     public static ContentParcelables$Contents extractContents(Bundle bundle) {
         SuggestParcelables$DebugInfo suggestParcelables$DebugInfo;
         ContentParcelables$AppIconType contentParcelables$AppIconType;
@@ -649,11 +680,7 @@ public final class BundleUtils {
                                                     if (bundle10 == null) {
                                                         obj6.appPackage = r62;
                                                     } else {
-                                                        ? obj7 = new Object();
-                                                        if (bundle10.containsKey("packageName")) {
-                                                            obj7.packageName = bundle10.getString("packageName");
-                                                        }
-                                                        obj6.appPackage = obj7;
+                                                        obj6.appPackage = new ContentParcelables$AppPackage(0, bundle10);
                                                     }
                                                 }
                                                 if (bundle9.containsKey("appIconType")) {
@@ -682,11 +709,7 @@ public final class BundleUtils {
                                             if (bundle12 == null) {
                                                 obj4.executionInfo = null;
                                             } else {
-                                                ? obj8 = new Object();
-                                                if (bundle12.containsKey("deeplinkUri")) {
-                                                    obj8.packageName = bundle12.getString("deeplinkUri");
-                                                }
-                                                obj4.executionInfo = obj8;
+                                                obj4.executionInfo = new ContentParcelables$AppPackage(1, bundle12);
                                             }
                                         }
                                         if (bundle7.containsKey("confScore")) {

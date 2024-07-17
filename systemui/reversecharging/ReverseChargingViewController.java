@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import androidx.compose.foundation.text.ValidatingOffsetMappingKt$$ExternalSyntheticOutline0;
+import androidx.compose.foundation.text.ValidatingOffsetMapping$$ExternalSyntheticOutline0;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LifecycleRegistry;
@@ -17,7 +17,7 @@ import com.google.android.systemui.keyguard.domain.interactor.AmbientIndicationI
 import com.google.android.systemui.statusbar.KeyguardIndicationControllerGoogle;
 import java.util.concurrent.Executor;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ReverseChargingViewController extends BroadcastReceiver implements LifecycleOwner, BatteryController.BatteryStateChangeCallback {
     public static final boolean DEBUG = Log.isLoggable("ReverseChargingViewCtrl", 3);
     public AmbientIndicationContainer mAmbientIndicationContainer;
@@ -45,9 +45,9 @@ public final class ReverseChargingViewController extends BroadcastReceiver imple
         this.mBroadcastDispatcher = broadcastDispatcher;
         this.mMainExecutor = executor;
         this.mKeyguardIndicationController = keyguardIndicationControllerGoogle;
-        this.mReverseCharging = context.getString(2131952202);
-        this.mSlotReverseCharging = context.getString(2131953931);
-        this.mContentDescription = context.getString(2131953701);
+        this.mReverseCharging = context.getString(2131952190);
+        this.mSlotReverseCharging = context.getString(2131953882);
+        this.mContentDescription = context.getString(2131953660);
     }
 
     public final Lifecycle getLifecycle() {
@@ -64,9 +64,9 @@ public final class ReverseChargingViewController extends BroadcastReceiver imple
 
     public final void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals("android.intent.action.LOCALE_CHANGED")) {
-            this.mReverseCharging = this.mContext.getString(2131952202);
-            this.mSlotReverseCharging = this.mContext.getString(2131953931);
-            this.mContentDescription = this.mContext.getString(2131953701);
+            this.mReverseCharging = this.mContext.getString(2131952190);
+            this.mSlotReverseCharging = this.mContext.getString(2131953882);
+            this.mContentDescription = this.mContext.getString(2131953660);
             if (DEBUG) {
                 Log.d("ReverseChargingViewCtrl", "onReceive(): ACTION_LOCALE_CHANGED this=" + this);
             }
@@ -86,7 +86,7 @@ public final class ReverseChargingViewController extends BroadcastReceiver imple
         }
         this.mProvidingBattery = z2;
         if (DEBUG) {
-            StringBuilder m = ValidatingOffsetMappingKt$$ExternalSyntheticOutline0.m("onReverseChanged(): rtx=", z ? 1 : 0, " level=", i, " name=");
+            StringBuilder m = ValidatingOffsetMapping$$ExternalSyntheticOutline0.m("onReverseChanged(): rtx=", z ? 1 : 0, " level=", i, " name=");
             m.append(str);
             m.append(" this=");
             m.append(this);

@@ -16,10 +16,10 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineStart;
-import kotlinx.coroutines.Job;
+import kotlinx.coroutines.StandaloneCoroutine;
 import vendor.google.google_battery.IGoogleBattery;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class HealthManager {
     public static final boolean healthDebugEnabled = Build.IS_DEBUGGABLE;
     public static final Duration updatePeriod = Duration.ofDays(1);
@@ -30,12 +30,12 @@ public final class HealthManager {
     public final Context context;
     public IGoogleBattery googleBattery;
     public final HealthManager$healthDebugReceiver$1 healthDebugReceiver = new HealthManager$healthDebugReceiver$1(this, 0);
-    public final Job initializer;
+    public final StandaloneCoroutine initializer;
     public final CoroutineScope mainScope;
     public final boolean periodicUpdateEnabled;
 
     /* renamed from: com.google.android.systemui.power.batteryhealth.HealthManager$1  reason: invalid class name */
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
 

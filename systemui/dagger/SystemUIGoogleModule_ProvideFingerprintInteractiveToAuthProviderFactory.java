@@ -5,11 +5,10 @@ import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 import com.android.systemui.util.settings.SecureSettings;
 import com.google.android.systemui.fingerprint.FingerprintInteractiveToAuthProviderGoogle;
 import javax.inject.Provider;
-import kotlinx.coroutines.CoroutineDispatcher;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public abstract class SystemUIGoogleModule_ProvideFingerprintInteractiveToAuthProviderFactory implements Provider {
-    public static FingerprintInteractiveToAuthProviderGoogle provideFingerprintInteractiveToAuthProvider(CoroutineDispatcher coroutineDispatcher, Context context, SecureSettings secureSettings, SelectedUserInteractor selectedUserInteractor) {
-        return new FingerprintInteractiveToAuthProviderGoogle(coroutineDispatcher, context, secureSettings, selectedUserInteractor);
+    public static FingerprintInteractiveToAuthProviderGoogle provideFingerprintInteractiveToAuthProvider(Context context, SecureSettings secureSettings, SelectedUserInteractor selectedUserInteractor) {
+        return new FingerprintInteractiveToAuthProviderGoogle(context, secureSettings, selectedUserInteractor);
     }
 }

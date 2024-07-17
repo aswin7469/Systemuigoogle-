@@ -1,6 +1,6 @@
 package com.google.android.setupdesign.util;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ThemeResolver {
     public static ThemeResolver defaultResolver;
     public final int defaultTheme;
@@ -113,19 +113,19 @@ public final class ThemeResolver {
         L_0x0076:
             goto L_0x008b
         L_0x0077:
-            r2 = 2132017889(0x7f1402e1, float:1.967407E38)
+            r2 = 2132017888(0x7f1402e0, float:1.9674067E38)
             return r2
         L_0x007b:
-            r2 = 2132017877(0x7f1402d5, float:1.9674045E38)
+            r2 = 2132017876(0x7f1402d4, float:1.9674043E38)
             return r2
         L_0x007f:
-            r2 = 2132017880(0x7f1402d8, float:1.967405E38)
+            r2 = 2132017879(0x7f1402d7, float:1.9674049E38)
             return r2
         L_0x0083:
-            r2 = 2132017883(0x7f1402db, float:1.9674057E38)
+            r2 = 2132017882(0x7f1402da, float:1.9674055E38)
             return r2
         L_0x0087:
-            r2 = 2132017886(0x7f1402de, float:1.9674063E38)
+            r2 = 2132017885(0x7f1402dd, float:1.9674061E38)
             return r2
         L_0x008b:
             return r0
@@ -234,34 +234,34 @@ public final class ThemeResolver {
         L_0x0076:
             goto L_0x009f
         L_0x0077:
-            r2 = 2132017888(0x7f1402e0, float:1.9674067E38)
+            r2 = 2132017887(0x7f1402df, float:1.9674065E38)
             return r2
         L_0x007b:
-            r2 = 2132017890(0x7f1402e2, float:1.9674071E38)
+            r2 = 2132017889(0x7f1402e1, float:1.967407E38)
             return r2
         L_0x007f:
-            r2 = 2132017876(0x7f1402d4, float:1.9674043E38)
+            r2 = 2132017875(0x7f1402d3, float:1.967404E38)
             return r2
         L_0x0083:
-            r2 = 2132017878(0x7f1402d6, float:1.9674047E38)
+            r2 = 2132017877(0x7f1402d5, float:1.9674045E38)
             return r2
         L_0x0087:
-            r2 = 2132017879(0x7f1402d7, float:1.9674049E38)
+            r2 = 2132017878(0x7f1402d6, float:1.9674047E38)
             return r2
         L_0x008b:
-            r2 = 2132017881(0x7f1402d9, float:1.9674053E38)
+            r2 = 2132017880(0x7f1402d8, float:1.967405E38)
             return r2
         L_0x008f:
-            r2 = 2132017882(0x7f1402da, float:1.9674055E38)
+            r2 = 2132017881(0x7f1402d9, float:1.9674053E38)
             return r2
         L_0x0093:
-            r2 = 2132017884(0x7f1402dc, float:1.967406E38)
+            r2 = 2132017883(0x7f1402db, float:1.9674057E38)
             return r2
         L_0x0097:
-            r2 = 2132017885(0x7f1402dd, float:1.9674061E38)
+            r2 = 2132017884(0x7f1402dc, float:1.967406E38)
             return r2
         L_0x009b:
-            r2 = 2132017887(0x7f1402df, float:1.9674065E38)
+            r2 = 2132017886(0x7f1402de, float:1.9674063E38)
             return r2
         L_0x009f:
             return r0

@@ -9,12 +9,12 @@ import androidx.appcompat.app.WindowDecorActionBar$$ExternalSyntheticThrowCCEIfN
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import com.google.android.material.behavior.SwipeDismissBehavior;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public abstract class BaseTransientBottomBar {
     public static final /* synthetic */ int $r8$clinit = 0;
 
     /* renamed from: com.google.android.material.snackbar.BaseTransientBottomBar$1  reason: invalid class name */
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class AnonymousClass1 implements Handler.Callback {
         public final boolean handleMessage(Message message) {
             int i = message.what;
@@ -30,7 +30,7 @@ public abstract class BaseTransientBottomBar {
         }
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public class Behavior extends SwipeDismissBehavior {
         public final BehaviorDelegate delegate;
 
@@ -70,7 +70,7 @@ public abstract class BaseTransientBottomBar {
         }
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class BehaviorDelegate {
     }
 

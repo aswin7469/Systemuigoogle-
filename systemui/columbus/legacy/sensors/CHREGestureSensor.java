@@ -28,7 +28,7 @@ import java.io.PrintWriter;
 import java.util.List;
 import kotlin.jvm.functions.Function0;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class CHREGestureSensor extends GestureSensor implements Dumpable {
     public final Handler bgHandler;
     public final Context context;
@@ -48,7 +48,7 @@ public final class CHREGestureSensor extends GestureSensor implements Dumpable {
     public final WakefulnessLifecycle wakefulnessLifecycle;
     public final CHREGestureSensor$wakefulnessLifecycleObserver$1 wakefulnessLifecycleObserver = new CHREGestureSensor$wakefulnessLifecycleObserver$1(this);
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class FeatureVector implements Dumpable {
         public final int gesture;
         public final long timestamp = SystemClock.elapsedRealtime();
@@ -77,7 +77,7 @@ public final class CHREGestureSensor extends GestureSensor implements Dumpable {
         }
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class FeatureVectorDumper implements Dumpable {
         public final RingBuffer featureVectors = new RingBuffer(FeatureVector.class, 10);
         public FeatureVector lastSingleTapFeatureVector;

@@ -29,7 +29,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.WeakHashMap;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class EndCompoundLayout extends LinearLayout {
     public final AccessibilityManager accessibilityManager;
     public EditText editText;
@@ -59,7 +59,7 @@ public final class EndCompoundLayout extends LinearLayout {
     public final TextInputLayout textInputLayout;
     public DropdownMenuEndIconDelegate$$ExternalSyntheticLambda5 touchExplorationStateChangeListener;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class EndIconDelegates {
         public final int customEndIconDrawableId;
         public final SparseArray delegates = new SparseArray();
@@ -111,9 +111,9 @@ public final class EndCompoundLayout extends LinearLayout {
         frameLayout.setVisibility(8);
         frameLayout.setLayoutParams(new LinearLayout.LayoutParams(-2, -1));
         LayoutInflater from = LayoutInflater.from(getContext());
-        CheckableImageButton createIconView = createIconView(this, from, 2131363845);
+        CheckableImageButton createIconView = createIconView(2131363811, from, this);
         this.errorIconView = createIconView;
-        CheckableImageButton createIconView2 = createIconView(frameLayout, from, 2131363844);
+        CheckableImageButton createIconView2 = createIconView(2131363810, from, frameLayout);
         this.endIconView = createIconView2;
         this.endIconDelegates = new EndIconDelegates(this, tintTypedArray2);
         AppCompatTextView appCompatTextView = new AppCompatTextView(getContext());
@@ -131,9 +131,9 @@ public final class EndCompoundLayout extends LinearLayout {
             updateErrorIconVisibility();
             IconHelper.applyIconTint(textInputLayout3, createIconView, this.errorIconTintList, this.errorIconTintMode);
         }
-        createIconView.setContentDescription(getResources().getText(2131952532));
+        createIconView.setContentDescription(getResources().getText(2131952507));
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-        createIconView.setImportantForAccessibility(2);
+        ViewCompat.Api16Impl.setImportantForAccessibility(createIconView, 2);
         createIconView.setClickable(false);
         createIconView.pressable = false;
         createIconView.setFocusable(false);
@@ -169,9 +169,9 @@ public final class EndCompoundLayout extends LinearLayout {
             }
         }
         appCompatTextView.setVisibility(8);
-        appCompatTextView.setId(2131363857);
+        appCompatTextView.setId(2131363823);
         appCompatTextView.setLayoutParams(new LinearLayout.LayoutParams(-2, -2, 80.0f));
-        appCompatTextView.setAccessibilityLiveRegion(1);
+        ViewCompat.Api19Impl.setAccessibilityLiveRegion(appCompatTextView, 1);
         appCompatTextView.setTextAppearance(typedArray.getResourceId(65, 0));
         if (typedArray.hasValue(66)) {
             appCompatTextView.setTextColor(tintTypedArray2.getColorStateList(66));
@@ -207,14 +207,14 @@ public final class EndCompoundLayout extends LinearLayout {
     public final void addTouchExplorationStateChangeListenerIfNeeded() {
         if (this.touchExplorationStateChangeListener != null && this.accessibilityManager != null) {
             WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-            if (isAttachedToWindow()) {
+            if (ViewCompat.Api19Impl.isAttachedToWindow(this)) {
                 this.accessibilityManager.addTouchExplorationStateChangeListener(new AccessibilityManagerCompat$TouchExplorationStateChangeListenerWrapper(this.touchExplorationStateChangeListener));
             }
         }
     }
 
-    public final CheckableImageButton createIconView(ViewGroup viewGroup, LayoutInflater layoutInflater, int i) {
-        CheckableImageButton checkableImageButton = (CheckableImageButton) layoutInflater.inflate(2131558575, viewGroup, false);
+    public final CheckableImageButton createIconView(int i, LayoutInflater layoutInflater, ViewGroup viewGroup) {
+        CheckableImageButton checkableImageButton = (CheckableImageButton) layoutInflater.inflate(2131558569, viewGroup, false);
         checkableImageButton.setId(i);
         if (MaterialResources.isFontScaleAtLeast1_3(getContext())) {
             ((ViewGroup.MarginLayoutParams) checkableImageButton.getLayoutParams()).setMarginStart(0);
@@ -242,7 +242,7 @@ public final class EndCompoundLayout extends LinearLayout {
             } else if (i == 3) {
                 endIconDelegate = new DropdownMenuEndIconDelegate(endCompoundLayout);
             } else {
-                throw new IllegalArgumentException(VendorAtomValue$1$$ExternalSyntheticOutline0.m(i, "Invalid end icon mode: "));
+                throw new IllegalArgumentException(VendorAtomValue$1$$ExternalSyntheticOutline0.m("Invalid end icon mode: ", i));
             }
             endIconDelegate2 = endIconDelegate;
             sparseArray.append(i, endIconDelegate2);
@@ -461,14 +461,14 @@ public final class EndCompoundLayout extends LinearLayout {
             } else {
                 EditText editText2 = this.textInputLayout.editText;
                 WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-                i = editText2.getPaddingEnd();
+                i = ViewCompat.Api17Impl.getPaddingEnd(editText2);
             }
             AppCompatTextView appCompatTextView = this.suffixTextView;
-            int dimensionPixelSize = getContext().getResources().getDimensionPixelSize(2131166685);
+            int dimensionPixelSize = getContext().getResources().getDimensionPixelSize(2131166643);
             int paddingTop = this.textInputLayout.editText.getPaddingTop();
             int paddingBottom = this.textInputLayout.editText.getPaddingBottom();
             WeakHashMap weakHashMap2 = ViewCompat.sViewPropertyAnimatorMap;
-            appCompatTextView.setPaddingRelative(dimensionPixelSize, paddingTop, i, paddingBottom);
+            ViewCompat.Api17Impl.setPaddingRelative(appCompatTextView, dimensionPixelSize, paddingTop, i, paddingBottom);
         }
     }
 

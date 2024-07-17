@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.concurrent.Executor;
 import kotlin.Unit;
-import kotlin.collections.SetsKt;
+import kotlin.collections.SetsKt__SetsKt;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.jvm.functions.Function1;
@@ -29,11 +29,11 @@ import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.Job;
 import kotlinx.coroutines.internal.ContextScope;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class HealthService extends Service {
     public static final /* synthetic */ KProperty[] $$delegatedProperties;
     public static final boolean healthDebugEnabled = Build.IS_DEBUGGABLE;
-    public static final Set supportedCallers = SetsKt.setOf("com.android.settings", "com.android.systemui", "com.google.android.apps.diagnosticstool", "com.google.android.apps.pixel.support", "com.google.android.settings.intelligence");
+    public static final Set supportedCallers = SetsKt__SetsKt.setOf("com.android.settings", "com.android.systemui", "com.google.android.apps.diagnosticstool", "com.google.android.apps.pixel.support", "com.google.android.settings.intelligence");
     public final HealthService$binder$1 binder = new HealthService$binder$1(this);
     public final Context context;
     public final boolean healthFeatureEnabled;
@@ -58,7 +58,7 @@ public final class HealthService extends Service {
     public static final String[] access$ensureSupportedCallers(HealthService healthService) {
         healthService.getClass();
         int callingUid = Binder.getCallingUid();
-        ExifInterface$$ExternalSyntheticOutline0.m("ensureSupportedCallers: pkg=", "HealthService", callingUid);
+        ExifInterface$$ExternalSyntheticOutline0.m("ensureSupportedCallers: pkg=", callingUid, "HealthService");
         String[] packagesForUid = healthService.context.getPackageManager().getPackagesForUid(callingUid);
         if (packagesForUid != null) {
             int length = packagesForUid.length;

@@ -8,13 +8,13 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.util.Log;
-import androidx.compose.foundation.text.ValidatingOffsetMappingKt$$ExternalSyntheticOutline0;
+import androidx.compose.foundation.text.ValidatingOffsetMapping$$ExternalSyntheticOutline0;
 import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.android.systemui.demomode.DemoModeController;
 import com.android.systemui.dump.DumpManager;
 import com.android.systemui.power.EnhancedEstimates;
-import com.android.systemui.settings.UserTracker;
+import com.android.systemui.settings.UserContentResolverProvider;
 import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.statusbar.policy.BatteryController;
 import com.android.systemui.statusbar.policy.BatteryControllerImpl;
@@ -22,23 +22,24 @@ import com.android.systemui.statusbar.policy.BatteryControllerLogger;
 import com.google.android.systemui.power.PowerUtils;
 import com.google.android.systemui.reversecharging.ReverseChargingController;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class BatteryControllerImplGoogle extends BatteryControllerImpl implements ReverseChargingController.ReverseChargingChangeCallback {
     public static final boolean DEBUG = Log.isLoggable("BatteryControllerGoogle", 3);
     public static final Uri IS_EBS_ENABLED_OBSERVABLE_URI = new Uri.Builder().scheme("content").authority("com.google.android.flipendo.api").appendPath("get_flipendo_state").build();
     protected final ContentObserver mContentObserver;
-    public final UserTracker mContentResolverProvider;
+    public final UserContentResolverProvider mContentResolverProvider;
     public boolean mExtremeSaver;
     public String mName;
     public boolean mReverse;
     public final ReverseChargingController mReverseChargingController;
     public int mRtxLevel;
 
-    public BatteryControllerImplGoogle(Context context, EnhancedEstimates enhancedEstimates, PowerManager powerManager, BroadcastDispatcher broadcastDispatcher, DemoModeController demoModeController, DumpManager dumpManager, BatteryControllerLogger batteryControllerLogger, Handler handler, Handler handler2, UserTracker userTracker, ReverseChargingController reverseChargingController) {
+    public BatteryControllerImplGoogle(Context context, EnhancedEstimates enhancedEstimates, PowerManager powerManager, BroadcastDispatcher broadcastDispatcher, DemoModeController demoModeController, DumpManager dumpManager, BatteryControllerLogger batteryControllerLogger, Handler handler, Handler handler2, UserContentResolverProvider userContentResolverProvider, ReverseChargingController reverseChargingController) {
         super(context, enhancedEstimates, powerManager, broadcastDispatcher, demoModeController, dumpManager, batteryControllerLogger, handler, handler2);
         this.mReverseChargingController = reverseChargingController;
-        this.mContentResolverProvider = userTracker;
+        this.mContentResolverProvider = userContentResolverProvider;
         this.mContentObserver = new ContentObserver(handler2) {
             public final void onChange(boolean z, Uri uri) {
                 if (BatteryControllerImplGoogle.DEBUG) {
@@ -48,7 +49,16 @@ public final class BatteryControllerImplGoogle extends BatteryControllerImpl imp
                 boolean isFlipendoEnabled = PowerUtils.isFlipendoEnabled(((UserTrackerImpl) batteryControllerImplGoogle.mContentResolverProvider).getUserContext().getContentResolver());
                 if (isFlipendoEnabled != batteryControllerImplGoogle.mExtremeSaver) {
                     batteryControllerImplGoogle.mExtremeSaver = isFlipendoEnabled;
-                    batteryControllerImplGoogle.dispatchSafeChange(new BatteryControllerImplGoogle$$ExternalSyntheticLambda0(batteryControllerImplGoogle, 1));
+                    synchronized (batteryControllerImplGoogle.mChangeCallbacks) {
+                        try {
+                            int size = batteryControllerImplGoogle.mChangeCallbacks.size();
+                            for (int i = 0; i < size; i++) {
+                                ((BatteryController.BatteryStateChangeCallback) batteryControllerImplGoogle.mChangeCallbacks.get(i)).onExtremeBatterySaverChanged(batteryControllerImplGoogle.mExtremeSaver);
+                            }
+                        } catch (Throwable th) {
+                            throw th;
+                        }
+                    }
                 }
             }
         };
@@ -97,20 +107,30 @@ public final class BatteryControllerImplGoogle extends BatteryControllerImpl imp
         this.mRtxLevel = i;
         this.mName = str;
         if (DEBUG) {
-            StringBuilder m = ValidatingOffsetMappingKt$$ExternalSyntheticOutline0.m("onReverseChargingChanged(): rtx=", z ? 1 : 0, " level=", i, " name=");
+            StringBuilder m = ValidatingOffsetMapping$$ExternalSyntheticOutline0.m("onReverseChargingChanged(): rtx=", z ? 1 : 0, " level=", i, " name=");
             m.append(str);
             m.append(" this=");
             m.append(this);
             Log.d("BatteryControllerGoogle", m.toString());
         }
-        dispatchSafeChange(new BatteryControllerImplGoogle$$ExternalSyntheticLambda0(this, 0));
+        synchronized (this.mChangeCallbacks) {
+            try {
+                ArrayList arrayList = new ArrayList(this.mChangeCallbacks);
+                int size = arrayList.size();
+                for (int i2 = 0; i2 < size; i2++) {
+                    ((BatteryController.BatteryStateChangeCallback) arrayList.get(i2)).onReverseChanged(this.mRtxLevel, this.mName, this.mReverse);
+                }
+            } catch (Throwable th) {
+                throw th;
+            }
+        }
     }
 
     public final void setReverseState(boolean z) {
         ReverseChargingController reverseChargingController = this.mReverseChargingController;
         if (reverseChargingController.isReverseSupported()) {
             if (ReverseChargingController.DEBUG) {
-                ExifInterface$$ExternalSyntheticOutline0.m("setReverseState(): rtx=", "ReverseChargingControl", z ? 1 : 0);
+                ExifInterface$$ExternalSyntheticOutline0.m("setReverseState(): rtx=", z ? 1 : 0, "ReverseChargingControl");
             }
             reverseChargingController.mStopReverseAtAcUnplug = false;
             reverseChargingController.setReverseStateInternal(2, z);

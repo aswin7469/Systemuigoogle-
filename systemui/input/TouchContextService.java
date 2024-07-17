@@ -1,55 +1,37 @@
 package com.google.android.systemui.input;
 
-import android.content.ContentResolver;
 import android.content.Context;
-import android.database.ContentObserver;
 import android.hardware.display.DisplayManager;
 import android.hardware.display.DisplayManagerGlobal;
 import android.media.AudioManager;
-import android.os.Handler;
-import android.os.IBinder;
 import android.os.IServiceCallback;
-import android.os.Looper;
-import android.os.Parcel;
 import android.os.RemoteException;
 import android.os.ServiceManager;
-import android.os.Trace;
 import android.provider.DeviceConfig;
-import android.provider.Settings;
 import android.util.Log;
 import android.view.DisplayInfo;
 import androidx.activity.ComponentActivity$activityResultRegistry$1$$ExternalSyntheticOutline0;
-import com.android.internal.os.BackgroundThread;
-import com.google.input.ContextPacket;
 import com.google.input.IConfigPropertyNamespaceListener;
 import com.google.input.ITouchContextService;
-import com.google.input.ITouchContextService$Stub$Proxy;
 import java.util.ArrayList;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class TouchContextService {
     public static final String INTERFACE_NAME = ComponentActivity$activityResultRegistry$1$$ExternalSyntheticOutline0.m(new StringBuilder(), ITouchContextService.DESCRIPTOR, "/default");
-    public final ArrayList mActivePropertyNamespaces;
-    public final AnonymousClass5 mAdaptiveTouchSensitivityObserver;
+    public final ArrayList mActivePropertyNamespaces = new ArrayList();
     public final AudioManager mAudioManager;
     public final AnonymousClass4 mAudioModeListener = new AudioManager.OnModeChangedListener() {
         public final void onModeChanged(int i) {
             TouchContextService touchContextService = TouchContextService.this;
             if (i != touchContextService.mPreviousAudioMode) {
                 touchContextService.mPreviousAudioMode = i;
-                touchContextService.updateTouchContext();
+                TouchContextService.m1712$$Nest$mupdateTouchContext(touchContextService);
             }
         }
     };
-    public final ContentResolver mContentResolver;
     public final AnonymousClass3 mDisplayListener = new DisplayManager.DisplayListener() {
         public final void onDisplayChanged(int i) {
-            Trace.beginSection("TouchContextService.mDisplayListener#onDisplayChanged");
-            if (i != 0) {
-                Trace.endSection();
-                return;
-            }
-            try {
+            if (i == 0) {
                 DisplayInfo displayInfo = DisplayManagerGlobal.getInstance().getDisplayInfo(i);
                 if (displayInfo == null) {
                     Log.e("TouchContextService.java", "could not get DisplayInfo for display " + i + ".");
@@ -57,15 +39,10 @@ public final class TouchContextService {
                 }
                 int i2 = displayInfo.rotation;
                 TouchContextService touchContextService = TouchContextService.this;
-                if (i2 == touchContextService.mPreviousRotation) {
-                    Trace.endSection();
-                    return;
+                if (i2 != touchContextService.mPreviousRotation) {
+                    touchContextService.mPreviousRotation = i2;
+                    TouchContextService.m1712$$Nest$mupdateTouchContext(touchContextService);
                 }
-                touchContextService.mPreviousRotation = i2;
-                touchContextService.updateTouchContext();
-                Trace.endSection();
-            } finally {
-                Trace.endSection();
             }
         }
 
@@ -76,94 +53,27 @@ public final class TouchContextService {
         }
     };
     public final DisplayManager mDisplayManager;
-    public int mPreviousAudioMode;
-    public int mPreviousRotation;
-    public final ArrayList mPropertiesChangedListeners;
-    public final Object mPropertiesLock;
-    public final AnonymousClass2 mPropertyNamespaceListener = new IConfigPropertyNamespaceListener() {
+    public int mPreviousAudioMode = 0;
+    public int mPreviousRotation = -1;
+    public final ArrayList mPropertiesChangedListeners = new ArrayList();
+    public final Object mPropertiesLock = new Object();
+    public final AnonymousClass2 mPropertyNamespaceListener = new IConfigPropertyNamespaceListener.Stub() {
         {
             markVintfStability();
             attachInterface(this, IConfigPropertyNamespaceListener.DESCRIPTOR);
         }
-
-        public final int getMaxTransactionId() {
-            return 16777214;
-        }
-
-        public final String getTransactionName(int i) {
-            if (i == 1) {
-                return "onResult";
-            }
-            switch (i) {
-                case 16777214:
-                    return "getInterfaceHash";
-                case 16777215:
-                    return "getInterfaceVersion";
-                default:
-                    return null;
-            }
-        }
-
-        public final boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) {
-            String str = IConfigPropertyNamespaceListener.DESCRIPTOR;
-            if (i >= 1 && i <= 16777215) {
-                parcel.enforceInterface(str);
-            }
-            if (i == 1598968902) {
-                parcel2.writeString(str);
-                return true;
-            } else if (i == 16777215) {
-                parcel2.writeNoException();
-                parcel2.writeInt(2);
-                return true;
-            } else if (i == 16777214) {
-                parcel2.writeNoException();
-                parcel2.writeString("aca4c2d71594b00b5aa82cf5554538a829bca02a");
-                return true;
-            } else if (i != 1) {
-                return super.onTransact(i, parcel, parcel2, i2);
-            } else {
-                String[] createStringArray = parcel.createStringArray();
-                parcel.enforceNoDataAvail();
-                Log.i("TouchContextService.java", "IConfigPropertyNamespaceListener received namespaces: \"" + String.join("\", \"", createStringArray) + "\"");
-                synchronized (TouchContextService.this.mPropertiesLock) {
-                    try {
-                        TouchContextService.this.mActivePropertyNamespaces.clear();
-                        for (int i3 = 0; i3 < TouchContextService.this.mPropertiesChangedListeners.size(); i3++) {
-                            DeviceConfig.removeOnPropertiesChangedListener((DeviceConfig.OnPropertiesChangedListener) TouchContextService.this.mPropertiesChangedListeners.get(i3));
-                        }
-                        TouchContextService.this.mPropertiesChangedListeners.clear();
-                        for (int i4 = 0; i4 < createStringArray.length; i4++) {
-                            TouchContextService.this.mActivePropertyNamespaces.add(createStringArray[i4]);
-                            TouchContextService touchContextService = TouchContextService.this;
-                            touchContextService.mPropertiesChangedListeners.add(new PropertiesChangedListener());
-                            DeviceConfig.addOnPropertiesChangedListener(createStringArray[i4], BackgroundThread.getExecutor(), (DeviceConfig.OnPropertiesChangedListener) TouchContextService.this.mPropertiesChangedListeners.get(i4));
-                            TouchContextService.m1750$$Nest$mconfigPropertiesChanged(TouchContextService.this, DeviceConfig.getProperties(createStringArray[i4], new String[0]));
-                        }
-                    } catch (Throwable th) {
-                        throw th;
-                    }
-                }
-                return true;
-            }
-        }
-
-        public final IBinder asBinder() {
-            return this;
-        }
     };
-    public final AnonymousClass5 mScreenProtectorModeObserver;
     public final AnonymousClass1 mServiceCallback;
-    public final Object mServiceLock;
+    public final Object mServiceLock = new Object();
     public ITouchContextService mTouchContextService;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class PropertiesChangedListener implements DeviceConfig.OnPropertiesChangedListener {
         public PropertiesChangedListener() {
         }
 
         public final void onPropertiesChanged(DeviceConfig.Properties properties) {
-            TouchContextService.m1750$$Nest$mconfigPropertiesChanged(TouchContextService.this, properties);
+            TouchContextService.m1711$$Nest$mconfigPropertiesChanged(TouchContextService.this, properties);
         }
     }
 
@@ -171,7 +81,7 @@ public final class TouchContextService {
     /* JADX WARNING: No exception handlers in catch block: Catch:{  } */
     /* renamed from: -$$Nest$mconfigPropertiesChanged  reason: not valid java name */
     /* Code decompiled incorrectly, please refer to instructions dump. */
-    public static void m1750$$Nest$mconfigPropertiesChanged(com.google.android.systemui.input.TouchContextService r6, android.provider.DeviceConfig.Properties r7) {
+    public static void m1711$$Nest$mconfigPropertiesChanged(com.google.android.systemui.input.TouchContextService r6, android.provider.DeviceConfig.Properties r7) {
         /*
             r6.getClass()
             java.util.ArrayList r0 = new java.util.ArrayList
@@ -247,7 +157,59 @@ public final class TouchContextService {
             monitor-exit(r7)     // Catch:{ all -> 0x007e }
             throw r6
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.systemui.input.TouchContextService.m1750$$Nest$mconfigPropertiesChanged(com.google.android.systemui.input.TouchContextService, android.provider.DeviceConfig$Properties):void");
+        throw new UnsupportedOperationException("Method not decompiled: com.google.android.systemui.input.TouchContextService.m1711$$Nest$mconfigPropertiesChanged(com.google.android.systemui.input.TouchContextService, android.provider.DeviceConfig$Properties):void");
+    }
+
+    /* JADX WARNING: No exception handlers in catch block: Catch:{  } */
+    /* renamed from: -$$Nest$mupdateTouchContext  reason: not valid java name */
+    /* Code decompiled incorrectly, please refer to instructions dump. */
+    public static void m1712$$Nest$mupdateTouchContext(com.google.android.systemui.input.TouchContextService r4) {
+        /*
+            r4.getClass()
+            com.google.input.ContextPacket r0 = new com.google.input.ContextPacket
+            r0.<init>()
+            int r1 = r4.mPreviousRotation
+            byte r1 = (byte) r1
+            r0.orientation = r1
+            int r1 = r4.mPreviousAudioMode
+            byte r1 = (byte) r1
+            r0.audioMode = r1
+            java.lang.Object r1 = r4.mServiceLock
+            monitor-enter(r1)
+            com.google.input.ITouchContextService r2 = r4.mTouchContextService     // Catch:{ all -> 0x002d }
+            if (r2 != 0) goto L_0x0020
+            java.lang.String r2 = "TouchContextService.java"
+            java.lang.String r3 = "mTouchContextService is null."
+            android.util.Log.e(r2, r3)     // Catch:{ all -> 0x002d }
+        L_0x0020:
+            com.google.input.ITouchContextService r4 = r4.mTouchContextService     // Catch:{ all -> 0x002d }
+            if (r4 != 0) goto L_0x002f
+            java.lang.String r4 = "TouchContextService.java"
+            java.lang.String r0 = "Failed to get touch context service, dropping context packet."
+            android.util.Log.e(r4, r0)     // Catch:{ all -> 0x002d }
+            monitor-exit(r1)     // Catch:{ all -> 0x002d }
+            goto L_0x003f
+        L_0x002d:
+            r4 = move-exception
+            goto L_0x0040
+        L_0x002f:
+            com.google.input.ITouchContextService$Stub$Proxy r4 = (com.google.input.ITouchContextService$Stub$Proxy) r4     // Catch:{ RemoteException -> 0x0036 }
+            r4.updateContext(r0)     // Catch:{ RemoteException -> 0x0036 }
+            monitor-exit(r1)     // Catch:{ all -> 0x002d }
+            goto L_0x003f
+        L_0x0036:
+            r4 = move-exception
+            java.lang.String r0 = "TouchContextService.java"
+            java.lang.String r2 = "Failed to send input context packet."
+            android.util.Log.e(r0, r2, r4)     // Catch:{ all -> 0x002d }
+            monitor-exit(r1)     // Catch:{ all -> 0x002d }
+        L_0x003f:
+            return
+        L_0x0040:
+            monitor-exit(r1)     // Catch:{ all -> 0x002d }
+            throw r4
+        */
+        throw new UnsupportedOperationException("Method not decompiled: com.google.android.systemui.input.TouchContextService.m1712$$Nest$mupdateTouchContext(com.google.android.systemui.input.TouchContextService):void");
     }
 
     public TouchContextService(Context context) {
@@ -342,61 +304,10 @@ public final class TouchContextService {
                 throw new UnsupportedOperationException("Method not decompiled: com.google.android.systemui.input.TouchContextService.AnonymousClass1.onRegistration(java.lang.String, android.os.IBinder):void");
             }
         };
-        new ContentObserver(this, new Handler(Looper.getMainLooper()), 0) {
-            public final /* synthetic */ TouchContextService this$0;
-
-            {
-                this.this$0 = r1;
-            }
-
-            public final void onChange(boolean z) {
-                switch (1) {
-                    case 0:
-                        super.onChange(z);
-                        Settings.Secure.getInt(this.this$0.mContentResolver, "adaptive_touch_sensitivity_enabled", -1);
-                        this.this$0.updateTouchContext();
-                        return;
-                    default:
-                        super.onChange(z);
-                        Settings.Secure.getInt(this.this$0.mContentResolver, "touch_sensitivity_enabled", -1);
-                        this.this$0.updateTouchContext();
-                        return;
-                }
-            }
-        };
-        new ContentObserver(this, new Handler(Looper.getMainLooper()), 1) {
-            public final /* synthetic */ TouchContextService this$0;
-
-            {
-                this.this$0 = r1;
-            }
-
-            public final void onChange(boolean z) {
-                switch (1) {
-                    case 0:
-                        super.onChange(z);
-                        Settings.Secure.getInt(this.this$0.mContentResolver, "adaptive_touch_sensitivity_enabled", -1);
-                        this.this$0.updateTouchContext();
-                        return;
-                    default:
-                        super.onChange(z);
-                        Settings.Secure.getInt(this.this$0.mContentResolver, "touch_sensitivity_enabled", -1);
-                        this.this$0.updateTouchContext();
-                        return;
-                }
-            }
-        };
-        this.mPropertiesLock = new Object();
-        this.mPropertiesChangedListeners = new ArrayList();
-        this.mActivePropertyNamespaces = new ArrayList();
-        this.mServiceLock = new Object();
-        this.mPreviousRotation = -1;
-        this.mPreviousAudioMode = 0;
         this.mDisplayManager = (DisplayManager) context.getSystemService(DisplayManager.class);
         AudioManager audioManager = (AudioManager) context.getSystemService(AudioManager.class);
         this.mAudioManager = audioManager;
         this.mPreviousAudioMode = audioManager.getMode();
-        this.mContentResolver = context.getContentResolver();
         try {
             String str = INTERFACE_NAME;
             if (!ServiceManager.isDeclared(str)) {
@@ -410,27 +321,6 @@ public final class TouchContextService {
             }
         } catch (SecurityException e2) {
             Log.e("TouchContextService.java", "Unable to check if AIDL service is declared. " + e2);
-        }
-    }
-
-    public final void updateTouchContext() {
-        ContextPacket contextPacket = new ContextPacket();
-        contextPacket.orientation = (byte) this.mPreviousRotation;
-        contextPacket.audioMode = (byte) this.mPreviousAudioMode;
-        synchronized (this.mServiceLock) {
-            if (this.mTouchContextService == null) {
-                Log.e("TouchContextService.java", "mTouchContextService is null.");
-            }
-            ITouchContextService iTouchContextService = this.mTouchContextService;
-            if (iTouchContextService == null) {
-                Log.e("TouchContextService.java", "Failed to get touch context service, dropping context packet.");
-                return;
-            }
-            try {
-                ((ITouchContextService$Stub$Proxy) iTouchContextService).updateContext(contextPacket);
-            } catch (RemoteException e) {
-                Log.e("TouchContextService.java", "Failed to send input context packet.", e);
-            }
         }
     }
 }

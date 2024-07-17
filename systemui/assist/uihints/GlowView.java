@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class GlowView extends FrameLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
     public ImageView mBlueGlow;
@@ -83,10 +83,10 @@ public final class GlowView extends FrameLayout {
     }
 
     public final void onFinishInflate() {
-        this.mBlueGlow = (ImageView) findViewById(2131362084);
-        this.mRedGlow = (ImageView) findViewById(2131363413);
-        this.mYellowGlow = (ImageView) findViewById(2131364154);
-        this.mGreenGlow = (ImageView) findViewById(2131362640);
+        this.mBlueGlow = (ImageView) findViewById(2131362079);
+        this.mRedGlow = (ImageView) findViewById(2131363386);
+        this.mYellowGlow = (ImageView) findViewById(2131364116);
+        this.mGreenGlow = (ImageView) findViewById(2131362620);
         this.mGlowImageViews = new ArrayList(Arrays.asList(new ImageView[]{this.mBlueGlow, this.mRedGlow, this.mYellowGlow, this.mGreenGlow}));
     }
 
@@ -261,6 +261,6 @@ public final class GlowView extends FrameLayout {
         this.mGlowImageMatrix = new Matrix();
         this.mBlurRadius = 0;
         this.mPaint = new Paint();
-        this.mBlurProvider = new BlurProvider(context, context.getResources().getDrawable(2131232418, (Resources.Theme) null));
+        this.mBlurProvider = new BlurProvider(context, context.getResources().getDrawable(2131232405, (Resources.Theme) null));
     }
 }

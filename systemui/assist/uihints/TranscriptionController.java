@@ -1,10 +1,14 @@
 package com.google.android.systemui.assist.uihints;
 
+import android.app.PendingIntent;
 import android.graphics.Rect;
 import android.graphics.Region;
 import android.view.ViewGroup;
 import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
 import com.android.systemui.statusbar.policy.ConfigurationController;
+import com.google.android.systemui.assist.uihints.NgaMessageHandler;
+import com.google.android.systemui.assist.uihints.input.TouchActionRegion;
+import com.google.android.systemui.assist.uihints.input.TouchInsideRegion;
 import com.google.common.util.concurrent.Futures;
 import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.MoreExecutors;
@@ -12,55 +16,64 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
-public final class TranscriptionController implements ConfigurationController.ConfigurationListener {
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
+public final class TranscriptionController implements NgaMessageHandler.CardInfoListener, NgaMessageHandler.TranscriptionInfoListener, NgaMessageHandler.GreetingInfoListener, NgaMessageHandler.ChipsInfoListener, NgaMessageHandler.ClearListener, ConfigurationController.ConfigurationListener, TouchActionRegion, TouchInsideRegion {
     public State mCurrentState;
     public final TouchInsideHandler mDefaultOnTap;
+    public final FlingVelocityWrapper mFlingVelocity;
     public boolean mHasAccurateBackground;
     public ListenableFuture mHideFuture;
     public TranscriptionSpaceListener mListener;
+    public PendingIntent mOnGreetingTap;
+    public PendingIntent mOnTranscriptionTap;
     public Runnable mQueuedCompletion;
     public State mQueuedState;
     public boolean mQueuedStateAnimates;
     public final Map mViewMap = new HashMap();
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public enum State {
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public interface TranscriptionSpaceListener {
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
-    public interface TranscriptionSpaceView {
-        void getHitRect(Rect rect);
-
-        ListenableFuture hide(boolean z);
-
-        void onFontSizeChanged();
-
-        void setHasDarkBackground(boolean z);
-    }
-
-    public TranscriptionController(ViewGroup viewGroup, TouchInsideHandler touchInsideHandler, ConfigurationController configurationController) {
+    public TranscriptionController(ViewGroup viewGroup, TouchInsideHandler touchInsideHandler, FlingVelocityWrapper flingVelocityWrapper, ConfigurationController configurationController) {
         State state = State.NONE;
         this.mCurrentState = state;
         this.mHasAccurateBackground = false;
         this.mQueuedStateAnimates = false;
         this.mQueuedState = state;
         this.mDefaultOnTap = touchInsideHandler;
+        this.mFlingVelocity = flingVelocityWrapper;
         this.mViewMap = new HashMap();
-        TranscriptionView transcriptionView = (TranscriptionView) viewGroup.findViewById(2131363900);
+        TranscriptionView transcriptionView = (TranscriptionView) viewGroup.findViewById(2131363864);
         transcriptionView.setOnClickListener(new TranscriptionController$$ExternalSyntheticLambda1(this, 0));
         transcriptionView.setOnTouchListener(touchInsideHandler);
         this.mViewMap.put(State.TRANSCRIPTION, transcriptionView);
-        GreetingView greetingView = (GreetingView) viewGroup.findViewById(2131362641);
+        GreetingView greetingView = (GreetingView) viewGroup.findViewById(2131362621);
         greetingView.setOnClickListener(new TranscriptionController$$ExternalSyntheticLambda1(this, 1));
         greetingView.setOnTouchListener(touchInsideHandler);
         this.mViewMap.put(State.GREETING, greetingView);
-        this.mViewMap.put(State.CHIPS, (ChipsContainer) viewGroup.findViewById(2131362264));
+        this.mViewMap.put(State.CHIPS, (ChipsContainer) viewGroup.findViewById(2131362248));
         ((ConfigurationControllerImpl) configurationController).addCallback(this);
+    }
+
+    public final Optional getTouchActionRegion() {
+        int ordinal = this.mCurrentState.ordinal();
+        if (ordinal == 0 ? this.mOnTranscriptionTap == null : ordinal == 1 ? this.mOnGreetingTap == null : ordinal != 2) {
+            return Optional.empty();
+        }
+        return getTouchRegion();
+    }
+
+    public final Optional getTouchInsideRegion() {
+        int ordinal = this.mCurrentState.ordinal();
+        if (ordinal == 0 ? this.mOnTranscriptionTap == null : ordinal == 1 ? this.mOnGreetingTap == null : ordinal != 2) {
+            return getTouchRegion();
+        }
+        return Optional.empty();
     }
 
     public final Optional getTouchRegion() {
@@ -101,7 +114,7 @@ public final class TranscriptionController implements ConfigurationController.Co
                     }
                     if (scrimController.mTranscriptionVisible != z) {
                         scrimController.mTranscriptionVisible = z;
-                        scrimController.refresh();
+                        scrimController.refresh$1();
                     }
                 }
                 if (state3.equals(this.mCurrentState)) {
@@ -122,9 +135,35 @@ public final class TranscriptionController implements ConfigurationController.Co
         }
     }
 
+    public final void onCardInfo(int i, boolean z, boolean z2, boolean z3) {
+        for (TranscriptionSpaceView cardVisible : this.mViewMap.values()) {
+            cardVisible.setCardVisible(z);
+        }
+    }
+
     public final void onDensityOrFontScaleChanged() {
         for (TranscriptionSpaceView onFontSizeChanged : this.mViewMap.values()) {
             onFontSizeChanged.onFontSizeChanged();
+        }
+    }
+
+    public final void setQueuedState(State state, boolean z, Runnable runnable) {
+        this.mQueuedState = state;
+        this.mQueuedStateAnimates = z;
+        this.mQueuedCompletion = runnable;
+    }
+
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
+    public interface TranscriptionSpaceView {
+        void getHitRect(Rect rect);
+
+        ListenableFuture hide(boolean z);
+
+        void onFontSizeChanged();
+
+        void setHasDarkBackground(boolean z);
+
+        void setCardVisible(boolean z) {
         }
     }
 }

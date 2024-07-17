@@ -8,10 +8,9 @@ import android.os.RemoteException;
 import android.util.Log;
 import com.google.android.systemui.power.batteryevent.aidl.IBatteryEventService;
 import com.google.android.systemui.power.batteryevent.aidl.SurfaceType;
-import com.google.android.systemui.power.batteryevent.domain.BatteryEventService$binder$1;
 import kotlin.Unit;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class BatteryEventClient$connection$1 implements ServiceConnection {
     public final /* synthetic */ BatteryEventClient this$0;
 
@@ -24,7 +23,7 @@ public final class BatteryEventClient$connection$1 implements ServiceConnection 
         IBatteryEventService iBatteryEventService;
         Unit unit;
         BatteryEventClient batteryEventClient = this.this$0;
-        int i = BatteryEventService$binder$1.$r8$clinit;
+        int i = IBatteryEventService.Stub.$r8$clinit;
         String str = null;
         if (iBinder == null) {
             iBatteryEventService = null;

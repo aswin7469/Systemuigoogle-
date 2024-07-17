@@ -6,8 +6,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import com.android.internal.logging.UiEventLogger;
+import com.android.systemui.assist.AssistManager;
 import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.shade.ShadeController;
+import com.android.systemui.shade.ShadeControllerImpl;
 import com.android.systemui.tuner.TunerService;
 import com.google.android.systemui.assist.AssistManagerGoogle;
 import com.google.android.systemui.columbus.ColumbusEvent;
@@ -16,7 +18,7 @@ import com.google.android.systemui.columbus.legacy.sensors.GestureSensor;
 import dagger.Lazy;
 import java.util.Set;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class LaunchOpa extends UserAction {
     public final AssistManagerGoogle assistManager;
     public boolean enableForAnyAssistant;
@@ -29,12 +31,18 @@ public final class LaunchOpa extends UserAction {
     public final LaunchOpa$tunable$1 tunable;
     public final UiEventLogger uiEventLogger;
 
-    public LaunchOpa(Context context, ShadeController shadeController2, Set set, AssistManagerGoogle assistManagerGoogle, Lazy lazy, TunerService tunerService, ColumbusContentObserver.Factory factory, UiEventLogger uiEventLogger2) {
+    public LaunchOpa(Context context, ShadeController shadeController2, Set set, AssistManager assistManager2, Lazy lazy, TunerService tunerService, ColumbusContentObserver.Factory factory, UiEventLogger uiEventLogger2) {
         super(context, set);
+        AssistManagerGoogle assistManagerGoogle;
         boolean z;
         this.shadeController = shadeController2;
         this.keyguardManager = lazy;
         this.uiEventLogger = uiEventLogger2;
+        if (assistManager2 instanceof AssistManagerGoogle) {
+            assistManagerGoogle = (AssistManagerGoogle) assistManager2;
+        } else {
+            assistManagerGoogle = null;
+        }
         this.assistManager = assistManagerGoogle;
         LaunchOpa$opaEnabledListener$1 launchOpa$opaEnabledListener$1 = new LaunchOpa$opaEnabledListener$1(this);
         Uri uriFor = Settings.Secure.getUriFor("assist_gesture_enabled");
@@ -54,7 +62,9 @@ public final class LaunchOpa extends UserAction {
         columbusContentObserver.contentResolver.contentResolver.unregisterContentObserver(columbusContentObserver);
         columbusContentObserver.contentResolver.contentResolver.registerContentObserver(columbusContentObserver.settingsUri, false, columbusContentObserver, ((UserTrackerImpl) columbusContentObserver.userTracker).getUserId());
         tunerService.addTunable(launchOpa$tunable$1, "assist_gesture_any_assistant");
-        assistManagerGoogle.addOpaEnabledListener(launchOpa$opaEnabledListener$1);
+        if (assistManagerGoogle != null) {
+            assistManagerGoogle.addOpaEnabledListener(launchOpa$opaEnabledListener$1);
+        }
         updateAvailable$5();
     }
 
@@ -70,7 +80,7 @@ public final class LaunchOpa extends UserAction {
         long j;
         int i;
         this.uiEventLogger.log(ColumbusEvent.COLUMBUS_INVOKED_ASSISTANT);
-        this.shadeController.cancelExpansionAndCollapseShade();
+        ((ShadeControllerImpl) this.shadeController).cancelExpansionAndCollapseShade();
         if (detectionProperties != null) {
             j = detectionProperties.actionId;
         } else {

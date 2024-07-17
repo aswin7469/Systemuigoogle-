@@ -10,7 +10,7 @@ import java.util.List;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class GestureConfiguration {
     public static final Range SENSITIVITY_RANGE = Range.create(Float.valueOf(0.0f), Float.valueOf(1.0f));
     public final Function1 adjustmentCallback = new GestureConfiguration$adjustmentCallback$1(this);

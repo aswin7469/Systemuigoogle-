@@ -8,7 +8,7 @@ import com.android.internal.logging.UiEventLogger;
 import com.google.android.systemui.columbus.ColumbusEvent;
 import java.util.ArrayList;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class GestureSensorImpl extends GestureSensor {
     public final Sensor accelerometer;
     public final Sensor gyroscope;
@@ -264,25 +264,24 @@ public final class GestureSensorImpl extends GestureSensor {
         this.uiEventLogger.log(ColumbusEvent.COLUMBUS_MODE_INACTIVE);
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class GestureSensorEventListener implements SensorEventListener {
         public GestureSensorEventListener() {
         }
 
-        /* JADX WARNING: Removed duplicated region for block: B:105:0x04ca  */
-        /* JADX WARNING: Removed duplicated region for block: B:108:0x04da  */
-        /* JADX WARNING: Removed duplicated region for block: B:21:0x009d  */
-        /* JADX WARNING: Removed duplicated region for block: B:22:0x0120  */
-        /* JADX WARNING: Removed duplicated region for block: B:91:0x0477  */
-        /* JADX WARNING: Removed duplicated region for block: B:96:0x0494  */
-        /* JADX WARNING: Removed duplicated region for block: B:97:0x0497  */
+        /* JADX WARNING: Code restructure failed: missing block: B:15:0x006f, code lost:
+            if (r2.mGotAcc == false) goto L_0x0448;
+         */
+        /* JADX WARNING: Code restructure failed: missing block: B:8:0x0048, code lost:
+            if (r2.mGotGyro == false) goto L_0x0448;
+         */
         /* Code decompiled incorrectly, please refer to instructions dump. */
-        public final void onSensorChanged(android.hardware.SensorEvent r33) {
+        public final void onSensorChanged(android.hardware.SensorEvent r23) {
             /*
-                r32 = this;
-                r0 = r33
-                if (r0 == 0) goto L_0x04e5
-                r1 = r32
+                r22 = this;
+                r0 = r23
+                if (r0 == 0) goto L_0x04c8
+                r1 = r22
                 com.google.android.systemui.columbus.legacy.sensors.GestureSensorImpl r1 = com.google.android.systemui.columbus.legacy.sensors.GestureSensorImpl.this
                 com.google.android.systemui.columbus.legacy.sensors.TapRT r2 = r1.tap
                 android.hardware.Sensor r3 = r0.sensor
@@ -299,573 +298,544 @@ public final class GestureSensorImpl extends GestureSensor {
                 r8 = 6
                 r2.mResult = r8
                 java.util.Deque r9 = r2.mTimestampsBackTap
-                java.util.Deque r8 = r2.mAccZs
-                r15 = 4
                 r16 = 0
-                if (r3 != r13) goto L_0x0056
+                if (r3 != r13) goto L_0x004c
                 r2.mGotAcc = r13
-                r18 = r14
-                long r13 = r2.mSyncTime
-                int r13 = (r16 > r13 ? 1 : (r16 == r13 ? 0 : -1))
-                if (r13 != 0) goto L_0x004c
-                com.google.android.systemui.columbus.legacy.sensors.Resample3C r13 = r2.mResampleAcc
-                r13.mRawLastX = r12
-                r13.mRawLastT = r10
-                r13.mResampledThisX = r12
-                r13.mResampledLastT = r10
-                r13.mInterval = r6
-                r14 = r18
-                r13.mRawLastY = r14
-                r13.mRawLastZ = r4
-                r13.mResampledThisY = r14
-                r13.mResampledThisZ = r4
-                goto L_0x004e
-            L_0x004c:
-                r14 = r18
-            L_0x004e:
+                r22 = r9
+                long r8 = r2.mSyncTime
+                int r8 = (r16 > r8 ? 1 : (r16 == r8 ? 0 : -1))
+                if (r8 != 0) goto L_0x0046
+                com.google.android.systemui.columbus.legacy.sensors.Resample3C r8 = r2.mResampleAcc
+                r8.mRawLastX = r12
+                r8.mRawLastT = r10
+                r8.mResampledThisX = r12
+                r8.mResampledLastT = r10
+                r8.mInterval = r6
+                r8.mRawLastY = r14
+                r8.mRawLastZ = r4
+                r8.mResampledThisY = r14
+                r8.mResampledThisZ = r4
+            L_0x0046:
                 boolean r6 = r2.mGotGyro
-                if (r6 != 0) goto L_0x0081
-                r0 = r1
-                r4 = r5
-                goto L_0x0462
-            L_0x0056:
-                if (r3 != r15) goto L_0x0081
-                r13 = 1
+                if (r6 != 0) goto L_0x0073
+                goto L_0x0448
+            L_0x004c:
+                r22 = r9
+                r8 = 4
+                if (r3 != r8) goto L_0x0073
                 r2.mGotGyro = r13
-                r18 = r6
-                long r5 = r2.mSyncTime
-                int r5 = (r16 > r5 ? 1 : (r16 == r5 ? 0 : -1))
-                if (r5 != 0) goto L_0x0079
-                com.google.android.systemui.columbus.legacy.sensors.Resample3C r5 = r2.mResampleGyro
-                r5.mRawLastX = r12
-                r5.mRawLastT = r10
-                r5.mResampledThisX = r12
-                r5.mResampledLastT = r10
-                r6 = r18
-                r5.mInterval = r6
-                r5.mRawLastY = r14
-                r5.mRawLastZ = r4
-                r5.mResampledThisY = r14
-                r5.mResampledThisZ = r4
-            L_0x0079:
-                boolean r5 = r2.mGotAcc
-                if (r5 != 0) goto L_0x0081
-                r0 = r1
-            L_0x007e:
-                r4 = 0
-                goto L_0x0462
-            L_0x0081:
-                long r5 = r2.mSyncTime
-                int r5 = (r16 > r5 ? 1 : (r16 == r5 ? 0 : -1))
-                com.google.android.systemui.columbus.legacy.sensors.Highpass3C r7 = r2.mHighpassAcc
-                com.google.android.systemui.columbus.legacy.sensors.Lowpass3C r6 = r2.mLowpassAcc
-                com.google.android.systemui.columbus.legacy.sensors.Slope3C r13 = r2.mSlopeAcc
-                com.google.android.systemui.columbus.legacy.sensors.Highpass3C r15 = r2.mHighpassGyro
-                com.google.android.systemui.columbus.legacy.sensors.Lowpass3C r0 = r2.mLowpassGyro
-                r18 = r1
-                com.google.android.systemui.columbus.legacy.sensors.Slope3C r1 = r2.mSlopeGyro
-                r19 = r9
-                com.google.android.systemui.columbus.legacy.sensors.Resample3C r9 = r2.mResampleGyro
-                r20 = r4
-                com.google.android.systemui.columbus.legacy.sensors.Resample3C r4 = r2.mResampleAcc
-                if (r5 != 0) goto L_0x0120
+                long r8 = r2.mSyncTime
+                int r8 = (r16 > r8 ? 1 : (r16 == r8 ? 0 : -1))
+                if (r8 != 0) goto L_0x006d
+                com.google.android.systemui.columbus.legacy.sensors.Resample3C r8 = r2.mResampleGyro
+                r8.mRawLastX = r12
+                r8.mRawLastT = r10
+                r8.mResampledThisX = r12
+                r8.mResampledLastT = r10
+                r8.mInterval = r6
+                r8.mRawLastY = r14
+                r8.mRawLastZ = r4
+                r8.mResampledThisY = r14
+                r8.mResampledThisZ = r4
+            L_0x006d:
+                boolean r6 = r2.mGotAcc
+                if (r6 != 0) goto L_0x0073
+                goto L_0x0448
+            L_0x0073:
+                long r6 = r2.mSyncTime
+                int r6 = (r16 > r6 ? 1 : (r16 == r6 ? 0 : -1))
+                if (r6 != 0) goto L_0x010c
                 r2.mSyncTime = r10
+                com.google.android.systemui.columbus.legacy.sensors.Resample3C r3 = r2.mResampleAcc
+                r3.mResampledLastT = r10
+                com.google.android.systemui.columbus.legacy.sensors.Resample3C r4 = r2.mResampleGyro
                 r4.mResampledLastT = r10
-                r9.mResampledLastT = r10
-                com.google.android.systemui.columbus.legacy.sensors.Sample3C r2 = r4.getResults()
-                com.google.android.systemui.columbus.legacy.sensors.Point3f r2 = r2.mPoint
-                r13.getClass()
-                float r3 = r2.x
-                com.google.android.systemui.columbus.legacy.sensors.Slope1C r4 = r13.mSlopeX
+                com.google.android.systemui.columbus.legacy.sensors.Slope3C r4 = r2.mSlopeAcc
+                com.google.android.systemui.columbus.legacy.sensors.Sample3C r3 = r3.getResults()
+                com.google.android.systemui.columbus.legacy.sensors.Point3f r3 = r3.mPoint
+                r4.getClass()
+                float r6 = r3.x
+                com.google.android.systemui.columbus.legacy.sensors.Slope1C r7 = r4.mSlopeX
+                r7.mRawLastX = r6
+                float r6 = r3.y
+                com.google.android.systemui.columbus.legacy.sensors.Slope1C r7 = r4.mSlopeY
+                r7.mRawLastX = r6
+                float r3 = r3.z
+                com.google.android.systemui.columbus.legacy.sensors.Slope1C r4 = r4.mSlopeZ
                 r4.mRawLastX = r3
-                float r3 = r2.y
-                com.google.android.systemui.columbus.legacy.sensors.Slope1C r4 = r13.mSlopeY
-                r4.mRawLastX = r3
-                float r2 = r2.z
-                com.google.android.systemui.columbus.legacy.sensors.Slope1C r3 = r13.mSlopeZ
-                r3.mRawLastX = r2
-                com.google.android.systemui.columbus.legacy.sensors.Sample3C r2 = r9.getResults()
-                com.google.android.systemui.columbus.legacy.sensors.Point3f r2 = r2.mPoint
-                r1.getClass()
-                float r3 = r2.x
-                com.google.android.systemui.columbus.legacy.sensors.Slope1C r4 = r1.mSlopeX
-                r4.mRawLastX = r3
-                float r3 = r2.y
-                com.google.android.systemui.columbus.legacy.sensors.Slope1C r4 = r1.mSlopeY
-                r4.mRawLastX = r3
-                float r2 = r2.z
-                com.google.android.systemui.columbus.legacy.sensors.Slope1C r1 = r1.mSlopeZ
-                r1.mRawLastX = r2
-                com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r1 = r6.mLowpassX
-                r2 = 0
-                r1.mLastX = r2
-                com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r1 = r6.mLowpassY
-                r1.mLastX = r2
-                com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r1 = r6.mLowpassZ
-                r1.mLastX = r2
-                com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r1 = r0.mLowpassX
-                r1.mLastX = r2
-                com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r1 = r0.mLowpassY
-                r1.mLastX = r2
-                com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r0 = r0.mLowpassZ
-                r0.mLastX = r2
-                r7.getClass()
-                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r0 = r7.mHighpassX
-                r0.mLastX = r2
-                r0.mLastY = r2
-                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r0 = r7.mHighpassY
-                r0.mLastX = r2
-                r0.mLastY = r2
-                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r0 = r7.mHighpassZ
-                r0.mLastX = r2
-                r0.mLastY = r2
-                r15.getClass()
-                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r0 = r15.mHighpassX
-                r0.mLastX = r2
-                r0.mLastY = r2
-                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r0 = r15.mHighpassY
-                r0.mLastX = r2
-                r0.mLastY = r2
-                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r0 = r15.mHighpassZ
-                r0.mLastX = r2
-                r0.mLastY = r2
-                r0 = r18
-                goto L_0x007e
-            L_0x0120:
-                java.util.Deque r5 = r2.mAccYs
-                r21 = r15
-                java.util.Deque r15 = r2.mAccXs
-                r23 = r0
-                r22 = r1
-                long r0 = r2.mSizeWindowNs
-                r24 = r0
-                com.google.android.systemui.columbus.legacy.sensors.PeakDetector r0 = r2.mValleyDetector
-                com.google.android.systemui.columbus.legacy.sensors.PeakDetector r1 = r2.mPeakDetector
-                r26 = 1242725376(0x4a127c00, float:2400000.0)
-                r27 = r6
-                r6 = 1
-                if (r3 != r6) goto L_0x0212
-            L_0x013a:
-                com.google.android.systemui.columbus.legacy.sensors.Resample3C r6 = r2.mResampleAcc
-                r3 = r27
-                r9 = r7
+                com.google.android.systemui.columbus.legacy.sensors.Slope3C r3 = r2.mSlopeGyro
+                com.google.android.systemui.columbus.legacy.sensors.Resample3C r4 = r2.mResampleGyro
+                com.google.android.systemui.columbus.legacy.sensors.Sample3C r4 = r4.getResults()
+                com.google.android.systemui.columbus.legacy.sensors.Point3f r4 = r4.mPoint
+                r3.getClass()
+                float r6 = r4.x
+                com.google.android.systemui.columbus.legacy.sensors.Slope1C r7 = r3.mSlopeX
+                r7.mRawLastX = r6
+                float r6 = r4.y
+                com.google.android.systemui.columbus.legacy.sensors.Slope1C r7 = r3.mSlopeY
+                r7.mRawLastX = r6
+                float r4 = r4.z
+                com.google.android.systemui.columbus.legacy.sensors.Slope1C r3 = r3.mSlopeZ
+                r3.mRawLastX = r4
+                com.google.android.systemui.columbus.legacy.sensors.Lowpass3C r3 = r2.mLowpassAcc
+                com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r4 = r3.mLowpassX
+                r6 = 0
+                r4.mLastX = r6
+                com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r4 = r3.mLowpassY
+                r4.mLastX = r6
+                com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r3 = r3.mLowpassZ
+                r3.mLastX = r6
+                com.google.android.systemui.columbus.legacy.sensors.Lowpass3C r3 = r2.mLowpassGyro
+                com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r4 = r3.mLowpassX
+                r4.mLastX = r6
+                com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r4 = r3.mLowpassY
+                r4.mLastX = r6
+                com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r3 = r3.mLowpassZ
+                r3.mLastX = r6
+                com.google.android.systemui.columbus.legacy.sensors.Highpass3C r3 = r2.mHighpassAcc
+                r3.getClass()
+                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r4 = r3.mHighpassX
+                r4.mLastX = r6
+                r4.mLastY = r6
+                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r4 = r3.mHighpassY
+                r4.mLastX = r6
+                r4.mLastY = r6
+                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r3 = r3.mHighpassZ
+                r3.mLastX = r6
+                r3.mLastY = r6
+                com.google.android.systemui.columbus.legacy.sensors.Highpass3C r2 = r2.mHighpassGyro
+                r2.getClass()
+                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r3 = r2.mHighpassX
+                r3.mLastX = r6
+                r3.mLastY = r6
+                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r3 = r2.mHighpassY
+                r3.mLastX = r6
+                r3.mLastY = r6
+                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r2 = r2.mHighpassZ
+                r2.mLastX = r6
+                r2.mLastY = r6
+                goto L_0x0448
+            L_0x010c:
+                long r8 = r2.mSizeWindowNs
+                com.google.android.systemui.columbus.legacy.sensors.PeakDetector r7 = r2.mValleyDetector
+                com.google.android.systemui.columbus.legacy.sensors.PeakDetector r6 = r2.mPeakDetector
+                r16 = 1242725376(0x4a127c00, float:2400000.0)
+                if (r3 != r13) goto L_0x0208
+            L_0x0117:
+                com.google.android.systemui.columbus.legacy.sensors.Resample3C r3 = r2.mResampleAcc
+                r15 = r6
+                r6 = r3
+                r3 = r7
                 r7 = r12
-                r27 = r12
-                r12 = r8
+                r18 = r8
                 r8 = r14
-                r17 = r9
-                r9 = r20
-                r28 = r10
+                r9 = r4
+                r20 = r10
                 boolean r6 = r6.update(r7, r8, r9, r10)
-                if (r6 == 0) goto L_0x020f
-                com.google.android.systemui.columbus.legacy.sensors.Sample3C r6 = r4.getResults()
-                long r7 = r4.mInterval
+                if (r6 == 0) goto L_0x0448
+                com.google.android.systemui.columbus.legacy.sensors.Resample3C r6 = r2.mResampleAcc
+                com.google.android.systemui.columbus.legacy.sensors.Sample3C r6 = r6.getResults()
+                com.google.android.systemui.columbus.legacy.sensors.Resample3C r7 = r2.mResampleAcc
+                long r7 = r7.mInterval
                 float r7 = (float) r7
-                float r7 = r26 / r7
+                float r7 = r16 / r7
+                com.google.android.systemui.columbus.legacy.sensors.Slope3C r8 = r2.mSlopeAcc
                 com.google.android.systemui.columbus.legacy.sensors.Point3f r6 = r6.mPoint
-                r13.getClass()
-                float r8 = r6.x
-                com.google.android.systemui.columbus.legacy.sensors.Slope1C r9 = r13.mSlopeX
-                float r8 = r8 * r7
-                float r10 = r9.mRawLastX
-                float r10 = r8 - r10
-                r9.mRawLastX = r8
-                com.google.android.systemui.columbus.legacy.sensors.Slope1C r8 = r13.mSlopeY
-                float r9 = r6.y
+                r8.getClass()
+                float r9 = r6.x
+                com.google.android.systemui.columbus.legacy.sensors.Slope1C r10 = r8.mSlopeX
                 float r9 = r9 * r7
-                float r11 = r8.mRawLastX
+                float r11 = r10.mRawLastX
                 float r11 = r9 - r11
-                r8.mRawLastX = r9
-                com.google.android.systemui.columbus.legacy.sensors.Slope1C r8 = r13.mSlopeZ
+                r10.mRawLastX = r9
+                com.google.android.systemui.columbus.legacy.sensors.Slope1C r9 = r8.mSlopeY
+                float r10 = r6.y
+                float r10 = r10 * r7
+                float r13 = r9.mRawLastX
+                float r13 = r10 - r13
+                r9.mRawLastX = r10
+                com.google.android.systemui.columbus.legacy.sensors.Slope1C r8 = r8.mSlopeZ
                 float r6 = r6.z
                 float r6 = r6 * r7
                 float r7 = r8.mRawLastX
                 float r7 = r6 - r7
                 r8.mRawLastX = r6
-                com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r6 = r3.mLowpassX
-                float r6 = r6.update(r10)
-                com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r8 = r3.mLowpassY
+                com.google.android.systemui.columbus.legacy.sensors.Lowpass3C r6 = r2.mLowpassAcc
+                com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r8 = r6.mLowpassX
                 float r8 = r8.update(r11)
-                com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r9 = r3.mLowpassZ
-                float r7 = r9.update(r7)
-                r17.getClass()
-                r9 = r17
-                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r10 = r9.mHighpassX
-                float r6 = r10.update(r6)
-                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r10 = r9.mHighpassY
+                com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r9 = r6.mLowpassY
+                float r9 = r9.update(r13)
+                com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r6 = r6.mLowpassZ
+                float r6 = r6.update(r7)
+                com.google.android.systemui.columbus.legacy.sensors.Highpass3C r7 = r2.mHighpassAcc
+                r7.getClass()
+                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r10 = r7.mHighpassX
                 float r8 = r10.update(r8)
-                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r10 = r9.mHighpassZ
-                float r7 = r10.update(r7)
+                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r10 = r7.mHighpassY
+                float r9 = r10.update(r9)
+                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r7 = r7.mHighpassZ
+                float r6 = r7.update(r6)
+                java.util.Deque r7 = r2.mAccXs
+                java.lang.Float r8 = java.lang.Float.valueOf(r8)
+                r7.add(r8)
+                java.util.Deque r7 = r2.mAccYs
+                java.lang.Float r8 = java.lang.Float.valueOf(r9)
+                r7.add(r8)
+                java.util.Deque r7 = r2.mAccZs
                 java.lang.Float r6 = java.lang.Float.valueOf(r6)
-                r15.add(r6)
-                java.lang.Float r6 = java.lang.Float.valueOf(r8)
-                r5.add(r6)
-                java.lang.Float r6 = java.lang.Float.valueOf(r7)
-                r12.add(r6)
-                long r6 = r4.mInterval
-                long r6 = r24 / r6
-                int r6 = (int) r6
-            L_0x01c2:
-                r7 = r15
+                r7.add(r6)
+                com.google.android.systemui.columbus.legacy.sensors.Resample3C r6 = r2.mResampleAcc
+                long r6 = r6.mInterval
+                long r8 = r18 / r6
+                int r6 = (int) r8
+            L_0x01ab:
+                java.util.Deque r7 = r2.mAccXs
                 java.util.ArrayDeque r7 = (java.util.ArrayDeque) r7
-                int r8 = r7.size()
-                if (r8 <= r6) goto L_0x01db
-                r7.removeFirst()
-                r7 = r5
+                int r7 = r7.size()
+                if (r7 <= r6) goto L_0x01cb
+                java.util.Deque r7 = r2.mAccXs
                 java.util.ArrayDeque r7 = (java.util.ArrayDeque) r7
                 r7.removeFirst()
-                r8 = r12
-                java.util.ArrayDeque r8 = (java.util.ArrayDeque) r8
-                r8.removeFirst()
-                goto L_0x01c2
-            L_0x01db:
-                r8 = r12
-                java.util.ArrayDeque r8 = (java.util.ArrayDeque) r8
-                java.lang.Object r6 = r8.getLast()
+                java.util.Deque r7 = r2.mAccYs
+                java.util.ArrayDeque r7 = (java.util.ArrayDeque) r7
+                r7.removeFirst()
+                java.util.Deque r7 = r2.mAccZs
+                java.util.ArrayDeque r7 = (java.util.ArrayDeque) r7
+                r7.removeFirst()
+                goto L_0x01ab
+            L_0x01cb:
+                java.util.Deque r6 = r2.mAccZs
+                java.util.ArrayDeque r6 = (java.util.ArrayDeque) r6
+                java.lang.Object r6 = r6.getLast()
                 java.lang.Float r6 = (java.lang.Float) r6
                 float r6 = r6.floatValue()
-                com.google.android.systemui.columbus.legacy.sensors.Sample3C r7 = r4.getResults()
-                long r10 = r7.mT
-                r1.update(r6, r10)
-                java.lang.Object r6 = r8.getLast()
+                com.google.android.systemui.columbus.legacy.sensors.Resample3C r7 = r2.mResampleAcc
+                com.google.android.systemui.columbus.legacy.sensors.Sample3C r7 = r7.getResults()
+                long r7 = r7.mT
+                r15.update(r6, r7)
+                java.util.Deque r6 = r2.mAccZs
+                java.util.ArrayDeque r6 = (java.util.ArrayDeque) r6
+                java.lang.Object r6 = r6.getLast()
                 java.lang.Float r6 = (java.lang.Float) r6
                 float r6 = r6.floatValue()
                 float r6 = -r6
-                com.google.android.systemui.columbus.legacy.sensors.Sample3C r7 = r4.getResults()
+                com.google.android.systemui.columbus.legacy.sensors.Resample3C r7 = r2.mResampleAcc
+                com.google.android.systemui.columbus.legacy.sensors.Sample3C r7 = r7.getResults()
                 long r7 = r7.mT
-                r0.update(r6, r7)
-                r7 = r9
-                r8 = r12
-                r12 = r27
-                r10 = r28
-                r27 = r3
-                goto L_0x013a
-            L_0x020f:
-                r4 = 0
-                goto L_0x0460
-            L_0x0212:
-                r28 = r10
-                r27 = r12
+                r3.update(r6, r7)
+                r7 = r3
+                r6 = r15
+                r8 = r18
+                r10 = r20
+                r13 = 1
+                r15 = 2
+                goto L_0x0117
+            L_0x0208:
+                r15 = r6
+                r13 = r7
+                r18 = r8
+                r20 = r10
                 r6 = 4
-                r12 = r8
-                if (r3 != r6) goto L_0x020f
-            L_0x021a:
+                if (r3 != r6) goto L_0x0448
+            L_0x0211:
                 com.google.android.systemui.columbus.legacy.sensors.Resample3C r6 = r2.mResampleGyro
-                r7 = r27
+                r7 = r12
                 r8 = r14
-                r13 = r9
-                r3 = r19
-                r9 = r20
-                r10 = r28
+                r3 = r22
+                r9 = r4
+                r10 = r20
                 boolean r6 = r6.update(r7, r8, r9, r10)
-                if (r6 == 0) goto L_0x044d
-                com.google.android.systemui.columbus.legacy.sensors.Sample3C r6 = r13.getResults()
-                long r7 = r13.mInterval
+                if (r6 == 0) goto L_0x0439
+                com.google.android.systemui.columbus.legacy.sensors.Resample3C r6 = r2.mResampleGyro
+                com.google.android.systemui.columbus.legacy.sensors.Sample3C r6 = r6.getResults()
+                com.google.android.systemui.columbus.legacy.sensors.Resample3C r7 = r2.mResampleGyro
+                long r7 = r7.mInterval
                 float r7 = (float) r7
-                float r7 = r26 / r7
+                float r7 = r16 / r7
+                com.google.android.systemui.columbus.legacy.sensors.Slope3C r8 = r2.mSlopeGyro
                 com.google.android.systemui.columbus.legacy.sensors.Point3f r6 = r6.mPoint
-                r22.getClass()
-                float r8 = r6.x
-                r9 = r22
-                com.google.android.systemui.columbus.legacy.sensors.Slope1C r10 = r9.mSlopeX
-                float r8 = r8 * r7
+                r8.getClass()
+                float r9 = r6.x
+                com.google.android.systemui.columbus.legacy.sensors.Slope1C r10 = r8.mSlopeX
+                float r9 = r9 * r7
                 float r11 = r10.mRawLastX
-                float r11 = r8 - r11
-                r10.mRawLastX = r8
-                com.google.android.systemui.columbus.legacy.sensors.Slope1C r8 = r9.mSlopeY
+                float r11 = r9 - r11
+                r10.mRawLastX = r9
+                com.google.android.systemui.columbus.legacy.sensors.Slope1C r9 = r8.mSlopeY
                 float r10 = r6.y
                 float r10 = r10 * r7
-                r19 = r14
-                float r14 = r8.mRawLastX
-                float r14 = r10 - r14
-                r8.mRawLastX = r10
-                com.google.android.systemui.columbus.legacy.sensors.Slope1C r8 = r9.mSlopeZ
+                float r5 = r9.mRawLastX
+                float r5 = r10 - r5
+                r9.mRawLastX = r10
+                com.google.android.systemui.columbus.legacy.sensors.Slope1C r8 = r8.mSlopeZ
                 float r6 = r6.z
                 float r6 = r6 * r7
                 float r7 = r8.mRawLastX
                 float r7 = r6 - r7
                 r8.mRawLastX = r6
-                r6 = r23
+                com.google.android.systemui.columbus.legacy.sensors.Lowpass3C r6 = r2.mLowpassGyro
                 com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r8 = r6.mLowpassX
                 float r8 = r8.update(r11)
-                com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r10 = r6.mLowpassY
-                float r10 = r10.update(r14)
-                com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r11 = r6.mLowpassZ
-                float r7 = r11.update(r7)
-                r21.getClass()
-                r11 = r21
-                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r14 = r11.mHighpassX
-                float r8 = r14.update(r8)
-                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r14 = r11.mHighpassY
-                float r10 = r14.update(r10)
-                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r14 = r11.mHighpassZ
-                float r7 = r14.update(r7)
-                java.util.Deque r14 = r2.mGyroXs
+                com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r9 = r6.mLowpassY
+                float r5 = r9.update(r5)
+                com.google.android.systemui.columbus.legacy.sensors.Lowpass1C r6 = r6.mLowpassZ
+                float r6 = r6.update(r7)
+                com.google.android.systemui.columbus.legacy.sensors.Highpass3C r7 = r2.mHighpassGyro
+                r7.getClass()
+                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r9 = r7.mHighpassX
+                float r8 = r9.update(r8)
+                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r9 = r7.mHighpassY
+                float r5 = r9.update(r5)
+                com.google.android.systemui.columbus.legacy.sensors.Highpass1C r7 = r7.mHighpassZ
+                float r6 = r7.update(r6)
+                java.util.Deque r7 = r2.mGyroXs
                 java.lang.Float r8 = java.lang.Float.valueOf(r8)
-                r14.add(r8)
-                java.util.Deque r8 = r2.mGyroYs
-                java.lang.Float r10 = java.lang.Float.valueOf(r10)
-                r8.add(r10)
-                java.util.Deque r10 = r2.mGyroZs
-                java.lang.Float r7 = java.lang.Float.valueOf(r7)
-                r10.add(r7)
-                r23 = r6
-                long r6 = r13.mInterval
-                long r6 = r24 / r6
-                int r6 = (int) r6
-            L_0x02ac:
-                r7 = r14
-                java.util.ArrayDeque r7 = (java.util.ArrayDeque) r7
-                r22 = r9
-                int r9 = r7.size()
-                if (r9 <= r6) goto L_0x02c9
-                r7.removeFirst()
-                r7 = r8
-                java.util.ArrayDeque r7 = (java.util.ArrayDeque) r7
-                r7.removeFirst()
-                r7 = r10
-                java.util.ArrayDeque r7 = (java.util.ArrayDeque) r7
-                r7.removeFirst()
-                r9 = r22
-                goto L_0x02ac
-            L_0x02c9:
-                long r6 = r4.mInterval
-                com.google.android.systemui.columbus.legacy.sensors.Sample3C r9 = r4.getResults()
-                r21 = r4
-                com.google.android.systemui.columbus.legacy.sensors.Sample3C r4 = r13.getResults()
-                r30 = r10
-                long r9 = r9.mT
-                r31 = r3
-                long r3 = r4.mT
-                long r9 = r9 - r3
+                r7.add(r8)
+                java.util.Deque r7 = r2.mGyroYs
+                java.lang.Float r5 = java.lang.Float.valueOf(r5)
+                r7.add(r5)
+                java.util.Deque r5 = r2.mGyroZs
+                java.lang.Float r6 = java.lang.Float.valueOf(r6)
+                r5.add(r6)
+                com.google.android.systemui.columbus.legacy.sensors.Resample3C r5 = r2.mResampleGyro
+                long r5 = r5.mInterval
+                long r8 = r18 / r5
+                int r5 = (int) r8
+            L_0x02a2:
+                java.util.Deque r6 = r2.mGyroXs
+                java.util.ArrayDeque r6 = (java.util.ArrayDeque) r6
+                int r6 = r6.size()
+                if (r6 <= r5) goto L_0x02c2
+                java.util.Deque r6 = r2.mGyroXs
+                java.util.ArrayDeque r6 = (java.util.ArrayDeque) r6
+                r6.removeFirst()
+                java.util.Deque r6 = r2.mGyroYs
+                java.util.ArrayDeque r6 = (java.util.ArrayDeque) r6
+                r6.removeFirst()
+                java.util.Deque r6 = r2.mGyroZs
+                java.util.ArrayDeque r6 = (java.util.ArrayDeque) r6
+                r6.removeFirst()
+                goto L_0x02a2
+            L_0x02c2:
+                com.google.android.systemui.columbus.legacy.sensors.Resample3C r5 = r2.mResampleAcc
+                long r6 = r5.mInterval
+                com.google.android.systemui.columbus.legacy.sensors.Sample3C r5 = r5.getResults()
+                com.google.android.systemui.columbus.legacy.sensors.Resample3C r8 = r2.mResampleGyro
+                com.google.android.systemui.columbus.legacy.sensors.Sample3C r8 = r8.getResults()
+                long r9 = r5.mT
+                r11 = r4
+                long r4 = r8.mT
+                long r9 = r9 - r4
                 long r9 = r9 / r6
-                int r3 = (int) r9
-                int r4 = r1.mPeakId
+                int r4 = (int) r9
+                int r5 = r15.mPeakId
                 r6 = 0
-                int r4 = java.lang.Math.max(r6, r4)
-                int r7 = r0.mPeakId
+                int r5 = java.lang.Math.max(r6, r5)
+                int r7 = r13.mPeakId
                 int r7 = java.lang.Math.max(r6, r7)
-                r6 = r13
-                float r9 = r1.mAmplitude
-                float r10 = r0.mAmplitude
-                int r9 = (r9 > r10 ? 1 : (r9 == r10 ? 0 : -1))
-                if (r9 <= 0) goto L_0x02f7
-                goto L_0x02f8
-            L_0x02f7:
-                r4 = r7
-            L_0x02f8:
-                r7 = 12
-                if (r4 <= r7) goto L_0x02ff
-                r9 = 1
-                r2.mWasPeakApproaching = r9
-            L_0x02ff:
-                int r9 = r4 + -6
-                int r3 = r9 - r3
-                r10 = r12
-                java.util.ArrayDeque r10 = (java.util.ArrayDeque) r10
-                int r10 = r10.size()
-                if (r9 < 0) goto L_0x0440
-                if (r3 < 0) goto L_0x0440
-                int r13 = r2.mSizeFeatureWindow
-                int r7 = r9 + r13
-                if (r7 > r10) goto L_0x0440
-                int r7 = r3 + r13
-                if (r7 <= r10) goto L_0x031a
-                goto L_0x0440
-            L_0x031a:
-                boolean r7 = r2.mWasPeakApproaching
-                if (r7 == 0) goto L_0x0440
-                r7 = 12
-                if (r4 > r7) goto L_0x0440
-                r4 = 0
-                r2.mWasPeakApproaching = r4
-                r2.addToFeatureVector(r15, r9, r4)
-                r2.addToFeatureVector(r5, r9, r13)
-                int r7 = r13 * 2
-                r2.addToFeatureVector(r12, r9, r7)
-                int r7 = r13 * 3
-                r2.addToFeatureVector(r14, r3, r7)
-                int r7 = r13 * 4
-                r2.addToFeatureVector(r8, r3, r7)
-                int r13 = r13 * 5
-                r7 = r30
-                r2.addToFeatureVector(r7, r3, r13)
-                java.util.ArrayList r3 = new java.util.ArrayList
-                java.util.ArrayList r7 = r2.mFeatureVector
-                r8 = 100
-                r9 = 150(0x96, float:2.1E-43)
-                java.util.List r7 = r7.subList(r8, r9)
-                r3.<init>(r7)
-                java.util.ArrayList r3 = r2.mFeatureVector
-                int r7 = r3.size()
-                r8 = 2
-                int r7 = r7 / r8
+                float r6 = r15.mAmplitude
+                float r8 = r13.mAmplitude
+                int r6 = (r6 > r8 ? 1 : (r6 == r8 ? 0 : -1))
+                if (r6 <= 0) goto L_0x02ee
+                goto L_0x02ef
+            L_0x02ee:
+                r5 = r7
+            L_0x02ef:
+                r6 = 12
+                if (r5 <= r6) goto L_0x02f6
+                r7 = 1
+                r2.mWasPeakApproaching = r7
+            L_0x02f6:
+                int r7 = r5 + -6
+                int r4 = r7 - r4
+                java.util.Deque r8 = r2.mAccZs
+                java.util.ArrayDeque r8 = (java.util.ArrayDeque) r8
+                int r8 = r8.size()
+                if (r7 < 0) goto L_0x0433
+                if (r4 < 0) goto L_0x0433
+                int r9 = r2.mSizeFeatureWindow
+                int r10 = r7 + r9
+                if (r10 > r8) goto L_0x0433
+                int r10 = r4 + r9
+                if (r10 <= r8) goto L_0x0312
+                goto L_0x0433
+            L_0x0312:
+                boolean r8 = r2.mWasPeakApproaching
+                if (r8 == 0) goto L_0x0433
+                if (r5 > r6) goto L_0x0433
+                r5 = 0
+                r2.mWasPeakApproaching = r5
+                java.util.Deque r6 = r2.mAccXs
+                r2.addToFeatureVector(r6, r7, r5)
+                java.util.Deque r5 = r2.mAccYs
+                r2.addToFeatureVector(r5, r7, r9)
+                java.util.Deque r5 = r2.mAccZs
+                int r6 = r9 * 2
+                r2.addToFeatureVector(r5, r7, r6)
+                java.util.Deque r5 = r2.mGyroXs
+                int r6 = r9 * 3
+                r2.addToFeatureVector(r5, r4, r6)
+                java.util.Deque r5 = r2.mGyroYs
+                int r6 = r9 * 4
+                r2.addToFeatureVector(r5, r4, r6)
+                java.util.Deque r5 = r2.mGyroZs
+                int r9 = r9 * 5
+                r2.addToFeatureVector(r5, r4, r9)
+                java.util.ArrayList r4 = new java.util.ArrayList
+                java.util.ArrayList r5 = r2.mFeatureVector
+                r6 = 100
+                r7 = 150(0x96, float:2.1E-43)
+                java.util.List r5 = r5.subList(r6, r7)
+                r4.<init>(r5)
+                java.util.ArrayList r4 = r2.mFeatureVector
+                int r5 = r4.size()
+                r6 = 2
+                int r5 = r5 / r6
             L_0x0358:
-                int r8 = r3.size()
-                if (r7 >= r8) goto L_0x0375
-                java.lang.Object r8 = r3.get(r7)
-                java.lang.Float r8 = (java.lang.Float) r8
-                float r8 = r8.floatValue()
-                r9 = 1092616192(0x41200000, float:10.0)
-                float r8 = r8 * r9
-                java.lang.Float r8 = java.lang.Float.valueOf(r8)
-                r3.set(r7, r8)
-                int r7 = r7 + 1
+                int r6 = r4.size()
+                if (r5 >= r6) goto L_0x0375
+                java.lang.Object r6 = r4.get(r5)
+                java.lang.Float r6 = (java.lang.Float) r6
+                float r6 = r6.floatValue()
+                r7 = 1092616192(0x41200000, float:10.0)
+                float r6 = r6 * r7
+                java.lang.Float r6 = java.lang.Float.valueOf(r6)
+                r4.set(r5, r6)
+                int r5 = r5 + 1
                 goto L_0x0358
             L_0x0375:
-                r2.mFeatureVector = r3
-                com.google.android.systemui.columbus.legacy.sensors.TfClassifier r7 = r2.mClassifier
-                org.tensorflow.lite.Interpreter r7 = r7.mInterpreter
-                if (r7 != 0) goto L_0x0386
-                java.util.ArrayList r3 = new java.util.ArrayList
-                r3.<init>()
-                r4 = 0
-                r9 = 4
-                goto L_0x040a
-            L_0x0386:
-                int r8 = r3.size()
-                r9 = 4
-                int[] r10 = new int[r9]
-                r13 = 3
-                r14 = 1
-                r10[r13] = r14
-                r13 = 2
-                r10[r13] = r14
-                r10[r14] = r8
-                r4 = 0
-                r10[r4] = r14
+                r2.mFeatureVector = r4
+                com.google.android.systemui.columbus.legacy.sensors.TfClassifier r5 = r2.mClassifier
+                org.tensorflow.lite.Interpreter r5 = r5.mInterpreter
+                if (r5 != 0) goto L_0x0385
+                java.util.ArrayList r4 = new java.util.ArrayList
+                r4.<init>()
+                r9 = 0
+                goto L_0x03fe
+            L_0x0385:
+                int r6 = r4.size()
+                r7 = 1
+                int[] r6 = new int[]{r7, r6, r7, r7}
+                java.lang.Class r7 = java.lang.Float.TYPE
+                java.lang.Object r6 = java.lang.reflect.Array.newInstance(r7, r6)
+                float[][][][] r6 = (float[][][][]) r6
+                r7 = 0
+            L_0x0397:
+                int r8 = r4.size()
+                if (r7 >= r8) goto L_0x03b3
+                java.lang.Object r8 = r4.get(r7)
+                java.lang.Float r8 = (java.lang.Float) r8
+                float r8 = r8.floatValue()
+                r9 = 0
+                r10 = r6[r9]
+                r10 = r10[r7]
+                r10 = r10[r9]
+                r10[r9] = r8
+                int r7 = r7 + 1
+                goto L_0x0397
+            L_0x03b3:
+                java.lang.Object[] r4 = new java.lang.Object[]{r6}
+                java.util.HashMap r6 = new java.util.HashMap
+                r6.<init>()
+                r7 = 7
+                r8 = 1
+                int[] r9 = new int[]{r8, r7}
                 java.lang.Class r8 = java.lang.Float.TYPE
-                java.lang.Object r8 = java.lang.reflect.Array.newInstance(r8, r10)
-                float[][][][] r8 = (float[][][][]) r8
-                r10 = r4
-            L_0x03a2:
-                int r13 = r3.size()
-                if (r10 >= r13) goto L_0x03bd
-                java.lang.Object r13 = r3.get(r10)
-                java.lang.Float r13 = (java.lang.Float) r13
-                float r13 = r13.floatValue()
-                r14 = r8[r4]
-                r14 = r14[r10]
-                r14 = r14[r4]
-                r14[r4] = r13
-                int r10 = r10 + 1
-                goto L_0x03a2
-            L_0x03bd:
-                java.lang.Object[] r3 = new java.lang.Object[]{r8}
-                java.util.HashMap r8 = new java.util.HashMap
-                r8.<init>()
-                r10 = 2
-                int[] r13 = new int[r10]
-                r10 = 7
-                r14 = 1
-                r13[r14] = r10
-                r13[r4] = r14
-                java.lang.Class r14 = java.lang.Float.TYPE
-                java.lang.Object r13 = java.lang.reflect.Array.newInstance(r14, r13)
-                float[][] r13 = (float[][]) r13
-                java.lang.Integer r14 = java.lang.Integer.valueOf(r4)
-                r8.put(r14, r13)
-                r7.runForMultipleInputsOutputs(r3, r8)
-                java.lang.Integer r3 = java.lang.Integer.valueOf(r4)
-                java.lang.Object r3 = r8.get(r3)
-                float[][] r3 = (float[][]) r3
-                java.util.ArrayList r7 = new java.util.ArrayList
-                r7.<init>()
-                java.util.ArrayList r8 = new java.util.ArrayList
-                r8.<init>()
-                r13 = r4
-            L_0x03f6:
-                if (r13 >= r10) goto L_0x0406
-                r14 = r3[r4]
-                r14 = r14[r13]
-                java.lang.Float r14 = java.lang.Float.valueOf(r14)
-                r8.add(r14)
-                int r13 = r13 + 1
-                goto L_0x03f6
-            L_0x0406:
-                r7.add(r8)
-                r3 = r7
-            L_0x040a:
-                boolean r7 = r3.isEmpty()
-                if (r7 != 0) goto L_0x0442
-                java.lang.Object r3 = r3.get(r4)
-                java.util.ArrayList r3 = (java.util.ArrayList) r3
-                r7 = -8388609(0xffffffffff7fffff, float:-3.4028235E38)
-                r8 = r4
-                r10 = r8
-            L_0x041b:
-                int r13 = r3.size()
-                if (r8 >= r13) goto L_0x043d
-                java.lang.Object r13 = r3.get(r8)
-                java.lang.Float r13 = (java.lang.Float) r13
-                float r13 = r13.floatValue()
-                int r13 = (r7 > r13 ? 1 : (r7 == r13 ? 0 : -1))
-                if (r13 >= 0) goto L_0x043a
-                java.lang.Object r7 = r3.get(r8)
-                java.lang.Float r7 = (java.lang.Float) r7
-                float r7 = r7.floatValue()
-                r10 = r8
-            L_0x043a:
+                java.lang.Object r8 = java.lang.reflect.Array.newInstance(r8, r9)
+                float[][] r8 = (float[][]) r8
+                r9 = 0
+                java.lang.Integer r10 = java.lang.Integer.valueOf(r9)
+                r6.put(r10, r8)
+                r5.runForMultipleInputsOutputs(r4, r6)
+                java.lang.Integer r4 = java.lang.Integer.valueOf(r9)
+                java.lang.Object r4 = r6.get(r4)
+                float[][] r4 = (float[][]) r4
+                java.util.ArrayList r5 = new java.util.ArrayList
+                r5.<init>()
+                java.util.ArrayList r6 = new java.util.ArrayList
+                r6.<init>()
+                r8 = r9
+            L_0x03ea:
+                if (r8 >= r7) goto L_0x03fa
+                r10 = r4[r9]
+                r10 = r10[r8]
+                java.lang.Float r10 = java.lang.Float.valueOf(r10)
+                r6.add(r10)
                 int r8 = r8 + 1
-                goto L_0x041b
-            L_0x043d:
-                r2.mResult = r10
-                goto L_0x0442
-            L_0x0440:
-                r4 = 0
-                r9 = 4
-            L_0x0442:
-                r9 = r6
-                r14 = r19
-                r4 = r21
-                r19 = r31
-                r21 = r11
-                goto L_0x021a
-            L_0x044d:
-                r31 = r3
-                r4 = 0
-                int r0 = r2.mResult
-                r1 = 1
-                if (r0 != r1) goto L_0x0460
-                java.lang.Long r0 = java.lang.Long.valueOf(r28)
-                r9 = r31
+                goto L_0x03ea
+            L_0x03fa:
+                r5.add(r6)
+                r4 = r5
+            L_0x03fe:
+                boolean r5 = r4.isEmpty()
+                if (r5 != 0) goto L_0x0433
+                java.lang.Object r4 = r4.get(r9)
+                java.util.ArrayList r4 = (java.util.ArrayList) r4
+                r5 = -8388609(0xffffffffff7fffff, float:-3.4028235E38)
+                r6 = 0
+                r7 = 0
+            L_0x040f:
+                int r8 = r4.size()
+                if (r6 >= r8) goto L_0x0431
+                java.lang.Object r8 = r4.get(r6)
+                java.lang.Float r8 = (java.lang.Float) r8
+                float r8 = r8.floatValue()
+                int r8 = (r5 > r8 ? 1 : (r5 == r8 ? 0 : -1))
+                if (r8 >= 0) goto L_0x042e
+                java.lang.Object r5 = r4.get(r6)
+                java.lang.Float r5 = (java.lang.Float) r5
+                float r5 = r5.floatValue()
+                r7 = r6
+            L_0x042e:
+                int r6 = r6 + 1
+                goto L_0x040f
+            L_0x0431:
+                r2.mResult = r7
+            L_0x0433:
+                r22 = r3
+                r4 = r11
+                r5 = 0
+                goto L_0x0211
+            L_0x0439:
+                int r2 = r2.mResult
+                r4 = 1
+                if (r2 != r4) goto L_0x0448
+                java.lang.Long r2 = java.lang.Long.valueOf(r20)
+                r9 = r3
                 java.util.ArrayDeque r9 = (java.util.ArrayDeque) r9
-                r9.addLast(r0)
-            L_0x0460:
-                r0 = r18
-            L_0x0462:
-                com.google.android.systemui.columbus.legacy.sensors.TapRT r1 = r0.tap
-                r2 = r33
-                long r2 = r2.timestamp
-                java.util.Deque r1 = r1.mTimestampsBackTap
-                r5 = r1
-                java.util.ArrayDeque r5 = (java.util.ArrayDeque) r5
-                java.util.Iterator r5 = r5.iterator()
-            L_0x0471:
-                boolean r6 = r5.hasNext()
-                if (r6 == 0) goto L_0x048e
-                java.lang.Object r6 = r5.next()
-                java.lang.Long r6 = (java.lang.Long) r6
-                long r6 = r6.longValue()
-                long r6 = r2 - r6
-                r8 = 500000000(0x1dcd6500, double:2.47032823E-315)
-                int r6 = (r6 > r8 ? 1 : (r6 == r8 ? 0 : -1))
-                if (r6 <= 0) goto L_0x0471
-                r5.remove()
-                goto L_0x0471
-            L_0x048e:
-                boolean r2 = r1.isEmpty()
-                if (r2 == 0) goto L_0x0497
-                r5 = r4
-                r1 = 1
-                goto L_0x04c8
-            L_0x0497:
-                r2 = r1
+                r9.addLast(r2)
+            L_0x0448:
+                com.google.android.systemui.columbus.legacy.sensors.TapRT r2 = r1.tap
+                long r3 = r0.timestamp
+                java.util.Deque r0 = r2.mTimestampsBackTap
+                r2 = r0
+                java.util.ArrayDeque r2 = (java.util.ArrayDeque) r2
+                java.util.Iterator r2 = r2.iterator()
+            L_0x0455:
+                boolean r5 = r2.hasNext()
+                if (r5 == 0) goto L_0x0472
+                java.lang.Object r5 = r2.next()
+                java.lang.Long r5 = (java.lang.Long) r5
+                long r5 = r5.longValue()
+                long r5 = r3 - r5
+                r7 = 500000000(0x1dcd6500, double:2.47032823E-315)
+                int r5 = (r5 > r7 ? 1 : (r5 == r7 ? 0 : -1))
+                if (r5 <= 0) goto L_0x0455
+                r2.remove()
+                goto L_0x0455
+            L_0x0472:
+                boolean r2 = r0.isEmpty()
+                if (r2 == 0) goto L_0x047b
+                r0 = 1
+                r6 = 0
+                goto L_0x04ac
+            L_0x047b:
+                r2 = r0
                 java.util.ArrayDeque r2 = (java.util.ArrayDeque) r2
                 java.util.Iterator r3 = r2.iterator()
-            L_0x049e:
+            L_0x0482:
                 boolean r4 = r3.hasNext()
-                if (r4 == 0) goto L_0x04c6
+                if (r4 == 0) goto L_0x04aa
                 java.lang.Object r4 = r2.getLast()
                 java.lang.Long r4 = (java.lang.Long) r4
                 long r4 = r4.longValue()
@@ -875,33 +845,32 @@ public final class GestureSensorImpl extends GestureSensor {
                 long r4 = r4 - r6
                 r6 = 100000000(0x5f5e100, double:4.94065646E-316)
                 int r4 = (r4 > r6 ? 1 : (r4 == r6 ? 0 : -1))
-                if (r4 <= 0) goto L_0x049e
-                r1.clear()
-                r1 = 1
-                r5 = 2
+                if (r4 <= 0) goto L_0x0482
+                r0.clear()
+                r0 = 1
+                r6 = 2
+                goto L_0x04ac
+            L_0x04aa:
+                r0 = 1
+                r6 = 1
+            L_0x04ac:
+                if (r6 == r0) goto L_0x04bd
+                r2 = 2
+                if (r6 == r2) goto L_0x04b2
                 goto L_0x04c8
-            L_0x04c6:
-                r1 = 1
-                r5 = 1
-            L_0x04c8:
-                if (r5 == r1) goto L_0x04da
-                r1 = 2
-                if (r5 == r1) goto L_0x04ce
-                goto L_0x04e5
-            L_0x04ce:
-                android.os.Handler r1 = r0.handler
-                com.google.android.systemui.columbus.legacy.sensors.GestureSensorImpl$GestureSensorEventListener$onSensorChanged$1$1 r2 = new com.google.android.systemui.columbus.legacy.sensors.GestureSensorImpl$GestureSensorEventListener$onSensorChanged$1$1
-                r3 = 1
-                r2.<init>(r0, r3)
-                r1.post(r2)
-                goto L_0x04e5
-            L_0x04da:
-                android.os.Handler r1 = r0.handler
+            L_0x04b2:
+                android.os.Handler r2 = r1.handler
+                com.google.android.systemui.columbus.legacy.sensors.GestureSensorImpl$GestureSensorEventListener$onSensorChanged$1$1 r3 = new com.google.android.systemui.columbus.legacy.sensors.GestureSensorImpl$GestureSensorEventListener$onSensorChanged$1$1
+                r3.<init>(r1, r0)
+                r2.post(r3)
+                goto L_0x04c8
+            L_0x04bd:
+                android.os.Handler r0 = r1.handler
                 com.google.android.systemui.columbus.legacy.sensors.GestureSensorImpl$GestureSensorEventListener$onSensorChanged$1$1 r2 = new com.google.android.systemui.columbus.legacy.sensors.GestureSensorImpl$GestureSensorEventListener$onSensorChanged$1$1
                 r3 = 0
-                r2.<init>(r0, r3)
-                r1.post(r2)
-            L_0x04e5:
+                r2.<init>(r1, r3)
+                r0.post(r2)
+            L_0x04c8:
                 return
             */
             throw new UnsupportedOperationException("Method not decompiled: com.google.android.systemui.columbus.legacy.sensors.GestureSensorImpl.GestureSensorEventListener.onSensorChanged(android.hardware.SensorEvent):void");

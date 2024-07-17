@@ -4,11 +4,12 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.util.TypedValue;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.TintTypedArray;
 import androidx.core.content.ContextCompat;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public abstract class MaterialResources {
     public static ColorStateList getColorStateList(Context context, TypedArray typedArray, int i) {
         int resourceId;
@@ -17,6 +18,17 @@ public abstract class MaterialResources {
             return typedArray.getColorStateList(i);
         }
         return colorStateList;
+    }
+
+    public static int getDimensionPixelSize(Context context, TypedArray typedArray, int i, int i2) {
+        TypedValue typedValue = new TypedValue();
+        if (!typedArray.getValue(i, typedValue) || typedValue.type != 2) {
+            return typedArray.getDimensionPixelSize(i, i2);
+        }
+        TypedArray obtainStyledAttributes = context.getTheme().obtainStyledAttributes(new int[]{typedValue.data});
+        int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(0, i2);
+        obtainStyledAttributes.recycle();
+        return dimensionPixelSize;
     }
 
     public static Drawable getDrawable(Context context, TypedArray typedArray, int i) {

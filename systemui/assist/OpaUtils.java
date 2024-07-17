@@ -9,12 +9,12 @@ import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.PathInterpolator;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public abstract class OpaUtils {
     public static final Interpolator INTERPOLATOR_40_40 = new PathInterpolator(0.4f, 0.0f, 0.6f, 1.0f);
     public static final Interpolator INTERPOLATOR_40_OUT = new PathInterpolator(0.4f, 0.0f, 1.0f, 1.0f);
 
-    public static ObjectAnimator getAlphaObjectAnimator(int i, View view, Interpolator interpolator) {
+    public static ObjectAnimator getAlphaObjectAnimator(View view, int i, Interpolator interpolator) {
         ObjectAnimator ofFloat = ObjectAnimator.ofFloat(view, View.ALPHA, new float[]{1.0f});
         ofFloat.setInterpolator(interpolator);
         ofFloat.setDuration((long) 50);
@@ -42,7 +42,7 @@ public abstract class OpaUtils {
         return ofPropertyValuesHolder;
     }
 
-    public static Animator getTranslationAnimatorX(int i, View view, Interpolator interpolator) {
+    public static Animator getTranslationAnimatorX(View view, Interpolator interpolator, int i) {
         RenderNodeAnimator renderNodeAnimator = new RenderNodeAnimator(0, 0.0f);
         renderNodeAnimator.setTarget(view);
         renderNodeAnimator.setInterpolator(interpolator);

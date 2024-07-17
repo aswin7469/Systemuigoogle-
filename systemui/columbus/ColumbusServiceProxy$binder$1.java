@@ -9,9 +9,9 @@ import android.util.Log;
 import com.google.android.systemui.columbus.ColumbusServiceProxy;
 import java.util.ArrayList;
 import java.util.List;
-import kotlin.collections.CollectionsKt__MutableCollectionsKt;
+import kotlin.collections.CollectionsKt__ReversedViewsKt;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ColumbusServiceProxy$binder$1 extends Binder implements IColumbusService {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final /* synthetic */ ColumbusServiceProxy this$0;
@@ -21,6 +21,7 @@ public final class ColumbusServiceProxy$binder$1 extends Binder implements IColu
         attachInterface(this, "com.google.android.systemui.columbus.IColumbusService");
     }
 
+    /* renamed from: onTransact$com$google$android$systemui$columbus$IColumbusService$Stub */
     public final boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) {
         if (i >= 1 && i <= 16777215) {
             parcel.enforceInterface("com.google.android.systemui.columbus.IColumbusService");
@@ -70,7 +71,7 @@ public final class ColumbusServiceProxy$binder$1 extends Binder implements IColu
         if (iBinder == null) {
             Log.e("Columbus/ColumbusProxy", "Binder token must not be null");
         } else if (iBinder2 == null) {
-            CollectionsKt__MutableCollectionsKt.removeAll(this.this$0.columbusServiceListeners, new ColumbusServiceProxy$binder$1$registerServiceListener$1(iBinder));
+            CollectionsKt__ReversedViewsKt.removeAll(this.this$0.columbusServiceListeners, new ColumbusServiceProxy$binder$1$registerServiceListener$1(iBinder));
         } else {
             List list = this.this$0.columbusServiceListeners;
             IInterface queryLocalInterface = iBinder2.queryLocalInterface("com.google.android.systemui.columbus.IColumbusServiceListener");

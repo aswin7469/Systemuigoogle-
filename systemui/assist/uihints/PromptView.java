@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.TextView;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class PromptView extends TextView {
     public final DecelerateInterpolator mDecelerateInterpolator;
     public boolean mEnabled;
@@ -27,8 +27,8 @@ public class PromptView extends TextView {
     public final void onConfigurationChanged(Configuration configuration) {
         boolean z;
         super.onConfigurationChanged(configuration);
-        this.mHandleString = getResources().getString(2131952652);
-        this.mSqueezeString = getResources().getString(2131953920);
+        this.mHandleString = getResources().getString(2131952628);
+        this.mSqueezeString = getResources().getString(2131953873);
         int updateFrom = this.mLastConfig.updateFrom(configuration);
         boolean z2 = true;
         if ((updateFrom & 4096) != 0) {
@@ -40,7 +40,7 @@ public class PromptView extends TextView {
             z2 = false;
         }
         if (z || z2) {
-            setTextSize(0, this.mContext.getResources().getDimension(2131167791));
+            setTextSize(0, this.mContext.getResources().getDimension(2131167746));
             updateViewHeight();
         }
     }
@@ -52,7 +52,7 @@ public class PromptView extends TextView {
     public final void updateViewHeight() {
         ViewGroup.LayoutParams layoutParams = getLayoutParams();
         if (layoutParams != null) {
-            layoutParams.height = (int) (this.mContext.getResources().getDimension(2131167791) + getResources().getDimension(2131165353) + this.mRiseDistance);
+            layoutParams.height = (int) (this.mContext.getResources().getDimension(2131167746) + getResources().getDimension(2131165353) + this.mRiseDistance);
         }
         requestLayout();
     }
@@ -72,13 +72,13 @@ public class PromptView extends TextView {
         this.mHasDarkBackground = false;
         this.mEnabled = false;
         this.mLastInvocationType = 0;
-        int color = getContext().getColor(2131100870);
+        int color = getContext().getColor(2131100852);
         this.mTextColorDark = color;
-        int color2 = getContext().getColor(2131100871);
+        int color2 = getContext().getColor(2131100853);
         this.mTextColorLight = color2;
         this.mRiseDistance = getResources().getDimension(2131165352);
-        this.mHandleString = getResources().getString(2131952652);
-        this.mSqueezeString = getResources().getString(2131953920);
+        this.mHandleString = getResources().getString(2131952628);
+        this.mSqueezeString = getResources().getString(2131953873);
         boolean z = this.mHasDarkBackground;
         boolean z2 = !z;
         if (z2 != z) {

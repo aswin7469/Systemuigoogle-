@@ -26,7 +26,7 @@ import kotlinx.coroutines.flow.SharingStarted;
 import kotlinx.coroutines.flow.StateFlow;
 import org.json.JSONArray;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ColumbusSettingsFetcher {
     public final String backupPackageName;
     public final StateFlow columbusEnabled;
@@ -36,7 +36,7 @@ public final class ColumbusSettingsFetcher {
     public final StateFlow selectedShortcut;
 
     /* renamed from: com.google.android.systemui.columbus.fetchers.ColumbusSettingsFetcher$1  reason: invalid class name */
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     final class AnonymousClass1 extends SuspendLambda implements Function2 {
         int label;
 

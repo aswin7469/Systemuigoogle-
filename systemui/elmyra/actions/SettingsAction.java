@@ -3,12 +3,13 @@ package com.google.android.systemui.elmyra.actions;
 import android.content.Context;
 import android.os.Binder;
 import com.android.systemui.shade.ShadeController;
+import com.android.systemui.shade.ShadeControllerImpl;
 import com.google.android.systemui.elmyra.sensors.GestureSensor;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class SettingsAction extends ServiceAction {
     public final LaunchOpa mLaunchOpa;
     public final String mSettingsPackageName;
@@ -16,7 +17,7 @@ public final class SettingsAction extends ServiceAction {
 
     public SettingsAction(Context context, Executor executor, ShadeController shadeController, LaunchOpa launchOpa) {
         super(context, executor, (List) null);
-        this.mSettingsPackageName = context.getResources().getString(2131953858);
+        this.mSettingsPackageName = context.getResources().getString(2131953815);
         this.mShadeController = shadeController;
         this.mLaunchOpa = launchOpa;
     }
@@ -31,7 +32,7 @@ public final class SettingsAction extends ServiceAction {
     }
 
     public final void onTrigger(GestureSensor.DetectionProperties detectionProperties) {
-        this.mShadeController.cancelExpansionAndCollapseShade();
+        ((ShadeControllerImpl) this.mShadeController).cancelExpansionAndCollapseShade();
         super.onTrigger(detectionProperties);
     }
 

@@ -10,11 +10,11 @@ import androidx.core.view.accessibility.AccessibilityNodeProviderCompat;
 import androidx.customview.widget.ExploreByTouchHelper;
 import java.util.List;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class LinkAccessibilityHelper extends AccessibilityDelegateCompat {
     public final AccessibilityDelegateCompat delegate;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     class PreOLinkAccessibilityHelper extends ExploreByTouchHelper {
         public final int getVirtualViewAt(float f, float f2) {
             throw null;
@@ -24,14 +24,14 @@ public final class LinkAccessibilityHelper extends AccessibilityDelegateCompat {
             throw null;
         }
 
-        public final boolean onPerformActionForVirtualView(int i, int i2) {
+        public final boolean onPerformActionForVirtualView(int i, int i2, Bundle bundle) {
             if (i2 != 16) {
                 return false;
             }
             throw null;
         }
 
-        public final void onPopulateEventForVirtualView(int i, AccessibilityEvent accessibilityEvent) {
+        public final void onPopulateEventForVirtualView(AccessibilityEvent accessibilityEvent, int i) {
             throw null;
         }
 

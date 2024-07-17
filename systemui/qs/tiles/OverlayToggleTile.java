@@ -17,21 +17,21 @@ import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.plugins.qs.QSTile;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.qs.QSHost;
-import com.android.systemui.qs.QsEventLoggerImpl;
+import com.android.systemui.qs.QsEventLogger;
 import com.android.systemui.qs.logging.QSLogger;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
 import java.util.Iterator;
 import java.util.List;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class OverlayToggleTile extends QSTileImpl {
     public final OverlayManager om;
     public CharSequence overlayLabel;
     public String overlayPackage;
 
-    public OverlayToggleTile(QSHost qSHost, QsEventLoggerImpl qsEventLoggerImpl, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, OverlayManager overlayManager) {
-        super(qSHost, qsEventLoggerImpl, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
+    public OverlayToggleTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, OverlayManager overlayManager) {
+        super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         this.om = overlayManager;
     }
 
@@ -105,7 +105,7 @@ public final class OverlayToggleTile extends QSTileImpl {
                     i = 1;
                 }
                 booleanState.state = i;
-                booleanState.icon = QSTileImpl.ResourceIcon.get(17303862);
+                booleanState.icon = QSTileImpl.ResourceIcon.get(17303721);
                 booleanState.label = this.overlayLabel;
                 if (obj != null) {
                     str = String.valueOf(obj);

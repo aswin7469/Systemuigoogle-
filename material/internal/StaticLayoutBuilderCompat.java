@@ -1,13 +1,16 @@
 package com.google.android.material.internal;
 
+import android.graphics.text.LineBreakConfig;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextDirectionHeuristic;
 import android.text.TextDirectionHeuristics;
 import android.text.TextPaint;
 import android.text.TextUtils;
+import com.android.settingslib.collapsingtoolbar.widget.CollapsingCoordinatorLayout;
+import com.android.settingslib.collapsingtoolbar.widget.CollapsingCoordinatorLayout$$ExternalSyntheticLambda0;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class StaticLayoutBuilderCompat {
     public Layout.Alignment alignment = Layout.Alignment.ALIGN_NORMAL;
     public TextUtils.TruncateAt ellipsize = null;
@@ -20,9 +23,10 @@ public final class StaticLayoutBuilderCompat {
     public int maxLines = Integer.MAX_VALUE;
     public final TextPaint paint;
     public CharSequence source;
+    public StaticLayoutBuilderConfigurer staticLayoutBuilderConfigurer;
     public final int width;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     abstract class StaticLayoutBuilderCompatException extends Exception {
     }
 
@@ -70,6 +74,12 @@ public final class StaticLayoutBuilderCompat {
         }
         if (this.maxLines > 1) {
             obtain.setHyphenationFrequency(this.hyphenationFrequency);
+        }
+        StaticLayoutBuilderConfigurer staticLayoutBuilderConfigurer2 = this.staticLayoutBuilderConfigurer;
+        if (staticLayoutBuilderConfigurer2 != null) {
+            ((CollapsingCoordinatorLayout$$ExternalSyntheticLambda0) staticLayoutBuilderConfigurer2).getClass();
+            int i2 = CollapsingCoordinatorLayout.$r8$clinit;
+            obtain.setLineBreakConfig(new LineBreakConfig.Builder().setLineBreakWordStyle(1).build());
         }
         return obtain.build();
     }

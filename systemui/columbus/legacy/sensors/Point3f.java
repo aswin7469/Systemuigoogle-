@@ -1,8 +1,14 @@
 package com.google.android.systemui.columbus.legacy.sensors;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class Point3f {
     public float x;
     public float y;
     public float z;
+
+    public Point3f(float f, float f2, float f3) {
+        this.x = f;
+        this.y = f2;
+        this.z = f3;
+    }
 }

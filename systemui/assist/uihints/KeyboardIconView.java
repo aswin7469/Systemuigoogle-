@@ -5,7 +5,7 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class KeyboardIconView extends FrameLayout {
     public final int COLOR_DARK_BACKGROUND;
     public final int COLOR_LIGHT_BACKGROUND;
@@ -16,7 +16,7 @@ public class KeyboardIconView extends FrameLayout {
     }
 
     public final void onFinishInflate() {
-        this.mKeyboardIcon = (ImageView) findViewById(2131362787);
+        this.mKeyboardIcon = (ImageView) findViewById(2131362766);
     }
 
     public KeyboardIconView(Context context, AttributeSet attributeSet) {
@@ -29,7 +29,7 @@ public class KeyboardIconView extends FrameLayout {
 
     public KeyboardIconView(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
-        this.COLOR_DARK_BACKGROUND = getResources().getColor(2131100868);
-        this.COLOR_LIGHT_BACKGROUND = getResources().getColor(2131100869);
+        this.COLOR_DARK_BACKGROUND = getResources().getColor(2131100850);
+        this.COLOR_LIGHT_BACKGROUND = getResources().getColor(2131100851);
     }
 }

@@ -11,7 +11,7 @@ import com.google.android.systemui.elmyra.sensors.GestureSensor;
 import com.google.android.systemui.elmyra.sensors.config.GestureConfiguration;
 import java.util.concurrent.CountDownLatch;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class WestworldLogger implements GestureSensor.Listener {
     public ChassisProtos$Chassis mChassis = null;
     public CountDownLatch mCountDownLatch;
@@ -43,7 +43,7 @@ public final class WestworldLogger implements GestureSensor.Listener {
         SysUiStatsLog.write(174, 3);
     }
 
-    public final void onGestureProgress(int i, float f) {
+    public final void onGestureProgress(float f, int i) {
         SysUiStatsLog.write(176, (int) (f * 100.0f));
         SysUiStatsLog.write(174, i);
     }

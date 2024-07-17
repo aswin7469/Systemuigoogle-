@@ -7,7 +7,7 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 final class BatteryEventService$notifyAidlBatteryEventsCallbacks$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ BatteryEvents $events;
     int I$0;
@@ -75,7 +75,7 @@ final class BatteryEventService$notifyAidlBatteryEventsCallbacks$2 extends Suspe
             com.google.android.systemui.power.batteryevent.domain.BatteryEventService$aidlBatteryEventsCallbackListener$1 r9 = r2.aidlBatteryEventsCallbackListener
             int r9 = r9.beginBroadcast()
             java.lang.String r10 = "AIDL callback listeners count: "
-            androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0.m(r10, r4, r9)
+            androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0.m(r10, r9, r4)
             r10 = 0
             r16 = r10
             r10 = r2

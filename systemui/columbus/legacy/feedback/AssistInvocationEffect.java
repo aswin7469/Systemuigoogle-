@@ -3,19 +3,28 @@ package com.google.android.systemui.columbus.legacy.feedback;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.view.animation.DecelerateInterpolator;
+import com.android.systemui.assist.AssistManager;
 import com.google.android.systemui.assist.AssistManagerGoogle;
 import com.google.android.systemui.columbus.legacy.sensors.GestureSensor;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class AssistInvocationEffect implements FeedbackEffect {
     public Animator animation;
-    public final AssistInvocationEffect$animatorListener$1 animatorListener = new AssistInvocationEffect$animatorListener$1(this);
-    public final AssistInvocationEffect$animatorUpdateListener$1 animatorUpdateListener = new AssistInvocationEffect$animatorUpdateListener$1(this);
+    public final AssistInvocationEffect$animatorListener$1 animatorListener;
+    public final AssistInvocationEffect$animatorUpdateListener$1 animatorUpdateListener;
     public final AssistManagerGoogle assistManager;
     public float progress;
 
-    public AssistInvocationEffect(AssistManagerGoogle assistManagerGoogle) {
+    public AssistInvocationEffect(AssistManager assistManager2) {
+        AssistManagerGoogle assistManagerGoogle;
+        if (assistManager2 instanceof AssistManagerGoogle) {
+            assistManagerGoogle = (AssistManagerGoogle) assistManager2;
+        } else {
+            assistManagerGoogle = null;
+        }
         this.assistManager = assistManagerGoogle;
+        this.animatorUpdateListener = new AssistInvocationEffect$animatorUpdateListener$1(this);
+        this.animatorListener = new AssistInvocationEffect$animatorListener$1(this);
     }
 
     public final void onGestureDetected(int i, GestureSensor.DetectionProperties detectionProperties) {

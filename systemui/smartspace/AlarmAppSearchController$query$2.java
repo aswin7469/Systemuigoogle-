@@ -25,7 +25,7 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 final class AlarmAppSearchController$query$2 extends SuspendLambda implements Function2 {
     int label;
     final /* synthetic */ AlarmAppSearchController this$0;
@@ -44,7 +44,7 @@ final class AlarmAppSearchController$query$2 extends SuspendLambda implements Fu
         return ((AlarmAppSearchController$query$2) create((CoroutineScope) obj, (Continuation) obj2)).invokeSuspend(Unit.INSTANCE);
     }
 
-    /* JADX WARNING: type inference failed for: r8v7, types: [androidx.appsearch.app.SearchSpec$Builder, java.lang.Object] */
+    /* JADX WARNING: type inference failed for: r7v7, types: [androidx.appsearch.app.SearchSpec$Builder, java.lang.Object] */
     public final Object invokeSuspend(Object obj) {
         CoroutineSingletons coroutineSingletons = CoroutineSingletons.COROUTINE_SUSPENDED;
         if (this.label == 0) {
@@ -115,7 +115,7 @@ final class AlarmAppSearchController$query$2 extends SuspendLambda implements Fu
     }
 
     /* renamed from: com.google.android.systemui.smartspace.AlarmAppSearchController$query$2$1  reason: invalid class name */
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class AnonymousClass1 implements SearchResults {
         public final ListenableFuture getNextPageAsync() {
             return new ImmediateFuture(new ArrayList());

@@ -2,7 +2,7 @@ package com.google.android.systemui.columbus.legacy.sensors;
 
 import androidx.compose.animation.AndroidFlingSpline$$ExternalSyntheticOutline0;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class Resample3C {
     public long mInterval = 0;
     public long mRawLastT;
@@ -15,21 +15,17 @@ public final class Resample3C {
     public float mResampledThisZ;
 
     /* JADX WARNING: type inference failed for: r0v0, types: [com.google.android.systemui.columbus.legacy.sensors.Sample3C, java.lang.Object] */
-    /* JADX WARNING: type inference failed for: r7v1, types: [java.lang.Object, com.google.android.systemui.columbus.legacy.sensors.Point3f] */
     public final Sample3C getResults() {
         float f = this.mResampledThisX;
         float f2 = this.mResampledThisY;
         float f3 = this.mResampledThisZ;
         long j = this.mResampledLastT;
         ? obj = new Object();
-        ? obj2 = new Object();
-        obj2.x = 0.0f;
-        obj2.y = 0.0f;
-        obj2.z = 0.0f;
-        obj.mPoint = obj2;
-        obj2.x = f;
-        obj2.y = f2;
-        obj2.z = f3;
+        Point3f point3f = new Point3f(0.0f, 0.0f, 0.0f);
+        obj.mPoint = point3f;
+        point3f.x = f;
+        point3f.y = f2;
+        point3f.z = f3;
         obj.mT = j;
         return obj;
     }

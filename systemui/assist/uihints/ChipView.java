@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.Space;
 import android.widget.TextView;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class ChipView extends FrameLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Drawable BACKGROUND_DARK;
@@ -26,16 +26,16 @@ public class ChipView extends FrameLayout {
     }
 
     public final void onFinishInflate() {
-        LinearLayout linearLayout = (LinearLayout) findViewById(2131362257);
+        LinearLayout linearLayout = (LinearLayout) findViewById(2131362241);
         linearLayout.getClass();
         this.mChip = linearLayout;
-        ImageView imageView = (ImageView) findViewById(2131362260);
+        ImageView imageView = (ImageView) findViewById(2131362244);
         imageView.getClass();
         this.mIconView = imageView;
-        TextView textView = (TextView) findViewById(2131362261);
+        TextView textView = (TextView) findViewById(2131362245);
         textView.getClass();
         this.mLabelView = textView;
-        Space space = (Space) findViewById(2131362259);
+        Space space = (Space) findViewById(2131362243);
         space.getClass();
         this.mSpaceView = space;
     }
@@ -50,8 +50,8 @@ public class ChipView extends FrameLayout {
 
     public ChipView(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
-        this.BACKGROUND_DARK = context.getDrawable(2131232242);
-        this.BACKGROUND_LIGHT = context.getDrawable(2131232243);
+        this.BACKGROUND_DARK = context.getDrawable(2131232240);
+        this.BACKGROUND_LIGHT = context.getDrawable(2131232241);
         this.TEXT_COLOR_DARK = context.getColor(2131099715);
         this.TEXT_COLOR_LIGHT = context.getColor(2131099716);
     }

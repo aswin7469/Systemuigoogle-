@@ -7,7 +7,7 @@ import android.content.Context;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.systemui.user.domain.interactor.SelectedUserInteractor;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class AmbientIndicationService extends BroadcastReceiver {
     public final AlarmManager mAlarmManager;
     public final AmbientIndicationContainer mAmbientIndicationContainer;
@@ -17,7 +17,7 @@ public final class AmbientIndicationService extends BroadcastReceiver {
         }
     };
     public final Context mContext;
-    public final AlarmManager.OnAlarmListener mHideIndicationListener;
+    public final AmbientIndicationService$$ExternalSyntheticLambda0 mHideIndicationListener;
     public final SelectedUserInteractor mSelectedUserInteractor;
     public boolean mStarted;
 
@@ -26,7 +26,7 @@ public final class AmbientIndicationService extends BroadcastReceiver {
         this.mAmbientIndicationContainer = ambientIndicationContainer;
         this.mAlarmManager = alarmManager;
         this.mSelectedUserInteractor = selectedUserInteractor;
-        this.mHideIndicationListener = new AmbientIndicationService$$ExternalSyntheticLambda0(ambientIndicationContainer);
+        this.mHideIndicationListener = new AmbientIndicationService$$ExternalSyntheticLambda0(1, ambientIndicationContainer);
     }
 
     public int getCurrentUser() {
@@ -97,7 +97,7 @@ public final class AmbientIndicationService extends BroadcastReceiver {
             goto L_0x00d3
         L_0x0060:
             android.app.AlarmManager r1 = r0.mAlarmManager
-            android.app.AlarmManager$OnAlarmListener r2 = r0.mHideIndicationListener
+            com.google.android.systemui.ambientmusic.AmbientIndicationService$$ExternalSyntheticLambda0 r2 = r0.mHideIndicationListener
             r1.cancel(r2)
             com.google.android.systemui.ambientmusic.AmbientIndicationContainer r4 = r0.mAmbientIndicationContainer
             r7 = 0
@@ -138,7 +138,7 @@ public final class AmbientIndicationService extends BroadcastReceiver {
             android.app.AlarmManager r14 = r0.mAlarmManager
             long r1 = android.os.SystemClock.elapsedRealtime()
             long r16 = r1 + r12
-            android.app.AlarmManager$OnAlarmListener r0 = r0.mHideIndicationListener
+            com.google.android.systemui.ambientmusic.AmbientIndicationService$$ExternalSyntheticLambda0 r0 = r0.mHideIndicationListener
             r15 = 2
             java.lang.String r18 = "AmbientIndication"
             r20 = 0

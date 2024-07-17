@@ -6,7 +6,7 @@ import kotlin.coroutines.CoroutineContext;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineStart;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class KeyguardProximity$keyguardListener$1 implements Gate.Listener {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ KeyguardProximity this$0;
@@ -17,15 +17,15 @@ public final class KeyguardProximity$keyguardListener$1 implements Gate.Listener
     }
 
     public final void onGateChanged(Gate gate) {
-        switch (this.$r8$classId) {
+        int i = this.$r8$classId;
+        KeyguardProximity keyguardProximity = this.this$0;
+        switch (i) {
             case 0:
-                KeyguardProximity keyguardProximity = this.this$0;
                 keyguardProximity.getClass();
                 BuildersKt.launch$default(keyguardProximity.coroutineScope, (CoroutineContext) null, (CoroutineStart) null, new KeyguardProximity$updateProximityListener$1(keyguardProximity, (Continuation) null), 3);
                 return;
             default:
-                KeyguardProximity keyguardProximity2 = this.this$0;
-                BuildersKt.launch$default(keyguardProximity2.coroutineScope, (CoroutineContext) null, (CoroutineStart) null, new KeyguardProximity$updateBlocking$1(keyguardProximity2, (Continuation) null), 3);
+                BuildersKt.launch$default(keyguardProximity.coroutineScope, (CoroutineContext) null, (CoroutineStart) null, new KeyguardProximity$updateBlocking$1(keyguardProximity, (Continuation) null), 3);
                 return;
         }
     }

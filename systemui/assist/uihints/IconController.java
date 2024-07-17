@@ -1,24 +1,54 @@
 package com.google.android.systemui.assist.uihints;
 
+import android.app.PendingIntent;
+import android.graphics.Rect;
+import android.graphics.Region;
 import android.view.View;
 import android.view.ViewGroup;
 import com.android.systemui.statusbar.phone.ConfigurationControllerImpl;
 import com.android.systemui.statusbar.policy.ConfigurationController;
+import com.google.android.systemui.assist.uihints.NgaMessageHandler;
+import com.google.android.systemui.assist.uihints.input.TouchActionRegion;
+import java.util.Optional;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
-public final class IconController implements ConfigurationController.ConfigurationListener {
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
+public final class IconController implements NgaMessageHandler.KeyboardInfoListener, NgaMessageHandler.ZerostateInfoListener, ConfigurationController.ConfigurationListener, TouchActionRegion {
     public boolean mHasAccurateLuma;
     public final KeyboardIconView mKeyboardIcon;
+    public boolean mKeyboardIconRequested;
+    public PendingIntent mOnKeyboardIconTap;
+    public PendingIntent mOnZerostateIconTap;
     public final ZeroStateIconView mZeroStateIcon;
+    public boolean mZerostateIconRequested;
 
     public IconController(ViewGroup viewGroup, ConfigurationController configurationController) {
-        KeyboardIconView keyboardIconView = (KeyboardIconView) viewGroup.findViewById(2131362785);
+        KeyboardIconView keyboardIconView = (KeyboardIconView) viewGroup.findViewById(2131362764);
         this.mKeyboardIcon = keyboardIconView;
-        keyboardIconView.setOnClickListener(new IconController$$ExternalSyntheticLambda0(this));
-        ZeroStateIconView zeroStateIconView = (ZeroStateIconView) viewGroup.findViewById(2131364163);
+        keyboardIconView.setOnClickListener(new IconController$$ExternalSyntheticLambda0(this, 0));
+        ZeroStateIconView zeroStateIconView = (ZeroStateIconView) viewGroup.findViewById(2131364125);
         this.mZeroStateIcon = zeroStateIconView;
-        zeroStateIconView.setOnClickListener(new IconController$$ExternalSyntheticLambda0(this));
+        zeroStateIconView.setOnClickListener(new IconController$$ExternalSyntheticLambda0(this, 1));
         ((ConfigurationControllerImpl) configurationController).addCallback(this);
+    }
+
+    public final Optional getTouchActionRegion() {
+        Region region = new Region();
+        KeyboardIconView keyboardIconView = this.mKeyboardIcon;
+        if (keyboardIconView.getVisibility() == 0) {
+            Rect rect = new Rect();
+            keyboardIconView.getHitRect(rect);
+            region.union(rect);
+        }
+        ZeroStateIconView zeroStateIconView = this.mZeroStateIcon;
+        if (zeroStateIconView.getVisibility() == 0) {
+            Rect rect2 = new Rect();
+            zeroStateIconView.getHitRect(rect2);
+            region.union(rect2);
+        }
+        if (region.isEmpty()) {
+            return Optional.empty();
+        }
+        return Optional.of(region);
     }
 
     public final void maybeUpdateIconVisibility(View view, boolean z) {
@@ -43,8 +73,8 @@ public final class IconController implements ConfigurationController.Configurati
 
     public final void onDensityOrFontScaleChanged() {
         KeyboardIconView keyboardIconView = this.mKeyboardIcon;
-        keyboardIconView.mKeyboardIcon.setImageDrawable(keyboardIconView.getContext().getDrawable(2131232754));
+        keyboardIconView.mKeyboardIcon.setImageDrawable(keyboardIconView.getContext().getDrawable(2131232735));
         ZeroStateIconView zeroStateIconView = this.mZeroStateIcon;
-        zeroStateIconView.mZeroStateIcon.setImageDrawable(zeroStateIconView.getContext().getDrawable(2131232683));
+        zeroStateIconView.mZeroStateIcon.setImageDrawable(zeroStateIconView.getContext().getDrawable(2131232666));
     }
 }

@@ -27,7 +27,7 @@ import java.util.Base64;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class AssistGestureController implements Dumpable {
     public ChassisProtos$Chassis mChassis;
     public final SnapshotLogger mCompleteGestures;
@@ -45,7 +45,7 @@ public final class AssistGestureController implements Dumpable {
     public final SnapshotController mSnapshotController;
     public final WestworldLogger mWestworldLogger;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class OPAQueryReceiver extends BroadcastReceiver {
         public OPAQueryReceiver() {
         }
@@ -80,13 +80,13 @@ public final class AssistGestureController implements Dumpable {
         }
         this.mCompleteGestures = new SnapshotLogger(i);
         this.mIncompleteGestures = new SnapshotLogger(snapshotConfiguration != null ? snapshotConfiguration.mIncompleteGestures : i2);
-        resources.getValue(2131165905, typedValue, true);
+        resources.getValue(2131165873, typedValue, true);
         this.mProgressAlpha = typedValue.getFloat();
-        resources.getValue(2131165907, typedValue, true);
+        resources.getValue(2131165875, typedValue, true);
         this.mProgressReportThreshold = typedValue.getFloat();
-        long integer = (long) resources.getInteger(2131427417);
+        long integer = (long) resources.getInteger(2131427414);
         this.mGestureCooldownTime = integer;
-        this.mFalsePrimeWindow = integer + ((long) resources.getInteger(2131427416));
+        this.mFalsePrimeWindow = integer + ((long) resources.getInteger(2131427413));
         if (snapshotConfiguration != null) {
             this.mSnapshotController = new SnapshotController(snapshotConfiguration);
         } else {
@@ -182,12 +182,12 @@ public final class AssistGestureController implements Dumpable {
                 if (i3 < 0) {
                     GestureSensor.Listener listener = this.mGestureListener;
                     if (listener != null) {
-                        listener.onGestureProgress(0, 0.0f);
+                        listener.onGestureProgress(0.0f, 0);
                     }
                     if (snapshotController != null) {
-                        snapshotController.onGestureProgress(0, 0.0f);
+                        snapshotController.onGestureProgress(0.0f, 0);
                     }
-                    westworldLogger.onGestureProgress(0, 0.0f);
+                    westworldLogger.onGestureProgress(0.0f, 0);
                     return;
                 }
                 float f5 = (f3 - f4) / (1.0f - f4);
@@ -196,12 +196,12 @@ public final class AssistGestureController implements Dumpable {
                 }
                 GestureSensor.Listener listener2 = this.mGestureListener;
                 if (listener2 != null) {
-                    listener2.onGestureProgress(i2, f5);
+                    listener2.onGestureProgress(f5, i2);
                 }
                 if (snapshotController != null) {
-                    snapshotController.onGestureProgress(i2, f5);
+                    snapshotController.onGestureProgress(f5, i2);
                 }
-                westworldLogger.onGestureProgress(i2, f5);
+                westworldLogger.onGestureProgress(f5, i2);
                 return;
             }
             this.mIsFalsePrimed = true;

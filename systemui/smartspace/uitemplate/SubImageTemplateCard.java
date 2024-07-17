@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Handler mHandler;
@@ -42,7 +42,7 @@ public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
     public final int mImageHeight;
     public ImageView mImageView;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class DrawableWrapper {
         public final ContentResolver mContentResolver;
         public Drawable mDrawable;
@@ -58,7 +58,7 @@ public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
         }
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class LoadUriTask extends AsyncTask {
         public final Object doInBackground(Object[] objArr) {
             DrawableWrapper[] drawableWrapperArr = (DrawableWrapper[]) objArr;
@@ -95,7 +95,7 @@ public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
 
     public final void onFinishInflate() {
         super.onFinishInflate();
-        this.mImageView = (ImageView) findViewById(2131362735);
+        this.mImageView = (ImageView) findViewById(2131362715);
     }
 
     public final void resetUi() {
@@ -134,7 +134,7 @@ public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
                 ((ConstraintLayout.LayoutParams) this.mImageView.getLayoutParams()).dimensionRatio = string;
             }
             if (extras.getBoolean("shouldShowBackground", false)) {
-                this.mImageView.setBackgroundTintList(ColorStateList.valueOf(getContext().getColor(2131100718)));
+                this.mImageView.setBackgroundTintList(ColorStateList.valueOf(getContext().getColor(2131100700)));
             }
         }
         int i2 = 200;
@@ -216,7 +216,7 @@ public class SubImageTemplateCard extends BcSmartspaceCardSecondary {
         super(context, attributeSet);
         this.mIconDrawableCache = new HashMap();
         this.mHandler = new Handler();
-        this.mImageHeight = getResources().getDimensionPixelOffset(2131165912);
+        this.mImageHeight = getResources().getDimensionPixelOffset(2131165880);
     }
 
     public final void setTextColor(int i) {

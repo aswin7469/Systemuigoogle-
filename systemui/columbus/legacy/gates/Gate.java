@@ -9,12 +9,13 @@ import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScopeKt;
 import kotlinx.coroutines.CoroutineStart;
 import kotlinx.coroutines.Dispatchers;
+import kotlinx.coroutines.MainCoroutineDispatcher;
 import kotlinx.coroutines.android.HandlerContext;
 import kotlinx.coroutines.internal.ContextScope;
 import kotlinx.coroutines.internal.MainDispatcherLoader;
 import kotlinx.coroutines.scheduling.DefaultScheduler;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public abstract class Gate {
     public boolean active;
     public final ContextScope coroutineScope;
@@ -23,18 +24,18 @@ public abstract class Gate {
     public final CoroutineDispatcher mainDispatcher;
     public final CoroutineDispatcher mainPostDispatcher;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public interface Listener {
         void onGateChanged(Gate gate);
     }
 
     public Gate() {
         DefaultScheduler defaultScheduler = Dispatchers.Default;
-        HandlerContext handlerContext = MainDispatcherLoader.dispatcher;
-        HandlerContext handlerContext2 = handlerContext.immediate;
-        this.mainDispatcher = handlerContext2;
-        this.mainPostDispatcher = handlerContext;
-        this.coroutineScope = CoroutineScopeKt.CoroutineScope(handlerContext2);
+        MainCoroutineDispatcher mainCoroutineDispatcher = MainDispatcherLoader.dispatcher;
+        HandlerContext handlerContext = ((HandlerContext) mainCoroutineDispatcher).immediate;
+        this.mainDispatcher = handlerContext;
+        this.mainPostDispatcher = mainCoroutineDispatcher;
+        this.coroutineScope = CoroutineScopeKt.CoroutineScope(handlerContext);
     }
 
     public final boolean isActive() {

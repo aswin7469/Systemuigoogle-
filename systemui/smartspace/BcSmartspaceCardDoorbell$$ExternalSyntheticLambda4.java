@@ -1,24 +1,27 @@
 package com.google.android.systemui.smartspace;
 
-import android.app.smartspace.SmartspaceAction;
-import android.net.Uri;
-import java.util.function.Function;
+import android.graphics.ImageDecoder;
+import android.util.Size;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
-public final /* synthetic */ class BcSmartspaceCardDoorbell$$ExternalSyntheticLambda4 implements Function {
-    public final /* synthetic */ int $r8$classId;
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
+public final /* synthetic */ class BcSmartspaceCardDoorbell$$ExternalSyntheticLambda4 implements ImageDecoder.OnHeaderDecodedListener {
+    public final /* synthetic */ int f$0;
 
     public /* synthetic */ BcSmartspaceCardDoorbell$$ExternalSyntheticLambda4(int i) {
-        this.$r8$classId = i;
+        this.f$0 = i;
     }
 
-    public final Object apply(Object obj) {
-        switch (this.$r8$classId) {
-            case 0:
-                int i = BcSmartspaceCardDoorbell.$r8$clinit;
-                return ((SmartspaceAction) obj).getExtras().getString("imageUri");
-            default:
-                return Uri.parse((String) obj);
+    public final void onHeaderDecoded(ImageDecoder imageDecoder, ImageDecoder.ImageInfo imageInfo, ImageDecoder.Source source) {
+        float f;
+        int i = this.f$0;
+        int i2 = BcSmartspaceCardDoorbell.$r8$clinit;
+        imageDecoder.setAllocator(3);
+        Size size = imageInfo.getSize();
+        if (size.getHeight() != 0) {
+            f = ((float) size.getWidth()) / ((float) size.getHeight());
+        } else {
+            f = 0.0f;
         }
+        imageDecoder.setTargetSize((int) (((float) i) * f), i);
     }
 }

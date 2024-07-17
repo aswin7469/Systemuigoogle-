@@ -1,6 +1,6 @@
 package com.google.android.setupcompat.partnerconfig;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public enum PartnerConfig {
     CONFIG_STATUS_BAR_BACKGROUND("setup_compat_status_bar_background", r1),
     CONFIG_LIGHT_STATUS_BAR("setup_compat_light_status_bar", r3),
@@ -53,7 +53,6 @@ public enum PartnerConfig {
     CONFIG_ICON_MARGIN_TOP("setup_design_icon_margin_top", r9),
     CONFIG_ICON_SIZE("setup_design_icon_size", r9),
     CONFIG_ILLUSTRATION_MAX_WIDTH("setup_design_illustration_max_width", r9),
-    CONFIG_ILLUSTRATION_MAX_HEIGHT("setup_design_illustration_max_height", r9),
     CONFIG_HEADER_AREA_BACKGROUND_COLOR("setup_design_header_area_background_color", r5),
     CONFIG_HEADER_CONTAINER_MARGIN_BOTTOM("setup_design_header_container_margin_bottom", r9),
     CONFIG_HEADER_AUTO_SIZE_ENABLED("setup_design_header_auto_size_enabled", r3),
@@ -74,6 +73,15 @@ public enum PartnerConfig {
     CONFIG_ACCOUNT_AVATAR_MARGIN_END("setup_design_account_avatar_margin_end", r9),
     CONFIG_ACCOUNT_AVATAR_SIZE("setup_design_account_avatar_size", r9),
     CONFIG_CONTENT_PADDING_TOP("setup_design_content_padding_top", r9),
+    CONFIG_ITEMS_TITLE_TEXT_SIZE("setup_design_items_title_text_size", r9),
+    CONFIG_ITEMS_SUMMARY_TEXT_SIZE("setup_design_items_summary_text_size", r9),
+    CONFIG_ITEMS_SUMMARY_MARGIN_TOP("setup_design_items_summary_margin_top", r9),
+    CONFIG_ITEMS_TITLE_FONT_FAMILY("setup_design_items_title_font_family", r14),
+    CONFIG_ITEMS_SUMMARY_FONT_FAMILY("setup_design_items_summary_font_family", r14),
+    CONFIG_ITEMS_PADDING_TOP("setup_design_items_padding_top", r9),
+    CONFIG_ITEMS_PADDING_BOTTOM("setup_design_items_padding_bottom", r9),
+    CONFIG_ITEMS_MIN_HEIGHT("setup_design_items_min_height", r9),
+    CONFIG_ITEMS_DIVIDER_SHOWN("setup_design_items_divider_shown", r3),
     CONFIG_CARD_VIEW_INTRINSIC_WIDTH("setup_design_card_view_intrinsic_width", r9),
     CONFIG_CARD_VIEW_INTRINSIC_HEIGHT("setup_design_card_view_intrinsic_height", r9),
     CONFIG_PROGRESS_ILLUSTRATION_DEFAULT("progress_illustration_custom_default", r1),
@@ -86,7 +94,7 @@ public enum PartnerConfig {
     private final String resourceName;
     private final ResourceType resourceType;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public enum ResourceType {
     }
 

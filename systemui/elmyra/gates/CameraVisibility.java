@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Executor;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class CameraVisibility extends Gate {
     public final IActivityManager mActivityManager;
     public final CameraAction mCameraAction;
@@ -29,7 +29,7 @@ public final class CameraVisibility extends Gate {
     public final AnonymousClass1 mTaskStackListener = new TaskStackListener() {
         public final void onTaskStackChanged() {
             CameraVisibility cameraVisibility = CameraVisibility.this;
-            cameraVisibility.mUpdateExecutor.execute(new CameraVisibility$1$$ExternalSyntheticLambda0(cameraVisibility));
+            cameraVisibility.mUpdateExecutor.execute(new CameraVisibility$1$$ExternalSyntheticLambda0(cameraVisibility, 0));
         }
     };
     public final Executor mUpdateExecutor;
@@ -39,7 +39,7 @@ public final class CameraVisibility extends Gate {
         AnonymousClass2 r0 = new Gate.Listener() {
             public final void onGateChanged(Gate gate) {
                 CameraVisibility cameraVisibility = CameraVisibility.this;
-                cameraVisibility.mUpdateExecutor.execute(new CameraVisibility$1$$ExternalSyntheticLambda0(cameraVisibility));
+                cameraVisibility.mUpdateExecutor.execute(new CameraVisibility$1$$ExternalSyntheticLambda0(cameraVisibility, 1));
             }
         };
         this.mCameraAction = cameraAction;
@@ -51,7 +51,7 @@ public final class CameraVisibility extends Gate {
         this.mPowerState = powerState;
         keyguardVisibility.mListener = r0;
         powerState.mListener = r0;
-        this.mCameraPackageName = context.getResources().getString(2131952606);
+        this.mCameraPackageName = context.getResources().getString(2131952581);
         this.mUpdateExecutor = executor;
     }
 

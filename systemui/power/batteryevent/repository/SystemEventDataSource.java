@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.util.Log;
 import com.android.systemui.broadcast.BroadcastDispatcher;
 import com.google.android.systemui.power.batteryevent.common.BatteryEventSubscriber;
-import com.google.android.systemui.power.batteryevent.common.data.EventData;
 import com.google.android.systemui.power.batteryevent.common.data.FrameworkApiEventData;
 import com.google.android.systemui.power.batteryevent.common.data.HalEventData;
 import com.google.android.systemui.power.batteryevent.common.data.SettingsEventData;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import kotlin.collections.CollectionsKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.collections.EmptyList;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.CoroutineContext;
@@ -26,7 +25,7 @@ import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineStart;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class SystemEventDataSource extends BroadcastReceiver implements EventSourceMonitor {
     public static final Function2 CALLBACK_INITIAL_STATE = SystemEventDataSource$Companion$CALLBACK_INITIAL_STATE$1.INSTANCE;
     public final Map actionToBatteryEventTypeCache = new LinkedHashMap();
@@ -36,7 +35,7 @@ public final class SystemEventDataSource extends BroadcastReceiver implements Ev
     public final BroadcastDispatcher broadcastDispatcher;
     public final FrameworkDataSource frameworkDataSource;
     public final HalDataSource halDataSource;
-    public SystemEventData lastSystemEventData = new SystemEventData("", new EventData(0), new EventData(0), new EventData(0), new EventData(0), new EventData(0), new EventData(0), new EventData(0), new HalEventData(new EventData(0), new EventData(false), new EventData(false)), new SettingsEventData(new EventData(0)), new FrameworkApiEventData(new EventData(false), new EventData(false)));
+    public SystemEventData lastSystemEventData = new SystemEventData(new HalEventData(0), new SettingsEventData(0), new FrameworkApiEventData(false, false));
     public Function2 onEventSourceUpdate = CALLBACK_INITIAL_STATE;
     public final SettingsDataSource settingsDataSource;
     public List subscribers = EmptyList.INSTANCE;
@@ -58,7 +57,7 @@ public final class SystemEventDataSource extends BroadcastReceiver implements Ev
                     arrayList.addAll(batteryEventSubscriber.eventDataType);
                 }
             }
-            List distinct = CollectionsKt.distinct(arrayList);
+            List distinct = CollectionsKt___CollectionsKt.distinct(arrayList);
             systemEventDataSource.actionToEventDataTypeCache.put(str, distinct);
             return distinct;
         }

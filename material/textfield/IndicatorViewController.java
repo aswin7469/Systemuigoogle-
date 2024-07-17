@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.WeakHashMap;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class IndicatorViewController {
     public Animator captionAnimator;
     public FrameLayout captionArea;
@@ -48,10 +48,10 @@ public final class IndicatorViewController {
         Context context2 = textInputLayout.getContext();
         this.context = context2;
         this.textInputView = textInputLayout;
-        this.captionTranslationYPx = (float) context2.getResources().getDimensionPixelSize(2131165781);
+        this.captionTranslationYPx = (float) context2.getResources().getDimensionPixelSize(2131165759);
     }
 
-    public final void addIndicator(TextView textView, int i) {
+    public final void addIndicator(int i, TextView textView) {
         if (this.indicatorArea == null && this.captionArea == null) {
             Context context2 = this.context;
             LinearLayout linearLayout = new LinearLayout(context2);
@@ -83,19 +83,19 @@ public final class IndicatorViewController {
             boolean isFontScaleAtLeast1_3 = MaterialResources.isFontScaleAtLeast1_3(context2);
             LinearLayout linearLayout = this.indicatorArea;
             WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-            int paddingStart = editText.getPaddingStart();
+            int paddingStart = ViewCompat.Api17Impl.getPaddingStart(editText);
             if (isFontScaleAtLeast1_3) {
-                paddingStart = context2.getResources().getDimensionPixelSize(2131166683);
+                paddingStart = context2.getResources().getDimensionPixelSize(2131166641);
             }
-            int dimensionPixelSize = context2.getResources().getDimensionPixelSize(2131166682);
+            int dimensionPixelSize = context2.getResources().getDimensionPixelSize(2131166640);
             if (isFontScaleAtLeast1_3) {
-                dimensionPixelSize = context2.getResources().getDimensionPixelSize(2131166684);
+                dimensionPixelSize = context2.getResources().getDimensionPixelSize(2131166642);
             }
-            int paddingEnd = editText.getPaddingEnd();
+            int paddingEnd = ViewCompat.Api17Impl.getPaddingEnd(editText);
             if (isFontScaleAtLeast1_3) {
-                paddingEnd = context2.getResources().getDimensionPixelSize(2131166683);
+                paddingEnd = context2.getResources().getDimensionPixelSize(2131166641);
             }
-            linearLayout.setPaddingRelative(paddingStart, dimensionPixelSize, paddingEnd, 0);
+            ViewCompat.Api17Impl.setPaddingRelative(linearLayout, paddingStart, dimensionPixelSize, paddingEnd, 0);
         }
     }
 
@@ -152,7 +152,7 @@ public final class IndicatorViewController {
         updateCaptionViewsVisibility(this.captionDisplayed, this.captionToShow, shouldAnimateCaptionView(this.errorView, ""));
     }
 
-    public final void removeIndicator(TextView textView, int i) {
+    public final void removeIndicator(int i, TextView textView) {
         FrameLayout frameLayout;
         LinearLayout linearLayout = this.indicatorArea;
         if (linearLayout != null) {
@@ -173,7 +173,7 @@ public final class IndicatorViewController {
     public final boolean shouldAnimateCaptionView(TextView textView, CharSequence charSequence) {
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
         TextInputLayout textInputLayout = this.textInputView;
-        if (!textInputLayout.isLaidOut() || !textInputLayout.isEnabled() || (this.captionToShow == this.captionDisplayed && textView != null && TextUtils.equals(textView.getText(), charSequence))) {
+        if (!ViewCompat.Api19Impl.isLaidOut(textInputLayout) || !textInputLayout.isEnabled() || (this.captionToShow == this.captionDisplayed && textView != null && TextUtils.equals(textView.getText(), charSequence))) {
             return false;
         }
         return true;

@@ -5,9 +5,9 @@ import com.android.systemui.navigationbar.NavigationModeController;
 import java.util.Set;
 import javax.inject.Provider;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public abstract class NgaMessageHandler_Factory implements Provider {
-    public static NgaMessageHandler newInstance(NgaUiController ngaUiController, AssistantPresenceHandler assistantPresenceHandler, NavigationModeController navigationModeController, Set set, Set set2, Set set3, Set set4, Set set5, Handler handler) {
-        return new NgaMessageHandler(ngaUiController, assistantPresenceHandler, navigationModeController, set, set2, set3, set4, set5, handler);
+    public static NgaMessageHandler newInstance(NgaUiController ngaUiController, AssistantPresenceHandler assistantPresenceHandler, NavigationModeController navigationModeController, Set set, Set set2, Set set3, Set set4, Set set5, Set set6, Set set7, Set set8, Set set9, Set set10, Set set11, Set set12, Set set13, Set set14, Set set15, Set set16, Set set17, Handler handler) {
+        return new NgaMessageHandler(ngaUiController, assistantPresenceHandler, navigationModeController, set, set2, set3, set4, set5, set6, set7, set8, set9, set10, set11, set12, set13, set14, set15, set16, set17, handler);
     }
 }

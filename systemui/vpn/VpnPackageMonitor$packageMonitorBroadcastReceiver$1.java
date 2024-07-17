@@ -9,7 +9,7 @@ import android.util.Log;
 import com.android.systemui.settings.UserFileManagerImpl;
 import com.android.systemui.settings.UserTrackerImpl;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class VpnPackageMonitor$packageMonitorBroadcastReceiver$1 extends BroadcastReceiver {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ VpnPackageMonitor this$0;
@@ -46,7 +46,7 @@ public final class VpnPackageMonitor$packageMonitorBroadcastReceiver$1 extends B
                         vpnPackageMonitor2.context.unregisterReceiver(vpnPackageMonitor2.packageMonitorBroadcastReceiver);
                         vpnPackageMonitor2.isRegistered = false;
                     }
-                    ((UserFileManagerImpl) vpnPackageMonitor2.userFileManager).getSharedPreferences$1(((UserTrackerImpl) vpnPackageMonitor2.userTracker).getUserId(), "package_monitor_index").edit().putBoolean("package_monitor_enabled", booleanExtra).apply();
+                    ((UserFileManagerImpl) vpnPackageMonitor2.userFileManager).getSharedPreferences$1("package_monitor_index", ((UserTrackerImpl) vpnPackageMonitor2.userTracker).getUserId()).edit().putBoolean("package_monitor_enabled", booleanExtra).apply();
                     return;
                 }
                 return;

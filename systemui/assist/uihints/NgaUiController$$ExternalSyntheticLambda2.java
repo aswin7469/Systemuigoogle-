@@ -1,46 +1,69 @@
 package com.google.android.systemui.assist.uihints;
 
-import android.graphics.Rect;
-import android.graphics.Region;
-import java.util.function.Consumer;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.os.SystemClock;
+import android.util.Log;
+import android.widget.ImageView;
+import java.util.Iterator;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
-public final /* synthetic */ class NgaUiController$$ExternalSyntheticLambda2 implements Consumer {
-    public final /* synthetic */ int $r8$classId;
-    public final /* synthetic */ Region f$0;
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
+public final /* synthetic */ class NgaUiController$$ExternalSyntheticLambda2 {
+    public final /* synthetic */ Object f$0;
 
-    public /* synthetic */ NgaUiController$$ExternalSyntheticLambda2(int i, Region region) {
-        this.$r8$classId = i;
-        this.f$0 = region;
+    public /* synthetic */ NgaUiController$$ExternalSyntheticLambda2(Object obj) {
+        this.f$0 = obj;
     }
 
-    public final void accept(Object obj) {
-        int i = this.$r8$classId;
-        Region region = this.f$0;
-        Region region2 = (Region) obj;
-        switch (i) {
-            case 0:
-                region.op(region2, Region.Op.UNION);
-                return;
-            case 1:
-                region.op(region2, Region.Op.UNION);
-                return;
-            case 2:
-                region.op(region2, Region.Op.UNION);
-                return;
-            default:
-                if (region.isEmpty()) {
-                    region.op(region2, Region.Op.UNION);
-                    return;
-                } else if (region.quickReject(region2)) {
-                    Rect bounds = region.getBounds();
-                    bounds.top = region2.getBounds().top;
-                    region.set(bounds);
-                    return;
-                } else {
-                    region.op(region2, Region.Op.UNION);
-                    return;
-                }
+    public final void onLightnessUpdate(float f) {
+        PorterDuff.Mode mode;
+        NgaUiController ngaUiController = (NgaUiController) this.f$0;
+        if (ngaUiController.mColorMonitoringStart > 0) {
+            long elapsedRealtime = SystemClock.elapsedRealtime() - ngaUiController.mColorMonitoringStart;
+            if (NgaUiController.VERBOSE) {
+                Log.d("NgaUiController", "Got lightness update (" + f + ") after " + elapsedRealtime + " ms");
+            }
+            ngaUiController.mColorMonitoringStart = 0;
         }
+        IconController iconController = ngaUiController.mIconController;
+        boolean z = true;
+        iconController.mHasAccurateLuma = true;
+        iconController.maybeUpdateIconVisibility(iconController.mKeyboardIcon, iconController.mKeyboardIconRequested);
+        iconController.maybeUpdateIconVisibility(iconController.mZeroStateIcon, iconController.mZerostateIconRequested);
+        GlowController glowController = ngaUiController.mGlowController;
+        glowController.getClass();
+        int i = (f > 0.4f ? 1 : (f == 0.4f ? 0 : -1));
+        if (i <= 0) {
+            mode = PorterDuff.Mode.LIGHTEN;
+        } else {
+            mode = PorterDuff.Mode.SRC_OVER;
+        }
+        GlowView glowView = glowController.mGlowView;
+        glowView.mPaint.setXfermode(new PorterDuffXfermode(mode));
+        Iterator it = glowView.mGlowImageViews.iterator();
+        while (it.hasNext()) {
+            ((ImageView) it.next()).setLayerPaint(glowView.mPaint);
+        }
+        glowController.mMedianLightness = f;
+        ScrimController scrimController = ngaUiController.mScrimController;
+        scrimController.mHaveAccurateLightness = true;
+        scrimController.mMedianLightness = f;
+        scrimController.refresh$1();
+        TranscriptionController transcriptionController = ngaUiController.mTranscriptionController;
+        if (!transcriptionController.mHasAccurateBackground) {
+            transcriptionController.mHasAccurateBackground = true;
+            transcriptionController.maybeSetState();
+        }
+        if (i > 0) {
+            z = false;
+        }
+        if (ngaUiController.mHasDarkBackground != z) {
+            ngaUiController.mHasDarkBackground = z;
+            ColorChangeHandler colorChangeHandler = ngaUiController.mColorChangeHandler;
+            colorChangeHandler.mIsDark = z;
+            colorChangeHandler.sendColor();
+            ngaUiController.dispatchHasDarkBackground();
+        }
+        ngaUiController.refresh$2();
     }
 }

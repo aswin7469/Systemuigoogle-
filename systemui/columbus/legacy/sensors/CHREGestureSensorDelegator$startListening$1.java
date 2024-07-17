@@ -3,12 +3,23 @@ package com.google.android.systemui.columbus.legacy.sensors;
 import android.util.Log;
 import java.util.function.Consumer;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class CHREGestureSensorDelegator$startListening$1 implements Consumer {
     public final /* synthetic */ CHREGestureSensorDelegator this$0;
 
+    public CHREGestureSensorDelegator$startListening$1(CHREGestureSensorDelegator cHREGestureSensorDelegator) {
+        this.this$0 = cHREGestureSensorDelegator;
+    }
+
+    public final void accept(Object obj) {
+        Integer num = (Integer) obj;
+        Log.i("Columbus/GestureSensor", "CHREGestureSensorDelegator received statusCode = " + num);
+        CHREGestureSensorDelegator cHREGestureSensorDelegator = this.this$0;
+        cHREGestureSensorDelegator.bgHandler.post(new AnonymousClass1(num, cHREGestureSensorDelegator));
+    }
+
     /* renamed from: com.google.android.systemui.columbus.legacy.sensors.CHREGestureSensorDelegator$startListening$1$1  reason: invalid class name */
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class AnonymousClass1 implements Runnable {
         public final /* synthetic */ int $r8$classId = 1;
         public final /* synthetic */ Object $statusCode;
@@ -50,16 +61,5 @@ public final class CHREGestureSensorDelegator$startListening$1 implements Consum
             this.$statusCode = num;
             this.this$0 = cHREGestureSensorDelegator;
         }
-    }
-
-    public CHREGestureSensorDelegator$startListening$1(CHREGestureSensorDelegator cHREGestureSensorDelegator) {
-        this.this$0 = cHREGestureSensorDelegator;
-    }
-
-    public final void accept(Object obj) {
-        Integer num = (Integer) obj;
-        Log.i("Columbus/GestureSensor", "CHREGestureSensorDelegator received statusCode = " + num);
-        CHREGestureSensorDelegator cHREGestureSensorDelegator = this.this$0;
-        cHREGestureSensorDelegator.bgHandler.post(new AnonymousClass1(num, cHREGestureSensorDelegator));
     }
 }

@@ -23,7 +23,7 @@ import com.google.android.setupcompat.partnerconfig.PartnerConfig;
 import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper;
 import java.util.HashMap;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class FooterBarMixin implements Mixin {
     final boolean applyDynamicColor;
     final boolean applyPartnerResources;
@@ -60,7 +60,7 @@ public final class FooterBarMixin implements Mixin {
         this.metrics = obj;
         Context context2 = templateLayout.getContext();
         this.context = context2;
-        this.footerStub = (ViewStub) templateLayout.findViewById(2131363746);
+        this.footerStub = (ViewStub) templateLayout.findManagedViewById(2131363712);
         FooterButtonStyleUtils.defaultTextColor.clear();
         boolean z3 = templateLayout instanceof PartnerCustomizationLayout;
         boolean z4 = true;
@@ -137,8 +137,8 @@ public final class FooterBarMixin implements Mixin {
             ViewStub viewStub = this.footerStub;
             if (viewStub != null) {
                 Context context2 = this.context;
-                viewStub.setLayoutInflater(LayoutInflater.from(new ContextThemeWrapper(context2, 2132017761)));
-                viewStub.setLayoutResource(2131559065);
+                viewStub.setLayoutInflater(LayoutInflater.from(new ContextThemeWrapper(context2, 2132017760)));
+                viewStub.setLayoutResource(2131559059);
                 LinearLayout linearLayout = (LinearLayout) viewStub.inflate();
                 this.buttonContainer = linearLayout;
                 if (linearLayout != null) {
@@ -213,9 +213,9 @@ public final class FooterBarMixin implements Mixin {
         }
         Context context2 = this.context;
         if (PartnerConfigHelper.get(context2).getColor(context2, partnerConfig) == 0) {
-            return 2132017759;
+            return 2132017758;
         }
-        return 2132017758;
+        return 2132017757;
     }
 
     public final Button getPrimaryButtonView() {
@@ -239,7 +239,7 @@ public final class FooterBarMixin implements Mixin {
     }
 
     public final FooterActionButton inflateButton(FooterButton footerButton, FooterButtonPartnerConfig footerButtonPartnerConfig) {
-        FooterActionButton footerActionButton = (FooterActionButton) LayoutInflater.from(new ContextThemeWrapper(this.context, footerButtonPartnerConfig.partnerTheme)).inflate(2131559064, (ViewGroup) null, false);
+        FooterActionButton footerActionButton = (FooterActionButton) LayoutInflater.from(new ContextThemeWrapper(this.context, footerButtonPartnerConfig.partnerTheme)).inflate(2131559058, (ViewGroup) null, false);
         footerActionButton.setId(View.generateViewId());
         footerActionButton.setText(footerButton.text);
         footerActionButton.setOnClickListener(footerButton);
@@ -705,7 +705,7 @@ public final class FooterBarMixin implements Mixin {
         Preconditions.ensureOnMainThread("setPrimaryButton");
         ensureFooterInflated();
         PartnerConfig partnerConfig2 = PartnerConfig.CONFIG_FOOTER_PRIMARY_BUTTON_BG_COLOR;
-        int partnerTheme = getPartnerTheme(footerButton2, 2132017758, partnerConfig2);
+        int partnerTheme = getPartnerTheme(footerButton2, 2132017757, partnerConfig2);
         PartnerConfig partnerConfig3 = PartnerConfig.CONFIG_FOOTER_BUTTON_DISABLED_ALPHA;
         PartnerConfig partnerConfig4 = PartnerConfig.CONFIG_FOOTER_BUTTON_DISABLED_BG_COLOR;
         PartnerConfig partnerConfig5 = PartnerConfig.CONFIG_FOOTER_PRIMARY_BUTTON_DISABLED_TEXT_COLOR;
@@ -757,7 +757,7 @@ public final class FooterBarMixin implements Mixin {
         this.isSecondaryButtonInPrimaryStyle = false;
         ensureFooterInflated();
         PartnerConfig partnerConfig2 = PartnerConfig.CONFIG_FOOTER_SECONDARY_BUTTON_BG_COLOR;
-        int partnerTheme = getPartnerTheme(footerButton2, 2132017759, partnerConfig2);
+        int partnerTheme = getPartnerTheme(footerButton2, 2132017758, partnerConfig2);
         PartnerConfig partnerConfig3 = PartnerConfig.CONFIG_FOOTER_BUTTON_DISABLED_ALPHA;
         PartnerConfig partnerConfig4 = PartnerConfig.CONFIG_FOOTER_BUTTON_DISABLED_BG_COLOR;
         PartnerConfig partnerConfig5 = PartnerConfig.CONFIG_FOOTER_SECONDARY_BUTTON_DISABLED_TEXT_COLOR;

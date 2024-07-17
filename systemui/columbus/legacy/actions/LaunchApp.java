@@ -21,6 +21,7 @@ import android.os.UserManager;
 import android.provider.DeviceConfig;
 import android.provider.Settings;
 import android.util.Log;
+import com.android.app.tracing.TraceUtils;
 import com.android.internal.logging.UiEventLogger;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.systemui.plugins.ActivityStarter;
@@ -44,14 +45,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Executor;
-import kotlin.collections.CollectionsKt;
-import kotlin.collections.CollectionsKt__IterablesKt;
-import kotlin.collections.SetsKt;
+import kotlin.collections.CollectionsKt__IteratorsJVMKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.collections.SetsKt__SetsKt;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.Charsets;
-import kotlin.text.StringsKt;
+import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class LaunchApp extends UserAction {
     public final ActivityStarter activityStarter;
     public final Set allowCertList;
@@ -99,9 +100,9 @@ public final class LaunchApp extends UserAction {
         this.onDismissKeyguardAction = new LaunchApp$onDismissKeyguardAction$1(this);
         this.messageDigest = MessageDigest.getInstance("SHA-256");
         String[] stringArray = context.getResources().getStringArray(2130903088);
-        this.allowPackageList = SetsKt.setOf(Arrays.copyOf(stringArray, stringArray.length));
+        this.allowPackageList = SetsKt__SetsKt.setOf(Arrays.copyOf(stringArray, stringArray.length));
         String[] stringArray2 = context.getResources().getStringArray(2130903087);
-        this.allowCertList = SetsKt.setOf(Arrays.copyOf(stringArray2, stringArray2.length));
+        this.allowCertList = SetsKt__SetsKt.setOf(Arrays.copyOf(stringArray2, stringArray2.length));
         this.denyPackageList = new LinkedHashSet();
         this.availableApps = new LinkedHashMap();
         this.availableShortcuts = new LinkedHashMap();
@@ -170,7 +171,7 @@ public final class LaunchApp extends UserAction {
             } else {
                 str2 = null;
             }
-            if (!CollectionsKt.contains(this.denyPackageList, str2) && str2 != null && this.allowPackageList.contains(str2)) {
+            if (!CollectionsKt___CollectionsKt.contains(this.denyPackageList, str2) && str2 != null && this.allowPackageList.contains(str2)) {
                 SigningInfo signingInfo = context.getPackageManager().getPackageInfo(str2, 134217728).signingInfo;
                 if (signingInfo != null) {
                     if (signingInfo.hasMultipleSigners()) {
@@ -268,17 +269,18 @@ public final class LaunchApp extends UserAction {
     }
 
     public final void updateAvailableAppsAndShortcutsAsync() {
-        this.bgHandler.post(new LaunchApp$updateAvailableAppsAndShortcutsAsync$1$2(this, 1));
+        int i = TraceUtils.$r8$clinit;
+        this.bgHandler.post(new LaunchApp$updateAvailableAppsAndShortcutsAsync$$inlined$traceRunnable$1(this));
     }
 
     public final void updateDenyList(String str) {
         Set set = this.denyPackageList;
         set.clear();
         if (str != null) {
-            List<String> split$default = StringsKt.split$default(str, new String[]{","}, 0, 6);
-            ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(split$default));
+            List<String> split$default = StringsKt__StringsKt.split$default(str, new String[]{","}, 0, 6);
+            ArrayList arrayList = new ArrayList(CollectionsKt__IteratorsJVMKt.collectionSizeOrDefault(split$default));
             for (String trim : split$default) {
-                arrayList.add(StringsKt.trim(trim).toString());
+                arrayList.add(StringsKt__StringsKt.trim(trim).toString());
             }
             set.addAll(arrayList);
         }

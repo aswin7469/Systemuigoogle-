@@ -17,12 +17,12 @@ import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSmoothScroller;
-import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 import com.google.android.material.button.MaterialButton;
 import java.util.Calendar;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class MaterialCalendar extends PickerFragment {
     static final Object MONTHS_VIEW_GROUP_TAG = "MONTHS_VIEW_GROUP_TAG";
     static final Object NAVIGATION_NEXT_TAG = "NAVIGATION_NEXT_TAG";
@@ -38,16 +38,7 @@ public final class MaterialCalendar extends PickerFragment {
     public View yearFrame;
     public RecyclerView yearSelector;
 
-    /* renamed from: com.google.android.material.datepicker.MaterialCalendar$1  reason: invalid class name */
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
-    public final class AnonymousClass1 extends AccessibilityDelegateCompat {
-        public final void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfoCompat accessibilityNodeInfoCompat) {
-            this.mOriginalDelegate.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfoCompat.mInfo);
-            accessibilityNodeInfoCompat.setCollectionInfo((AccessibilityNodeInfoCompat.RangeInfoCompat) null);
-        }
-    }
-
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     enum CalendarSelector {
     }
 
@@ -71,20 +62,49 @@ public final class MaterialCalendar extends PickerFragment {
         LayoutInflater cloneInContext = layoutInflater.cloneInContext(contextThemeWrapper);
         Month month = this.calendarConstraints.start;
         if (MaterialDatePicker.readMaterialCalendarStyleBoolean(16843277, contextThemeWrapper)) {
-            i2 = 2131558815;
+            i2 = 2131558808;
             i = 1;
         } else {
-            i2 = 2131558810;
+            i2 = 2131558803;
             i = 0;
         }
         View inflate = cloneInContext.inflate(i2, viewGroup, false);
         Resources resources = requireContext().getResources();
-        int dimensionPixelOffset = resources.getDimensionPixelOffset(2131166831) + resources.getDimensionPixelOffset(2131166833) + resources.getDimensionPixelSize(2131166832);
-        int dimensionPixelSize = resources.getDimensionPixelSize(2131166816);
+        int dimensionPixelOffset = resources.getDimensionPixelOffset(2131166789) + resources.getDimensionPixelOffset(2131166791) + resources.getDimensionPixelSize(2131166790);
+        int dimensionPixelSize = resources.getDimensionPixelSize(2131166774);
         int i3 = MonthAdapter.MAXIMUM_WEEKS;
-        inflate.setMinimumHeight(dimensionPixelOffset + dimensionPixelSize + (resources.getDimensionPixelOffset(2131166830) * (i3 - 1)) + (resources.getDimensionPixelSize(2131166811) * i3) + resources.getDimensionPixelOffset(2131166808));
-        GridView gridView = (GridView) inflate.findViewById(2131363146);
-        ViewCompat.setAccessibilityDelegate(gridView, new AccessibilityDelegateCompat());
+        inflate.setMinimumHeight(dimensionPixelOffset + dimensionPixelSize + (resources.getDimensionPixelOffset(2131166788) * (i3 - 1)) + (resources.getDimensionPixelSize(2131166769) * i3) + resources.getDimensionPixelOffset(2131166766));
+        GridView gridView = (GridView) inflate.findViewById(2131363119);
+        ViewCompat.setAccessibilityDelegate(gridView, new AccessibilityDelegateCompat(this, 0) {
+            public final /* synthetic */ MaterialCalendar this$0;
+
+            {
+                this.this$0 = r1;
+            }
+
+            public final void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfoCompat accessibilityNodeInfoCompat) {
+                String str;
+                int i = 1;
+                View.AccessibilityDelegate accessibilityDelegate = this.mOriginalDelegate;
+                AccessibilityNodeInfo accessibilityNodeInfo = accessibilityNodeInfoCompat.mInfo;
+                switch (i) {
+                    case 0:
+                        accessibilityDelegate.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfo);
+                        accessibilityNodeInfoCompat.setCollectionInfo((AccessibilityNodeInfoCompat.CollectionInfoCompat) null);
+                        return;
+                    default:
+                        accessibilityDelegate.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfo);
+                        MaterialCalendar materialCalendar = this.this$0;
+                        if (materialCalendar.dayFrame.getVisibility() == 0) {
+                            str = materialCalendar.requireContext().getResources().getString(2131953283);
+                        } else {
+                            str = materialCalendar.requireContext().getResources().getString(2131953281);
+                        }
+                        accessibilityNodeInfo.setHintText(str);
+                        return;
+                }
+            }
+        });
         int i4 = this.calendarConstraints.firstDayOfWeek;
         if (i4 <= 0) {
             daysOfWeekAdapter = new DaysOfWeekAdapter();
@@ -92,7 +112,7 @@ public final class MaterialCalendar extends PickerFragment {
         gridView.setAdapter(daysOfWeekAdapter);
         gridView.setNumColumns(month.daysInWeek);
         gridView.setEnabled(false);
-        this.recyclerView = (RecyclerView) inflate.findViewById(2131363149);
+        this.recyclerView = (RecyclerView) inflate.findViewById(2131363122);
         getContext();
         this.recyclerView.setLayoutManager(new LinearLayoutManager(i) {
             public final void calculateExtraLayoutSpace(RecyclerView.State state, int[] iArr) {
@@ -117,8 +137,8 @@ public final class MaterialCalendar extends PickerFragment {
         final MonthsPagerAdapter monthsPagerAdapter = new MonthsPagerAdapter(contextThemeWrapper, this.calendarConstraints, new Object() {
         });
         this.recyclerView.setAdapter(monthsPagerAdapter);
-        int integer = contextThemeWrapper.getResources().getInteger(2131427534);
-        RecyclerView recyclerView2 = (RecyclerView) inflate.findViewById(2131363152);
+        int integer = contextThemeWrapper.getResources().getInteger(2131427531);
+        RecyclerView recyclerView2 = (RecyclerView) inflate.findViewById(2131363125);
         this.yearSelector = recyclerView2;
         if (recyclerView2 != null) {
             recyclerView2.mHasFixedSize = true;
@@ -134,40 +154,56 @@ public final class MaterialCalendar extends PickerFragment {
                     if ((recyclerView.mAdapter instanceof YearGridAdapter) && (recyclerView.getLayoutManager() instanceof GridLayoutManager)) {
                         YearGridAdapter yearGridAdapter = (YearGridAdapter) recyclerView.mAdapter;
                         GridLayoutManager gridLayoutManager = (GridLayoutManager) recyclerView.getLayoutManager();
+                        Object obj = MaterialCalendar.MONTHS_VIEW_GROUP_TAG;
                         MaterialCalendar.this.getClass();
                         throw null;
                     }
                 }
             });
         }
-        if (inflate.findViewById(2131363074) != null) {
-            final MaterialButton materialButton = (MaterialButton) inflate.findViewById(2131363074);
+        if (inflate.findViewById(2131363047) != null) {
+            final MaterialButton materialButton = (MaterialButton) inflate.findViewById(2131363047);
             materialButton.setTag(SELECTOR_TOGGLE_TAG);
-            ViewCompat.setAccessibilityDelegate(materialButton, new AccessibilityDelegateCompat() {
+            ViewCompat.setAccessibilityDelegate(materialButton, new AccessibilityDelegateCompat(this, 1) {
+                public final /* synthetic */ MaterialCalendar this$0;
+
+                {
+                    this.this$0 = r1;
+                }
+
                 public final void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfoCompat accessibilityNodeInfoCompat) {
                     String str;
+                    int i = 1;
                     View.AccessibilityDelegate accessibilityDelegate = this.mOriginalDelegate;
                     AccessibilityNodeInfo accessibilityNodeInfo = accessibilityNodeInfoCompat.mInfo;
-                    accessibilityDelegate.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfo);
-                    MaterialCalendar materialCalendar = MaterialCalendar.this;
-                    if (materialCalendar.dayFrame.getVisibility() == 0) {
-                        str = materialCalendar.requireContext().getResources().getString(2131953324);
-                    } else {
-                        str = materialCalendar.requireContext().getResources().getString(2131953322);
+                    switch (i) {
+                        case 0:
+                            accessibilityDelegate.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfo);
+                            accessibilityNodeInfoCompat.setCollectionInfo((AccessibilityNodeInfoCompat.CollectionInfoCompat) null);
+                            return;
+                        default:
+                            accessibilityDelegate.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfo);
+                            MaterialCalendar materialCalendar = this.this$0;
+                            if (materialCalendar.dayFrame.getVisibility() == 0) {
+                                str = materialCalendar.requireContext().getResources().getString(2131953283);
+                            } else {
+                                str = materialCalendar.requireContext().getResources().getString(2131953281);
+                            }
+                            accessibilityNodeInfo.setHintText(str);
+                            return;
                     }
-                    accessibilityNodeInfo.setHintText(str);
                 }
             });
-            MaterialButton materialButton2 = (MaterialButton) inflate.findViewById(2131363076);
+            MaterialButton materialButton2 = (MaterialButton) inflate.findViewById(2131363049);
             materialButton2.setTag(NAVIGATION_PREV_TAG);
-            MaterialButton materialButton3 = (MaterialButton) inflate.findViewById(2131363075);
+            MaterialButton materialButton3 = (MaterialButton) inflate.findViewById(2131363048);
             materialButton3.setTag(NAVIGATION_NEXT_TAG);
-            this.yearFrame = inflate.findViewById(2131363152);
-            this.dayFrame = inflate.findViewById(2131363145);
+            this.yearFrame = inflate.findViewById(2131363125);
+            this.dayFrame = inflate.findViewById(2131363118);
             setSelector(CalendarSelector.DAY);
             materialButton.setText(this.current.getLongName());
             this.recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                public final void onScrollStateChanged(RecyclerView recyclerView, int i) {
+                public final void onScrollStateChanged(int i, RecyclerView recyclerView) {
                     if (i == 0) {
                         recyclerView.announceForAccessibility(materialButton.getText());
                     }
@@ -269,7 +305,7 @@ public final class MaterialCalendar extends PickerFragment {
             });
         }
         if (!MaterialDatePicker.readMaterialCalendarStyleBoolean(16843277, contextThemeWrapper)) {
-            new PagerSnapHelper().attachToRecyclerView(this.recyclerView);
+            new SnapHelper().attachToRecyclerView(this.recyclerView);
         }
         this.recyclerView.scrollToPosition(monthsPagerAdapter.calendarConstraints.start.monthsUntil(this.current));
         return inflate;

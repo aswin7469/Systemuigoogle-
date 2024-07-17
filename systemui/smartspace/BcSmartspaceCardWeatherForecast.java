@@ -11,15 +11,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.appsearch.app.DocumentClassFactoryRegistry$$ExternalSyntheticOutline0;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Constraints;
 import com.android.systemui.plugins.BcSmartspaceDataPlugin;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo;
 import java.util.Locale;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
     public static final /* synthetic */ int $r8$clinit = 0;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public interface ItemUpdateFunction {
         void update(View view, int i);
     }
@@ -34,12 +35,12 @@ public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
         super.onFinishInflate();
         ConstraintLayout[] constraintLayoutArr = new ConstraintLayout[4];
         for (int i = 0; i < 4; i++) {
-            ConstraintLayout constraintLayout3 = (ConstraintLayout) ViewGroup.inflate(getContext(), 2131559034, (ViewGroup) null);
+            ConstraintLayout constraintLayout3 = (ConstraintLayout) ViewGroup.inflate(getContext(), 2131559028, (ViewGroup) null);
             constraintLayout3.setId(View.generateViewId());
             constraintLayoutArr[i] = constraintLayout3;
         }
         for (int i2 = 0; i2 < 4; i2++) {
-            ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(0);
+            Constraints.LayoutParams layoutParams = new Constraints.LayoutParams(0);
             ConstraintLayout constraintLayout4 = constraintLayoutArr[i2];
             if (i2 > 0) {
                 constraintLayout = constraintLayoutArr[i2 - 1];
@@ -70,13 +71,13 @@ public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
 
     public final boolean setSmartspaceActions(SmartspaceTarget smartspaceTarget, BcSmartspaceDataPlugin.SmartspaceEventNotifier smartspaceEventNotifier, BcSmartspaceCardLoggingInfo bcSmartspaceCardLoggingInfo) {
         Bundle bundle;
+        boolean z;
         SmartspaceAction baseAction = smartspaceTarget.getBaseAction();
         if (baseAction == null) {
             bundle = null;
         } else {
             bundle = baseAction.getExtras();
         }
-        boolean z = false;
         if (bundle == null) {
             return false;
         }
@@ -85,16 +86,18 @@ public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
             if (stringArray == null) {
                 Log.w("BcSmartspaceCardWeatherForecast", "Temperature values array is null.");
             } else {
-                updateFields(new BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda0(1, stringArray), stringArray.length, 2131363833, "temperature value");
+                updateFields(new BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda0(1, stringArray), stringArray.length, 2131363799, "temperature value");
             }
             z = true;
+        } else {
+            z = false;
         }
         if (bundle.containsKey("weatherIcons")) {
             Bitmap[] bitmapArr = (Bitmap[]) bundle.get("weatherIcons");
             if (bitmapArr == null) {
                 Log.w("BcSmartspaceCardWeatherForecast", "Weather icons array is null.");
             } else {
-                updateFields(new BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda0(2, bitmapArr), bitmapArr.length, 2131364100, "weather icon");
+                updateFields(new BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda0(2, bitmapArr), bitmapArr.length, 2131364061, "weather icon");
             }
             z = true;
         }
@@ -105,14 +108,14 @@ public class BcSmartspaceCardWeatherForecast extends BcSmartspaceCardSecondary {
         if (stringArray2 == null) {
             Log.w("BcSmartspaceCardWeatherForecast", "Timestamps array is null.");
         } else {
-            updateFields(new BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda0(0, stringArray2), stringArray2.length, 2131363866, "timestamp");
+            updateFields(new BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda0(0, stringArray2), stringArray2.length, 2131363832, "timestamp");
         }
         return true;
     }
 
     public final void setTextColor(int i) {
-        updateFields(new BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda2(i, 0), 4, 2131363833, "temperature value");
-        updateFields(new BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda2(i, 1), 4, 2131363866, "timestamp");
+        updateFields(new BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda1(i, 0), 4, 2131363799, "temperature value");
+        updateFields(new BcSmartspaceCardWeatherForecast$$ExternalSyntheticLambda1(i, 1), 4, 2131363832, "timestamp");
     }
 
     public final void updateFields(ItemUpdateFunction itemUpdateFunction, int i, int i2, String str) {

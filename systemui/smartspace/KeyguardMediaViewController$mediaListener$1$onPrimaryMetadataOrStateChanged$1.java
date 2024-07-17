@@ -2,7 +2,7 @@ package com.google.android.systemui.smartspace;
 
 import android.media.MediaMetadata;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class KeyguardMediaViewController$mediaListener$1$onPrimaryMetadataOrStateChanged$1 implements Runnable {
     public final /* synthetic */ MediaMetadata $metadata;
     public final /* synthetic */ int $state;
@@ -41,7 +41,7 @@ public final class KeyguardMediaViewController$mediaListener$1$onPrimaryMetadata
             if (r3 == 0) goto L_0x003a
             android.content.Context r6 = r0.context
             android.content.res.Resources r6 = r6.getResources()
-            r3 = 2131953335(0x7f1306b7, float:1.9543138E38)
+            r3 = 2131953294(0x7f13068e, float:1.9543055E38)
             java.lang.String r6 = r6.getString(r3)
             goto L_0x003a
         L_0x0039:

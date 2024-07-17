@@ -4,10 +4,11 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import androidx.appcompat.widget.TintTypedArray;
 import androidx.appsearch.app.DocumentClassFactoryRegistry$$ExternalSyntheticOutline0;
 import com.google.android.material.R$styleable;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public abstract class ThemeEnforcement {
     public static final int[] APPCOMPAT_CHECK_ATTRS = {2130968878};
     public static final int[] MATERIAL_CHECK_ATTRS = {2130968883};
@@ -97,5 +98,11 @@ public abstract class ThemeEnforcement {
         checkCompatibleTheme(context, attributeSet, i, i2);
         checkTextAppearance(context, attributeSet, iArr, i, i2, iArr2);
         return context.obtainStyledAttributes(attributeSet, iArr, i, i2);
+    }
+
+    public static TintTypedArray obtainTintedStyledAttributes(Context context, AttributeSet attributeSet, int[] iArr, int i, int i2, int... iArr2) {
+        checkCompatibleTheme(context, attributeSet, i, i2);
+        checkTextAppearance(context, attributeSet, iArr, i, i2, iArr2);
+        return new TintTypedArray(context, context.obtainStyledAttributes(attributeSet, iArr, i, i2));
     }
 }

@@ -7,7 +7,8 @@ import android.os.UserManager;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.systemui.shade.ShadeController;
-import com.google.android.systemui.dagger.DaggerSysUIGoogleGlobalRootComponent$SysUIGoogleSysUIComponentImpl$SwitchingProvider$30;
+import com.android.systemui.shade.ShadeControllerImpl;
+import com.google.android.systemui.dagger.DaggerSysUIGoogleGlobalRootComponent$SysUIGoogleSysUIComponentImpl$SwitchingProvider$24;
 import com.google.android.systemui.elmyra.gates.Gate;
 import com.google.android.systemui.elmyra.gates.KeyguardDeferredSetup;
 import com.google.android.systemui.elmyra.sensors.GestureSensor;
@@ -15,7 +16,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Executor;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class SetupWizardAction extends Action {
     public final Context mContext;
     public boolean mDeviceInDemoMode;
@@ -27,7 +28,7 @@ public final class SetupWizardAction extends Action {
     public boolean mUserCompletedSuw;
     public final KeyguardUpdateMonitorCallback mUserSwitchCallback;
 
-    public SetupWizardAction(Context context, Executor executor, SettingsAction settingsAction, LaunchOpa launchOpa, DaggerSysUIGoogleGlobalRootComponent$SysUIGoogleSysUIComponentImpl$SwitchingProvider$30 daggerSysUIGoogleGlobalRootComponent$SysUIGoogleSysUIComponentImpl$SwitchingProvider$30, KeyguardUpdateMonitor keyguardUpdateMonitor, ShadeController shadeController) {
+    public SetupWizardAction(Context context, Executor executor, SettingsAction settingsAction, LaunchOpa launchOpa, DaggerSysUIGoogleGlobalRootComponent$SysUIGoogleSysUIComponentImpl$SwitchingProvider$24 daggerSysUIGoogleGlobalRootComponent$SysUIGoogleSysUIComponentImpl$SwitchingProvider$24, KeyguardUpdateMonitor keyguardUpdateMonitor, ShadeController shadeController) {
         super(executor, (List) null);
         AnonymousClass1 r4 = new KeyguardUpdateMonitorCallback() {
             public final void onUserSwitching(int i) {
@@ -46,12 +47,12 @@ public final class SetupWizardAction extends Action {
             }
         };
         this.mContext = context;
-        this.mSettingsPackageName = context.getResources().getString(2131953858);
+        this.mSettingsPackageName = context.getResources().getString(2131953815);
         this.mSettingsAction = settingsAction;
         this.mLaunchOpa = launchOpa;
         this.mShadeController = shadeController;
         keyguardUpdateMonitor.registerCallback(r4);
-        KeyguardDeferredSetup create = daggerSysUIGoogleGlobalRootComponent$SysUIGoogleSysUIComponentImpl$SwitchingProvider$30.create(Collections.emptySet());
+        KeyguardDeferredSetup create = daggerSysUIGoogleGlobalRootComponent$SysUIGoogleSysUIComponentImpl$SwitchingProvider$24.create(Collections.emptySet());
         create.activate();
         create.mListener = r0;
         this.mUserCompletedSuw = create.mDeferredSetupComplete;
@@ -69,7 +70,7 @@ public final class SetupWizardAction extends Action {
     }
 
     public final void onTrigger(GestureSensor.DetectionProperties detectionProperties) {
-        this.mShadeController.cancelExpansionAndCollapseShade();
+        ((ShadeControllerImpl) this.mShadeController).cancelExpansionAndCollapseShade();
         triggerFeedbackEffects(detectionProperties);
         if (!this.mUserCompletedSuw && !this.mSettingsAction.isAvailable()) {
             Intent intent = new Intent();

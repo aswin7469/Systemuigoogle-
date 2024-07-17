@@ -10,7 +10,7 @@ import com.android.systemui.plugins.ActivityStarter;
 import com.google.android.systemui.columbus.ColumbusEvent;
 import java.util.Map;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class LaunchApp$onDismissKeyguardAction$1 implements ActivityStarter.OnDismissAction {
     public final /* synthetic */ LaunchApp this$0;
 
@@ -27,14 +27,15 @@ public final class LaunchApp$onDismissKeyguardAction$1 implements ActivityStarte
         UiEventLogger uiEventLogger = launchApp.uiEventLogger;
         String str3 = null;
         if (usingShortcut) {
+            Map map = launchApp.availableShortcuts;
             ComponentName componentName = launchApp.currentApp;
             if (componentName != null) {
                 str = componentName.getPackageName();
             } else {
                 str = null;
             }
-            Map map = (Map) launchApp.availableShortcuts.get(str);
-            if (!(map == null || (shortcutInfo = (ShortcutInfo) map.get(launchApp.currentShortcut)) == null)) {
+            Map map2 = (Map) map.get(str);
+            if (!(map2 == null || (shortcutInfo = (ShortcutInfo) map2.get(launchApp.currentShortcut)) == null)) {
                 ColumbusEvent columbusEvent = ColumbusEvent.COLUMBUS_INVOKED_LAUNCH_SHORTCUT;
                 ComponentName componentName2 = launchApp.currentApp;
                 if (componentName2 != null) {

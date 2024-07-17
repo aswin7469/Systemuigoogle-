@@ -2,13 +2,13 @@ package com.google.android.systemui.columbus.legacy.sensors.config;
 
 import android.content.Context;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class SensorConfiguration {
     public final float defaultSensitivityValue;
     public final float lowSensitivityValue;
 
     public SensorConfiguration(Context context) {
-        this.defaultSensitivityValue = ((float) context.getResources().getInteger(2131427342)) * 0.01f;
-        this.lowSensitivityValue = ((float) context.getResources().getInteger(2131427343)) * 0.01f;
+        this.defaultSensitivityValue = ((float) context.getResources().getInteger(2131427341)) * 0.01f;
+        this.lowSensitivityValue = ((float) context.getResources().getInteger(2131427342)) * 0.01f;
     }
 }

@@ -19,7 +19,7 @@ import com.google.android.setupdesign.util.PartnerStyleHelper;
 import com.google.android.setupdesign.util.TextViewPartnerStyler;
 import java.util.ArrayList;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class HeaderMixin implements Mixin {
     boolean autoTextSizeEnabled = false;
     public float headerAutoSizeLineExtraSpacingInPx;
@@ -37,18 +37,18 @@ public final class HeaderMixin implements Mixin {
         CharSequence text = obtainStyledAttributes.getText(4);
         ColorStateList colorStateList = obtainStyledAttributes.getColorStateList(5);
         obtainStyledAttributes.recycle();
-        if (((TextView) templateLayout2.findViewById(2131363748)) != null) {
-            ((TextView) templateLayout2.findViewById(2131363748)).getTextSize();
-            ((TextView) templateLayout2.findViewById(2131363748)).getLineHeight();
+        if (((TextView) templateLayout2.findManagedViewById(2131363714)) != null) {
+            ((TextView) templateLayout2.findManagedViewById(2131363714)).getTextSize();
+            ((TextView) templateLayout2.findManagedViewById(2131363714)).getLineHeight();
         }
         tryUpdateAutoTextSizeFlagWithPartnerConfig();
-        if (!(text == null || (textView2 = (TextView) templateLayout2.findViewById(2131363748)) == null)) {
+        if (!(text == null || (textView2 = (TextView) templateLayout2.findManagedViewById(2131363714)) == null)) {
             if (this.autoTextSizeEnabled) {
                 autoAdjustTextSize(textView2);
             }
             textView2.setText(text);
         }
-        if (colorStateList != null && (textView = (TextView) templateLayout2.findViewById(2131363748)) != null) {
+        if (colorStateList != null && (textView = (TextView) templateLayout2.findManagedViewById(2131363714)) != null) {
             textView.setTextColor(colorStateList);
         }
     }
@@ -83,14 +83,14 @@ public final class HeaderMixin implements Mixin {
 
     public final void tryApplyPartnerCustomizationStyle() {
         TemplateLayout templateLayout2 = this.templateLayout;
-        TextView textView = (TextView) templateLayout2.findViewById(2131363748);
-        if (PartnerStyleHelper.shouldApplyPartnerResource(templateLayout2)) {
-            View findViewById = templateLayout2.findViewById(2131363772);
-            LayoutStyler.applyPartnerCustomizationExtraPaddingStyle(findViewById);
+        TextView textView = (TextView) templateLayout2.findManagedViewById(2131363714);
+        if (PartnerStyleHelper.shouldApplyPartnerResource((View) templateLayout2)) {
+            View findManagedViewById = templateLayout2.findManagedViewById(2131363738);
+            LayoutStyler.applyPartnerCustomizationExtraPaddingStyle(findManagedViewById);
             if (textView != null) {
                 TextViewPartnerStyler.applyPartnerCustomizationStyle(textView, new TextViewPartnerStyler.TextPartnerConfigs(PartnerConfig.CONFIG_HEADER_TEXT_COLOR, (PartnerConfig) null, PartnerConfig.CONFIG_HEADER_TEXT_SIZE, PartnerConfig.CONFIG_HEADER_FONT_FAMILY, PartnerConfig.CONFIG_HEADER_FONT_WEIGHT, (PartnerConfig) null, PartnerConfig.CONFIG_HEADER_TEXT_MARGIN_TOP, PartnerConfig.CONFIG_HEADER_TEXT_MARGIN_BOTTOM, PartnerStyleHelper.getLayoutGravity(textView.getContext())));
             }
-            ViewGroup viewGroup = (ViewGroup) findViewById;
+            ViewGroup viewGroup = (ViewGroup) findManagedViewById;
             if (viewGroup != null) {
                 Context context = viewGroup.getContext();
                 viewGroup.setBackgroundColor(PartnerConfigHelper.get(context).getColor(context, PartnerConfig.CONFIG_HEADER_AREA_BACKGROUND_COLOR));
@@ -115,7 +115,7 @@ public final class HeaderMixin implements Mixin {
     public final void tryUpdateAutoTextSizeFlagWithPartnerConfig() {
         TemplateLayout templateLayout2 = this.templateLayout;
         Context context = templateLayout2.getContext();
-        if (!PartnerStyleHelper.shouldApplyPartnerResource(templateLayout2)) {
+        if (!PartnerStyleHelper.shouldApplyPartnerResource((View) templateLayout2)) {
             this.autoTextSizeEnabled = false;
             return;
         }

@@ -6,28 +6,30 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.metrics.LogMaker;
+import android.os.Looper;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
 import androidx.appcompat.view.menu.CascadingMenuPopup$$ExternalSyntheticOutline0;
+import com.android.internal.logging.MetricsLogger;
 import com.android.systemui.assist.ui.EdgeLight;
 import com.android.systemui.assist.ui.PathSpecCornerPathRenderer;
 import com.android.systemui.assist.ui.PerimeterPathGuide;
 import com.google.android.systemui.assist.uihints.DisplayUtils;
-import com.google.android.systemui.assist.uihints.edgelights.mode.Gone;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class EdgeLightsView extends View {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final List mAssistInvocationLights;
     public EdgeLight[] mAssistLights;
     public final Set mListeners;
-    public Gone mMode;
+    public Mode mMode;
     public final Paint mPaint;
     public final Path mPath;
     public final PerimeterPathGuide mPerimeterPathGuide;
@@ -37,19 +39,26 @@ public class EdgeLightsView extends View {
         this(context, (AttributeSet) null);
     }
 
-    /* JADX WARNING: type inference failed for: r0v3, types: [java.util.function.Consumer, java.lang.Object] */
-    public final void commitModeTransition(Gone gone) {
-        post(new EdgeLightsView$$ExternalSyntheticLambda2(this, new EdgeLight[0]));
-        this.mMode = gone;
+    /* JADX WARNING: type inference failed for: r0v2, types: [java.util.function.Consumer, java.lang.Object] */
+    public final void commitModeTransition(Mode mode) {
+        mode.start(this, this.mPerimeterPathGuide, this.mMode);
+        this.mMode = mode;
         this.mListeners.forEach(new EdgeLightsView$$ExternalSyntheticLambda0(this, 0));
         ((ArrayList) this.mAssistInvocationLights).forEach(new Object());
         invalidate();
     }
 
+    public final EdgeLight[] getAssistLights() {
+        if (Looper.getMainLooper().isCurrentThread()) {
+            return this.mAssistLights;
+        }
+        throw new IllegalStateException("Must be called from main thread");
+    }
+
     public final void onConfigurationChanged(Configuration configuration) {
         super.onConfigurationChanged(configuration);
         this.mPerimeterPathGuide.setRotation(getContext().getDisplay().getRotation());
-        this.mMode.getClass();
+        this.mMode.onConfigurationChanged();
     }
 
     public final void onDraw(Canvas canvas) {
@@ -101,6 +110,10 @@ public class EdgeLightsView extends View {
         canvas.drawPath(this.mPath, this.mPaint);
     }
 
+    public final void setAssistLights(EdgeLight[] edgeLightArr) {
+        post(new EdgeLightsView$$ExternalSyntheticLambda2(this, edgeLightArr));
+    }
+
     public final void setVisibility(int i) {
         int visibility = getVisibility();
         super.setVisibility(i);
@@ -117,7 +130,7 @@ public class EdgeLightsView extends View {
         this(context, attributeSet, i, 0);
     }
 
-    /* JADX WARNING: type inference failed for: r9v1, types: [java.lang.Object, com.google.android.systemui.assist.uihints.edgelights.mode.Gone] */
+    /* JADX WARNING: type inference failed for: r9v1, types: [com.google.android.systemui.assist.uihints.edgelights.EdgeLightsView$Mode, java.lang.Object] */
     public EdgeLightsView(Context context, AttributeSet attributeSet, int i, int i2) {
         super(context, attributeSet, i, i2);
         int i3;
@@ -165,9 +178,32 @@ public class EdgeLightsView extends View {
         this.mMode = obj;
         commitModeTransition(obj);
         Resources resources = getResources();
-        arrayList.add(new EdgeLight(resources.getColor(2131099894)));
-        arrayList.add(new EdgeLight(resources.getColor(2131099896)));
-        arrayList.add(new EdgeLight(resources.getColor(2131099897)));
-        arrayList.add(new EdgeLight(resources.getColor(2131099895)));
+        arrayList.add(new EdgeLight(resources.getColor(2131099879)));
+        arrayList.add(new EdgeLight(resources.getColor(2131099881)));
+        arrayList.add(new EdgeLight(resources.getColor(2131099882)));
+        arrayList.add(new EdgeLight(resources.getColor(2131099880)));
+    }
+
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
+    public interface Mode {
+        int getSubType();
+
+        void logState() {
+            MetricsLogger.action(new LogMaker(1716).setType(6).setSubtype(getSubType()));
+        }
+
+        void onNewModeRequest(EdgeLightsView edgeLightsView, Mode mode);
+
+        boolean preventsInvocations() {
+            return false;
+        }
+
+        void start(EdgeLightsView edgeLightsView, PerimeterPathGuide perimeterPathGuide, Mode mode);
+
+        void onAudioLevelUpdate(float f) {
+        }
+
+        void onConfigurationChanged() {
+        }
     }
 }

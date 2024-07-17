@@ -2,7 +2,7 @@ package com.google.android.systemui.power.batteryevent.common.data;
 
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class SystemEventData {
     public final EventData batteryLevel;
     public final EventData batteryScale;
@@ -52,12 +52,16 @@ public final class SystemEventData {
         int hashCode5 = this.maxChargingCurrent.hashCode();
         int hashCode6 = this.maxChargingVoltage.hashCode();
         int hashCode7 = this.batteryStatus.hashCode();
-        int hashCode8 = this.halEventData.hashCode();
+        int hashCode8 = this.halEventData.dockDefendStatus.hashCode();
         int hashCode9 = this.settingsEventData.dockDefenderBypass.hashCode();
         return this.frameworkApiEventData.hashCode() + ((hashCode9 + ((hashCode8 + ((hashCode7 + ((hashCode6 + ((hashCode5 + ((hashCode4 + ((hashCode3 + ((hashCode2 + ((hashCode + (this.intentAction.hashCode() * 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31)) * 31);
     }
 
     public final String toString() {
         return "SystemEventData(intentAction=" + this.intentAction + ", plugged=" + this.plugged + ", batteryScale=" + this.batteryScale + ", batteryLevel=" + this.batteryLevel + ", chargingStatus=" + this.chargingStatus + ", maxChargingCurrent=" + this.maxChargingCurrent + ", maxChargingVoltage=" + this.maxChargingVoltage + ", batteryStatus=" + this.batteryStatus + ", halEventData=" + this.halEventData + ", settingsEventData=" + this.settingsEventData + ", frameworkApiEventData=" + this.frameworkApiEventData + ")";
+    }
+
+    public SystemEventData(HalEventData halEventData2, SettingsEventData settingsEventData2, FrameworkApiEventData frameworkApiEventData2) {
+        this("", new EventData(0), new EventData(0), new EventData(0), new EventData(0), new EventData(0), new EventData(0), new EventData(0), halEventData2, settingsEventData2, frameworkApiEventData2);
     }
 }

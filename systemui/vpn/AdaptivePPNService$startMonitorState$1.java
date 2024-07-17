@@ -9,7 +9,7 @@ import com.android.systemui.settings.UserFileManagerImpl;
 import com.android.systemui.settings.UserTrackerImpl;
 import java.util.concurrent.Executor;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class AdaptivePPNService$startMonitorState$1 implements Runnable {
     public final /* synthetic */ AdaptivePPNService this$0;
 
@@ -41,7 +41,7 @@ public final class AdaptivePPNService$startMonitorState$1 implements Runnable {
             pendingRemovalStore.pendingRemoval.add(identifier, vpnNetworkMonitor$broadcastReceiver$1);
         }
         broadcastDispatcher.handler.obtainMessage(2, userHandle.getIdentifier(), 0, vpnNetworkMonitor$broadcastReceiver$1).sendToTarget();
-        Log.i("VpnNetworkMonitor", "NetworkMonitor - destroy, enabled is " + ((UserFileManagerImpl) vpnNetworkMonitor.userFileManager).getSharedPreferences$1(((UserTrackerImpl) vpnNetworkMonitor.userTracker).getUserId(), "network_monitor_index").getBoolean("network_monitor_enabled", true));
+        Log.i("VpnNetworkMonitor", "NetworkMonitor - destroy, enabled is " + ((UserFileManagerImpl) vpnNetworkMonitor.userFileManager).getSharedPreferences$1("network_monitor_index", ((UserTrackerImpl) vpnNetworkMonitor.userTracker).getUserId()).getBoolean("network_monitor_enabled", true));
         VpnPackageMonitor vpnPackageMonitor2 = adaptivePPNService3.vpnPackageMonitor;
         if (vpnPackageMonitor2 == null) {
             vpnPackageMonitor2 = null;
@@ -68,7 +68,7 @@ public final class AdaptivePPNService$startMonitorState$1 implements Runnable {
         }
         vpnNetworkMonitor2.getClass();
         vpnNetworkMonitor2.broadcastDispatcher.registerReceiver(vpnNetworkMonitor2.broadcastReceiver, new IntentFilter("com.google.android.wildlife.action.UPDATE_NETWORK_MONITOR"), vpnNetworkMonitor2.uiExecutor, new UserHandle(-1), 2, "com.google.android.wildlife.permission.UPDATE_NETWORK_MONITOR");
-        boolean z = ((UserFileManagerImpl) vpnNetworkMonitor2.userFileManager).getSharedPreferences$1(((UserTrackerImpl) vpnNetworkMonitor2.userTracker).getUserId(), "network_monitor_index").getBoolean("network_monitor_enabled", true);
+        boolean z = ((UserFileManagerImpl) vpnNetworkMonitor2.userFileManager).getSharedPreferences$1("network_monitor_index", ((UserTrackerImpl) vpnNetworkMonitor2.userTracker).getUserId()).getBoolean("network_monitor_enabled", true);
         Log.i("VpnNetworkMonitor", "NetworkMonitor - create, enabled is " + z);
         if (z) {
             vpnNetworkMonitor2.registerNetworkCallback();
@@ -80,7 +80,7 @@ public final class AdaptivePPNService$startMonitorState$1 implements Runnable {
         }
         vpnPackageMonitor.getClass();
         vpnPackageMonitor.broadcastDispatcher.registerReceiver(vpnPackageMonitor.wildlifeFeatureBroadcastReceiver, new IntentFilter("com.google.android.wildlife.action.UPDATE_PACKAGE_MONITOR"), (Executor) null, new UserHandle(-1), 2, "com.google.android.wildlife.permission.UPDATE_PACKAGE_MONITOR");
-        boolean z2 = ((UserFileManagerImpl) vpnPackageMonitor.userFileManager).getSharedPreferences$1(((UserTrackerImpl) vpnPackageMonitor.userTracker).getUserId(), "package_monitor_index").getBoolean("package_monitor_enabled", true);
+        boolean z2 = ((UserFileManagerImpl) vpnPackageMonitor.userFileManager).getSharedPreferences$1("package_monitor_index", ((UserTrackerImpl) vpnPackageMonitor.userTracker).getUserId()).getBoolean("package_monitor_enabled", true);
         Log.i("VpnPackageMonitor", "isPackageMonitorEnabled is " + z2);
         if (z2) {
             vpnPackageMonitor.registerPackageMonitorReceiver();

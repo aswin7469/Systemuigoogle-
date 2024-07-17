@@ -1,26 +1,18 @@
 package com.google.android.systemui.power;
 
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
-import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
-import androidx.core.app.NotificationCompat$Builder;
-import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import com.android.internal.logging.UiEventLogger;
-import com.android.keyguard.logging.BiometricUnlockLogger$logCalculateModeForFingerprintUnlockingAllowed$2$$ExternalSyntheticOutline0;
-import com.android.systemui.power.BatteryWarningEvents$LowBatteryWarningEvent;
+import com.android.systemui.statusbar.phone.SystemUIDialog;
 import com.android.systemui.util.settings.GlobalSettings;
-import com.google.android.systemui.power.batteryevent.aidl.BatteryEventType;
-import java.text.NumberFormat;
 import java.util.List;
 import java.util.concurrent.Executor;
 import kotlin.collections.EmptyList;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class LowPowerWarningsController {
     public final Context context;
     public final Executor executor;
@@ -34,16 +26,15 @@ public final class LowPowerWarningsController {
     public List prevBatteryEventTypes = EmptyList.INSTANCE;
     public Integer prevBatteryLevel;
     public Boolean prevPowerSaveEnabledAsync;
-    public final SevereLowBatteryNotification severeLowBatteryNotification;
-    public boolean severeLowBatteryNotificationCancelled;
+    public final SevereLowBatteryDialog severeLowBatteryDialog;
     public boolean severeLowBatterySectionEntered;
     public final UiEventLogger uiEventLogger;
 
-    public LowPowerWarningsController(Context context2, SevereLowBatteryNotification severeLowBatteryNotification2, GlobalSettings globalSettings2, UiEventLogger uiEventLogger2, Executor executor2) {
+    public LowPowerWarningsController(Context context2, SevereLowBatteryDialog severeLowBatteryDialog2, GlobalSettings globalSettings2, UiEventLogger uiEventLogger2, Executor executor2) {
         LowBatteryNotification lowBatteryNotification2 = new LowBatteryNotification(context2);
         ExtremeLowBatteryNotification extremeLowBatteryNotification = new ExtremeLowBatteryNotification(context2, uiEventLogger2);
         this.context = context2;
-        this.severeLowBatteryNotification = severeLowBatteryNotification2;
+        this.severeLowBatteryDialog = severeLowBatteryDialog2;
         this.globalSettings = globalSettings2;
         this.uiEventLogger = uiEventLogger2;
         this.executor = executor2;
@@ -62,15 +53,15 @@ public final class LowPowerWarningsController {
         }
         if (this.severeLowBatterySectionEntered) {
             Log.d("LowPowerWarningsController", "cancelNotification->severeLowBatterySection");
-            SevereLowBatteryNotification severeLowBatteryNotification2 = this.severeLowBatteryNotification;
-            severeLowBatteryNotification2.getClass();
-            Log.d("SevereLowBatteryNotification", "cancel()");
-            ((NotificationManager) severeLowBatteryNotification2.notificationManager$delegate.getValue()).cancelAsUser("low_battery", 3, UserHandle.ALL);
-            this.severeLowBatteryNotificationCancelled = true;
+            SevereLowBatteryDialog severeLowBatteryDialog2 = this.severeLowBatteryDialog;
+            SystemUIDialog systemUIDialog = severeLowBatteryDialog2.mSevereBatteryDialog;
+            if (systemUIDialog != null && systemUIDialog.isShowing()) {
+                severeLowBatteryDialog2.mSevereBatteryDialog.dismiss();
+            }
         }
         if (this.extremeLowBatterySectionEntered) {
             Log.d("LowPowerWarningsController", "cancelNotification->extremeLowBatterySection");
-            this.extremeLowNotification.mNotificationManager.cancelAsUser("low_battery", 2131952541, UserHandle.ALL);
+            this.extremeLowNotification.mNotificationManager.cancelAsUser("low_battery", 2131952516, UserHandle.ALL);
         }
     }
 
@@ -83,180 +74,301 @@ public final class LowPowerWarningsController {
     }
 
     /* JADX WARNING: type inference failed for: r5v2, types: [java.lang.Object, androidx.core.app.NotificationCompat$BigTextStyle] */
-    /* JADX WARNING: type inference failed for: r1v21, types: [java.lang.Object, androidx.core.app.NotificationCompat$BigTextStyle] */
-    public final void onBatteryEventUpdate(int i, List list) {
-        boolean z;
-        boolean z2;
-        int i2;
-        int i3;
-        boolean z3;
-        int i4;
-        int i5 = i;
-        List list2 = list;
-        this.prevBatteryLevel = Integer.valueOf(i);
-        this.prevBatteryEventTypes = list2;
-        boolean z4 = this.lowBatterySectionEntered;
-        boolean z5 = false;
-        if ((z4 || this.lowBatteryNotificationCancelled || this.severeLowBatterySectionEntered || this.severeLowBatteryNotificationCancelled) && i5 >= 30) {
-            boolean z6 = this.lowBatteryNotificationCancelled;
-            boolean z7 = this.severeLowBatterySectionEntered;
-            boolean z8 = this.severeLowBatteryNotificationCancelled;
-            StringBuilder sb = new StringBuilder("reset section guard for low/severe low. batteryLevel:");
-            sb.append(i5);
-            sb.append(" | lowBatterySectionEntered:");
-            sb.append(z4);
-            sb.append(" -> false, lowBatteryNotificationCancelled:");
-            BiometricUnlockLogger$logCalculateModeForFingerprintUnlockingAllowed$2$$ExternalSyntheticOutline0.m(sb, z6, " -> false, severeLowBatterySectionEntered:", z7, " -> falsesevereLowBatteryNotificationCancelled:");
-            sb.append(z8);
-            sb.append(" -> false");
-            Log.d("LowPowerWarningsController", sb.toString());
-            this.lowBatterySectionEntered = false;
-            this.lowBatteryNotificationCancelled = false;
-            this.severeLowBatterySectionEntered = false;
-            this.severeLowBatteryNotificationCancelled = false;
-        }
-        boolean z9 = this.extremeLowBatterySectionEntered;
-        ExtremeLowBatteryNotification extremeLowBatteryNotification = this.extremeLowNotification;
-        if (z9 && i5 >= 4) {
-            ExifInterface$$ExternalSyntheticOutline0.m("reset section guard for extreme low. batteryLevel:", "LowPowerWarningsController", i5);
-            this.extremeLowBatterySectionEntered = false;
-            extremeLowBatteryNotification.mNotificationManager.cancelAsUser("low_battery", 2131952541, UserHandle.ALL);
-        }
-        if (!list.isEmpty()) {
-            boolean contains = list2.contains(BatteryEventType.LOW_BATTERY);
-            GlobalSettings globalSettings2 = this.globalSettings;
-            LowBatteryNotification lowBatteryNotification2 = this.lowBatteryNotification;
-            Context context2 = this.context;
-            PowerManager powerManager2 = this.powerManager;
-            if (!contains) {
-                boolean contains2 = list2.contains(BatteryEventType.SEVERE_LOW_BATTERY);
-                SevereLowBatteryNotification severeLowBatteryNotification2 = this.severeLowBatteryNotification;
-                if (contains2) {
-                    if (this.severeLowBatteryNotificationCancelled) {
-                        Log.d("LowPowerWarningsController", "notification has been canceled, skip showing notification");
-                    } else if (globalSettings2.getInt(1, "low_power_mode_reminder_enabled") == 0) {
-                        Log.d("LowPowerWarningsController", "battery saver reminder has been disabled, skip showing notification");
-                    } else if (PowerUtils.isFlipendoEnabled(context2.getContentResolver())) {
-                        Log.d("LowPowerWarningsController", "EBS has been enabled, skip showing notification");
-                    } else {
-                        if (!this.severeLowBatterySectionEntered) {
-                            this.severeLowBatterySectionEntered = true;
-                            lowBatteryNotification2.mNotificationManager.cancelAsUser("low_battery", 3, UserHandle.ALL);
-                            this.lowBatteryNotificationCancelled = true;
-                            z = false;
-                        } else {
-                            z = true;
-                        }
-                        if (isScheduledByPercentage() || (powerManager2 != null && powerManager2.isPowerSaveMode())) {
-                            z2 = true;
-                        } else {
-                            z2 = false;
-                        }
-                        severeLowBatteryNotification2.getClass();
-                        Log.d("SevereLowBatteryNotification", "show() batteryLevel:" + i5 + ", scheduled:" + z2 + ", subsequenceEvent:" + z);
-                        Context context3 = severeLowBatteryNotification2.context;
-                        String string = context3.getString(2131953867, new Object[]{NumberFormat.getPercentInstance().format(((double) i5) * 0.01d)});
-                        if (z2) {
-                            i2 = 2131953865;
-                        } else {
-                            i2 = 2131953866;
-                        }
-                        String string2 = context3.getString(i2);
-                        if (z2) {
-                            i3 = 2131953868;
-                        } else {
-                            i3 = 2131951981;
-                        }
-                        PendingIntent createPendingIntent = PowerUtils.createPendingIntent(context3, "systemui.power.action.START_FLIPENDO");
-                        NotificationCompat$Builder notificationCompat$Builder = new NotificationCompat$Builder(context3);
-                        notificationCompat$Builder.mNotification.icon = 2131233010;
-                        notificationCompat$Builder.mContentTitle = NotificationCompat$Builder.limitCharSequenceLength(string);
-                        notificationCompat$Builder.mContentText = NotificationCompat$Builder.limitCharSequenceLength(string2);
-                        ? obj = new Object();
-                        obj.mBigText = NotificationCompat$Builder.limitCharSequenceLength(string2);
-                        notificationCompat$Builder.setStyle(obj);
-                        notificationCompat$Builder.mNotification.deleteIntent = PowerUtils.createPendingIntent(context3, "PNW.dismissedWarning");
-                        notificationCompat$Builder.mVisibility = 1;
-                        notificationCompat$Builder.addAction(context3.getString(i3), createPendingIntent);
-                        notificationCompat$Builder.mLocalOnly = true;
-                        if (z) {
-                            notificationCompat$Builder.setFlag(8, true);
-                        }
-                        PowerUtils.overrideNotificationAppName(context3, notificationCompat$Builder);
-                        ((NotificationManager) severeLowBatteryNotification2.notificationManager$delegate.getValue()).notifyAsUser("low_battery", 3, notificationCompat$Builder.build(), UserHandle.ALL);
-                        severeLowBatteryNotification2.uiEventLogger.log(BatteryMetricEvent.SEVERE_BATTERY_DIALOG);
-                    }
-                } else if (list2.contains(BatteryEventType.EXTREME_LOW_BATTERY) && !this.extremeLowBatterySectionEntered) {
-                    this.extremeLowBatterySectionEntered = true;
-                    NotificationManager notificationManager = lowBatteryNotification2.mNotificationManager;
-                    UserHandle userHandle = UserHandle.ALL;
-                    notificationManager.cancelAsUser("low_battery", 3, userHandle);
-                    this.lowBatteryNotificationCancelled = true;
-                    severeLowBatteryNotification2.getClass();
-                    Log.d("SevereLowBatteryNotification", "cancel()");
-                    ((NotificationManager) severeLowBatteryNotification2.notificationManager$delegate.getValue()).cancelAsUser("low_battery", 3, userHandle);
-                    this.severeLowBatteryNotificationCancelled = true;
-                    Context context4 = extremeLowBatteryNotification.mContext;
-                    String string3 = context4.getString(2131952541);
-                    String string4 = context4.getString(2131952540);
-                    NotificationCompat$Builder notificationCompat$Builder2 = new NotificationCompat$Builder(context4);
-                    notificationCompat$Builder2.mNotification.icon = 2131232473;
-                    ? obj2 = new Object();
-                    obj2.mBigText = NotificationCompat$Builder.limitCharSequenceLength(string4);
-                    notificationCompat$Builder2.setStyle(obj2);
-                    notificationCompat$Builder2.mContentText = NotificationCompat$Builder.limitCharSequenceLength(string4);
-                    notificationCompat$Builder2.mContentTitle = NotificationCompat$Builder.limitCharSequenceLength(string3);
-                    notificationCompat$Builder2.mVisibility = 1;
-                    PowerUtils.overrideNotificationAppName(context4, notificationCompat$Builder2);
-                    extremeLowBatteryNotification.mNotificationManager.notifyAsUser("low_battery", 2131952541, notificationCompat$Builder2.build(), userHandle);
-                    UiEventLogger uiEventLogger2 = extremeLowBatteryNotification.mUiEventLogger;
-                    if (uiEventLogger2 != null) {
-                        uiEventLogger2.log(BatteryMetricEvent.EXTREME_LOW_BATTERY_NOTIFICATION);
-                    }
-                }
-            } else if (this.lowBatteryNotificationCancelled) {
-                Log.d("LowPowerWarningsController", "not showing notification -> notificationCanceled: true");
-            } else if (globalSettings2.getInt(1, "low_power_mode_reminder_enabled") == 0) {
-                Log.d("LowPowerWarningsController", "not showing notification -> isBatterySaverReminderDisabled: true");
-            } else if (isScheduledByPercentage()) {
-                Log.d("LowPowerWarningsController", "not showing notification -> isScheduledByPercentage: true");
-            } else if (powerManager2 == null || !powerManager2.isPowerSaveMode()) {
-                if (!this.lowBatterySectionEntered) {
-                    this.lowBatterySectionEntered = true;
-                    this.uiEventLogger.log(BatteryWarningEvents$LowBatteryWarningEvent.LOW_BATTERY_NOTIFICATION);
-                    z3 = true;
-                } else {
-                    z3 = false;
-                }
-                Bundle call = context2.getApplicationContext().getContentResolver().call("com.google.android.flipendo.api", "get_flipendo_state", (String) null, (Bundle) null);
-                if (call == null) {
-                    Log.w("LowPowerWarningsController", "contentResolver call Flipendo FLIPENDO_STATE_METHOD failed");
-                } else {
-                    z5 = call.getBoolean("is_flipendo_aggressive", false);
-                }
-                lowBatteryNotification2.getClass();
-                Context context5 = lowBatteryNotification2.mContext;
-                String string5 = context5.getString(2131953028, new Object[]{NumberFormat.getPercentInstance().format(((double) i5) * 0.01d)});
-                if (z5) {
-                    i4 = 2131953027;
-                } else {
-                    i4 = 2131953026;
-                }
-                String string6 = context5.getString(i4);
-                NotificationCompat$Builder notificationCompat$Builder3 = new NotificationCompat$Builder(context5);
-                notificationCompat$Builder3.mNotification.icon = 2131233010;
-                notificationCompat$Builder3.mContentText = NotificationCompat$Builder.limitCharSequenceLength(string6);
-                notificationCompat$Builder3.mContentTitle = NotificationCompat$Builder.limitCharSequenceLength(string5);
-                notificationCompat$Builder3.setFlag(8, !z3);
-                notificationCompat$Builder3.mNotification.deleteIntent = PowerUtils.createPendingIntent(context5, "PNW.dismissedWarning");
-                notificationCompat$Builder3.mVisibility = 1;
-                notificationCompat$Builder3.addAction(context5.getString(2131951981), PowerUtils.createPendingIntent(context5, "PNW.startSaver"));
-                notificationCompat$Builder3.mLocalOnly = true;
-                PowerUtils.overrideNotificationAppName(context5, notificationCompat$Builder3);
-                lowBatteryNotification2.mNotificationManager.notifyAsUser("low_battery", 3, notificationCompat$Builder3.build(), UserHandle.ALL);
-            } else {
-                Log.d("LowPowerWarningsController", "not showing notification -> isPowerSaveMode: true");
-            }
-        }
+    /* JADX WARNING: Code restructure failed: missing block: B:72:0x01d7, code lost:
+        if (r4.mIDreamManager.isDreaming() != false) goto L_0x01d9;
+     */
+    /* Code decompiled incorrectly, please refer to instructions dump. */
+    public final void onBatteryEventUpdate(int r17, java.util.List r18) {
+        /*
+            r16 = this;
+            r0 = r16
+            r1 = r17
+            r2 = r18
+            java.lang.Integer r3 = java.lang.Integer.valueOf(r17)
+            r0.prevBatteryLevel = r3
+            r0.prevBatteryEventTypes = r2
+            boolean r3 = r0.lowBatteryNotificationCancelled
+            r4 = 0
+            java.lang.String r5 = "LowPowerWarningsController"
+            if (r3 != 0) goto L_0x001d
+            boolean r6 = r0.lowBatterySectionEntered
+            if (r6 != 0) goto L_0x001d
+            boolean r6 = r0.severeLowBatterySectionEntered
+            if (r6 == 0) goto L_0x0059
+        L_0x001d:
+            r6 = 30
+            if (r1 < r6) goto L_0x0059
+            boolean r6 = r0.lowBatterySectionEntered
+            boolean r7 = r0.severeLowBatterySectionEntered
+            java.lang.StringBuilder r8 = new java.lang.StringBuilder
+            java.lang.String r9 = "reset section guard for low/severe low. batteryLevel:"
+            r8.<init>(r9)
+            r8.append(r1)
+            java.lang.String r9 = " | mLowBatteryNotificationCancelled:"
+            r8.append(r9)
+            r8.append(r3)
+            java.lang.String r3 = " -> false, mLowBatterySectionEntered:"
+            r8.append(r3)
+            r8.append(r6)
+            java.lang.String r3 = " -> false, mSevereLowBatterySectionEntered:"
+            r8.append(r3)
+            r8.append(r7)
+            java.lang.String r3 = " -> false"
+            r8.append(r3)
+            java.lang.String r3 = r8.toString()
+            android.util.Log.d(r5, r3)
+            r0.lowBatteryNotificationCancelled = r4
+            r0.lowBatterySectionEntered = r4
+            r0.severeLowBatterySectionEntered = r4
+        L_0x0059:
+            boolean r3 = r0.extremeLowBatterySectionEntered
+            r6 = 2131952516(0x7f130384, float:1.9541477E38)
+            java.lang.String r7 = "low_battery"
+            com.google.android.systemui.power.ExtremeLowBatteryNotification r8 = r0.extremeLowNotification
+            if (r3 == 0) goto L_0x0075
+            r3 = 4
+            if (r1 < r3) goto L_0x0075
+            java.lang.String r3 = "reset section guard for extreme low. batteryLevel:"
+            androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0.m(r3, r1, r5)
+            r0.extremeLowBatterySectionEntered = r4
+            android.app.NotificationManager r3 = r8.mNotificationManager
+            android.os.UserHandle r9 = android.os.UserHandle.ALL
+            r3.cancelAsUser(r7, r6, r9)
+        L_0x0075:
+            boolean r3 = r18.isEmpty()
+            if (r3 == 0) goto L_0x007c
+            return
+        L_0x007c:
+            com.google.android.systemui.power.batteryevent.aidl.BatteryEventType r3 = com.google.android.systemui.power.batteryevent.aidl.BatteryEventType.LOW_BATTERY
+            boolean r3 = r2.contains(r3)
+            java.lang.String r9 = "low_power_mode_reminder_enabled"
+            com.android.systemui.util.settings.GlobalSettings r10 = r0.globalSettings
+            r11 = 3
+            com.google.android.systemui.power.LowBatteryNotification r12 = r0.lowBatteryNotification
+            r13 = 1
+            r14 = 17039674(0x104013a, float:2.424545E-38)
+            android.os.PowerManager r15 = r0.powerManager
+            if (r3 == 0) goto L_0x016b
+            boolean r2 = r0.lowBatteryNotificationCancelled
+            if (r2 == 0) goto L_0x009c
+            java.lang.String r0 = "not showing notification -> notificationCanceled: true"
+            android.util.Log.d(r5, r0)
+            goto L_0x0272
+        L_0x009c:
+            int r2 = r10.getInt(r13, r9)
+            if (r2 != 0) goto L_0x00a9
+            java.lang.String r0 = "not showing notification -> isBatterySaverReminderDisabled: true"
+            android.util.Log.d(r5, r0)
+            goto L_0x0272
+        L_0x00a9:
+            boolean r2 = r16.isScheduledByPercentage()
+            if (r2 == 0) goto L_0x00b6
+            java.lang.String r0 = "not showing notification -> isScheduledByPercentage: true"
+            android.util.Log.d(r5, r0)
+            goto L_0x0272
+        L_0x00b6:
+            if (r15 == 0) goto L_0x00c5
+            boolean r2 = r15.isPowerSaveMode()
+            if (r2 != r13) goto L_0x00c5
+            java.lang.String r0 = "not showing notification -> isPowerSaveMode: true"
+            android.util.Log.d(r5, r0)
+            goto L_0x0272
+        L_0x00c5:
+            boolean r2 = r0.lowBatterySectionEntered
+            if (r2 != 0) goto L_0x00d4
+            r0.lowBatterySectionEntered = r13
+            com.android.systemui.power.BatteryWarningEvents$LowBatteryWarningEvent r2 = com.android.systemui.power.BatteryWarningEvents$LowBatteryWarningEvent.LOW_BATTERY_NOTIFICATION
+            com.android.internal.logging.UiEventLogger r3 = r0.uiEventLogger
+            r3.log(r2)
+            r2 = r13
+            goto L_0x00d5
+        L_0x00d4:
+            r2 = r4
+        L_0x00d5:
+            android.content.Context r0 = r0.context
+            android.content.Context r0 = r0.getApplicationContext()
+            android.content.ContentResolver r0 = r0.getContentResolver()
+            java.lang.String r3 = "get_flipendo_state"
+            r6 = 0
+            java.lang.String r8 = "com.google.android.flipendo.api"
+            android.os.Bundle r0 = r0.call(r8, r3, r6, r6)
+            if (r0 != 0) goto L_0x00f0
+            java.lang.String r0 = "contentResolver call Flipendo FLIPENDO_STATE_METHOD failed"
+            android.util.Log.w(r5, r0)
+            goto L_0x00f6
+        L_0x00f0:
+            java.lang.String r3 = "is_flipendo_aggressive"
+            boolean r4 = r0.getBoolean(r3, r4)
+        L_0x00f6:
+            r12.getClass()
+            java.text.NumberFormat r0 = java.text.NumberFormat.getPercentInstance()
+            double r5 = (double) r1
+            r8 = 4576918229304087675(0x3f847ae147ae147b, double:0.01)
+            double r5 = r5 * r8
+            java.lang.String r0 = r0.format(r5)
+            java.lang.Object[] r0 = new java.lang.Object[]{r0}
+            android.content.Context r1 = r12.mContext
+            r3 = 2131952992(0x7f130560, float:1.9542442E38)
+            java.lang.String r0 = r1.getString(r3, r0)
+            if (r4 == 0) goto L_0x011b
+            r3 = 2131952991(0x7f13055f, float:1.954244E38)
+            goto L_0x011e
+        L_0x011b:
+            r3 = 2131952990(0x7f13055e, float:1.9542438E38)
+        L_0x011e:
+            java.lang.String r3 = r1.getString(r3)
+            androidx.core.app.NotificationCompat$Builder r4 = new androidx.core.app.NotificationCompat$Builder
+            r4.<init>(r1)
+            android.app.Notification r5 = r4.mNotification
+            r6 = 2131232967(0x7f0808c7, float:1.8082058E38)
+            r5.icon = r6
+            java.lang.CharSequence r3 = androidx.core.app.NotificationCompat$Builder.limitCharSequenceLength(r3)
+            r4.mContentText = r3
+            java.lang.CharSequence r0 = androidx.core.app.NotificationCompat$Builder.limitCharSequenceLength(r0)
+            r4.mContentTitle = r0
+            r0 = r2 ^ 1
+            r2 = 8
+            r4.setFlag(r2, r0)
+            java.lang.String r0 = "PNW.dismissedWarning"
+            android.app.PendingIntent r0 = com.google.android.systemui.power.PowerUtils.createPendingIntent(r1, r0)
+            r5.deleteIntent = r0
+            r4.mVisibility = r13
+            r0 = 2131951971(0x7f130163, float:1.9540372E38)
+            java.lang.String r0 = r1.getString(r0)
+            java.lang.String r2 = "PNW.startSaver"
+            android.app.PendingIntent r2 = com.google.android.systemui.power.PowerUtils.createPendingIntent(r1, r2)
+            r4.addAction(r0, r2)
+            com.google.android.systemui.power.PowerUtils.overrideNotificationAppName(r1, r4, r14)
+            android.app.NotificationManager r0 = r12.mNotificationManager
+            android.app.Notification r1 = r4.build()
+            android.os.UserHandle r2 = android.os.UserHandle.ALL
+            r0.notifyAsUser(r7, r11, r1, r2)
+            goto L_0x0272
+        L_0x016b:
+            com.google.android.systemui.power.batteryevent.aidl.BatteryEventType r3 = com.google.android.systemui.power.batteryevent.aidl.BatteryEventType.SEVERE_LOW_BATTERY
+            boolean r3 = r2.contains(r3)
+            com.google.android.systemui.power.SevereLowBatteryDialog r4 = r0.severeLowBatteryDialog
+            if (r3 == 0) goto L_0x0202
+            int r2 = r10.getInt(r13, r9)
+            if (r2 != 0) goto L_0x0182
+            java.lang.String r0 = "isBatterySaverReminderDisabled: true"
+            android.util.Log.d(r5, r0)
+            goto L_0x0272
+        L_0x0182:
+            boolean r2 = r0.severeLowBatterySectionEntered
+            if (r2 != 0) goto L_0x0272
+            r0.severeLowBatterySectionEntered = r13
+            boolean r2 = r16.isScheduledByPercentage()
+            if (r2 != 0) goto L_0x0199
+            if (r15 == 0) goto L_0x0197
+            boolean r2 = r15.isPowerSaveMode()
+            if (r2 == 0) goto L_0x0197
+            goto L_0x0199
+        L_0x0197:
+            r2 = 0
+            goto L_0x019a
+        L_0x0199:
+            r2 = r13
+        L_0x019a:
+            android.app.NotificationManager r3 = r12.mNotificationManager
+            android.os.UserHandle r5 = android.os.UserHandle.ALL
+            r3.cancelAsUser(r7, r11, r5)
+            r0.lowBatteryNotificationCancelled = r13
+            com.android.systemui.statusbar.phone.SystemUIDialog r0 = r4.mSevereBatteryDialog
+            java.lang.String r3 = "SevereLowBatteryDialog"
+            if (r0 == 0) goto L_0x01b6
+            boolean r0 = r0.isShowing()
+            if (r0 == 0) goto L_0x01b6
+            java.lang.String r0 = "showSevereBatteryDialog: already showing"
+            android.util.Log.d(r3, r0)
+            goto L_0x0272
+        L_0x01b6:
+            com.android.systemui.statusbar.policy.KeyguardStateController r0 = r4.mKeyguardStateController
+            if (r0 == 0) goto L_0x01c0
+            com.android.systemui.statusbar.policy.KeyguardStateControllerImpl r0 = (com.android.systemui.statusbar.policy.KeyguardStateControllerImpl) r0
+            boolean r0 = r0.mShowing
+            if (r0 != 0) goto L_0x01d9
+        L_0x01c0:
+            java.lang.Class<android.os.PowerManager> r0 = android.os.PowerManager.class
+            android.content.Context r5 = r4.mContext
+            java.lang.Object r0 = r5.getSystemService(r0)
+            android.os.PowerManager r0 = (android.os.PowerManager) r0
+            boolean r0 = r0.isInteractive()
+            if (r0 != 0) goto L_0x01d1
+            goto L_0x01d9
+        L_0x01d1:
+            android.service.dreams.IDreamManager r0 = r4.mIDreamManager     // Catch:{ RemoteException -> 0x01e0 }
+            boolean r0 = r0.isDreaming()     // Catch:{ RemoteException -> 0x01e0 }
+            if (r0 == 0) goto L_0x01e6
+        L_0x01d9:
+            java.lang.String r0 = "showSevereBatteryDialog: device is not active"
+            android.util.Log.d(r3, r0)
+            goto L_0x0272
+        L_0x01e0:
+            r0 = move-exception
+            java.lang.String r6 = "mIDreamManager.isDreaming()"
+            android.util.Log.e(r3, r6, r0)
+        L_0x01e6:
+            android.content.ContentResolver r0 = r5.getContentResolver()
+            boolean r0 = com.google.android.systemui.power.PowerUtils.isFlipendoEnabled(r0)
+            if (r0 == 0) goto L_0x01f7
+            java.lang.String r0 = "showSevereBatteryDialog: EBS is enabled"
+            android.util.Log.d(r3, r0)
+            goto L_0x0272
+        L_0x01f7:
+            android.os.Handler r0 = r4.mHandler
+            com.google.android.systemui.power.SevereLowBatteryDialog$$ExternalSyntheticLambda0 r3 = new com.google.android.systemui.power.SevereLowBatteryDialog$$ExternalSyntheticLambda0
+            r3.<init>(r4, r1, r2)
+            r0.post(r3)
+            goto L_0x0272
+        L_0x0202:
+            com.google.android.systemui.power.batteryevent.aidl.BatteryEventType r1 = com.google.android.systemui.power.batteryevent.aidl.BatteryEventType.EXTREME_LOW_BATTERY
+            boolean r1 = r2.contains(r1)
+            if (r1 == 0) goto L_0x0272
+            boolean r1 = r0.extremeLowBatterySectionEntered
+            if (r1 != 0) goto L_0x0272
+            r0.extremeLowBatterySectionEntered = r13
+            android.app.NotificationManager r1 = r12.mNotificationManager
+            android.os.UserHandle r2 = android.os.UserHandle.ALL
+            r1.cancelAsUser(r7, r11, r2)
+            r0.lowBatteryNotificationCancelled = r13
+            com.android.systemui.statusbar.phone.SystemUIDialog r0 = r4.mSevereBatteryDialog
+            if (r0 == 0) goto L_0x0228
+            boolean r0 = r0.isShowing()
+            if (r0 == 0) goto L_0x0228
+            com.android.systemui.statusbar.phone.SystemUIDialog r0 = r4.mSevereBatteryDialog
+            r0.dismiss()
+        L_0x0228:
+            android.content.Context r0 = r8.mContext
+            java.lang.String r1 = r0.getString(r6)
+            r3 = 2131952515(0x7f130383, float:1.9541475E38)
+            java.lang.String r3 = r0.getString(r3)
+            androidx.core.app.NotificationCompat$Builder r4 = new androidx.core.app.NotificationCompat$Builder
+            r4.<init>(r0)
+            android.app.Notification r5 = r4.mNotification
+            r9 = 2131232459(0x7f0806cb, float:1.8081028E38)
+            r5.icon = r9
+            androidx.core.app.NotificationCompat$BigTextStyle r5 = new androidx.core.app.NotificationCompat$BigTextStyle
+            r5.<init>()
+            java.lang.CharSequence r9 = androidx.core.app.NotificationCompat$Builder.limitCharSequenceLength(r3)
+            r5.mBigText = r9
+            r4.setStyle(r5)
+            java.lang.CharSequence r3 = androidx.core.app.NotificationCompat$Builder.limitCharSequenceLength(r3)
+            r4.mContentText = r3
+            java.lang.CharSequence r1 = androidx.core.app.NotificationCompat$Builder.limitCharSequenceLength(r1)
+            r4.mContentTitle = r1
+            r4.mVisibility = r13
+            com.google.android.systemui.power.PowerUtils.overrideNotificationAppName(r0, r4, r14)
+            android.app.NotificationManager r0 = r8.mNotificationManager
+            android.app.Notification r1 = r4.build()
+            r0.notifyAsUser(r7, r6, r1, r2)
+            com.android.internal.logging.UiEventLogger r0 = r8.mUiEventLogger
+            if (r0 == 0) goto L_0x0272
+            com.google.android.systemui.power.BatteryMetricEvent r1 = com.google.android.systemui.power.BatteryMetricEvent.EXTREME_LOW_BATTERY_NOTIFICATION
+            r0.log(r1)
+        L_0x0272:
+            return
+        */
+        throw new UnsupportedOperationException("Method not decompiled: com.google.android.systemui.power.LowPowerWarningsController.onBatteryEventUpdate(int, java.util.List):void");
     }
 }

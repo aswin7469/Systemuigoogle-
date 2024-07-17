@@ -9,7 +9,7 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 final class ContentFetcher$fetchStringSecureSetting$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ String $defaultValue;
     final /* synthetic */ String $settingKey;
@@ -18,7 +18,7 @@ final class ContentFetcher$fetchStringSecureSetting$2 extends SuspendLambda impl
     final /* synthetic */ ContentFetcher this$0;
 
     /* JADX INFO: super call moved to the top of the method (can break code semantics) */
-    public ContentFetcher$fetchStringSecureSetting$2(ContentFetcher contentFetcher, String str, int i, String str2, Continuation continuation) {
+    public ContentFetcher$fetchStringSecureSetting$2(int i, ContentFetcher contentFetcher, String str, String str2, Continuation continuation) {
         super(2, continuation);
         this.this$0 = contentFetcher;
         this.$settingKey = str;
@@ -27,7 +27,7 @@ final class ContentFetcher$fetchStringSecureSetting$2 extends SuspendLambda impl
     }
 
     public final Continuation create(Object obj, Continuation continuation) {
-        return new ContentFetcher$fetchStringSecureSetting$2(this.this$0, this.$settingKey, this.$userId, this.$defaultValue, continuation);
+        return new ContentFetcher$fetchStringSecureSetting$2(this.$userId, this.this$0, this.$settingKey, this.$defaultValue, continuation);
     }
 
     public final Object invoke(Object obj, Object obj2) {

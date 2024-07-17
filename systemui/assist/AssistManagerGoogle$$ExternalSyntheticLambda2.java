@@ -1,10 +1,10 @@
 package com.google.android.systemui.assist;
 
 import android.content.ComponentName;
-import com.android.systemui.assist.AssistManager$UiController;
+import com.android.systemui.assist.AssistManager;
 import com.google.android.systemui.assist.uihints.AssistantPresenceHandler;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final /* synthetic */ class AssistManagerGoogle$$ExternalSyntheticLambda2 implements Runnable {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Object f$0;
@@ -20,6 +20,12 @@ public final /* synthetic */ class AssistManagerGoogle$$ExternalSyntheticLambda2
         Object obj = this.f$0;
         switch (i) {
             case 0:
+                ((AssistManager.UiController) obj).hide();
+                return;
+            case 1:
+                ((AssistManager.UiController) obj).hide();
+                return;
+            default:
                 AssistManagerGoogle assistManagerGoogle = (AssistManagerGoogle) obj;
                 AssistantPresenceHandler assistantPresenceHandler = assistManagerGoogle.mAssistantPresenceHandler;
                 ComponentName assistComponentForUser = assistantPresenceHandler.mAssistUtils.getAssistComponentForUser(-2);
@@ -28,11 +34,8 @@ public final /* synthetic */ class AssistManagerGoogle$$ExternalSyntheticLambda2
                 } else {
                     z = true;
                 }
-                assistantPresenceHandler.updateAssistantPresence(z, assistantPresenceHandler.mNgaIsAssistant);
+                assistantPresenceHandler.updateAssistantPresence(z, assistantPresenceHandler.mNgaIsAssistant, assistantPresenceHandler.mSysUiIsNgaUi);
                 assistManagerGoogle.mCheckAssistantStatus = false;
-                return;
-            default:
-                ((AssistManager$UiController) obj).hide();
                 return;
         }
     }

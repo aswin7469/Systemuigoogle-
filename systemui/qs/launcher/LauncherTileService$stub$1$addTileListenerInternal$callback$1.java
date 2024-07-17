@@ -11,16 +11,16 @@ import com.android.systemui.qs.tileimpl.SubtitleArrayMapping;
 import java.util.HashMap;
 import java.util.function.Supplier;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class LauncherTileService$stub$1$addTileListenerInternal$callback$1 implements QSTile.Callback {
-    public final /* synthetic */ ILauncherTileListener$Stub$Proxy $listener;
+    public final /* synthetic */ ILauncherTileListener $listener;
     public final /* synthetic */ String $tileSpec;
     public final /* synthetic */ LauncherTileService this$0;
 
-    public LauncherTileService$stub$1$addTileListenerInternal$callback$1(String str, LauncherTileService launcherTileService, ILauncherTileListener$Stub$Proxy iLauncherTileListener$Stub$Proxy) {
+    public LauncherTileService$stub$1$addTileListenerInternal$callback$1(String str, LauncherTileService launcherTileService, ILauncherTileListener iLauncherTileListener) {
         this.$tileSpec = str;
         this.this$0 = launcherTileService;
-        this.$listener = iLauncherTileListener$Stub$Proxy;
+        this.$listener = iLauncherTileListener;
     }
 
     public final void onStateChanged(QSTile.State state) {
@@ -63,7 +63,7 @@ public final class LauncherTileService$stub$1$addTileListenerInternal$callback$1
         tileState.mContentDescription = state.contentDescription;
         tileState.mStateDescription = state.stateDescription;
         try {
-            this.$listener.onTileUpdated(tileState);
+            ((ILauncherTileListener$Stub$Proxy) this.$listener).onTileUpdated(tileState);
         } catch (RemoteException e) {
             Log.e("LauncherTileService", "Failed to call onTileUpdated", e);
         }

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class PoodleOrbView extends FrameLayout implements Animator.AnimatorListener, FeedbackEffect {
     public final ArrayList mAnimations = new ArrayList();
     public View mBackground;
@@ -35,25 +35,22 @@ public class PoodleOrbView extends FrameLayout implements Animator.AnimatorListe
     public final ObjectAnimator[] createDotAnimator(View view, float f, Path path) {
         View view2 = view;
         Keyframe[] keyframeArr = {Keyframe.ofFloat(0.0f, view.getScaleX()), Keyframe.ofFloat(0.75f, view.getScaleX()), Keyframe.ofFloat(0.95f, 0.3f), Keyframe.ofFloat(1.0f, 0.0f)};
-        float f2 = 0.25f;
         Keyframe[] keyframeArr2 = {Keyframe.ofFloat(0.0f, 1.0f), Keyframe.ofFloat(0.75f, 1.0f), Keyframe.ofFloat(0.95f, 0.25f), Keyframe.ofFloat(1.0f, 0.0f)};
         float[] approximate = path.approximate(0.5f);
-        int length = approximate.length / 3;
-        Keyframe[] keyframeArr3 = new Keyframe[length];
+        Keyframe[] keyframeArr3 = new Keyframe[(approximate.length / 3)];
         Keyframe[] keyframeArr4 = new Keyframe[(approximate.length / 3)];
         int i = 0;
         int i2 = 0;
         while (i < approximate.length) {
-            float f3 = (approximate[i] * f2) + 0.75f;
+            float f2 = (approximate[i] * 0.25f) + 0.75f;
             int i3 = i + 2;
-            keyframeArr3[i2] = Keyframe.ofFloat(f3, approximate[i + 1]);
+            keyframeArr3[i2] = Keyframe.ofFloat(f2, approximate[i + 1]);
             i += 3;
-            keyframeArr4[i2] = Keyframe.ofFloat(f3, approximate[i3]);
+            keyframeArr4[i2] = Keyframe.ofFloat(f2, approximate[i3]);
             i2++;
-            f2 = 0.25f;
         }
         Keyframe[][] keyframeArr5 = {keyframeArr3, keyframeArr4};
-        Keyframe[] keyframeArr6 = new Keyframe[(length + 2)];
+        Keyframe[] keyframeArr6 = new Keyframe[(keyframeArr5[0].length + 2)];
         keyframeArr6[0] = Keyframe.ofFloat(0.0f, view.getTranslationX());
         keyframeArr6[1] = Keyframe.ofFloat(0.75f, view.getTranslationX());
         Keyframe[] keyframeArr7 = keyframeArr5[0];
@@ -79,12 +76,12 @@ public class PoodleOrbView extends FrameLayout implements Animator.AnimatorListe
 
     public final void onFinishInflate() {
         super.onFinishInflate();
-        this.mBackground = findViewById(2131362511);
-        this.mBlue = findViewById(2131362512);
-        this.mGreen = findViewById(2131362513);
-        this.mRed = findViewById(2131362514);
-        this.mYellow = findViewById(2131362516);
-        this.mFeedbackHeight = getResources().getDimensionPixelSize(2131167152);
+        this.mBackground = findViewById(2131362490);
+        this.mBlue = findViewById(2131362491);
+        this.mGreen = findViewById(2131362492);
+        this.mRed = findViewById(2131362493);
+        this.mYellow = findViewById(2131362495);
+        this.mFeedbackHeight = getResources().getDimensionPixelSize(2131167110);
         this.mBackground.setScaleX(0.0f);
         this.mBackground.setScaleY(0.0f);
         View view = this.mBlue;

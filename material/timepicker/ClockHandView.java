@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.WeakHashMap;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 class ClockHandView extends View {
     public final float centerDotRadius;
     public boolean changedDuringTouch;
@@ -34,7 +34,7 @@ class ClockHandView extends View {
     public final int selectorRadius;
     public final int selectorStrokeWidth;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public interface OnRotateListener {
     }
 
@@ -145,19 +145,19 @@ class ClockHandView extends View {
         Paint paint2 = new Paint();
         this.paint = paint2;
         this.selectorBox = new RectF();
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.ClockHandView, i, 2132018881);
+        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.ClockHandView, i, 2132018875);
         this.circleRadius = obtainStyledAttributes.getDimensionPixelSize(1, 0);
         this.selectorRadius = obtainStyledAttributes.getDimensionPixelSize(2, 0);
         Resources resources = getResources();
-        this.selectorStrokeWidth = resources.getDimensionPixelSize(2131166661);
-        this.centerDotRadius = (float) resources.getDimensionPixelSize(2131166659);
+        this.selectorStrokeWidth = resources.getDimensionPixelSize(2131166619);
+        this.centerDotRadius = (float) resources.getDimensionPixelSize(2131166617);
         int color = obtainStyledAttributes.getColor(0, 0);
         paint2.setAntiAlias(true);
         paint2.setColor(color);
         setHandRotation(0.0f);
         ViewConfiguration.get(context).getScaledTouchSlop();
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-        setImportantForAccessibility(2);
+        ViewCompat.Api16Impl.setImportantForAccessibility(this, 2);
         obtainStyledAttributes.recycle();
     }
 }

@@ -24,12 +24,11 @@ import kotlinx.coroutines.CoroutineStart;
 import kotlinx.coroutines.Job;
 import kotlinx.coroutines.StandaloneCoroutine;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class NextClockAlarmController implements CallbackController, Dumpable {
     public static final boolean DEBUG = Log.isLoggable("NextClockAlarmCtlr", 3);
     public final AppSearchController alarmAppSearchController;
     public final CoroutineScope applicationScope;
-    public final CoroutineScope backgroundScope;
     public final BroadcastDispatcher broadcastDispatcher;
     public final List changeCallbacks = new ArrayList();
     public Context context;
@@ -44,14 +43,13 @@ public final class NextClockAlarmController implements CallbackController, Dumpa
     public final UserTracker userTracker;
     public final NextClockAlarmController$userUnlockReceiver$1 userUnlockReceiver = new NextClockAlarmController$userUnlockReceiver$1(this);
 
-    public NextClockAlarmController(UserTracker userTracker2, BroadcastDispatcher broadcastDispatcher2, DumpManager dumpManager2, AlarmAppSearchController alarmAppSearchController2, Executor executor, CoroutineScope coroutineScope, CoroutineScope coroutineScope2) {
+    public NextClockAlarmController(UserTracker userTracker2, BroadcastDispatcher broadcastDispatcher2, DumpManager dumpManager2, AlarmAppSearchController alarmAppSearchController2, Executor executor, CoroutineScope coroutineScope) {
         this.userTracker = userTracker2;
         this.broadcastDispatcher = broadcastDispatcher2;
         this.dumpManager = dumpManager2;
         this.alarmAppSearchController = alarmAppSearchController2;
         this.mainExecutor = executor;
         this.applicationScope = coroutineScope;
-        this.backgroundScope = coroutineScope2;
     }
 
     /* JADX WARNING: Removed duplicated region for block: B:14:0x0046  */
@@ -476,6 +474,6 @@ public final class NextClockAlarmController implements CallbackController, Dumpa
         if (standaloneCoroutine != null) {
             standaloneCoroutine.cancel((CancellationException) null);
         }
-        this.updateSessionJob = BuildersKt.launch$default(this.backgroundScope, (CoroutineContext) null, (CoroutineStart) null, new NextClockAlarmController$updateSession$1(this, (Continuation) null), 3);
+        this.updateSessionJob = BuildersKt.launch$default(this.applicationScope, (CoroutineContext) null, (CoroutineStart) null, new NextClockAlarmController$updateSession$1(this, (Continuation) null), 3);
     }
 }

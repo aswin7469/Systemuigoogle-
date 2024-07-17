@@ -28,7 +28,7 @@ import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInf
 import com.google.android.systemui.smartspace.utils.ContentDescriptionUtil;
 import java.util.List;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class WeatherSmartspaceView extends FrameLayout implements BcSmartspaceDataPlugin.SmartspaceTargetListener, BcSmartspaceDataPlugin.SmartspaceView {
     public static final boolean DEBUG = Log.isLoggable("WeatherSmartspaceView", 3);
     public final AnonymousClass1 mAodSettingsObserver;
@@ -76,7 +76,7 @@ public class WeatherSmartspaceView extends FrameLayout implements BcSmartspaceDa
 
     public final void onFinishInflate() {
         super.onFinishInflate();
-        this.mView = (DoubleShadowTextView) findViewById(2131364102);
+        this.mView = (DoubleShadowTextView) findViewById(2131364063);
     }
 
     public final void onSmartspaceTargetsUpdated(List list) {
@@ -103,7 +103,7 @@ public class WeatherSmartspaceView extends FrameLayout implements BcSmartspaceDa
                     builder.mUid = -1;
                     builder.mDimensionalInfo = BcSmartspaceCardLoggerUtil.createDimensionalLoggingInfo(smartspaceTarget.getTemplateData());
                     this.mLoggingInfo = builder.build();
-                    DateSmartspaceView$$ExternalSyntheticLambda0 dateSmartspaceView$$ExternalSyntheticLambda0 = null;
+                    WeatherSmartspaceView$$ExternalSyntheticLambda0 weatherSmartspaceView$$ExternalSyntheticLambda0 = null;
                     if (!containsValidTemplateType) {
                         SmartspaceAction headerAction2 = smartspaceTarget.getHeaderAction();
                         if (headerAction2 == null) {
@@ -117,9 +117,9 @@ public class WeatherSmartspaceView extends FrameLayout implements BcSmartspaceDa
                             DoubleShadowTextView doubleShadowTextView = this.mView;
                             BcSmartspaceDataPlugin bcSmartspaceDataPlugin = this.mDataProvider;
                             if (bcSmartspaceDataPlugin != null) {
-                                dateSmartspaceView$$ExternalSyntheticLambda0 = new DateSmartspaceView$$ExternalSyntheticLambda0(bcSmartspaceDataPlugin);
+                                weatherSmartspaceView$$ExternalSyntheticLambda0 = new WeatherSmartspaceView$$ExternalSyntheticLambda0(bcSmartspaceDataPlugin, 0);
                             }
-                            BcSmartSpaceUtil.setOnClickListener((View) doubleShadowTextView, smartspaceTarget, headerAction2, (BcSmartspaceDataPlugin.SmartspaceEventNotifier) dateSmartspaceView$$ExternalSyntheticLambda0, "WeatherSmartspaceView", this.mLoggingInfo);
+                            BcSmartSpaceUtil.setOnClickListener((View) doubleShadowTextView, smartspaceTarget, headerAction2, (BcSmartspaceDataPlugin.SmartspaceEventNotifier) weatherSmartspaceView$$ExternalSyntheticLambda0, "WeatherSmartspaceView", this.mLoggingInfo);
                         }
                     } else if (smartspaceTarget.getTemplateData() != null) {
                         BaseTemplateData.SubItemInfo subtitleItem = smartspaceTarget.getTemplateData().getSubtitleItem();
@@ -130,8 +130,9 @@ public class WeatherSmartspaceView extends FrameLayout implements BcSmartspaceDa
                             BcSmartspaceTemplateDataUtils.setText(this.mView, text);
                             Icon icon = subtitleItem.getIcon();
                             if (icon != null) {
-                                this.mIconDrawable.setIcon(BcSmartSpaceUtil.getIconDrawableWithCustomSize(icon.getIcon(), getContext(), this.mIconSize));
-                                this.mView.setCompoundDrawablesRelative(this.mIconDrawable, (Drawable) null, (Drawable) null, (Drawable) null);
+                                Drawable iconDrawableWithCustomSize = BcSmartSpaceUtil.getIconDrawableWithCustomSize(icon.getIcon(), getContext(), this.mIconSize);
+                                this.mIconDrawable.setIcon(iconDrawableWithCustomSize);
+                                this.mView.setCompoundDrawablesRelative(iconDrawableWithCustomSize, (Drawable) null, (Drawable) null, (Drawable) null);
                             }
                             DoubleShadowTextView doubleShadowTextView2 = this.mView;
                             CharSequence charSequence2 = "";
@@ -149,9 +150,9 @@ public class WeatherSmartspaceView extends FrameLayout implements BcSmartspaceDa
                                 DoubleShadowTextView doubleShadowTextView3 = this.mView;
                                 BcSmartspaceDataPlugin bcSmartspaceDataPlugin2 = this.mDataProvider;
                                 if (bcSmartspaceDataPlugin2 != null) {
-                                    dateSmartspaceView$$ExternalSyntheticLambda0 = new DateSmartspaceView$$ExternalSyntheticLambda0(bcSmartspaceDataPlugin2);
+                                    weatherSmartspaceView$$ExternalSyntheticLambda0 = new WeatherSmartspaceView$$ExternalSyntheticLambda0(bcSmartspaceDataPlugin2, 1);
                                 }
-                                BcSmartSpaceUtil.setOnClickListener((View) doubleShadowTextView3, smartspaceTarget, tapAction, (BcSmartspaceDataPlugin.SmartspaceEventNotifier) dateSmartspaceView$$ExternalSyntheticLambda0, "WeatherSmartspaceView", this.mLoggingInfo);
+                                BcSmartSpaceUtil.setOnClickListener((View) doubleShadowTextView3, smartspaceTarget, tapAction, (BcSmartspaceDataPlugin.SmartspaceEventNotifier) weatherSmartspaceView$$ExternalSyntheticLambda0, "WeatherSmartspaceView", this.mLoggingInfo);
                             }
                         }
                     }
@@ -240,11 +241,11 @@ public class WeatherSmartspaceView extends FrameLayout implements BcSmartspaceDa
                 }
             }
         };
-        context.getTheme().applyStyle(2132017753, false);
+        context.getTheme().applyStyle(2132017752, false);
         TypedArray obtainStyledAttributes = context.getTheme().obtainStyledAttributes(attributeSet, R$styleable.WeatherSmartspaceView, 0, 0);
         try {
-            int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(1, context.getResources().getDimensionPixelSize(2131165919));
-            int dimensionPixelSize2 = obtainStyledAttributes.getDimensionPixelSize(0, context.getResources().getDimensionPixelSize(2131165917));
+            int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(1, context.getResources().getDimensionPixelSize(2131165887));
+            int dimensionPixelSize2 = obtainStyledAttributes.getDimensionPixelSize(0, context.getResources().getDimensionPixelSize(2131165885));
             this.mRemoveTextDescent = obtainStyledAttributes.getBoolean(2, false);
             this.mTextDescentExtraPadding = obtainStyledAttributes.getDimensionPixelSize(3, 0);
             obtainStyledAttributes.recycle();

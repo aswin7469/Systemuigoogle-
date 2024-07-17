@@ -8,11 +8,10 @@ import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
-import kotlinx.coroutines.Job;
-import kotlinx.coroutines.JobSupport;
+import kotlinx.coroutines.StandaloneCoroutine;
 import vendor.google.google_battery.IGoogleBattery;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 final class HealthManager$getHealthStatus$2 extends SuspendLambda implements Function2 {
     int label;
     final /* synthetic */ HealthManager this$0;
@@ -37,9 +36,9 @@ final class HealthManager$getHealthStatus$2 extends SuspendLambda implements Fun
         int i = this.label;
         if (i == 0) {
             ResultKt.throwOnFailure(obj);
-            Job job = this.this$0.initializer;
+            StandaloneCoroutine standaloneCoroutine = this.this$0.initializer;
             this.label = 1;
-            if (((JobSupport) job).join(this) == coroutineSingletons) {
+            if (standaloneCoroutine.join(this) == coroutineSingletons) {
                 return coroutineSingletons;
             }
         } else if (i == 1) {

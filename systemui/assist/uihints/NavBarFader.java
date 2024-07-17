@@ -1,18 +1,20 @@
 package com.google.android.systemui.assist.uihints;
 
 import android.animation.ObjectAnimator;
+import com.android.systemui.navigationbar.NavigationBarController;
 import com.android.systemui.navigationbar.NavigationBarControllerImpl;
 import com.android.systemui.navigationbar.NavigationBarView;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class NavBarFader {
     public ObjectAnimator animator = new ObjectAnimator();
-    public final NavigationBarControllerImpl navigationBarController;
+    public final NavigationBarController navigationBarController;
     public float targetAlpha;
 
-    public NavBarFader(NavigationBarControllerImpl navigationBarControllerImpl) {
+    public NavBarFader(NavigationBarController navigationBarController2) {
         float f;
-        this.navigationBarController = navigationBarControllerImpl;
+        this.navigationBarController = navigationBarController2;
+        NavigationBarControllerImpl navigationBarControllerImpl = (NavigationBarControllerImpl) navigationBarController2;
         navigationBarControllerImpl.mDisplayTracker.getClass();
         NavigationBarView navigationBarView = navigationBarControllerImpl.getNavigationBarView(0);
         if (navigationBarView != null) {

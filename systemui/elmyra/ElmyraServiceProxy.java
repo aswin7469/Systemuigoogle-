@@ -10,7 +10,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class ElmyraServiceProxy extends Service {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final AnonymousClass1 mBinder = new IElmyraService() {
@@ -20,6 +20,7 @@ public class ElmyraServiceProxy extends Service {
             attachInterface(this, "com.google.android.systemui.elmyra.IElmyraService");
         }
 
+        /* renamed from: onTransact$com$google$android$systemui$elmyra$IElmyraService$Stub */
         public final boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) {
             if (i >= 1 && i <= 16777215) {
                 parcel.enforceInterface("com.google.android.systemui.elmyra.IElmyraService");
@@ -123,7 +124,7 @@ public class ElmyraServiceProxy extends Service {
     };
     public final List mElmyraServiceListeners = new ArrayList();
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class ElmyraServiceListener implements IBinder.DeathRecipient {
         public IElmyraServiceListener mListener;
         public IBinder mToken;

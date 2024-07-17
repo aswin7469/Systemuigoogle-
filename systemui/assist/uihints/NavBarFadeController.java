@@ -5,9 +5,10 @@ import android.os.Handler;
 import android.view.View;
 import com.android.systemui.navigationbar.NavigationBarControllerImpl;
 import com.android.systemui.navigationbar.NavigationBarView;
+import com.google.android.systemui.assist.uihints.NgaMessageHandler;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
-public final class NavBarFadeController {
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
+public final class NavBarFadeController implements NgaMessageHandler.NavBarVisibilityListener {
     public final Handler handler;
     public final NavBarFader navBarFader;
     public boolean ngaVisible = true;
@@ -29,7 +30,7 @@ public final class NavBarFadeController {
             handler2.postDelayed(navBarFadeController$onTimeout$1, 10000);
         }
         NavBarFader navBarFader2 = this.navBarFader;
-        NavigationBarControllerImpl navigationBarControllerImpl = navBarFader2.navigationBarController;
+        NavigationBarControllerImpl navigationBarControllerImpl = (NavigationBarControllerImpl) navBarFader2.navigationBarController;
         navigationBarControllerImpl.mDisplayTracker.getClass();
         NavigationBarView navigationBarView = navigationBarControllerImpl.getNavigationBarView(0);
         if (navigationBarView != null) {

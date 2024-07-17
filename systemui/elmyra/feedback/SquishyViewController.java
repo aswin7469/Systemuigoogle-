@@ -17,7 +17,7 @@ import com.google.android.systemui.elmyra.sensors.GestureSensor;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class SquishyViewController implements FeedbackEffect {
     public static final Interpolator SQUISH_TRANSLATION_MAP = new PathInterpolator(0.4f, 0.0f, 0.6f, 1.0f);
     public AnimatorSet mAnimatorSet;
@@ -29,7 +29,7 @@ public final class SquishyViewController implements FeedbackEffect {
     public int mScreenRotation;
     public final float mSquishTranslationMax;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class SpringInterpolator implements Interpolator {
         public final float mBounce;
 

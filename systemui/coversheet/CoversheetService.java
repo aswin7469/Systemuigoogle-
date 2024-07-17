@@ -8,17 +8,17 @@ import android.os.Build;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
-import androidx.fragment.app.FragmentManagerViewModel$$ExternalSyntheticOutline0;
 import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
-import com.android.settingslib.Utils$$ExternalSyntheticOutline0;
+import com.android.settingslib.bluetooth.BluetoothUtils$$ExternalSyntheticOutline0;
 import com.android.settingslib.bluetooth.CachedBluetoothDevice$$ExternalSyntheticOutline0;
+import com.android.settingslib.mobile.MobileStatusTracker$MobileTelephonyCallback$$ExternalSyntheticOutline0;
 import com.android.systemui.Dependency;
 import com.android.systemui.shared.system.ActivityManagerWrapper;
 import com.android.systemui.statusbar.policy.DeviceProvisionedController;
 import com.android.systemui.statusbar.policy.DeviceProvisionedControllerImpl;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class CoversheetService {
     public static final boolean DEBUG = Log.isLoggable("Coversheet", 3);
     public final String mBuildId;
@@ -28,7 +28,7 @@ public final class CoversheetService {
     public boolean mUserUnlocked;
 
     /* renamed from: -$$Nest$mstartCoversheetIfNeeded  reason: not valid java name */
-    public static void m920$$Nest$mstartCoversheetIfNeeded(CoversheetService coversheetService) {
+    public static void m832$$Nest$mstartCoversheetIfNeeded(CoversheetService coversheetService) {
         boolean z;
         Context context = coversheetService.mContext;
         boolean z2 = DEBUG;
@@ -50,7 +50,7 @@ public final class CoversheetService {
                 z = false;
             }
             if (z2) {
-                Utils$$ExternalSyntheticOutline0.m("Going to home now? ", "Coversheet", z);
+                MobileStatusTracker$MobileTelephonyCallback$$ExternalSyntheticOutline0.m("Going to home now? ", z, "Coversheet");
             }
             if (z) {
                 try {
@@ -90,7 +90,7 @@ public final class CoversheetService {
                 }
                 CoversheetService coversheetService = CoversheetService.this;
                 coversheetService.mKeyguardShowing = z;
-                CoversheetService.m920$$Nest$mstartCoversheetIfNeeded(coversheetService);
+                CoversheetService.m832$$Nest$mstartCoversheetIfNeeded(coversheetService);
             }
 
             public final void onUserUnlocked() {
@@ -99,7 +99,7 @@ public final class CoversheetService {
                 }
                 CoversheetService coversheetService = CoversheetService.this;
                 coversheetService.mUserUnlocked = true;
-                CoversheetService.m920$$Nest$mstartCoversheetIfNeeded(coversheetService);
+                CoversheetService.m832$$Nest$mstartCoversheetIfNeeded(coversheetService);
             }
         };
         this.mCallback = r0;
@@ -110,7 +110,7 @@ public final class CoversheetService {
         boolean z2 = DEBUG;
         if (!z) {
             if (z2) {
-                FragmentManagerViewModel$$ExternalSyntheticOutline0.m("Store initial ID: ", str, "Coversheet");
+                BluetoothUtils$$ExternalSyntheticOutline0.m("Store initial ID: ", str, "Coversheet");
             }
             Settings.System.putString(context.getContentResolver(), "coversheet_id", str);
         } else if (!TextUtils.equals(str, Settings.System.getString(context.getContentResolver(), "coversheet_id"))) {

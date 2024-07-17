@@ -3,7 +3,7 @@ package com.google.android.material.datepicker;
 import android.widget.BaseAdapter;
 import java.util.Calendar;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class DaysOfWeekAdapter extends BaseAdapter {
     public final Calendar calendar;
     public final int daysInWeek;
@@ -47,7 +47,7 @@ public final class DaysOfWeekAdapter extends BaseAdapter {
             if (r5 != 0) goto L_0x0018
             android.content.Context r5 = r6.getContext()
             android.view.LayoutInflater r5 = android.view.LayoutInflater.from(r5)
-            r0 = 2131558808(0x7f0d0198, float:1.8742942E38)
+            r0 = 2131558801(0x7f0d0191, float:1.8742928E38)
             r1 = 0
             android.view.View r5 = r5.inflate(r0, r6, r1)
             r0 = r5
@@ -70,7 +70,7 @@ public final class DaysOfWeekAdapter extends BaseAdapter {
             java.lang.String r4 = r5.getDisplayName(r1, r2, r4)
             r0.setText(r4)
             android.content.Context r4 = r6.getContext()
-            r5 = 2131953302(0x7f130696, float:1.9543071E38)
+            r5 = 2131953261(0x7f13066d, float:1.9542988E38)
             java.lang.String r4 = r4.getString(r5)
             java.util.Calendar r3 = r3.calendar
             r5 = 2

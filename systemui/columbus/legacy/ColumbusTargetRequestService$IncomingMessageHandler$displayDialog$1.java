@@ -3,14 +3,14 @@ package com.google.android.systemui.columbus.legacy;
 import android.content.DialogInterface;
 import android.content.pm.LauncherActivityInfo;
 import android.os.Messenger;
-import androidx.fragment.app.FragmentManagerViewModel$$ExternalSyntheticOutline0;
+import com.android.settingslib.bluetooth.BluetoothUtils$$ExternalSyntheticOutline0;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 import com.google.android.systemui.columbus.ColumbusEvent;
 import com.google.android.systemui.columbus.legacy.ColumbusTargetRequestService;
 import kotlin.jvm.internal.Intrinsics;
 import org.json.JSONObject;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ColumbusTargetRequestService$IncomingMessageHandler$displayDialog$1 implements Runnable {
     public final /* synthetic */ LauncherActivityInfo $appInfo;
     public final /* synthetic */ Messenger $replyTo;
@@ -65,7 +65,7 @@ public final class ColumbusTargetRequestService$IncomingMessageHandler$displayDi
                     if (r10 == r9) goto L_0x0010
                     java.lang.String r8 = "Columbus/TargetRequest"
                     java.lang.String r9 = "Invalid dialog option: "
-                    com.android.keyguard.ClockEventController$zenModeCallback$1$$ExternalSyntheticOutline0.m(r9, r8, r10)
+                    com.android.keyguard.ClockEventController$zenModeCallback$1$$ExternalSyntheticOutline0.m(r9, r10, r8)
                     goto L_0x014b
                 L_0x0010:
                     com.google.android.systemui.columbus.legacy.ColumbusTargetRequestService r9 = r9
@@ -119,7 +119,7 @@ public final class ColumbusTargetRequestService$IncomingMessageHandler$displayDi
                     android.content.ComponentName r10 = r10.getComponentName()
                     java.lang.String r10 = r10.flattenToString()
                     java.lang.String r1 = "Target changed to "
-                    androidx.fragment.app.FragmentManagerViewModel$$ExternalSyntheticOutline0.m(r1, r10, r9)
+                    com.android.settingslib.bluetooth.BluetoothUtils$$ExternalSyntheticOutline0.m(r1, r10, r9)
                     int r9 = r5
                     if (r9 != 0) goto L_0x00a1
                     com.google.android.systemui.columbus.ColumbusEvent r9 = com.google.android.systemui.columbus.ColumbusEvent.COLUMBUS_RETARGET_APPROVED
@@ -196,7 +196,7 @@ public final class ColumbusTargetRequestService$IncomingMessageHandler$displayDi
                     android.content.ComponentName r10 = r10.getComponentName()
                     java.lang.String r10 = r10.flattenToString()
                     java.lang.String r1 = "Target change denied by user: "
-                    androidx.fragment.app.FragmentManagerViewModel$$ExternalSyntheticOutline0.m(r1, r10, r9)
+                    com.android.settingslib.bluetooth.BluetoothUtils$$ExternalSyntheticOutline0.m(r1, r10, r9)
                     int r9 = r5
                     if (r9 != 0) goto L_0x0138
                     com.google.android.systemui.columbus.ColumbusEvent r9 = com.google.android.systemui.columbus.ColumbusEvent.COLUMBUS_RETARGET_NOT_APPROVED
@@ -231,7 +231,7 @@ public final class ColumbusTargetRequestService$IncomingMessageHandler$displayDi
                 int i2 = ColumbusTargetRequestService.IncomingMessageHandler.$r8$clinit;
                 incomingMessageHandler.getClass();
                 ColumbusTargetRequestService.IncomingMessageHandler.replyToMessenger(messenger, i, 6);
-                FragmentManagerViewModel$$ExternalSyntheticOutline0.m("Target change dismissed by user: ", launcherActivityInfo2.getComponentName().flattenToString(), "Columbus/TargetRequest");
+                BluetoothUtils$$ExternalSyntheticOutline0.m("Target change dismissed by user: ", launcherActivityInfo2.getComponentName().flattenToString(), "Columbus/TargetRequest");
                 if (i3 == 0) {
                     columbusEvent = ColumbusEvent.COLUMBUS_RETARGET_NOT_APPROVED;
                 } else {
@@ -240,10 +240,10 @@ public final class ColumbusTargetRequestService$IncomingMessageHandler$displayDi
                 columbusTargetRequestService3.uiEventLogger.log(columbusEvent, 0, launcherActivityInfo2.getComponentName().flattenToString());
             }
         };
-        systemUIDialog.setTitle(systemUIDialog.getContext().getString(2131952241, new Object[]{launcherActivityInfo.getLabel()}));
-        systemUIDialog.setMessage(systemUIDialog.getContext().getString(2131952240, new Object[]{launcherActivityInfo.getLabel()}));
-        systemUIDialog.setPositiveButton(2131952238, r3);
-        systemUIDialog.setNegativeButton(2131952239, r3);
+        systemUIDialog.setTitle(systemUIDialog.getContext().getString(2131952229, new Object[]{launcherActivityInfo.getLabel()}));
+        systemUIDialog.setMessage(systemUIDialog.getContext().getString(2131952228, new Object[]{launcherActivityInfo.getLabel()}));
+        systemUIDialog.setPositiveButton(2131952226, r3);
+        systemUIDialog.setNegativeButton(2131952227, r3);
         systemUIDialog.setOnCancelListener(r1);
         systemUIDialog.setCanceledOnTouchOutside(true);
         ColumbusTargetRequestService.IncomingMessageHandler incomingMessageHandler3 = this.this$1;

@@ -1,24 +1,53 @@
 package com.google.android.systemui.reversecharging;
 
+import android.app.AlarmManager;
+import android.hardware.usb.UsbDevice;
+import android.hardware.usb.UsbManager;
 import android.util.Log;
-import com.android.systemui.BootCompleteCache$BootCompleteListener;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
-public final /* synthetic */ class ReverseChargingController$$ExternalSyntheticLambda2 implements BootCompleteCache$BootCompleteListener {
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
+public final /* synthetic */ class ReverseChargingController$$ExternalSyntheticLambda2 implements AlarmManager.OnAlarmListener {
+    public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ ReverseChargingController f$0;
 
-    public /* synthetic */ ReverseChargingController$$ExternalSyntheticLambda2(ReverseChargingController reverseChargingController) {
+    public /* synthetic */ ReverseChargingController$$ExternalSyntheticLambda2(ReverseChargingController reverseChargingController, int i) {
+        this.$r8$classId = i;
         this.f$0 = reverseChargingController;
     }
 
-    public final void onBootComplete() {
-        boolean z = ReverseChargingController.DEBUG;
+    public final void onAlarm() {
+        int i = this.$r8$classId;
         ReverseChargingController reverseChargingController = this.f$0;
-        if (z) {
-            reverseChargingController.getClass();
-            Log.d("ReverseChargingControl", "onBootComplete(): ACTION_BOOT_COMPLETED");
+        switch (i) {
+            case 0:
+                reverseChargingController.onAlarmRtxFinish(5);
+                return;
+            case 1:
+                reverseChargingController.onAlarmRtxFinish(103);
+                return;
+            case 2:
+                if (reverseChargingController.mUsbManagerOptional.isPresent()) {
+                    for (UsbDevice checkAndChangeNfcPollingAgainstUsbAudioDevice : ((UsbManager) reverseChargingController.mUsbManagerOptional.get()).getDeviceList().values()) {
+                        reverseChargingController.checkAndChangeNfcPollingAgainstUsbAudioDevice(false, checkAndChangeNfcPollingAgainstUsbAudioDevice);
+                    }
+                    return;
+                }
+                return;
+            case 3:
+                if (ReverseChargingController.DEBUG) {
+                    reverseChargingController.getClass();
+                    Log.w("ReverseChargingControl", "mReConnectedTimeoutAlarmAction() timeout");
+                }
+                reverseChargingController.mStartReconnected = false;
+                reverseChargingController.onAlarmRtxFinish(6);
+                return;
+            default:
+                if (ReverseChargingController.DEBUG) {
+                    reverseChargingController.getClass();
+                    Log.w("ReverseChargingControl", "mAccessoryDeviceRemovedTimeoutAlarmAction() timeout");
+                }
+                reverseChargingController.onAlarmRtxFinish(6);
+                return;
         }
-        reverseChargingController.mBootCompleted = true;
-        reverseChargingController.setRtxTimer(ReverseChargingController.DURATION_WAIT_NFC_SERVICE, 2);
     }
 }

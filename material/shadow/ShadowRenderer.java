@@ -5,7 +5,7 @@ import android.graphics.Path;
 import androidx.core.graphics.ColorUtils;
 import com.android.systemui.plugins.DarkIconDispatcher;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ShadowRenderer {
     public static final int[] cornerColors = new int[4];
     public static final float[] cornerPositions = {0.0f, 0.0f, 0.5f, 1.0f};
@@ -23,16 +23,19 @@ public final class ShadowRenderer {
     public ShadowRenderer() {
         Paint paint = new Paint();
         this.transparentPaint = paint;
-        Paint paint2 = new Paint();
-        this.shadowPaint = paint2;
-        this.shadowStartColor = ColorUtils.setAlphaComponent(DarkIconDispatcher.DEFAULT_INVERSE_ICON_TINT, 68);
-        this.shadowMiddleColor = ColorUtils.setAlphaComponent(DarkIconDispatcher.DEFAULT_INVERSE_ICON_TINT, 20);
-        this.shadowEndColor = ColorUtils.setAlphaComponent(DarkIconDispatcher.DEFAULT_INVERSE_ICON_TINT, 0);
-        paint2.setColor(this.shadowStartColor);
+        this.shadowPaint = new Paint();
+        setShadowColor(DarkIconDispatcher.DEFAULT_INVERSE_ICON_TINT);
         paint.setColor(0);
-        Paint paint3 = new Paint(4);
-        this.cornerShadowPaint = paint3;
-        paint3.setStyle(Paint.Style.FILL);
-        this.edgeShadowPaint = new Paint(paint3);
+        Paint paint2 = new Paint(4);
+        this.cornerShadowPaint = paint2;
+        paint2.setStyle(Paint.Style.FILL);
+        this.edgeShadowPaint = new Paint(paint2);
+    }
+
+    public final void setShadowColor(int i) {
+        this.shadowStartColor = ColorUtils.setAlphaComponent(i, 68);
+        this.shadowMiddleColor = ColorUtils.setAlphaComponent(i, 20);
+        this.shadowEndColor = ColorUtils.setAlphaComponent(i, 0);
+        this.shadowPaint.setColor(this.shadowStartColor);
     }
 }

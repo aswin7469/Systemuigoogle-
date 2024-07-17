@@ -15,8 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.activity.result.ActivityResultRegistry$$ExternalSyntheticOutline0;
 import androidx.core.view.ViewCompat;
-import androidx.fragment.app.FragmentManagerViewModel$$ExternalSyntheticOutline0;
 import com.android.app.animation.Interpolators;
+import com.android.settingslib.bluetooth.BluetoothUtils$$ExternalSyntheticOutline0;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
@@ -27,7 +27,7 @@ import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import kotlin.jvm.functions.Function1;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class DockGestureController extends GestureDetector.SimpleOnGestureListener implements View.OnTouchListener, StatusBarStateController.StateListener, KeyguardStateController.Callback, ConfigurationController.ConfigurationListener {
     public static final long GEAR_VISIBLE_TIME_MILLIS;
     public static final long PREVIEW_DELAY_MILLIS;
@@ -83,17 +83,17 @@ public final class DockGestureController extends GestureDetector.SimpleOnGesture
         this.mTouchDelegateView = view;
         this.mSettingsGear = imageView;
         this.mPhotoPreview = frameLayout;
-        TextView textView = (TextView) frameLayout.findViewById(2131363301);
+        TextView textView = (TextView) frameLayout.findViewById(2131363274);
         this.mPhotoPreviewText = textView;
-        textView.setText(context.getResources().getString(2131952473));
+        textView.setText(context.getResources().getString(2131952452));
         imageView.setOnClickListener(new DockGestureController$$ExternalSyntheticLambda1(this));
         this.mAccessibilityManager = (AccessibilityManager) context.getSystemService("accessibility");
-        this.mPhotoDiffThreshold = context.getResources().getDimensionPixelSize(2131165829);
+        this.mPhotoDiffThreshold = context.getResources().getDimensionPixelSize(2131165799);
         this.mStatusBarStateController = statusBarStateController;
         this.mKeyguardStateController = keyguardStateController;
         Function1 function1 = PhysicsAnimator.instanceConstructor;
         this.mPreviewTargetAnimator = PhysicsAnimator.Companion.getInstance(frameLayout);
-        this.mShowPhotoFrameA11yAction = new DreamlinerA11yAction(context.getString(2131952463), frameLayout.getRootView(), new DockGestureController$$ExternalSyntheticLambda0(this, 1));
+        this.mShowPhotoFrameA11yAction = new DreamlinerA11yAction(frameLayout.getRootView(), new DockGestureController$$ExternalSyntheticLambda0(this, 1), context.getString(2131952442));
     }
 
     public final void hideGear() {
@@ -161,7 +161,7 @@ public final class DockGestureController extends GestureDetector.SimpleOnGesture
             Log.d("DreamlnierA11yAction", m.toString());
             return;
         }
-        FragmentManagerViewModel$$ExternalSyntheticOutline0.m("disable action: ", str2, "DreamlnierA11yAction");
+        BluetoothUtils$$ExternalSyntheticOutline0.m("disable action: ", str2, "DreamlnierA11yAction");
         int i3 = dreamlinerA11yAction2.mActionId;
         dreamlinerA11yAction2.mActionWrapper.getClass();
         ViewCompat.removeAccessibilityAction(view, i3);
@@ -170,7 +170,7 @@ public final class DockGestureController extends GestureDetector.SimpleOnGesture
     }
 
     public final void onLocaleListChanged() {
-        this.mPhotoPreviewText.setText(this.mContext.getResources().getString(2131952473));
+        this.mPhotoPreviewText.setText(this.mContext.getResources().getString(2131952452));
     }
 
     public final boolean onSingleTapConfirmed(MotionEvent motionEvent) {
@@ -186,7 +186,7 @@ public final class DockGestureController extends GestureDetector.SimpleOnGesture
         return false;
     }
 
-    /* JADX WARNING: Removed duplicated region for block: B:41:0x0130  */
+    /* JADX WARNING: Removed duplicated region for block: B:41:0x012f  */
     /* Code decompiled incorrectly, please refer to instructions dump. */
     public final boolean onTouch(android.view.View r10, android.view.MotionEvent r11) {
         /*
@@ -201,16 +201,16 @@ public final class DockGestureController extends GestureDetector.SimpleOnGesture
             r1 = 2
             r2 = 1
             r3 = 0
-            if (r0 == 0) goto L_0x00c2
+            if (r0 == 0) goto L_0x00c1
             if (r0 == r2) goto L_0x0065
             if (r0 == r1) goto L_0x001d
-            goto L_0x013c
+            goto L_0x013b
         L_0x001d:
             boolean r0 = r9.mFromRight
-            if (r0 == 0) goto L_0x013c
+            if (r0 == 0) goto L_0x013b
             boolean r0 = r9.mPhotoEnabled
             if (r0 != 0) goto L_0x0027
-            goto L_0x013c
+            goto L_0x013b
         L_0x0027:
             float r0 = r11.getX()
             float r1 = r9.mLastTouchX
@@ -230,60 +230,59 @@ public final class DockGestureController extends GestureDetector.SimpleOnGesture
             float r1 = java.lang.Math.abs(r1)
             float r0 = java.lang.Math.abs(r0)
             int r0 = (r1 > r0 ? 1 : (r1 == r0 ? 0 : -1))
-            if (r0 <= 0) goto L_0x013c
+            if (r0 <= 0) goto L_0x013b
             float r0 = r9.mDiffX
             float r0 = java.lang.Math.abs(r0)
             int r1 = r9.mPhotoDiffThreshold
             float r1 = (float) r1
             int r0 = (r0 > r1 ? 1 : (r0 == r1 ? 0 : -1))
-            if (r0 <= 0) goto L_0x013c
+            if (r0 <= 0) goto L_0x013b
             r9.mTriggerPhoto = r2
-            goto L_0x013c
+            goto L_0x013b
         L_0x0065:
             android.view.VelocityTracker r0 = r9.mVelocityTracker
-            r1 = 1000(0x3e8, float:1.401E-42)
-            r0.computeCurrentVelocity(r1)
+            r4 = 1000(0x3e8, float:1.401E-42)
+            r0.computeCurrentVelocity(r4)
             android.view.VelocityTracker r0 = r9.mVelocityTracker
             float r0 = r0.getXVelocity()
             r9.mVelocityX = r0
             float r0 = r9.mDiffX
             float r0 = java.lang.Math.signum(r0)
-            float r1 = r9.mVelocityX
-            float r1 = java.lang.Math.signum(r1)
-            int r0 = (r0 > r1 ? 1 : (r0 == r1 ? 0 : -1))
+            float r4 = r9.mVelocityX
+            float r4 = java.lang.Math.signum(r4)
+            int r0 = (r0 > r4 ? 1 : (r0 == r4 ? 0 : -1))
             if (r0 == 0) goto L_0x0094
             float r0 = r9.mLastTouchX
-            android.widget.FrameLayout r1 = r9.mPhotoPreview
-            int r1 = r1.getRight()
-            int r4 = r9.mPhotoDiffThreshold
-            int r1 = r1 - r4
-            float r1 = (float) r1
-            int r0 = (r0 > r1 ? 1 : (r0 == r1 ? 0 : -1))
+            android.widget.FrameLayout r4 = r9.mPhotoPreview
+            int r4 = r4.getRight()
+            int r5 = r9.mPhotoDiffThreshold
+            int r4 = r4 - r5
+            float r4 = (float) r4
+            int r0 = (r0 > r4 ? 1 : (r0 == r4 ? 0 : -1))
             if (r0 <= 0) goto L_0x0096
         L_0x0094:
             r9.mTriggerPhoto = r3
         L_0x0096:
             boolean r0 = r9.mTriggerPhoto
-            if (r0 == 0) goto L_0x00bd
+            if (r0 == 0) goto L_0x00bc
             android.widget.FrameLayout r0 = r9.mPhotoPreview
             int r0 = r0.getVisibility()
-            if (r0 != 0) goto L_0x00bd
+            if (r0 != 0) goto L_0x00bc
             android.content.Intent r0 = new android.content.Intent
-            java.lang.String r1 = "com.google.android.systemui.dreamliner.PHOTO_EVENT"
-            r0.<init>(r1)
+            java.lang.String r4 = "com.google.android.systemui.dreamliner.PHOTO_EVENT"
+            r0.<init>(r4)
             r9.sendProtectedBroadcast(r0)
             android.widget.FrameLayout r0 = r9.mPhotoPreview
-            com.google.android.systemui.dreamliner.DockGestureController$$ExternalSyntheticLambda0 r1 = new com.google.android.systemui.dreamliner.DockGestureController$$ExternalSyntheticLambda0
-            r4 = 2
-            r1.<init>(r9, r4)
-            r0.post(r1)
+            com.google.android.systemui.dreamliner.DockGestureController$$ExternalSyntheticLambda0 r4 = new com.google.android.systemui.dreamliner.DockGestureController$$ExternalSyntheticLambda0
+            r4.<init>(r9, r1)
+            r0.post(r4)
             r9.mLaunchedPhoto = r2
             r9.mTriggerPhoto = r3
-            goto L_0x013c
-        L_0x00bd:
+            goto L_0x013b
+        L_0x00bc:
             r9.hidePhotoPreview(r2)
-            goto L_0x013c
-        L_0x00c2:
+            goto L_0x013b
+        L_0x00c1:
             android.view.VelocityTracker r0 = r9.mVelocityTracker
             r0.clear()
             r9.mFirstTouchX = r10
@@ -292,11 +291,11 @@ public final class DockGestureController extends GestureDetector.SimpleOnGesture
             r9.mLaunchedPhoto = r3
             r9.mFromRight = r3
             com.google.android.systemui.dreamliner.DockIndicationController r0 = r9.mDockIndicationController
-            if (r0 == 0) goto L_0x0116
+            if (r0 == 0) goto L_0x0115
             android.widget.ImageView r4 = r0.mDockedTopIcon
-            if (r4 != 0) goto L_0x00dc
-            goto L_0x0116
-        L_0x00dc:
+            if (r4 != 0) goto L_0x00db
+            goto L_0x0115
+        L_0x00db:
             int[] r1 = new int[r1]
             r4.getLocationOnScreen(r1)
             android.graphics.RectF r4 = new android.graphics.RectF
@@ -319,41 +318,41 @@ public final class DockGestureController extends GestureDetector.SimpleOnGesture
             boolean r0 = r4.contains(r0, r1)
             java.lang.String r1 = "dockedTopIcon touched="
             java.lang.String r4 = "DLIndicator"
-            com.android.settingslib.Utils$$ExternalSyntheticOutline0.m(r1, r4, r0)
-            if (r0 != 0) goto L_0x0114
-            goto L_0x0116
-        L_0x0114:
+            com.android.settingslib.mobile.MobileStatusTracker$MobileTelephonyCallback$$ExternalSyntheticOutline0.m(r1, r0, r4)
+            if (r0 != 0) goto L_0x0113
+            goto L_0x0115
+        L_0x0113:
             r0 = r3
-            goto L_0x0117
-        L_0x0116:
+            goto L_0x0116
+        L_0x0115:
             r0 = r2
-        L_0x0117:
+        L_0x0116:
             r9.mShouldConsumeTouch = r0
-            if (r0 != 0) goto L_0x011c
-            goto L_0x013c
-        L_0x011c:
+            if (r0 != 0) goto L_0x011b
+            goto L_0x013b
+        L_0x011b:
             android.widget.FrameLayout r0 = r9.mPhotoPreview
             int r0 = r0.getRight()
             int r1 = r9.mPhotoDiffThreshold
             int r0 = r0 - r1
             float r0 = (float) r0
             int r0 = (r10 > r0 ? 1 : (r10 == r0 ? 0 : -1))
-            if (r0 <= 0) goto L_0x013c
+            if (r0 <= 0) goto L_0x013b
             r9.mFromRight = r2
             boolean r0 = r9.mPhotoEnabled
-            if (r0 == 0) goto L_0x013c
+            if (r0 == 0) goto L_0x013b
             android.widget.FrameLayout r0 = r9.mPhotoPreview
             r0.setVisibility(r3)
             android.widget.FrameLayout r0 = r9.mPhotoPreview
             r1 = 100
             com.android.systemui.statusbar.CrossFadeHelper.fadeIn((android.view.View) r0, (long) r1, (int) r3)
-        L_0x013c:
+        L_0x013b:
             r9.mLastTouchX = r10
             boolean r10 = r9.mShouldConsumeTouch
-            if (r10 == 0) goto L_0x0147
+            if (r10 == 0) goto L_0x0146
             android.view.GestureDetector r10 = r9.mGestureDetector
             r10.onTouchEvent(r11)
-        L_0x0147:
+        L_0x0146:
             boolean r9 = r9.mShouldConsumeTouch
             return r9
         */

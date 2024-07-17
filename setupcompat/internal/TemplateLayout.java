@@ -14,7 +14,7 @@ import com.google.android.setupcompat.template.Mixin;
 import java.util.HashMap;
 import java.util.Map;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class TemplateLayout extends FrameLayout {
     public ViewGroup container;
     public final Map mixins = new HashMap();
@@ -32,6 +32,10 @@ public class TemplateLayout extends FrameLayout {
 
     public ViewGroup findContainer(int i) {
         return (ViewGroup) findViewById(i);
+    }
+
+    public View findManagedViewById(int i) {
+        return findViewById(i);
     }
 
     public final Mixin getMixin(Class cls) {
@@ -65,6 +69,7 @@ public class TemplateLayout extends FrameLayout {
         ViewGroup findContainer = findContainer(i2);
         this.container = findContainer;
         if (findContainer != null) {
+            onTemplateInflated();
             obtainStyledAttributes.recycle();
             return;
         }
@@ -105,6 +110,9 @@ public class TemplateLayout extends FrameLayout {
     public TemplateLayout(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
         init(0, 0, attributeSet, i);
+    }
+
+    public void onTemplateInflated() {
     }
 
     public void onBeforeTemplateInflated(AttributeSet attributeSet, int i) {

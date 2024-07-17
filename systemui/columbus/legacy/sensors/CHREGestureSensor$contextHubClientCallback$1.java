@@ -10,7 +10,7 @@ import com.google.android.systemui.columbus.proto.nano.ColumbusProto$GestureDete
 import com.google.android.systemui.columbus.proto.nano.ColumbusProto$NanoappEvents;
 import com.google.protobuf.nano.InvalidProtocolBufferNanoException;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class CHREGestureSensor$contextHubClientCallback$1 extends ContextHubClientCallback {
     public final /* synthetic */ CHREGestureSensor this$0;
 
@@ -19,7 +19,7 @@ public final class CHREGestureSensor$contextHubClientCallback$1 extends ContextH
     }
 
     public final void onHubReset(ContextHubClient contextHubClient) {
-        ExifInterface$$ExternalSyntheticOutline0.m("HubReset: ", "Columbus/GestureSensor", contextHubClient.getAttachedHub().getId());
+        ExifInterface$$ExternalSyntheticOutline0.m("HubReset: ", contextHubClient.getAttachedHub().getId(), "Columbus/GestureSensor");
     }
 
     public final void onMessageFromNanoApp(ContextHubClient contextHubClient, NanoAppMessage nanoAppMessage) {
@@ -42,7 +42,7 @@ public final class CHREGestureSensor$contextHubClientCallback$1 extends ContextH
 
     public final void onNanoAppAborted(ContextHubClient contextHubClient, long j, int i) {
         if (j == 5147455389092024345L) {
-            ClockEventController$zenModeCallback$1$$ExternalSyntheticOutline0.m("Nanoapp aborted, code: ", "Columbus/GestureSensor", i);
+            ClockEventController$zenModeCallback$1$$ExternalSyntheticOutline0.m("Nanoapp aborted, code: ", i, "Columbus/GestureSensor");
         }
     }
 

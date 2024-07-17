@@ -11,7 +11,7 @@ import com.android.systemui.temporarydisplay.ViewPriority;
 import com.android.systemui.temporarydisplay.chipbar.ChipbarInfo;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ActiveUnlockChipbarManager$keyguardUpdateMonitorCallback$1 extends KeyguardUpdateMonitorCallback {
     public final /* synthetic */ ActiveUnlockChipbarManager this$0;
 
@@ -24,7 +24,7 @@ public final class ActiveUnlockChipbarManager$keyguardUpdateMonitorCallback$1 ex
             ActiveUnlockChipbarManager activeUnlockChipbarManager = this.this$0;
             if (activeUnlockChipbarManager.globalSettings.getInt(0, "chip_all_watch_unlocks") != 0 || z) {
                 Intrinsics.checkNotNull(str);
-                TintedIcon tintedIcon = new TintedIcon(new Icon.Resource(2131233145, (ContentDescription) null), 17957020);
+                TintedIcon tintedIcon = new TintedIcon(new Icon.Resource(2131233098, (ContentDescription) null), 17957019);
                 Text.Loaded loaded = new Text.Loaded(str);
                 int i = activeUnlockChipbarManager.globalSettings.getInt(1500, "chip_duration");
                 ViewPriority viewPriority = ViewPriority.NORMAL;

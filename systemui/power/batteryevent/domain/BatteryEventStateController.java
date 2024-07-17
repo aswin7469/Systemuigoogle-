@@ -15,13 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import kotlin.Unit;
-import kotlin.collections.CollectionsKt;
-import kotlin.collections.CollectionsKt__IterablesKt;
+import kotlin.collections.CollectionsKt__IteratorsJVMKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.flow.StateFlowImpl;
 import kotlinx.coroutines.flow.StateFlowKt;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class BatteryEventStateController {
     public final BatteryEventModuleProvider batteryEventModuleProvider;
     public final StateFlowImpl mutableBatteryEventsFlow = StateFlowKt.MutableStateFlow((Object) null);
@@ -31,7 +31,7 @@ public final class BatteryEventStateController {
         this.batteryEventModuleProvider = batteryEventModuleProvider2;
         this.systemEventDataSource = eventSourceMonitor;
         List<BaseBatteryEventModule> list = batteryEventModuleProvider2.eventModuleList;
-        ArrayList<BatteryEventSubscriber> arrayList = new ArrayList<>(CollectionsKt__IterablesKt.collectionSizeOrDefault(list));
+        ArrayList<BatteryEventSubscriber> arrayList = new ArrayList<>(CollectionsKt__IteratorsJVMKt.collectionSizeOrDefault(list));
         for (BaseBatteryEventModule baseBatteryEventModule : list) {
             arrayList.add(new BatteryEventSubscriber(baseBatteryEventModule.getModuleType(), baseBatteryEventModule.getIntentActions(), baseBatteryEventModule.getEventDataTypes()));
         }
@@ -50,11 +50,11 @@ public final class BatteryEventStateController {
                     }
                 }
                 StateFlowImpl stateFlowImpl = BatteryEventStateController.this.mutableBatteryEventsFlow;
-                ArrayList arrayList2 = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(arrayList));
+                ArrayList arrayList2 = new ArrayList(CollectionsKt__IteratorsJVMKt.collectionSizeOrDefault(arrayList));
                 for (BaseBatteryEventModule moduleType : arrayList) {
                     arrayList2.add(moduleType.getModuleType());
                 }
-                stateFlowImpl.setValue(new BatteryEvents(CollectionsKt.toSet(arrayList2), batteryLevel, ((Number) systemEventData.plugged.value).intValue()));
+                stateFlowImpl.setValue(new BatteryEvents(CollectionsKt___CollectionsKt.toSet(arrayList2), batteryLevel, ((Number) systemEventData.plugged.value).intValue()));
                 return Unit.INSTANCE;
             }
         };

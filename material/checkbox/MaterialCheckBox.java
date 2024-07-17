@@ -1,25 +1,48 @@
 package com.google.android.material.checkbox;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
+import android.util.AttributeSet;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.CheckBox;
 import androidx.appcompat.widget.AppCompatCheckBox;
+import com.google.android.material.R$styleable;
 import com.google.android.material.color.MaterialColors;
+import com.google.android.material.internal.ThemeEnforcement;
 import com.google.android.material.internal.ViewUtils;
+import com.google.android.material.resources.MaterialResources;
+import com.google.android.material.theme.overlay.MaterialThemeOverlay;
+import java.util.LinkedHashSet;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
-public final class MaterialCheckBox extends AppCompatCheckBox {
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
+public class MaterialCheckBox extends AppCompatCheckBox {
     public static final int[][] CHECKBOX_STATES = {new int[]{16842910, 2130969964}, new int[]{16842910, 16842912}, new int[]{16842910, -16842912}, new int[]{-16842910, 16842912}, new int[]{-16842910, -16842912}};
     public static final int[] ERROR_STATE_SET = {2130969964};
-    public boolean centerIfNoTextEnabled;
-    public CharSequence errorAccessibilityLabel;
-    public boolean errorShown;
+    public final boolean centerIfNoTextEnabled;
+    public final CharSequence errorAccessibilityLabel;
+    public final boolean errorShown;
     public ColorStateList materialThemeColorsTintList;
     public boolean useMaterialThemeColors;
+
+    public MaterialCheckBox(Context context, AttributeSet attributeSet) {
+        super(MaterialThemeOverlay.wrap(context, attributeSet, 2130968787, 2132018808), attributeSet, 2130968787);
+        new LinkedHashSet();
+        Context context2 = getContext();
+        TypedArray obtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context2, attributeSet, R$styleable.MaterialCheckBox, 2130968787, 2132018808, new int[0]);
+        if (obtainStyledAttributes.hasValue(0)) {
+            setButtonTintList(MaterialResources.getColorStateList(context2, obtainStyledAttributes, 0));
+        }
+        this.useMaterialThemeColors = obtainStyledAttributes.getBoolean(4, false);
+        this.centerIfNoTextEnabled = obtainStyledAttributes.getBoolean(1, true);
+        this.errorShown = obtainStyledAttributes.getBoolean(3, false);
+        this.errorAccessibilityLabel = obtainStyledAttributes.getText(2);
+        obtainStyledAttributes.recycle();
+    }
 
     public final void onAttachedToWindow() {
         super.onAttachedToWindow();

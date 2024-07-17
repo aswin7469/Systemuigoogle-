@@ -28,7 +28,7 @@ import com.google.android.material.resources.MaterialResources;
 import com.google.android.material.timepicker.ClockHandView;
 import java.util.Arrays;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 class ClockFaceView extends RadialViewGroup implements ClockHandView.OnRotateListener {
     public final int clockHandPadding;
     public final ClockHandView clockHandView;
@@ -73,7 +73,7 @@ class ClockFaceView extends RadialViewGroup implements ClockHandView.OnRotateLis
 
     public final void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo accessibilityNodeInfo) {
         super.onInitializeAccessibilityNodeInfo(accessibilityNodeInfo);
-        accessibilityNodeInfo.setCollectionInfo((AccessibilityNodeInfo.CollectionInfo) AccessibilityNodeInfoCompat.RangeInfoCompat.obtain(1, this.values.length, 1).mInfo);
+        accessibilityNodeInfo.setCollectionInfo((AccessibilityNodeInfo.CollectionInfo) AccessibilityNodeInfoCompat.CollectionInfoCompat.obtain(1, this.values.length, 1).mInfo);
     }
 
     public final void onLayout(boolean z, int i, int i2, int i3, int i4) {
@@ -100,18 +100,18 @@ class ClockFaceView extends RadialViewGroup implements ClockHandView.OnRotateLis
         SparseArray sparseArray = new SparseArray();
         this.textViewPool = sparseArray;
         this.gradientPositions = new float[]{0.0f, 0.9f, 1.0f};
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.ClockFaceView, i, 2132018881);
+        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.ClockFaceView, i, 2132018875);
         Resources resources = getResources();
         ColorStateList colorStateList = MaterialResources.getColorStateList(context, obtainStyledAttributes, 1);
         this.textColor = colorStateList;
-        LayoutInflater.from(context).inflate(2131558756, this, true);
-        ClockHandView clockHandView2 = (ClockHandView) findViewById(2131362975);
+        LayoutInflater.from(context).inflate(2131558750, this, true);
+        ClockHandView clockHandView2 = (ClockHandView) findViewById(2131362951);
         this.clockHandView = clockHandView2;
-        this.clockHandPadding = resources.getDimensionPixelSize(2131166660);
+        this.clockHandPadding = resources.getDimensionPixelSize(2131166618);
         int colorForState = colorStateList.getColorForState(new int[]{16842913}, colorStateList.getDefaultColor());
         this.gradientColors = new int[]{colorForState, colorForState, colorStateList.getDefaultColor()};
         clockHandView2.listeners.add(this);
-        int defaultColor = ContextCompat.getColorStateList(2131100427, context).getDefaultColor();
+        int defaultColor = ContextCompat.getColorStateList(2131100412, context).getDefaultColor();
         ColorStateList colorStateList2 = MaterialResources.getColorStateList(context, obtainStyledAttributes, 0);
         setBackgroundColor(colorStateList2 != null ? colorStateList2.getDefaultColor() : defaultColor);
         getViewTreeObserver().addOnPreDrawListener(new ViewTreeObserver.OnPreDrawListener() {
@@ -124,7 +124,7 @@ class ClockFaceView extends RadialViewGroup implements ClockHandView.OnRotateLis
                 int height = ((ClockFaceView.this.getHeight() / 2) - clockFaceView.clockHandView.selectorRadius) - clockFaceView.clockHandPadding;
                 if (height != clockFaceView.radius) {
                     clockFaceView.radius = height;
-                    clockFaceView.updateLayoutParams$1();
+                    clockFaceView.updateLayoutParams();
                     ClockHandView clockHandView = clockFaceView.clockHandView;
                     clockHandView.circleRadius = clockFaceView.radius;
                     clockHandView.invalidate();
@@ -139,11 +139,11 @@ class ClockFaceView extends RadialViewGroup implements ClockHandView.OnRotateLis
                 View.AccessibilityDelegate accessibilityDelegate = this.mOriginalDelegate;
                 AccessibilityNodeInfo accessibilityNodeInfo = accessibilityNodeInfoCompat.mInfo;
                 accessibilityDelegate.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfo);
-                int intValue = ((Integer) view.getTag(2131362990)).intValue();
+                int intValue = ((Integer) view.getTag(2131362966)).intValue();
                 if (intValue > 0) {
                     accessibilityNodeInfo.setTraversalAfter((View) ClockFaceView.this.textViewPool.get(intValue - 1));
                 }
-                accessibilityNodeInfoCompat.setCollectionItemInfo(AccessibilityNodeInfoCompat.RangeInfoCompat.obtain(view.isSelected(), 0, 1, intValue, 1));
+                accessibilityNodeInfoCompat.setCollectionItemInfo(AccessibilityNodeInfoCompat.CollectionInfoCompat.obtain(0, 1, intValue, 1, false, view.isSelected()));
                 accessibilityNodeInfoCompat.setClickable(true);
                 accessibilityNodeInfoCompat.addAction(AccessibilityNodeInfoCompat.AccessibilityActionCompat.ACTION_CLICK);
             }
@@ -173,19 +173,19 @@ class ClockFaceView extends RadialViewGroup implements ClockHandView.OnRotateLis
                 this.textViewPool.remove(i2);
             } else {
                 if (textView == null) {
-                    textView = (TextView) from.inflate(2131558755, this, false);
+                    textView = (TextView) from.inflate(2131558749, this, false);
                     this.textViewPool.put(i2, textView);
                     addView(textView);
                 }
                 textView.setVisibility(0);
                 textView.setText(this.values[i2]);
-                textView.setTag(2131362990, Integer.valueOf(i2));
+                textView.setTag(2131362966, Integer.valueOf(i2));
                 ViewCompat.setAccessibilityDelegate(textView, this.valueAccessibilityDelegate);
                 textView.setTextColor(this.textColor);
             }
         }
-        this.minimumHeight = resources.getDimensionPixelSize(2131166690);
-        this.minimumWidth = resources.getDimensionPixelSize(2131166691);
-        this.clockSize = resources.getDimensionPixelSize(2131166667);
+        this.minimumHeight = resources.getDimensionPixelSize(2131166648);
+        this.minimumWidth = resources.getDimensionPixelSize(2131166649);
+        this.clockSize = resources.getDimensionPixelSize(2131166625);
     }
 }

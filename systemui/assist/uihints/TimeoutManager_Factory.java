@@ -1,15 +1,11 @@
 package com.google.android.systemui.assist.uihints;
 
-import android.os.Handler;
-import android.os.Looper;
+import dagger.Lazy;
 import javax.inject.Provider;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public abstract class TimeoutManager_Factory implements Provider {
-    /* JADX WARNING: type inference failed for: r0v0, types: [java.lang.Object, com.google.android.systemui.assist.uihints.TimeoutManager] */
-    public static TimeoutManager newInstance() {
-        ? obj = new Object();
-        new Handler(Looper.getMainLooper());
-        return obj;
+    public static TimeoutManager newInstance(Lazy lazy) {
+        return new TimeoutManager(lazy);
     }
 }

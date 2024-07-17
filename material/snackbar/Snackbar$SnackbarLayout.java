@@ -1,11 +1,9 @@
 package com.google.android.material.snackbar;
 
-import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -13,7 +11,7 @@ import androidx.core.view.ViewCompat;
 import com.google.android.material.shape.ShapeAppearanceModel;
 import java.util.WeakHashMap;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class Snackbar$SnackbarLayout extends FrameLayout {
     public static final BaseTransientBottomBar$SnackbarBaseLayout$1 consumeAllTouchListener = new Object();
     public ColorStateList backgroundTint;
@@ -21,10 +19,105 @@ public final class Snackbar$SnackbarLayout extends FrameLayout {
     public final int maxWidth;
     public final ShapeAppearanceModel shapeAppearanceModel;
 
-    public Snackbar$SnackbarLayout(Context context, AttributeSet attributeSet) {
-        this(context, attributeSet, 0);
+    /* JADX DEBUG: Multi-variable search result rejected for TypeSearchVarInfo{r1v1, resolved type: android.graphics.drawable.GradientDrawable} */
+    /* JADX DEBUG: Multi-variable search result rejected for TypeSearchVarInfo{r1v2, resolved type: android.graphics.drawable.GradientDrawable} */
+    /* JADX DEBUG: Multi-variable search result rejected for TypeSearchVarInfo{r1v4, resolved type: com.google.android.material.shape.MaterialShapeDrawable} */
+    /* JADX DEBUG: Multi-variable search result rejected for TypeSearchVarInfo{r1v5, resolved type: android.graphics.drawable.GradientDrawable} */
+    /* JADX WARNING: Multi-variable type inference failed */
+    /* Code decompiled incorrectly, please refer to instructions dump. */
+    public Snackbar$SnackbarLayout(android.content.Context r7) {
+        /*
+            r6 = this;
+            r0 = 0
+            r1 = 0
+            android.content.Context r7 = com.google.android.material.theme.overlay.MaterialThemeOverlay.wrap(r7, r0, r1, r1)
+            r6.<init>(r7, r0)
+            android.content.Context r7 = r6.getContext()
+            int[] r2 = com.google.android.material.R$styleable.SnackbarLayout
+            android.content.res.TypedArray r2 = r7.obtainStyledAttributes(r0, r2)
+            r3 = 6
+            boolean r4 = r2.hasValue(r3)
+            if (r4 == 0) goto L_0x0024
+            int r3 = r2.getDimensionPixelSize(r3, r1)
+            float r3 = (float) r3
+            java.util.WeakHashMap r4 = androidx.core.view.ViewCompat.sViewPropertyAnimatorMap
+            androidx.core.view.ViewCompat.Api21Impl.setElevation(r6, r3)
+        L_0x0024:
+            r3 = 2
+            r2.getInt(r3, r1)
+            r3 = 8
+            boolean r3 = r2.hasValue(r3)
+            if (r3 != 0) goto L_0x0038
+            r3 = 9
+            boolean r3 = r2.hasValue(r3)
+            if (r3 == 0) goto L_0x0042
+        L_0x0038:
+            com.google.android.material.shape.ShapeAppearanceModel$Builder r0 = com.google.android.material.shape.ShapeAppearanceModel.builder((android.content.Context) r7, (android.util.AttributeSet) r0, (int) r1, (int) r1)
+            com.google.android.material.shape.ShapeAppearanceModel r0 = r0.build()
+            r6.shapeAppearanceModel = r0
+        L_0x0042:
+            r0 = 3
+            r3 = 1065353216(0x3f800000, float:1.0)
+            float r0 = r2.getFloat(r0, r3)
+            r4 = 4
+            android.content.res.ColorStateList r7 = com.google.android.material.resources.MaterialResources.getColorStateList((android.content.Context) r7, (android.content.res.TypedArray) r2, (int) r4)
+            r6.setBackgroundTintList(r7)
+            r7 = 5
+            r4 = -1
+            int r7 = r2.getInt(r7, r4)
+            android.graphics.PorterDuff$Mode r5 = android.graphics.PorterDuff.Mode.SRC_IN
+            android.graphics.PorterDuff$Mode r7 = com.google.android.material.internal.ViewUtils.parseTintMode(r7, r5)
+            r6.setBackgroundTintMode(r7)
+            r7 = 1
+            r2.getFloat(r7, r3)
+            int r3 = r2.getDimensionPixelSize(r1, r4)
+            r6.maxWidth = r3
+            r3 = 7
+            r2.getDimensionPixelSize(r3, r4)
+            r2.recycle()
+            com.google.android.material.snackbar.BaseTransientBottomBar$SnackbarBaseLayout$1 r2 = consumeAllTouchListener
+            r6.setOnTouchListener(r2)
+            r6.setFocusable(r7)
+            android.graphics.drawable.Drawable r7 = r6.getBackground()
+            if (r7 != 0) goto L_0x00cc
+            r7 = 2130968887(0x7f040137, float:1.754644E38)
+            int r7 = com.google.android.material.color.MaterialColors.getColor(r6, r7)
+            r2 = 2130968872(0x7f040128, float:1.754641E38)
+            int r2 = com.google.android.material.color.MaterialColors.getColor(r6, r2)
+            int r7 = com.google.android.material.color.MaterialColors.layer(r7, r0, r2)
+            com.google.android.material.shape.ShapeAppearanceModel r0 = r6.shapeAppearanceModel
+            if (r0 == 0) goto L_0x00a4
+            int r1 = com.google.android.material.snackbar.BaseTransientBottomBar.$r8$clinit
+            com.google.android.material.shape.MaterialShapeDrawable r1 = new com.google.android.material.shape.MaterialShapeDrawable
+            r1.<init>((com.google.android.material.shape.ShapeAppearanceModel) r0)
+            android.content.res.ColorStateList r7 = android.content.res.ColorStateList.valueOf(r7)
+            r1.setFillColor(r7)
+            goto L_0x00c0
+        L_0x00a4:
+            android.content.res.Resources r0 = r6.getResources()
+            int r2 = com.google.android.material.snackbar.BaseTransientBottomBar.$r8$clinit
+            r2 = 2131166889(0x7f0706a9, float:1.7948036E38)
+            float r0 = r0.getDimension(r2)
+            android.graphics.drawable.GradientDrawable r2 = new android.graphics.drawable.GradientDrawable
+            r2.<init>()
+            r2.setShape(r1)
+            r2.setCornerRadius(r0)
+            r2.setColor(r7)
+            r1 = r2
+        L_0x00c0:
+            android.content.res.ColorStateList r7 = r6.backgroundTint
+            if (r7 == 0) goto L_0x00c7
+            r1.setTintList(r7)
+        L_0x00c7:
+            java.util.WeakHashMap r7 = androidx.core.view.ViewCompat.sViewPropertyAnimatorMap
+            androidx.core.view.ViewCompat.Api16Impl.setBackground(r6, r1)
+        L_0x00cc:
+            return
+        */
+        throw new UnsupportedOperationException("Method not decompiled: com.google.android.material.snackbar.Snackbar$SnackbarLayout.<init>(android.content.Context):void");
     }
 
+    /* renamed from: onAttachedToWindow$com$google$android$material$snackbar$BaseTransientBottomBar$SnackbarBaseLayout */
     public final void onAttachedToWindow() {
         super.onAttachedToWindow();
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
@@ -63,6 +156,7 @@ public final class Snackbar$SnackbarLayout extends FrameLayout {
         setBackgroundDrawable(drawable);
     }
 
+    /* renamed from: setBackgroundDrawable$com$google$android$material$snackbar$BaseTransientBottomBar$SnackbarBaseLayout */
     public final void setBackgroundDrawable(Drawable drawable) {
         if (!(drawable == null || this.backgroundTint == null)) {
             drawable = drawable.mutate();
@@ -72,6 +166,7 @@ public final class Snackbar$SnackbarLayout extends FrameLayout {
         super.setBackgroundDrawable(drawable);
     }
 
+    /* renamed from: setBackgroundTintList$com$google$android$material$snackbar$BaseTransientBottomBar$SnackbarBaseLayout */
     public final void setBackgroundTintList(ColorStateList colorStateList) {
         this.backgroundTint = colorStateList;
         if (getBackground() != null) {
@@ -84,6 +179,7 @@ public final class Snackbar$SnackbarLayout extends FrameLayout {
         }
     }
 
+    /* renamed from: setBackgroundTintMode$com$google$android$material$snackbar$BaseTransientBottomBar$SnackbarBaseLayout */
     public final void setBackgroundTintMode(PorterDuff.Mode mode) {
         this.backgroundTintMode = mode;
         if (getBackground() != null) {
@@ -95,6 +191,7 @@ public final class Snackbar$SnackbarLayout extends FrameLayout {
         }
     }
 
+    /* renamed from: setLayoutParams$com$google$android$material$snackbar$BaseTransientBottomBar$SnackbarBaseLayout */
     public final void setLayoutParams(ViewGroup.LayoutParams layoutParams) {
         super.setLayoutParams(layoutParams);
         if (layoutParams instanceof ViewGroup.MarginLayoutParams) {
@@ -103,6 +200,7 @@ public final class Snackbar$SnackbarLayout extends FrameLayout {
         }
     }
 
+    /* renamed from: setOnClickListener$com$google$android$material$snackbar$BaseTransientBottomBar$SnackbarBaseLayout */
     public final void setOnClickListener(View.OnClickListener onClickListener) {
         BaseTransientBottomBar$SnackbarBaseLayout$1 baseTransientBottomBar$SnackbarBaseLayout$1;
         if (onClickListener != null) {
@@ -114,104 +212,100 @@ public final class Snackbar$SnackbarLayout extends FrameLayout {
         super.setOnClickListener(onClickListener);
     }
 
-    public Snackbar$SnackbarLayout(Context context) {
-        this(context, (AttributeSet) null, 0);
-    }
-
-    /* JADX DEBUG: Multi-variable search result rejected for TypeSearchVarInfo{r7v2, resolved type: android.graphics.drawable.GradientDrawable} */
-    /* JADX DEBUG: Multi-variable search result rejected for TypeSearchVarInfo{r7v3, resolved type: android.graphics.drawable.GradientDrawable} */
-    /* JADX DEBUG: Multi-variable search result rejected for TypeSearchVarInfo{r7v5, resolved type: com.google.android.material.shape.MaterialShapeDrawable} */
-    /* JADX DEBUG: Multi-variable search result rejected for TypeSearchVarInfo{r7v6, resolved type: android.graphics.drawable.GradientDrawable} */
+    /* JADX DEBUG: Multi-variable search result rejected for TypeSearchVarInfo{r0v1, resolved type: android.graphics.drawable.GradientDrawable} */
+    /* JADX DEBUG: Multi-variable search result rejected for TypeSearchVarInfo{r0v2, resolved type: android.graphics.drawable.GradientDrawable} */
+    /* JADX DEBUG: Multi-variable search result rejected for TypeSearchVarInfo{r0v4, resolved type: com.google.android.material.shape.MaterialShapeDrawable} */
+    /* JADX DEBUG: Multi-variable search result rejected for TypeSearchVarInfo{r0v5, resolved type: android.graphics.drawable.GradientDrawable} */
     /* JADX WARNING: Multi-variable type inference failed */
     /* Code decompiled incorrectly, please refer to instructions dump. */
-    public Snackbar$SnackbarLayout(android.content.Context r5, android.util.AttributeSet r6, int r7) {
+    public Snackbar$SnackbarLayout(android.content.Context r6, android.util.AttributeSet r7) {
         /*
-            r4 = this;
-            r7 = 0
-            android.content.Context r5 = com.google.android.material.theme.overlay.MaterialThemeOverlay.wrap(r5, r6, r7, r7)
-            r4.<init>(r5, r6)
-            android.content.Context r5 = r4.getContext()
-            int[] r0 = com.google.android.material.R$styleable.SnackbarLayout
-            android.content.res.TypedArray r0 = r5.obtainStyledAttributes(r6, r0)
-            r1 = 6
-            boolean r2 = r0.hasValue(r1)
-            if (r2 == 0) goto L_0x0023
-            int r1 = r0.getDimensionPixelSize(r1, r7)
-            float r1 = (float) r1
-            java.util.WeakHashMap r2 = androidx.core.view.ViewCompat.sViewPropertyAnimatorMap
-            androidx.core.view.ViewCompat.Api21Impl.setElevation(r4, r1)
+            r5 = this;
+            r0 = 0
+            android.content.Context r6 = com.google.android.material.theme.overlay.MaterialThemeOverlay.wrap(r6, r7, r0, r0)
+            r5.<init>(r6, r7)
+            android.content.Context r6 = r5.getContext()
+            int[] r1 = com.google.android.material.R$styleable.SnackbarLayout
+            android.content.res.TypedArray r1 = r6.obtainStyledAttributes(r7, r1)
+            r2 = 6
+            boolean r3 = r1.hasValue(r2)
+            if (r3 == 0) goto L_0x0023
+            int r2 = r1.getDimensionPixelSize(r2, r0)
+            float r2 = (float) r2
+            java.util.WeakHashMap r3 = androidx.core.view.ViewCompat.sViewPropertyAnimatorMap
+            androidx.core.view.ViewCompat.Api21Impl.setElevation(r5, r2)
         L_0x0023:
-            r1 = 2
-            r0.getInt(r1, r7)
-            r1 = 8
-            boolean r1 = r0.hasValue(r1)
-            if (r1 != 0) goto L_0x0037
-            r1 = 9
-            boolean r1 = r0.hasValue(r1)
-            if (r1 == 0) goto L_0x0041
+            r2 = 2
+            r1.getInt(r2, r0)
+            r2 = 8
+            boolean r2 = r1.hasValue(r2)
+            if (r2 != 0) goto L_0x0037
+            r2 = 9
+            boolean r2 = r1.hasValue(r2)
+            if (r2 == 0) goto L_0x0041
         L_0x0037:
-            com.google.android.material.shape.ShapeAppearanceModel$Builder r6 = com.google.android.material.shape.ShapeAppearanceModel.builder((android.content.Context) r5, (android.util.AttributeSet) r6, (int) r7, (int) r7)
-            com.google.android.material.shape.ShapeAppearanceModel r6 = r6.build()
-            r4.shapeAppearanceModel = r6
+            com.google.android.material.shape.ShapeAppearanceModel$Builder r7 = com.google.android.material.shape.ShapeAppearanceModel.builder((android.content.Context) r6, (android.util.AttributeSet) r7, (int) r0, (int) r0)
+            com.google.android.material.shape.ShapeAppearanceModel r7 = r7.build()
+            r5.shapeAppearanceModel = r7
         L_0x0041:
-            r6 = 3
-            r1 = 1065353216(0x3f800000, float:1.0)
-            float r6 = r0.getFloat(r6, r1)
-            r2 = 4
-            android.content.res.ColorStateList r5 = com.google.android.material.resources.MaterialResources.getColorStateList((android.content.Context) r5, (android.content.res.TypedArray) r0, (int) r2)
-            r4.setBackgroundTintList(r5)
-            r5 = 5
-            r2 = -1
-            int r5 = r0.getInt(r5, r2)
-            android.graphics.PorterDuff$Mode r3 = android.graphics.PorterDuff.Mode.SRC_IN
-            android.graphics.PorterDuff$Mode r5 = com.google.android.material.internal.ViewUtils.parseTintMode(r5, r3)
-            r4.setBackgroundTintMode(r5)
-            r5 = 1
-            r0.getFloat(r5, r1)
-            int r1 = r0.getDimensionPixelSize(r7, r2)
-            r4.maxWidth = r1
-            r1 = 7
-            r0.getDimensionPixelSize(r1, r2)
-            r0.recycle()
-            com.google.android.material.snackbar.BaseTransientBottomBar$SnackbarBaseLayout$1 r0 = consumeAllTouchListener
-            r4.setOnTouchListener(r0)
-            r4.setFocusable(r5)
-            android.graphics.drawable.Drawable r5 = r4.getBackground()
-            if (r5 != 0) goto L_0x00cb
-            r5 = 2130968887(0x7f040137, float:1.754644E38)
-            int r5 = com.google.android.material.color.MaterialColors.getColor(r4, r5)
-            r0 = 2130968872(0x7f040128, float:1.754641E38)
-            int r0 = com.google.android.material.color.MaterialColors.getColor(r4, r0)
-            int r5 = com.google.android.material.color.MaterialColors.layer(r5, r6, r0)
-            com.google.android.material.shape.ShapeAppearanceModel r6 = r4.shapeAppearanceModel
-            if (r6 == 0) goto L_0x00a3
-            int r7 = com.google.android.material.snackbar.BaseTransientBottomBar.$r8$clinit
-            com.google.android.material.shape.MaterialShapeDrawable r7 = new com.google.android.material.shape.MaterialShapeDrawable
-            r7.<init>((com.google.android.material.shape.ShapeAppearanceModel) r6)
-            android.content.res.ColorStateList r5 = android.content.res.ColorStateList.valueOf(r5)
-            r7.setFillColor(r5)
+            r7 = 3
+            r2 = 1065353216(0x3f800000, float:1.0)
+            float r7 = r1.getFloat(r7, r2)
+            r3 = 4
+            android.content.res.ColorStateList r6 = com.google.android.material.resources.MaterialResources.getColorStateList((android.content.Context) r6, (android.content.res.TypedArray) r1, (int) r3)
+            r5.setBackgroundTintList(r6)
+            r6 = 5
+            r3 = -1
+            int r6 = r1.getInt(r6, r3)
+            android.graphics.PorterDuff$Mode r4 = android.graphics.PorterDuff.Mode.SRC_IN
+            android.graphics.PorterDuff$Mode r6 = com.google.android.material.internal.ViewUtils.parseTintMode(r6, r4)
+            r5.setBackgroundTintMode(r6)
+            r6 = 1
+            r1.getFloat(r6, r2)
+            int r2 = r1.getDimensionPixelSize(r0, r3)
+            r5.maxWidth = r2
+            r2 = 7
+            r1.getDimensionPixelSize(r2, r3)
+            r1.recycle()
+            com.google.android.material.snackbar.BaseTransientBottomBar$SnackbarBaseLayout$1 r1 = consumeAllTouchListener
+            r5.setOnTouchListener(r1)
+            r5.setFocusable(r6)
+            android.graphics.drawable.Drawable r6 = r5.getBackground()
+            if (r6 != 0) goto L_0x00cb
+            r6 = 2130968887(0x7f040137, float:1.754644E38)
+            int r6 = com.google.android.material.color.MaterialColors.getColor(r5, r6)
+            r1 = 2130968872(0x7f040128, float:1.754641E38)
+            int r1 = com.google.android.material.color.MaterialColors.getColor(r5, r1)
+            int r6 = com.google.android.material.color.MaterialColors.layer(r6, r7, r1)
+            com.google.android.material.shape.ShapeAppearanceModel r7 = r5.shapeAppearanceModel
+            if (r7 == 0) goto L_0x00a3
+            int r0 = com.google.android.material.snackbar.BaseTransientBottomBar.$r8$clinit
+            com.google.android.material.shape.MaterialShapeDrawable r0 = new com.google.android.material.shape.MaterialShapeDrawable
+            r0.<init>((com.google.android.material.shape.ShapeAppearanceModel) r7)
+            android.content.res.ColorStateList r6 = android.content.res.ColorStateList.valueOf(r6)
+            r0.setFillColor(r6)
             goto L_0x00bf
         L_0x00a3:
-            android.content.res.Resources r6 = r4.getResources()
-            int r0 = com.google.android.material.snackbar.BaseTransientBottomBar.$r8$clinit
-            r0 = 2131166931(0x7f0706d3, float:1.7948121E38)
-            float r6 = r6.getDimension(r0)
-            android.graphics.drawable.GradientDrawable r0 = new android.graphics.drawable.GradientDrawable
-            r0.<init>()
-            r0.setShape(r7)
-            r0.setCornerRadius(r6)
-            r0.setColor(r5)
-            r7 = r0
+            android.content.res.Resources r7 = r5.getResources()
+            int r1 = com.google.android.material.snackbar.BaseTransientBottomBar.$r8$clinit
+            r1 = 2131166889(0x7f0706a9, float:1.7948036E38)
+            float r7 = r7.getDimension(r1)
+            android.graphics.drawable.GradientDrawable r1 = new android.graphics.drawable.GradientDrawable
+            r1.<init>()
+            r1.setShape(r0)
+            r1.setCornerRadius(r7)
+            r1.setColor(r6)
+            r0 = r1
         L_0x00bf:
-            android.content.res.ColorStateList r5 = r4.backgroundTint
-            if (r5 == 0) goto L_0x00c6
-            r7.setTintList(r5)
+            android.content.res.ColorStateList r6 = r5.backgroundTint
+            if (r6 == 0) goto L_0x00c6
+            r0.setTintList(r6)
         L_0x00c6:
-            java.util.WeakHashMap r5 = androidx.core.view.ViewCompat.sViewPropertyAnimatorMap
-            r4.setBackgroundDrawable(r7)
+            java.util.WeakHashMap r6 = androidx.core.view.ViewCompat.sViewPropertyAnimatorMap
+            androidx.core.view.ViewCompat.Api16Impl.setBackground(r5, r0)
         L_0x00cb:
             return
         */
-        throw new UnsupportedOperationException("Method not decompiled: com.google.android.material.snackbar.Snackbar$SnackbarLayout.<init>(android.content.Context, android.util.AttributeSet, int):void");
+        throw new UnsupportedOperationException("Method not decompiled: com.google.android.material.snackbar.Snackbar$SnackbarLayout.<init>(android.content.Context, android.util.AttributeSet):void");
     }
 }

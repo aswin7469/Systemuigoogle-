@@ -2,17 +2,17 @@ package com.google.android.systemui.power.batteryhealth;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.compose.animation.Scale$$ExternalSyntheticOutline0;
+import androidx.compose.foundation.MagnifierElement$$ExternalSyntheticOutline0;
 import com.google.android.systemui.power.DumpUtils;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class IncompatibleChargerData implements Parcelable {
     public static final CREATOR CREATOR = new Object();
     public final boolean isIncompatibleCharger;
     public final long lastCompatibleChargerTime;
     public final long lastIncompatibleChargerTime;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class CREATOR implements Parcelable.Creator {
         public final Object createFromParcel(Parcel parcel) {
             return new IncompatibleChargerData(parcel.readLong(), parcel.readLong(), parcel.readBoolean());
@@ -48,7 +48,11 @@ public final class IncompatibleChargerData implements Parcelable {
     }
 
     public final int hashCode() {
-        return Long.hashCode(this.lastIncompatibleChargerTime) + Scale$$ExternalSyntheticOutline0.m(Boolean.hashCode(this.isIncompatibleCharger) * 31, 31, this.lastCompatibleChargerTime);
+        boolean z = this.isIncompatibleCharger;
+        if (z) {
+            z = true;
+        }
+        return Long.hashCode(this.lastIncompatibleChargerTime) + MagnifierElement$$ExternalSyntheticOutline0.m(this.lastCompatibleChargerTime, (z ? 1 : 0) * true, 31);
     }
 
     public final String toString() {

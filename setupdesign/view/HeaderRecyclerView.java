@@ -9,15 +9,16 @@ import android.view.ViewGroup;
 import android.view.accessibility.AccessibilityEvent;
 import android.widget.FrameLayout;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.setupdesign.DividerItemDecoration;
 import com.google.android.setupdesign.R$styleable;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class HeaderRecyclerView extends RecyclerView {
     public View header;
     public int headerRes;
     public boolean shouldHandleActionUp = false;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class HeaderAdapter extends RecyclerView.Adapter {
         public final RecyclerView.Adapter adapter;
         public View header;
@@ -34,7 +35,7 @@ public class HeaderRecyclerView extends RecyclerView {
                     if (headerAdapter.header != null) {
                         i++;
                     }
-                    headerAdapter.mObservable.notifyItemRangeChanged(i, i2);
+                    headerAdapter.mObservable.notifyItemRangeChanged(i, i2, (Object) null);
                 }
 
                 public final void onItemRangeInserted(int i, int i2) {
@@ -42,7 +43,7 @@ public class HeaderRecyclerView extends RecyclerView {
                     if (headerAdapter.header != null) {
                         i++;
                     }
-                    headerAdapter.mObservable.notifyItemRangeInserted(i, i2);
+                    headerAdapter.notifyItemRangeInserted(i, i2);
                 }
 
                 public final void onItemRangeMoved(int i, int i2) {
@@ -59,7 +60,7 @@ public class HeaderRecyclerView extends RecyclerView {
                     if (headerAdapter.header != null) {
                         i++;
                     }
-                    headerAdapter.mObservable.notifyItemRangeRemoved(i, i2);
+                    headerAdapter.notifyItemRangeRemoved(i, i2);
                 }
             };
             this.adapter = adapter2;
@@ -112,9 +113,9 @@ public class HeaderRecyclerView extends RecyclerView {
             }
         }
 
-        public final RecyclerView.ViewHolder onCreateViewHolder(RecyclerView recyclerView, int i) {
+        public final RecyclerView.ViewHolder onCreateViewHolder(int i, RecyclerView recyclerView) {
             if (i != Integer.MAX_VALUE) {
-                return this.adapter.onCreateViewHolder(recyclerView, i);
+                return this.adapter.onCreateViewHolder(i, recyclerView);
             }
             FrameLayout frameLayout = new FrameLayout(recyclerView.getContext());
             frameLayout.setLayoutParams(new FrameLayout.LayoutParams(-1, -2));
@@ -122,8 +123,15 @@ public class HeaderRecyclerView extends RecyclerView {
         }
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
-    public final class HeaderViewHolder extends RecyclerView.ViewHolder {
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
+    public final class HeaderViewHolder extends RecyclerView.ViewHolder implements DividerItemDecoration.DividedViewHolder {
+        public final boolean isDividerAllowedAbove() {
+            return false;
+        }
+
+        public final boolean isDividerAllowedBelow() {
+            return false;
+        }
     }
 
     public HeaderRecyclerView(Context context) {

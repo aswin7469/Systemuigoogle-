@@ -15,7 +15,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.TextView;
 import androidx.appcompat.widget.AppCompatTextView;
-import androidx.compose.foundation.text.input.internal.RecordingInputConnection$$ExternalSyntheticOutline0;
+import androidx.compose.ui.text.input.RecordingInputConnection$$ExternalSyntheticOutline0;
 import androidx.core.view.AccessibilityDelegateCompat;
 import androidx.core.view.ViewCompat;
 import androidx.customview.widget.ExploreByTouchHelper;
@@ -25,7 +25,7 @@ import com.google.android.setupdesign.span.BoldLinkSpan;
 import com.google.android.setupdesign.span.LinkSpan;
 import com.google.android.setupdesign.view.TouchableMovementMethod;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class RichTextView extends AppCompatTextView implements LinkSpan.OnLinkClickListener {
     static Typeface spanTypeface;
     public LinkAccessibilityHelper accessibilityHelper;
@@ -93,7 +93,7 @@ public class RichTextView extends AppCompatTextView implements LinkSpan.OnLinkCl
                 if ("textAppearance".equals(key)) {
                     int identifier = context.getResources().getIdentifier(annotation.getValue(), "style", context.getPackageName());
                     if (identifier == 0) {
-                        RecordingInputConnection$$ExternalSyntheticOutline0.m("Cannot find resource: ", "RichTextView", identifier);
+                        RecordingInputConnection$$ExternalSyntheticOutline0.m("Cannot find resource: ", identifier, "RichTextView");
                     }
                     Object[] objArr = {new TextAppearanceSpan(context, identifier)};
                     int spanStart = spannableString.getSpanStart(annotation);

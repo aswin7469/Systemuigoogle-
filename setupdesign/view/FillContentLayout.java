@@ -10,7 +10,7 @@ import com.google.android.setupcompat.partnerconfig.PartnerConfig;
 import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper;
 import com.google.android.setupdesign.R$styleable;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class FillContentLayout extends FrameLayout {
     public final int maxHeight;
     public final int maxWidth;
@@ -53,17 +53,11 @@ public class FillContentLayout extends FrameLayout {
         super(context, attributeSet, i);
         if (!isInEditMode()) {
             TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.SudFillContentLayout, i, 0);
+            this.maxHeight = obtainStyledAttributes.getDimensionPixelSize(1, -1);
             PartnerConfigHelper partnerConfigHelper = PartnerConfigHelper.get(context);
-            PartnerConfig partnerConfig = PartnerConfig.CONFIG_ILLUSTRATION_MAX_HEIGHT;
+            PartnerConfig partnerConfig = PartnerConfig.CONFIG_ILLUSTRATION_MAX_WIDTH;
             if (partnerConfigHelper.isPartnerConfigAvailable(partnerConfig)) {
-                this.maxHeight = (int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig, 0.0f);
-            } else {
-                this.maxHeight = obtainStyledAttributes.getDimensionPixelSize(1, -1);
-            }
-            PartnerConfigHelper partnerConfigHelper2 = PartnerConfigHelper.get(context);
-            PartnerConfig partnerConfig2 = PartnerConfig.CONFIG_ILLUSTRATION_MAX_WIDTH;
-            if (partnerConfigHelper2.isPartnerConfigAvailable(partnerConfig2)) {
-                this.maxWidth = (int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig2, 0.0f);
+                this.maxWidth = (int) PartnerConfigHelper.get(context).getDimension(context, partnerConfig, 0.0f);
             } else {
                 this.maxWidth = obtainStyledAttributes.getDimensionPixelSize(0, -1);
             }

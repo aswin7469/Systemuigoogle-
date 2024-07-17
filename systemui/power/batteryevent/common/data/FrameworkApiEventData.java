@@ -2,7 +2,7 @@ package com.google.android.systemui.power.batteryevent.common.data;
 
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class FrameworkApiEventData {
     public final EventData batterySaverState;
     public final EventData extremeBatterySaverState;
@@ -32,5 +32,9 @@ public final class FrameworkApiEventData {
 
     public final String toString() {
         return "FrameworkApiEventData(batterySaverState=" + this.batterySaverState + ", extremeBatterySaverState=" + this.extremeBatterySaverState + ")";
+    }
+
+    public FrameworkApiEventData(boolean z, boolean z2) {
+        this(new EventData(Boolean.valueOf(z)), new EventData(Boolean.valueOf(z2)));
     }
 }

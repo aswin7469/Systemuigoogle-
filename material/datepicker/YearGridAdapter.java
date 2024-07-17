@@ -5,11 +5,11 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.Locale;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class YearGridAdapter extends RecyclerView.Adapter {
     public final MaterialCalendar materialCalendar;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView textView;
 
@@ -31,7 +31,7 @@ public final class YearGridAdapter extends RecyclerView.Adapter {
         MaterialCalendar materialCalendar2 = this.materialCalendar;
         int i2 = materialCalendar2.calendarConstraints.start.year + i;
         TextView textView = ((ViewHolder) viewHolder).textView;
-        String string = textView.getContext().getString(2131953307);
+        String string = textView.getContext().getString(2131953266);
         textView.setText(String.format(Locale.getDefault(), "%d", new Object[]{Integer.valueOf(i2)}));
         textView.setContentDescription(String.format(string, new Object[]{Integer.valueOf(i2)}));
         CalendarStyle calendarStyle = materialCalendar2.calendarStyle;
@@ -43,7 +43,7 @@ public final class YearGridAdapter extends RecyclerView.Adapter {
         throw null;
     }
 
-    public final RecyclerView.ViewHolder onCreateViewHolder(RecyclerView recyclerView, int i) {
-        return new ViewHolder((TextView) LayoutInflater.from(recyclerView.getContext()).inflate(2131558816, recyclerView, false));
+    public final RecyclerView.ViewHolder onCreateViewHolder(int i, RecyclerView recyclerView) {
+        return new ViewHolder((TextView) LayoutInflater.from(recyclerView.getContext()).inflate(2131558809, recyclerView, false));
     }
 }

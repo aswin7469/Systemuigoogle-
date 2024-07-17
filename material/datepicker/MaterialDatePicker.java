@@ -13,7 +13,6 @@ import android.graphics.drawable.StateListDrawable;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,23 +25,23 @@ import androidx.appcompat.app.WindowDecorActionBar$$ExternalSyntheticThrowCCEIfN
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.view.AccessibilityDelegateCompat;
 import androidx.core.view.OnApplyWindowInsetsListener;
-import androidx.core.view.SoftwareKeyboardControllerCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.core.view.WindowInsetsControllerCompat;
+import androidx.core.view.WindowInsetsControllerCompat$Impl30;
 import androidx.fragment.app.DialogFragment;
 import com.android.systemui.plugins.DarkIconDispatcher;
 import com.google.android.material.color.MaterialColors;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.dialog.InsetDialogOnTouchListener;
 import com.google.android.material.internal.CheckableImageButton;
+import com.google.android.material.internal.EdgeToEdgeUtils;
 import com.google.android.material.resources.MaterialAttributes;
 import com.google.android.material.shape.MaterialShapeDrawable;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.WeakHashMap;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class MaterialDatePicker extends DialogFragment {
     public MaterialShapeDrawable background;
     public MaterialCalendar calendar;
@@ -70,10 +69,10 @@ public final class MaterialDatePicker extends DialogFragment {
 
     public static int getPaddedPickerWidth(Context context) {
         Resources resources = context.getResources();
-        int dimensionPixelOffset = resources.getDimensionPixelOffset(2131166809);
+        int dimensionPixelOffset = resources.getDimensionPixelOffset(2131166767);
         int i = new Month(UtcDates.getTodayCalendar()).daysInWeek;
-        int dimensionPixelSize = resources.getDimensionPixelSize(2131166815) * i;
-        return ((i - 1) * resources.getDimensionPixelOffset(2131166829)) + dimensionPixelSize + (dimensionPixelOffset * 2);
+        int dimensionPixelSize = resources.getDimensionPixelSize(2131166773) * i;
+        return ((i - 1) * resources.getDimensionPixelOffset(2131166787)) + dimensionPixelSize + (dimensionPixelOffset * 2);
     }
 
     public static boolean readMaterialCalendarStyleBoolean(int i, Context context) {
@@ -120,7 +119,7 @@ public final class MaterialDatePicker extends DialogFragment {
             Context context = dialog.getContext();
             this.fullscreen = readMaterialCalendarStyleBoolean(16843277, context);
             int i2 = MaterialAttributes.resolveTypedValueOrThrow(context, MaterialDatePicker.class.getCanonicalName(), 2130968887).data;
-            MaterialShapeDrawable materialShapeDrawable = new MaterialShapeDrawable(context, (AttributeSet) null, 2130969537, 2132018823);
+            MaterialShapeDrawable materialShapeDrawable = new MaterialShapeDrawable(context, (AttributeSet) null, 2130969537, 2132018817);
             this.background = materialShapeDrawable;
             materialShapeDrawable.initializeElevationOverlay(context);
             this.background.setFillColor(ColorStateList.valueOf(i2));
@@ -138,22 +137,22 @@ public final class MaterialDatePicker extends DialogFragment {
         int i;
         String str;
         if (this.fullscreen) {
-            i = 2131558822;
+            i = 2131558815;
         } else {
-            i = 2131558821;
+            i = 2131558814;
         }
         View inflate = layoutInflater.inflate(i, viewGroup);
         Context context = inflate.getContext();
         if (this.fullscreen) {
-            inflate.findViewById(2131363147).setLayoutParams(new LinearLayout.LayoutParams(getPaddedPickerWidth(context), -2));
+            inflate.findViewById(2131363120).setLayoutParams(new LinearLayout.LayoutParams(getPaddedPickerWidth(context), -2));
         } else {
-            inflate.findViewById(2131363148).setLayoutParams(new LinearLayout.LayoutParams(getPaddedPickerWidth(context), -1));
+            inflate.findViewById(2131363121).setLayoutParams(new LinearLayout.LayoutParams(getPaddedPickerWidth(context), -1));
         }
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
         boolean z = true;
-        ((TextView) inflate.findViewById(2131363159)).setAccessibilityLiveRegion(1);
-        this.headerToggleButton = (CheckableImageButton) inflate.findViewById(2131363161);
-        TextView textView = (TextView) inflate.findViewById(2131363165);
+        ViewCompat.Api19Impl.setAccessibilityLiveRegion((TextView) inflate.findViewById(2131363132), 1);
+        this.headerToggleButton = (CheckableImageButton) inflate.findViewById(2131363134);
+        TextView textView = (TextView) inflate.findViewById(2131363138);
         CharSequence charSequence = this.titleText;
         if (charSequence != null) {
             textView.setText(charSequence);
@@ -163,8 +162,8 @@ public final class MaterialDatePicker extends DialogFragment {
         this.headerToggleButton.setTag("TOGGLE_BUTTON_TAG");
         CheckableImageButton checkableImageButton = this.headerToggleButton;
         StateListDrawable stateListDrawable = new StateListDrawable();
-        stateListDrawable.addState(new int[]{16842912}, AppCompatResources.getDrawable(2131233272, context));
-        stateListDrawable.addState(new int[0], AppCompatResources.getDrawable(2131233274, context));
+        stateListDrawable.addState(new int[]{16842912}, AppCompatResources.getDrawable(2131233216, context));
+        stateListDrawable.addState(new int[0], AppCompatResources.getDrawable(2131233218, context));
         checkableImageButton.setImageDrawable(stateListDrawable);
         CheckableImageButton checkableImageButton2 = this.headerToggleButton;
         if (this.inputMode == 0) {
@@ -174,9 +173,9 @@ public final class MaterialDatePicker extends DialogFragment {
         ViewCompat.setAccessibilityDelegate(this.headerToggleButton, (AccessibilityDelegateCompat) null);
         CheckableImageButton checkableImageButton3 = this.headerToggleButton;
         if (checkableImageButton3.checked) {
-            str = checkableImageButton3.getContext().getString(2131953321);
+            str = checkableImageButton3.getContext().getString(2131953280);
         } else {
-            str = checkableImageButton3.getContext().getString(2131953323);
+            str = checkableImageButton3.getContext().getString(2131953282);
         }
         this.headerToggleButton.setContentDescription(str);
         this.headerToggleButton.setOnClickListener(new View.OnClickListener() {
@@ -187,7 +186,7 @@ public final class MaterialDatePicker extends DialogFragment {
                 throw null;
             }
         });
-        this.confirmButton = (Button) inflate.findViewById(2131362297);
+        this.confirmButton = (Button) inflate.findViewById(2131362281);
         getDateSelector();
         throw null;
     }
@@ -244,7 +243,6 @@ public final class MaterialDatePicker extends DialogFragment {
     public final void onStart() {
         Integer num;
         boolean z;
-        int i;
         boolean z2;
         boolean z3;
         super.onStart();
@@ -255,7 +253,7 @@ public final class MaterialDatePicker extends DialogFragment {
                 window.setLayout(-1, -1);
                 window.setBackgroundDrawable(this.background);
                 if (!this.edgeToEdgeEnabled) {
-                    final View findViewById = requireView().findViewById(2131362616);
+                    final View findViewById = requireView().findViewById(2131362596);
                     if (findViewById.getBackground() instanceof ColorDrawable) {
                         num = Integer.valueOf(((ColorDrawable) findViewById.getBackground()).getColor());
                     } else {
@@ -266,20 +264,9 @@ public final class MaterialDatePicker extends DialogFragment {
                     } else {
                         z = false;
                     }
-                    Context context = window.getContext();
-                    TypedValue resolve = MaterialAttributes.resolve(16842801, context);
-                    if (resolve != null) {
-                        int i2 = resolve.resourceId;
-                        if (i2 != 0) {
-                            i = context.getColor(i2);
-                        } else {
-                            i = resolve.data;
-                        }
-                    } else {
-                        i = DarkIconDispatcher.DEFAULT_INVERSE_ICON_TINT;
-                    }
+                    int color = MaterialColors.getColor(window.getContext(), 16842801, DarkIconDispatcher.DEFAULT_INVERSE_ICON_TINT);
                     if (z) {
-                        num = Integer.valueOf(i);
+                        num = Integer.valueOf(color);
                     }
                     window.setDecorFitsSystemWindows(false);
                     window.getContext();
@@ -292,52 +279,36 @@ public final class MaterialDatePicker extends DialogFragment {
                     } else {
                         z2 = false;
                     }
-                    new SoftwareKeyboardControllerCompat.Impl30(window.getDecorView());
-                    WindowInsetsControllerCompat.Impl30 impl30 = new WindowInsetsControllerCompat.Impl30(window);
-                    Window window2 = impl30.mWindow;
-                    WindowInsetsController windowInsetsController = impl30.mInsetsController;
-                    if (z2) {
-                        if (window2 != null) {
-                            View decorView = window2.getDecorView();
-                            decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() | 8192);
-                        }
-                        windowInsetsController.setSystemBarsAppearance(8, 8);
-                    } else {
-                        if (window2 != null) {
-                            View decorView2 = window2.getDecorView();
-                            decorView2.setSystemUiVisibility(decorView2.getSystemUiVisibility() & -8193);
-                        }
-                        windowInsetsController.setSystemBarsAppearance(0, 8);
-                    }
-                    boolean isColorLight2 = MaterialColors.isColorLight(i);
+                    EdgeToEdgeUtils.setLightStatusBar(window, z2);
+                    boolean isColorLight2 = MaterialColors.isColorLight(color);
                     if (MaterialColors.isColorLight(0) || isColorLight2) {
                         z3 = true;
                     } else {
                         z3 = false;
                     }
-                    new SoftwareKeyboardControllerCompat.Impl30(window.getDecorView());
-                    WindowInsetsControllerCompat.Impl30 impl302 = new WindowInsetsControllerCompat.Impl30(window);
-                    Window window3 = impl302.mWindow;
-                    WindowInsetsController windowInsetsController2 = impl302.mInsetsController;
+                    window.getDecorView();
+                    WindowInsetsControllerCompat$Impl30 windowInsetsControllerCompat$Impl30 = new WindowInsetsControllerCompat$Impl30(window);
+                    Window window2 = windowInsetsControllerCompat$Impl30.mWindow;
+                    WindowInsetsController windowInsetsController = windowInsetsControllerCompat$Impl30.mInsetsController;
                     if (z3) {
-                        if (window3 != null) {
-                            View decorView3 = window3.getDecorView();
-                            decorView3.setSystemUiVisibility(decorView3.getSystemUiVisibility() | 16);
+                        if (window2 != null) {
+                            View decorView = window2.getDecorView();
+                            decorView.setSystemUiVisibility(decorView.getSystemUiVisibility() | 16);
                         }
-                        windowInsetsController2.setSystemBarsAppearance(16, 16);
+                        windowInsetsController.setSystemBarsAppearance(16, 16);
                     } else {
-                        if (window3 != null) {
-                            View decorView4 = window3.getDecorView();
-                            decorView4.setSystemUiVisibility(decorView4.getSystemUiVisibility() & -17);
+                        if (window2 != null) {
+                            View decorView2 = window2.getDecorView();
+                            decorView2.setSystemUiVisibility(decorView2.getSystemUiVisibility() & -17);
                         }
-                        windowInsetsController2.setSystemBarsAppearance(0, 16);
+                        windowInsetsController.setSystemBarsAppearance(0, 16);
                     }
                     final int paddingTop = findViewById.getPaddingTop();
-                    final int i3 = findViewById.getLayoutParams().height;
-                    AnonymousClass3 r5 = new OnApplyWindowInsetsListener() {
+                    final int i = findViewById.getLayoutParams().height;
+                    AnonymousClass3 r3 = new OnApplyWindowInsetsListener() {
                         public final WindowInsetsCompat onApplyWindowInsets(View view, WindowInsetsCompat windowInsetsCompat) {
                             int i = windowInsetsCompat.mImpl.getInsets(7).top;
-                            int i2 = i3;
+                            int i2 = i;
                             View view2 = findViewById;
                             if (i2 >= 0) {
                                 view2.getLayoutParams().height = i2 + i;
@@ -348,30 +319,30 @@ public final class MaterialDatePicker extends DialogFragment {
                         }
                     };
                     WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-                    ViewCompat.Api21Impl.setOnApplyWindowInsetsListener(findViewById, r5);
+                    ViewCompat.Api21Impl.setOnApplyWindowInsetsListener(findViewById, r3);
                     this.edgeToEdgeEnabled = true;
                 }
             } else {
                 window.setLayout(-2, -2);
-                int dimensionPixelOffset = requireContext().getResources().getDimensionPixelOffset(2131166817);
+                int dimensionPixelOffset = requireContext().getResources().getDimensionPixelOffset(2131166775);
                 Rect rect = new Rect(dimensionPixelOffset, dimensionPixelOffset, dimensionPixelOffset, dimensionPixelOffset);
                 window.setBackgroundDrawable(new InsetDrawable(this.background, dimensionPixelOffset, dimensionPixelOffset, dimensionPixelOffset, dimensionPixelOffset));
-                View decorView5 = window.getDecorView();
+                View decorView3 = window.getDecorView();
                 Dialog dialog2 = this.mDialog;
                 if (dialog2 != null) {
-                    decorView5.setOnTouchListener(new InsetDialogOnTouchListener(dialog2, rect));
+                    decorView3.setOnTouchListener(new InsetDialogOnTouchListener(dialog2, rect));
                 } else {
                     throw new IllegalStateException("DialogFragment " + this + " does not have a Dialog.");
                 }
             }
             requireContext();
-            int i4 = this.overrideThemeResId;
-            if (i4 != 0) {
+            int i2 = this.overrideThemeResId;
+            if (i2 != 0) {
                 getDateSelector();
                 CalendarConstraints calendarConstraints2 = this.calendarConstraints;
                 MaterialCalendar materialCalendar = new MaterialCalendar();
                 Bundle bundle = new Bundle();
-                bundle.putInt("THEME_RES_ID_KEY", i4);
+                bundle.putInt("THEME_RES_ID_KEY", i2);
                 bundle.putParcelable("GRID_SELECTOR_KEY", (Parcelable) null);
                 bundle.putParcelable("CALENDAR_CONSTRAINTS_KEY", calendarConstraints2);
                 bundle.putParcelable("CURRENT_MONTH_KEY", calendarConstraints2.openAt);
@@ -383,7 +354,7 @@ public final class MaterialDatePicker extends DialogFragment {
                     CalendarConstraints calendarConstraints3 = this.calendarConstraints;
                     PickerFragment materialTextInputPicker = new MaterialTextInputPicker();
                     Bundle bundle2 = new Bundle();
-                    bundle2.putInt("THEME_RES_ID_KEY", i4);
+                    bundle2.putInt("THEME_RES_ID_KEY", i2);
                     bundle2.putParcelable("DATE_SELECTOR_KEY", (Parcelable) null);
                     bundle2.putParcelable("CALENDAR_CONSTRAINTS_KEY", calendarConstraints3);
                     materialTextInputPicker.setArguments(bundle2);

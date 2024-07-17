@@ -8,9 +8,10 @@ import androidx.core.util.Preconditions;
 import com.google.android.material.R$styleable;
 import com.google.android.material.resources.MaterialResources;
 import com.google.android.material.shape.AbsoluteCornerSize;
+import com.google.android.material.shape.CornerSize;
 import com.google.android.material.shape.ShapeAppearanceModel;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class CalendarItemStyle {
     public final ColorStateList backgroundColor;
     public final Rect insets;
@@ -46,7 +47,7 @@ public final class CalendarItemStyle {
         ColorStateList colorStateList2 = MaterialResources.getColorStateList(context, obtainStyledAttributes, 9);
         ColorStateList colorStateList3 = MaterialResources.getColorStateList(context, obtainStyledAttributes, 7);
         int dimensionPixelSize = obtainStyledAttributes.getDimensionPixelSize(8, 0);
-        ShapeAppearanceModel build = ShapeAppearanceModel.builder(context, obtainStyledAttributes.getResourceId(5, 0), obtainStyledAttributes.getResourceId(6, 0), new AbsoluteCornerSize((float) 0)).build();
+        ShapeAppearanceModel build = ShapeAppearanceModel.builder(context, obtainStyledAttributes.getResourceId(5, 0), obtainStyledAttributes.getResourceId(6, 0), (CornerSize) new AbsoluteCornerSize((float) 0)).build();
         obtainStyledAttributes.recycle();
         return new CalendarItemStyle(colorStateList, colorStateList2, colorStateList3, dimensionPixelSize, build, rect);
     }

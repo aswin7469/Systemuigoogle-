@@ -18,8 +18,7 @@ import android.os.Messenger;
 import android.os.Trace;
 import android.util.Log;
 import androidx.compose.foundation.text.HeightInLinesModifierKt$$ExternalSyntheticOutline0;
-import androidx.compose.foundation.text.input.internal.RecordingInputConnection$$ExternalSyntheticOutline0;
-import com.android.app.tracing.TraceUtilsKt;
+import androidx.compose.ui.text.input.RecordingInputConnection$$ExternalSyntheticOutline0;
 import com.android.internal.logging.UiEventLogger;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;
@@ -33,11 +32,11 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import kotlin.Result;
 import kotlin.Unit;
-import kotlin.collections.SetsKt;
+import kotlin.collections.SetsKt__SetsKt;
 import kotlin.jvm.internal.Intrinsics;
 import kotlin.text.Charsets;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ColumbusTargetRequestService extends Service {
     public static final long PACKAGE_DENY_COOLDOWN_MS = TimeUnit.DAYS.toMillis(5);
     public final Set allowCertList;
@@ -53,7 +52,7 @@ public final class ColumbusTargetRequestService extends Service {
     public final UiEventLogger uiEventLogger;
     public final UserTracker userTracker;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class IncomingMessageHandler extends Handler {
         public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -72,23 +71,23 @@ public final class ColumbusTargetRequestService extends Service {
                 } catch (Throwable th) {
                     obj = new Result.Failure(th);
                 }
-                Throwable r2 = Result.m1756exceptionOrNullimpl(obj);
+                Throwable r2 = Result.m1717exceptionOrNullimpl(obj);
                 if (r2 != null) {
-                    Log.e("Columbus/TargetRequest", HeightInLinesModifierKt$$ExternalSyntheticOutline0.m("Could not send response ", i2, i, " for request "), r2);
+                    Log.e("Columbus/TargetRequest", HeightInLinesModifierKt$$ExternalSyntheticOutline0.m("Could not send response ", i2, " for request ", i), r2);
                 }
             }
         }
 
         public final LauncherActivityInfo getAppInfoForPackage(String str) {
             List<LauncherActivityInfo> activityList;
-            boolean isEnabled;
+            boolean isTagEnabled;
             PendingIntent pendingIntent;
             boolean z;
             String concat = "getAppInfoForPackage pkg=".concat(str);
             ColumbusTargetRequestService columbusTargetRequestService = ColumbusTargetRequestService.this;
-            boolean isEnabled2 = Trace.isEnabled();
-            if (isEnabled2) {
-                TraceUtilsKt.beginSlice(concat);
+            boolean isTagEnabled2 = Trace.isTagEnabled(4096);
+            if (isTagEnabled2) {
+                Trace.traceBegin(4096, concat);
             }
             try {
                 LauncherApps launcherApps = columbusTargetRequestService.launcherApps;
@@ -101,9 +100,9 @@ public final class ColumbusTargetRequestService extends Service {
                             LauncherActivityInfo launcherActivityInfo = (LauncherActivityInfo) next;
                             try {
                                 String str2 = "getMainActivityLaunchIntent component=" + launcherActivityInfo.getComponentName();
-                                isEnabled = Trace.isEnabled();
-                                if (isEnabled) {
-                                    TraceUtilsKt.beginSlice(str2);
+                                isTagEnabled = Trace.isTagEnabled(4096);
+                                if (isTagEnabled) {
+                                    Trace.traceBegin(4096, str2);
                                 }
                                 LauncherApps launcherApps2 = columbusTargetRequestService.launcherApps;
                                 if (launcherApps2 != null) {
@@ -116,8 +115,8 @@ public final class ColumbusTargetRequestService extends Service {
                                 } else {
                                     z = false;
                                 }
-                                if (isEnabled) {
-                                    TraceUtilsKt.endSlice();
+                                if (isTagEnabled) {
+                                    Trace.traceEnd(4096);
                                 }
                                 if (z) {
                                     t = next;
@@ -125,8 +124,8 @@ public final class ColumbusTargetRequestService extends Service {
                                 }
                             } catch (RuntimeException unused) {
                             } catch (Throwable th) {
-                                if (isEnabled) {
-                                    TraceUtilsKt.endSlice();
+                                if (isTagEnabled) {
+                                    Trace.traceEnd(4096);
                                 }
                                 throw th;
                             }
@@ -136,8 +135,8 @@ public final class ColumbusTargetRequestService extends Service {
                 }
                 return t;
             } finally {
-                if (isEnabled2) {
-                    TraceUtilsKt.endSlice();
+                if (isTagEnabled2) {
+                    Trace.traceEnd(4096);
                 }
             }
         }
@@ -153,7 +152,7 @@ public final class ColumbusTargetRequestService extends Service {
             int i = message.what;
             if (i != 1) {
                 if (i != 2) {
-                    RecordingInputConnection$$ExternalSyntheticOutline0.m("Invalid request type: ", "Columbus/TargetRequest", i);
+                    RecordingInputConnection$$ExternalSyntheticOutline0.m("Invalid request type: ", i, "Columbus/TargetRequest");
                 } else if (str == null || packageIsNotAllowed(str) || ColumbusTargetRequestService.this.columbusStructuredDataManager.getPackageShownCount(str) >= 3 || getAppInfoForPackage(str) == null) {
                     replyToMessenger(message.replyTo, message.what, 2);
                 } else if (packageIsTarget(str)) {
@@ -292,9 +291,9 @@ public final class ColumbusTargetRequestService extends Service {
         this.columbusContext = new ColumbusContext(context);
         this.messenger = new Messenger(new IncomingMessageHandler(looper));
         String[] stringArray = context.getResources().getStringArray(2130903088);
-        this.allowPackageList = SetsKt.setOf(Arrays.copyOf(stringArray, stringArray.length));
+        this.allowPackageList = SetsKt__SetsKt.setOf(Arrays.copyOf(stringArray, stringArray.length));
         String[] stringArray2 = context.getResources().getStringArray(2130903087);
-        this.allowCertList = SetsKt.setOf(Arrays.copyOf(stringArray2, stringArray2.length));
+        this.allowCertList = SetsKt__SetsKt.setOf(Arrays.copyOf(stringArray2, stringArray2.length));
     }
 
     public final IBinder onBind(Intent intent) {

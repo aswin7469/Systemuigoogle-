@@ -13,7 +13,7 @@ import com.google.android.setupcompat.partnerconfig.PartnerConfig;
 import com.google.android.setupcompat.partnerconfig.PartnerConfigHelper;
 import com.google.android.setupcompat.view.StatusBarBackgroundLayout;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class StatusBarMixin implements Mixin {
     public final LinearLayout linearLayout;
     public final PartnerCustomizationLayout partnerCustomizationLayout;
@@ -22,12 +22,12 @@ public final class StatusBarMixin implements Mixin {
     public StatusBarMixin(PartnerCustomizationLayout partnerCustomizationLayout2, Window window, AttributeSet attributeSet, int i) {
         boolean z;
         this.partnerCustomizationLayout = partnerCustomizationLayout2;
-        View findViewById = partnerCustomizationLayout2.findViewById(2131363747);
-        if (findViewById != null) {
-            if (findViewById instanceof StatusBarBackgroundLayout) {
-                this.statusBarLayout = (StatusBarBackgroundLayout) findViewById;
+        View findManagedViewById = partnerCustomizationLayout2.findManagedViewById(2131363713);
+        if (findManagedViewById != null) {
+            if (findManagedViewById instanceof StatusBarBackgroundLayout) {
+                this.statusBarLayout = (StatusBarBackgroundLayout) findManagedViewById;
             } else {
-                this.linearLayout = (LinearLayout) findViewById;
+                this.linearLayout = (LinearLayout) findManagedViewById;
             }
             View decorView = window.getDecorView();
             window.setStatusBarColor(0);

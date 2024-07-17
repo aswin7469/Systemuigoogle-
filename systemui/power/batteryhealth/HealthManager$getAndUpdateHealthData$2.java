@@ -6,7 +6,7 @@ import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 final class HealthManager$getAndUpdateHealthData$2 extends SuspendLambda implements Function2 {
     Object L$0;
     Object L$1;
@@ -75,11 +75,11 @@ final class HealthManager$getAndUpdateHealthData$2 extends SuspendLambda impleme
             java.lang.Object r7 = r0.L$0
             com.google.android.systemui.power.batteryhealth.HealthManager r7 = (com.google.android.systemui.power.batteryhealth.HealthManager) r7
             kotlin.ResultKt.throwOnFailure(r19)
-            r12 = r2
-            r11 = r4
-            r10 = r5
-            r14 = r6
-            r15 = r7
+            r14 = r2
+            r13 = r4
+            r12 = r5
+            r10 = r6
+            r11 = r7
             r4 = r19
             goto L_0x011e
         L_0x0047:
@@ -194,14 +194,14 @@ final class HealthManager$getAndUpdateHealthData$2 extends SuspendLambda impleme
             if (r4 != r1) goto L_0x0119
             return r1
         L_0x0119:
-            r11 = r2
-            r12 = r5
-            r10 = r6
-            r14 = r7
-            r15 = r9
+            r13 = r2
+            r14 = r5
+            r12 = r6
+            r10 = r7
+            r11 = r9
         L_0x011e:
-            r13 = r4
-            java.lang.Integer r13 = (java.lang.Integer) r13
+            r15 = r4
+            java.lang.Integer r15 = (java.lang.Integer) r15
             r0.L$0 = r8
             r0.L$1 = r8
             r0.L$2 = r8
@@ -209,7 +209,7 @@ final class HealthManager$getAndUpdateHealthData$2 extends SuspendLambda impleme
             r0.L$4 = r8
             r0.label = r3
             boolean r2 = com.google.android.systemui.power.batteryhealth.HealthManager.healthDebugEnabled
-            r15.getClass()
+            r11.getClass()
             com.google.android.systemui.power.batteryhealth.HealthManager$saveAsHealthData$2 r2 = new com.google.android.systemui.power.batteryhealth.HealthManager$saveAsHealthData$2
             r16 = 0
             r9 = r2

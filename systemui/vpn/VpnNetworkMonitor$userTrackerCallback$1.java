@@ -5,7 +5,7 @@ import com.android.systemui.settings.UserFileManagerImpl;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.settings.UserTrackerImpl;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class VpnNetworkMonitor$userTrackerCallback$1 implements UserTracker.Callback {
     public final /* synthetic */ VpnNetworkMonitor this$0;
 
@@ -15,7 +15,7 @@ public final class VpnNetworkMonitor$userTrackerCallback$1 implements UserTracke
 
     public final void onUserChanged(int i, Context context) {
         VpnNetworkMonitor vpnNetworkMonitor = this.this$0;
-        if (((UserFileManagerImpl) vpnNetworkMonitor.userFileManager).getSharedPreferences$1(((UserTrackerImpl) vpnNetworkMonitor.userTracker).getUserId(), "network_monitor_index").getBoolean("network_monitor_enabled", true)) {
+        if (((UserFileManagerImpl) vpnNetworkMonitor.userFileManager).getSharedPreferences$1("network_monitor_index", ((UserTrackerImpl) vpnNetworkMonitor.userTracker).getUserId()).getBoolean("network_monitor_enabled", true)) {
             vpnNetworkMonitor.registerNetworkCallback();
         } else {
             vpnNetworkMonitor.unregisterNetworkCallback();

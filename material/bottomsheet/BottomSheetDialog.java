@@ -15,18 +15,18 @@ import androidx.appcompat.app.AppCompatDialog;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.view.AccessibilityDelegateCompat;
 import androidx.core.view.OnApplyWindowInsetsListener;
-import androidx.core.view.SoftwareKeyboardControllerCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.core.view.WindowInsetsControllerCompat;
+import androidx.core.view.WindowInsetsControllerCompat$Impl30;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.color.MaterialColors;
+import com.google.android.material.internal.EdgeToEdgeUtils;
 import com.google.android.material.shape.MaterialShapeDrawable;
 import java.util.ArrayList;
 import java.util.WeakHashMap;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class BottomSheetDialog extends AppCompatDialog {
     public BottomSheetBehavior behavior;
     public FrameLayout bottomSheet;
@@ -40,14 +40,14 @@ public final class BottomSheetDialog extends AppCompatDialog {
     public boolean edgeToEdgeEnabled;
 
     /* renamed from: com.google.android.material.bottomsheet.BottomSheetDialog$4  reason: invalid class name */
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class AnonymousClass4 implements View.OnTouchListener {
         public final boolean onTouch(View view, MotionEvent motionEvent) {
             return true;
         }
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class EdgeToEdgeCallback extends BottomSheetBehavior.BottomSheetCallback {
         public final WindowInsetsCompat insetsCompat;
         public final Boolean lightBottomSheet;
@@ -98,13 +98,13 @@ public final class BottomSheetDialog extends AppCompatDialog {
                     } else {
                         z = bool.booleanValue();
                     }
-                    new WindowInsetsControllerCompat(window2, window2.getDecorView()).setAppearanceLightStatusBars(z);
+                    EdgeToEdgeUtils.setLightStatusBar(window2, z);
                 }
                 view.setPadding(view.getPaddingLeft(), windowInsetsCompat.getSystemWindowInsetTop() - view.getTop(), view.getPaddingRight(), view.getPaddingBottom());
             } else if (view.getTop() != 0) {
                 Window window3 = this.window;
                 if (window3 != null) {
-                    new WindowInsetsControllerCompat(window3, window3.getDecorView()).setAppearanceLightStatusBars(this.lightStatusBar);
+                    EdgeToEdgeUtils.setLightStatusBar(window3, this.lightStatusBar);
                 }
                 view.setPadding(view.getPaddingLeft(), 0, view.getPaddingRight(), view.getPaddingBottom());
             }
@@ -115,8 +115,8 @@ public final class BottomSheetDialog extends AppCompatDialog {
             if (this.window != window2) {
                 this.window = window2;
                 if (window2 != null) {
-                    new SoftwareKeyboardControllerCompat.Impl30(window2.getDecorView());
-                    if ((new WindowInsetsControllerCompat.Impl30(window2).mInsetsController.getSystemBarsAppearance() & 8) != 0) {
+                    window2.getDecorView();
+                    if ((new WindowInsetsControllerCompat$Impl30(window2).mInsetsController.getSystemBarsAppearance() & 8) != 0) {
                         z = true;
                     } else {
                         z = false;
@@ -136,10 +136,10 @@ public final class BottomSheetDialog extends AppCompatDialog {
 
     public final void ensureContainerAndBehavior() {
         if (this.container == null) {
-            FrameLayout frameLayout = (FrameLayout) View.inflate(getContext(), 2131558563, (ViewGroup) null);
+            FrameLayout frameLayout = (FrameLayout) View.inflate(getContext(), 2131558557, (ViewGroup) null);
             this.container = frameLayout;
-            this.coordinator = (CoordinatorLayout) frameLayout.findViewById(2131362358);
-            FrameLayout frameLayout2 = (FrameLayout) this.container.findViewById(2131362401);
+            this.coordinator = (CoordinatorLayout) frameLayout.findViewById(2131362341);
+            FrameLayout frameLayout2 = (FrameLayout) this.container.findViewById(2131362381);
             this.bottomSheet = frameLayout2;
             BottomSheetBehavior from = BottomSheetBehavior.from(frameLayout2);
             this.behavior = from;
@@ -230,7 +230,7 @@ public final class BottomSheetDialog extends AppCompatDialog {
     /* JADX WARNING: type inference failed for: r5v5, types: [java.lang.Object, android.view.View$OnTouchListener] */
     public final View wrapInBottomSheet(View view, int i, ViewGroup.LayoutParams layoutParams) {
         ensureContainerAndBehavior();
-        CoordinatorLayout coordinatorLayout = (CoordinatorLayout) this.container.findViewById(2131362358);
+        CoordinatorLayout coordinatorLayout = (CoordinatorLayout) this.container.findViewById(2131362341);
         if (i != 0 && view == null) {
             view = getLayoutInflater().inflate(i, coordinatorLayout, false);
         }
@@ -264,7 +264,7 @@ public final class BottomSheetDialog extends AppCompatDialog {
         } else {
             this.bottomSheet.addView(view, layoutParams);
         }
-        coordinatorLayout.findViewById(2131363898).setOnClickListener(new View.OnClickListener() {
+        coordinatorLayout.findViewById(2131363862).setOnClickListener(new View.OnClickListener() {
             public final void onClick(View view) {
                 BottomSheetDialog bottomSheetDialog = BottomSheetDialog.this;
                 if (bottomSheetDialog.cancelable && bottomSheetDialog.isShowing()) {

@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.google.android.systemui.smartspace.BcSmartspaceCardSecondary;
 import com.google.android.systemui.smartspace.BcSmartspaceTemplateDataUtils;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class HeadToHeadTemplateCard extends BcSmartspaceCardSecondary {
     public ImageView mFirstCompetitorIcon;
     public TextView mFirstCompetitorText;
@@ -21,11 +21,11 @@ public class HeadToHeadTemplateCard extends BcSmartspaceCardSecondary {
 
     public final void onFinishInflate() {
         super.onFinishInflate();
-        this.mHeadToHeadTitle = (TextView) findViewById(2131362681);
-        this.mFirstCompetitorText = (TextView) findViewById(2131362592);
-        this.mSecondCompetitorText = (TextView) findViewById(2131363563);
-        this.mFirstCompetitorIcon = (ImageView) findViewById(2131362589);
-        this.mSecondCompetitorIcon = (ImageView) findViewById(2131363560);
+        this.mHeadToHeadTitle = (TextView) findViewById(2131362661);
+        this.mFirstCompetitorText = (TextView) findViewById(2131362572);
+        this.mSecondCompetitorText = (TextView) findViewById(2131363534);
+        this.mFirstCompetitorIcon = (ImageView) findViewById(2131362569);
+        this.mSecondCompetitorIcon = (ImageView) findViewById(2131363531);
     }
 
     public final void resetUi() {

@@ -14,7 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
 import com.android.internal.graphics.ColorUtils;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class DoubleShadowIconDrawable extends Drawable {
     public final int mAmbientShadowRadius;
     public final int mCanvasSize;
@@ -27,7 +27,7 @@ public final class DoubleShadowIconDrawable extends Drawable {
     public boolean mShowShadow;
 
     public DoubleShadowIconDrawable(Context context) {
-        this(context, context.getResources().getDimensionPixelSize(2131165919), context.getResources().getDimensionPixelSize(2131165917));
+        this(context, context.getResources().getDimensionPixelSize(2131165887), context.getResources().getDimensionPixelSize(2131165885));
     }
 
     public final void draw(Canvas canvas) {
@@ -118,9 +118,9 @@ public final class DoubleShadowIconDrawable extends Drawable {
         int i3 = (i2 * 2) + i;
         this.mCanvasSize = i3;
         this.mAmbientShadowRadius = context.getResources().getDimensionPixelSize(2131165334);
-        this.mKeyShadowRadius = context.getResources().getDimensionPixelSize(2131166028);
-        this.mKeyShadowOffsetX = context.getResources().getDimensionPixelSize(2131166026);
-        this.mKeyShadowOffsetY = context.getResources().getDimensionPixelSize(2131166027);
+        this.mKeyShadowRadius = context.getResources().getDimensionPixelSize(2131165992);
+        this.mKeyShadowOffsetX = context.getResources().getDimensionPixelSize(2131165990);
+        this.mKeyShadowOffsetY = context.getResources().getDimensionPixelSize(2131165991);
         setBounds(0, 0, i3, i3);
     }
 }

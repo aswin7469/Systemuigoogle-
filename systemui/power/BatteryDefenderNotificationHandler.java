@@ -3,16 +3,12 @@ package com.google.android.systemui.power;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.provider.Settings;
-import android.util.Log;
 import com.android.internal.logging.UiEventLogger;
-import com.android.settingslib.Utils$$ExternalSyntheticOutline0;
-import com.android.settingslib.fuelgauge.BatteryStatus;
 import com.android.systemui.util.time.SystemClock;
-import com.google.android.systemui.power.DwellTempDefenderNotification;
 import com.google.android.systemui.power.batteryevent.repository.GoogleBatteryManagerWrapperImpl;
 import java.util.concurrent.Executor;
 import kotlin.Lazy;
-import kotlin.LazyKt__LazyJVMKt;
+import kotlin.LazyKt__LazyKt;
 import kotlin.Unit;
 import kotlin.coroutines.Continuation;
 import kotlin.coroutines.CoroutineContext;
@@ -23,31 +19,30 @@ import kotlin.time.DurationUnit;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineDispatcher;
 import kotlinx.coroutines.CoroutineScopeKt;
-import kotlinx.coroutines.CoroutineStart;
 import kotlinx.coroutines.Dispatchers;
 import kotlinx.coroutines.ExecutorsKt;
+import kotlinx.coroutines.MainCoroutineDispatcher;
 import kotlinx.coroutines.SupervisorKt;
-import kotlinx.coroutines.android.HandlerContext;
 import kotlinx.coroutines.internal.ContextScope;
 import kotlinx.coroutines.internal.MainDispatcherLoader;
 import kotlinx.coroutines.scheduling.DefaultScheduler;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class BatteryDefenderNotificationHandler {
     public static final /* synthetic */ int $r8$clinit = 0;
-    public static final long POST_NOTIFICATION_THRESHOLD_MILLIS = Duration.m1761getInWholeMillisecondsimpl(DurationKt.toDuration(10, DurationUnit.MINUTES));
+    public static final long POST_NOTIFICATION_THRESHOLD_MILLIS = Duration.m1721getInWholeMillisecondsimpl(DurationKt.toDuration(10, DurationUnit.MINUTES));
     public final ContextScope backgroundCoroutineScope;
     public final CoroutineDispatcher backgroundDispatcher;
     public int batteryLevel = -1;
     public final Context context;
     public boolean dockDefendEnabled;
-    public final Lazy dockDefenderNotification$delegate = LazyKt__LazyJVMKt.lazy(new BatteryDefenderNotificationHandler$dockDefenderNotification$2(this));
-    public final Lazy dwellTempDefenderNotification$delegate = LazyKt__LazyJVMKt.lazy(new BatteryDefenderNotificationHandler$dwellTempDefenderNotification$2(this));
+    public final Lazy dockDefenderNotification$delegate = LazyKt__LazyKt.lazy(new BatteryDefenderNotificationHandler$dockDefenderNotification$2(this));
+    public final Lazy dwellTempDefenderNotification$delegate = LazyKt__LazyKt.lazy(new BatteryDefenderNotificationHandler$dwellTempDefenderNotification$2(this));
     public final GoogleBatteryManagerWrapperImpl googleBatteryManagerWrapper;
     public boolean inDefenderSection;
     public final CoroutineDispatcher mainDispatcher;
     public final NotificationManager notificationManager;
-    public final Lazy sharedPreferences$delegate = LazyKt__LazyJVMKt.lazy(new BatteryDefenderNotificationHandler$sharedPreferences$2(this));
+    public final Lazy sharedPreferences$delegate = LazyKt__LazyKt.lazy(new BatteryDefenderNotificationHandler$sharedPreferences$2(this));
     public final SystemClock systemClock;
     public final UiEventLogger uiEventLogger;
 
@@ -59,16 +54,16 @@ public final class BatteryDefenderNotificationHandler {
     /* JADX WARNING: type inference failed for: r3v0, types: [com.android.systemui.util.time.SystemClock, java.lang.Object] */
     public BatteryDefenderNotificationHandler(Context context2, UiEventLogger uiEventLogger2, Executor executor) {
         DefaultScheduler defaultScheduler = Dispatchers.Default;
-        HandlerContext handlerContext = MainDispatcherLoader.dispatcher;
+        MainCoroutineDispatcher mainCoroutineDispatcher = MainDispatcherLoader.dispatcher;
         ? obj = new Object();
         ? obj2 = new Object();
         this.context = context2;
         this.uiEventLogger = uiEventLogger2;
-        this.mainDispatcher = handlerContext;
+        this.mainDispatcher = mainCoroutineDispatcher;
         this.notificationManager = (NotificationManager) context2.getSystemService(NotificationManager.class);
         this.googleBatteryManagerWrapper = obj;
         this.systemClock = obj2;
-        this.dockDefendEnabled = context2.getResources().getBoolean(2131034195);
+        this.dockDefendEnabled = context2.getResources().getBoolean(2131034197);
         CoroutineDispatcher from = ExecutorsKt.from(executor);
         this.backgroundDispatcher = from;
         this.backgroundCoroutineScope = CoroutineScopeKt.CoroutineScope(CoroutineContext.DefaultImpls.plus(from, SupervisorKt.SupervisorJob$default()));
@@ -96,37 +91,6 @@ public final class BatteryDefenderNotificationHandler {
 
     public final DwellTempDefenderNotification getDwellTempDefenderNotification() {
         return (DwellTempDefenderNotification) this.dwellTempDefenderNotification$delegate.getValue();
-    }
-
-    public final void onBatteryDefenderEvent(int i, DwellTempDefenderNotification.BatteryDefendType batteryDefendType) {
-        boolean isPluggedIn = BatteryStatus.isPluggedIn(i);
-        boolean z = this.inDefenderSection;
-        Log.d("BatteryDefenderNotification", "onBatteryDefenderEvent, pluggedIn:" + isPluggedIn + ", inDefenderSection:" + z);
-        if (this.inDefenderSection) {
-            DwellTempDefenderNotification dwellTempDefenderNotification = getDwellTempDefenderNotification();
-            Utils$$ExternalSyntheticOutline0.m("updateNotificationIfNeeded, notificationVisible:", "DwellTempDefenderNotification", dwellTempDefenderNotification.notificationVisible);
-            if (dwellTempDefenderNotification.notificationVisible && isPluggedIn != dwellTempDefenderNotification.lastPlugged) {
-                dwellTempDefenderNotification.lastPlugged = isPluggedIn;
-                dwellTempDefenderNotification.sendDefenderNotification(isPluggedIn, batteryDefendType);
-                return;
-            }
-            return;
-        }
-        this.inDefenderSection = true;
-        DwellTempDefenderNotification dwellTempDefenderNotification2 = getDwellTempDefenderNotification();
-        boolean z2 = dwellTempDefenderNotification2.postNotificationVisible;
-        Log.d("DwellTempDefenderNotification", "showNotification, postNotificationVisible:" + z2 + "->true");
-        if (dwellTempDefenderNotification2.postNotificationVisible) {
-            dwellTempDefenderNotification2.cancelPostNotification();
-        }
-        dwellTempDefenderNotification2.sendDefenderNotification(isPluggedIn, batteryDefendType);
-        dwellTempDefenderNotification2.notificationVisible = true;
-        dwellTempDefenderNotification2.lastPlugged = isPluggedIn;
-        UiEventLogger uiEventLogger2 = this.uiEventLogger;
-        if (uiEventLogger2 != null) {
-            uiEventLogger2.log(BatteryMetricEvent.BATTERY_DEFENDER_NOTIFICATION);
-        }
-        BuildersKt.launch$default(this.backgroundCoroutineScope, (CoroutineContext) null, (CoroutineStart) null, new BatteryDefenderNotificationHandler$onBatteryDefenderEvent$1(this, (Continuation) null), 3);
     }
 
     public final void setDockDefenderEnabled(boolean z) {

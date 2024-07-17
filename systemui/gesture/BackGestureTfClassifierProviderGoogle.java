@@ -4,6 +4,7 @@ import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.os.Trace;
 import android.util.Log;
+import com.android.systemui.navigationbar.gestural.BackGestureTfClassifierProvider;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.reflect.Array;
@@ -12,8 +13,8 @@ import java.util.HashMap;
 import java.util.Map;
 import org.tensorflow.lite.Interpreter;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
-public final class BackGestureTfClassifierProviderGoogle {
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
+public final class BackGestureTfClassifierProviderGoogle extends BackGestureTfClassifierProvider {
     public static final Object sModelLoadingLock = new Object();
     public Interpreter mInterpreter = null;
     public final String mModelFile;
@@ -26,10 +27,7 @@ public final class BackGestureTfClassifierProviderGoogle {
     public BackGestureTfClassifierProviderGoogle(String str) {
         HashMap hashMap = new HashMap();
         this.mOutputMap = hashMap;
-        int[] iArr = new int[2];
-        iArr[1] = 1;
-        iArr[0] = 1;
-        float[][] fArr = (float[][]) Array.newInstance(Float.TYPE, iArr);
+        float[][] fArr = (float[][]) Array.newInstance(Float.TYPE, new int[]{1, 1});
         this.mOutput = fArr;
         this.mModelFile = str.concat(".tflite");
         this.mVocabFile = str.concat(".vocab");

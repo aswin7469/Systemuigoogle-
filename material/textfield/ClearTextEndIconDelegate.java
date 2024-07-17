@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.EditText;
 import com.google.android.material.animation.AnimationUtils;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ClearTextEndIconDelegate extends EndIconDelegate {
     public EditText editText;
     public AnimatorSet iconInAnim;
@@ -50,11 +50,11 @@ public final class ClearTextEndIconDelegate extends EndIconDelegate {
     }
 
     public final int getIconContentDescriptionResId() {
-        return 2131952206;
+        return 2131952194;
     }
 
     public final int getIconDrawableResId() {
-        return 2131233355;
+        return 2131233299;
     }
 
     public final View.OnFocusChangeListener getOnEditTextFocusChangeListener() {
@@ -100,7 +100,7 @@ public final class ClearTextEndIconDelegate extends EndIconDelegate {
                 this.this$0 = r1;
             }
 
-            public void onAnimationEnd(Animator animator) {
+            public final void onAnimationEnd(Animator animator) {
                 switch (1) {
                     case 1:
                         this.this$0.endLayout.setEndIconVisible(false);
@@ -111,7 +111,7 @@ public final class ClearTextEndIconDelegate extends EndIconDelegate {
                 }
             }
 
-            public void onAnimationStart(Animator animator) {
+            public final void onAnimationStart(Animator animator) {
                 switch (1) {
                     case 0:
                         this.this$0.endLayout.setEndIconVisible(true);
@@ -134,7 +134,7 @@ public final class ClearTextEndIconDelegate extends EndIconDelegate {
                 this.this$0 = r1;
             }
 
-            public void onAnimationEnd(Animator animator) {
+            public final void onAnimationEnd(Animator animator) {
                 switch (1) {
                     case 1:
                         this.this$0.endLayout.setEndIconVisible(false);
@@ -145,7 +145,7 @@ public final class ClearTextEndIconDelegate extends EndIconDelegate {
                 }
             }
 
-            public void onAnimationStart(Animator animator) {
+            public final void onAnimationStart(Animator animator) {
                 switch (1) {
                     case 0:
                         this.this$0.endLayout.setEndIconVisible(true);

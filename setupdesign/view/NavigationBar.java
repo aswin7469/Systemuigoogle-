@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class NavigationBar extends LinearLayout implements View.OnClickListener {
     public NavigationBar(Context context) {
         super(getThemedContext(context));
@@ -26,9 +26,9 @@ public class NavigationBar extends LinearLayout implements View.OnClickListener 
             Color.colorToHSV(obtainStyledAttributes.getColor(1, 0), fArr);
             Color.colorToHSV(obtainStyledAttributes.getColor(2, 0), fArr2);
             if (fArr[2] > fArr2[2]) {
-                i = 2132017867;
+                i = 2132017866;
             } else {
-                i = 2132017868;
+                i = 2132017867;
             }
             resourceId = i;
         }
@@ -38,10 +38,10 @@ public class NavigationBar extends LinearLayout implements View.OnClickListener 
 
     public final void init() {
         if (!isInEditMode()) {
-            View.inflate(getContext(), 2131559136, this);
-            Button button = (Button) findViewById(2131363786);
-            Button button2 = (Button) findViewById(2131363784);
-            Button button3 = (Button) findViewById(2131363785);
+            View.inflate(getContext(), 2131559118, this);
+            Button button = (Button) findViewById(2131363752);
+            Button button2 = (Button) findViewById(2131363750);
+            Button button3 = (Button) findViewById(2131363751);
         }
     }
 

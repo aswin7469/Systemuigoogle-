@@ -19,7 +19,7 @@ import com.google.android.material.internal.ViewUtils;
 import com.google.android.material.resources.MaterialResources;
 import java.util.WeakHashMap;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class StartCompoundLayout extends LinearLayout {
     public boolean hintExpanded;
     public final CharSequence prefixText;
@@ -37,7 +37,7 @@ public final class StartCompoundLayout extends LinearLayout {
         setVisibility(8);
         setOrientation(0);
         setLayoutParams(new FrameLayout.LayoutParams(-2, -1, 8388611));
-        CheckableImageButton checkableImageButton = (CheckableImageButton) LayoutInflater.from(getContext()).inflate(2131558576, this, false);
+        CheckableImageButton checkableImageButton = (CheckableImageButton) LayoutInflater.from(getContext()).inflate(2131558570, this, false);
         this.startIconView = checkableImageButton;
         AppCompatTextView appCompatTextView = new AppCompatTextView(getContext());
         this.prefixTextView = appCompatTextView;
@@ -95,10 +95,10 @@ public final class StartCompoundLayout extends LinearLayout {
             }
         }
         appCompatTextView.setVisibility(8);
-        appCompatTextView.setId(2131363856);
+        appCompatTextView.setId(2131363822);
         appCompatTextView.setLayoutParams(new LinearLayout.LayoutParams(-2, -2));
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-        appCompatTextView.setAccessibilityLiveRegion(1);
+        ViewCompat.Api19Impl.setAccessibilityLiveRegion(appCompatTextView, 1);
         appCompatTextView.setTextAppearance(typedArray.getResourceId(55, 0));
         if (typedArray.hasValue(56)) {
             appCompatTextView.setTextColor(tintTypedArray.getColorStateList(56));
@@ -124,14 +124,14 @@ public final class StartCompoundLayout extends LinearLayout {
                 i = 0;
             } else {
                 WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-                i = editText.getPaddingStart();
+                i = ViewCompat.Api17Impl.getPaddingStart(editText);
             }
             AppCompatTextView appCompatTextView = this.prefixTextView;
             int compoundPaddingTop = editText.getCompoundPaddingTop();
-            int dimensionPixelSize = getContext().getResources().getDimensionPixelSize(2131166685);
+            int dimensionPixelSize = getContext().getResources().getDimensionPixelSize(2131166643);
             int compoundPaddingBottom = editText.getCompoundPaddingBottom();
             WeakHashMap weakHashMap2 = ViewCompat.sViewPropertyAnimatorMap;
-            appCompatTextView.setPaddingRelative(i, compoundPaddingTop, dimensionPixelSize, compoundPaddingBottom);
+            ViewCompat.Api17Impl.setPaddingRelative(appCompatTextView, i, compoundPaddingTop, dimensionPixelSize, compoundPaddingBottom);
         }
     }
 

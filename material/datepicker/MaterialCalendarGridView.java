@@ -14,16 +14,16 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import java.util.Calendar;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 final class MaterialCalendarGridView extends GridView {
     public final boolean nestedScrollable;
 
     /* renamed from: com.google.android.material.datepicker.MaterialCalendarGridView$1  reason: invalid class name */
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class AnonymousClass1 extends AccessibilityDelegateCompat {
         public final void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfoCompat accessibilityNodeInfoCompat) {
             this.mOriginalDelegate.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfoCompat.mInfo);
-            accessibilityNodeInfoCompat.setCollectionInfo((AccessibilityNodeInfoCompat.RangeInfoCompat) null);
+            accessibilityNodeInfoCompat.setCollectionInfo((AccessibilityNodeInfoCompat.CollectionInfoCompat) null);
         }
     }
 
@@ -99,7 +99,7 @@ final class MaterialCalendarGridView extends GridView {
     }
 
     /* renamed from: getAdapter  reason: collision with other method in class */
-    public final ListAdapter m912getAdapter() {
+    public final ListAdapter m823getAdapter() {
         return (MonthAdapter) super.getAdapter();
     }
 
@@ -115,15 +115,15 @@ final class MaterialCalendarGridView extends GridView {
         super(context, attributeSet, i);
         UtcDates.getUtcCalendarOf((Calendar) null);
         if (MaterialDatePicker.readMaterialCalendarStyleBoolean(16843277, getContext())) {
-            setNextFocusLeftId(2131362215);
-            setNextFocusRightId(2131362297);
+            setNextFocusLeftId(2131362199);
+            setNextFocusRightId(2131362281);
         }
         this.nestedScrollable = MaterialDatePicker.readMaterialCalendarStyleBoolean(2130969661, getContext());
         ViewCompat.setAccessibilityDelegate(this, new AccessibilityDelegateCompat());
     }
 
     /* renamed from: getAdapter  reason: collision with other method in class */
-    public final MonthAdapter m913getAdapter() {
+    public final MonthAdapter m824getAdapter() {
         return (MonthAdapter) super.getAdapter();
     }
 }

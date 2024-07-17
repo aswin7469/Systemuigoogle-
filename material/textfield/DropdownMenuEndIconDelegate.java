@@ -17,7 +17,7 @@ import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import com.google.android.material.animation.AnimationUtils;
 import java.util.WeakHashMap;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class DropdownMenuEndIconDelegate extends EndIconDelegate {
     public AccessibilityManager accessibilityManager;
     public AutoCompleteTextView autoCompleteTextView;
@@ -43,11 +43,11 @@ public final class DropdownMenuEndIconDelegate extends EndIconDelegate {
     }
 
     public final int getIconContentDescriptionResId() {
-        return 2131952536;
+        return 2131952511;
     }
 
     public final int getIconDrawableResId() {
-        return 2131233352;
+        return 2131233296;
     }
 
     public final View.OnFocusChangeListener getOnEditTextFocusChangeListener() {
@@ -91,7 +91,7 @@ public final class DropdownMenuEndIconDelegate extends EndIconDelegate {
             IconHelper.applyIconTint(endCompoundLayout.textInputLayout, endCompoundLayout.errorIconView, endCompoundLayout.errorIconTintList, endCompoundLayout.errorIconTintMode);
             if (!EditTextUtils.isEditable(editText) && this.accessibilityManager.isTouchExplorationEnabled()) {
                 WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-                this.endIconView.setImportantForAccessibility(2);
+                ViewCompat.Api16Impl.setImportantForAccessibility(this.endIconView, 2);
             }
             textInputLayout.endLayout.setEndIconVisible(true);
             return;

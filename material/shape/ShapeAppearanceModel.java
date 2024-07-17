@@ -8,34 +8,35 @@ import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import com.google.android.material.R$styleable;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ShapeAppearanceModel {
+    public static final RelativeCornerSize PILL = new RelativeCornerSize(0.5f);
     public EdgeTreatment bottomEdge = new Object();
-    public CornerTreatment bottomLeftCorner = new RoundedCornerTreatment();
+    public CornerTreatment bottomLeftCorner = new Object();
     public CornerSize bottomLeftCornerSize = new AbsoluteCornerSize(0.0f);
-    public CornerTreatment bottomRightCorner = new RoundedCornerTreatment();
+    public CornerTreatment bottomRightCorner = new Object();
     public CornerSize bottomRightCornerSize = new AbsoluteCornerSize(0.0f);
     public EdgeTreatment leftEdge = new Object();
     public EdgeTreatment rightEdge = new Object();
     public EdgeTreatment topEdge = new Object();
-    public CornerTreatment topLeftCorner = new RoundedCornerTreatment();
+    public CornerTreatment topLeftCorner = new Object();
     public CornerSize topLeftCornerSize = new AbsoluteCornerSize(0.0f);
-    public CornerTreatment topRightCorner = new RoundedCornerTreatment();
+    public CornerTreatment topRightCorner = new Object();
     public CornerSize topRightCornerSize = new AbsoluteCornerSize(0.0f);
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class Builder {
         public EdgeTreatment bottomEdge = new Object();
-        public CornerTreatment bottomLeftCorner = new RoundedCornerTreatment();
+        public CornerTreatment bottomLeftCorner = new Object();
         public CornerSize bottomLeftCornerSize = new AbsoluteCornerSize(0.0f);
-        public CornerTreatment bottomRightCorner = new RoundedCornerTreatment();
+        public CornerTreatment bottomRightCorner = new Object();
         public CornerSize bottomRightCornerSize = new AbsoluteCornerSize(0.0f);
         public EdgeTreatment leftEdge = new Object();
         public EdgeTreatment rightEdge = new Object();
         public EdgeTreatment topEdge = new Object();
-        public CornerTreatment topLeftCorner = new RoundedCornerTreatment();
+        public CornerTreatment topLeftCorner = new Object();
         public CornerSize topLeftCornerSize = new AbsoluteCornerSize(0.0f);
-        public CornerTreatment topRightCorner = new RoundedCornerTreatment();
+        public CornerTreatment topRightCorner = new Object();
         public CornerSize topRightCornerSize = new AbsoluteCornerSize(0.0f);
 
         public static void compatCornerTreatmentSize(CornerTreatment cornerTreatment) {
@@ -63,15 +64,17 @@ public final class ShapeAppearanceModel {
             obj.leftEdge = this.leftEdge;
             return obj;
         }
+
+        public final void setAllCornerSizes(float f) {
+            this.topLeftCornerSize = new AbsoluteCornerSize(f);
+            this.topRightCornerSize = new AbsoluteCornerSize(f);
+            this.bottomRightCornerSize = new AbsoluteCornerSize(f);
+            this.bottomLeftCornerSize = new AbsoluteCornerSize(f);
+        }
     }
 
     public static Builder builder(Context context, AttributeSet attributeSet, int i, int i2) {
-        AbsoluteCornerSize absoluteCornerSize = new AbsoluteCornerSize((float) 0);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.MaterialShape, i, i2);
-        int resourceId = obtainStyledAttributes.getResourceId(0, 0);
-        int resourceId2 = obtainStyledAttributes.getResourceId(1, 0);
-        obtainStyledAttributes.recycle();
-        return builder(context, resourceId, resourceId2, absoluteCornerSize);
+        return builder(context, attributeSet, i, i2, new AbsoluteCornerSize((float) 0));
     }
 
     public static CornerSize getCornerSize(TypedArray typedArray, int i, CornerSize cornerSize) {
@@ -134,7 +137,15 @@ public final class ShapeAppearanceModel {
         return obj;
     }
 
-    public static Builder builder(Context context, int i, int i2, AbsoluteCornerSize absoluteCornerSize) {
+    public static Builder builder(Context context, AttributeSet attributeSet, int i, int i2, CornerSize cornerSize) {
+        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, R$styleable.MaterialShape, i, i2);
+        int resourceId = obtainStyledAttributes.getResourceId(0, 0);
+        int resourceId2 = obtainStyledAttributes.getResourceId(1, 0);
+        obtainStyledAttributes.recycle();
+        return builder(context, resourceId, resourceId2, cornerSize);
+    }
+
+    public static Builder builder(Context context, int i, int i2, CornerSize cornerSize) {
         ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(context, i);
         if (i2 != 0) {
             contextThemeWrapper = new ContextThemeWrapper(contextThemeWrapper, i2);
@@ -146,28 +157,28 @@ public final class ShapeAppearanceModel {
             int i5 = obtainStyledAttributes.getInt(4, i3);
             int i6 = obtainStyledAttributes.getInt(2, i3);
             int i7 = obtainStyledAttributes.getInt(1, i3);
-            CornerSize cornerSize = getCornerSize(obtainStyledAttributes, 5, absoluteCornerSize);
-            CornerSize cornerSize2 = getCornerSize(obtainStyledAttributes, 8, cornerSize);
-            CornerSize cornerSize3 = getCornerSize(obtainStyledAttributes, 9, cornerSize);
-            CornerSize cornerSize4 = getCornerSize(obtainStyledAttributes, 7, cornerSize);
-            CornerSize cornerSize5 = getCornerSize(obtainStyledAttributes, 6, cornerSize);
+            CornerSize cornerSize2 = getCornerSize(obtainStyledAttributes, 5, cornerSize);
+            CornerSize cornerSize3 = getCornerSize(obtainStyledAttributes, 8, cornerSize2);
+            CornerSize cornerSize4 = getCornerSize(obtainStyledAttributes, 9, cornerSize2);
+            CornerSize cornerSize5 = getCornerSize(obtainStyledAttributes, 7, cornerSize2);
+            CornerSize cornerSize6 = getCornerSize(obtainStyledAttributes, 6, cornerSize2);
             Builder builder = new Builder();
             CornerTreatment createCornerTreatment = MaterialShapeUtils.createCornerTreatment(i4);
             builder.topLeftCorner = createCornerTreatment;
             Builder.compatCornerTreatmentSize(createCornerTreatment);
-            builder.topLeftCornerSize = cornerSize2;
+            builder.topLeftCornerSize = cornerSize3;
             CornerTreatment createCornerTreatment2 = MaterialShapeUtils.createCornerTreatment(i5);
             builder.topRightCorner = createCornerTreatment2;
             Builder.compatCornerTreatmentSize(createCornerTreatment2);
-            builder.topRightCornerSize = cornerSize3;
+            builder.topRightCornerSize = cornerSize4;
             CornerTreatment createCornerTreatment3 = MaterialShapeUtils.createCornerTreatment(i6);
             builder.bottomRightCorner = createCornerTreatment3;
             Builder.compatCornerTreatmentSize(createCornerTreatment3);
-            builder.bottomRightCornerSize = cornerSize4;
+            builder.bottomRightCornerSize = cornerSize5;
             CornerTreatment createCornerTreatment4 = MaterialShapeUtils.createCornerTreatment(i7);
             builder.bottomLeftCorner = createCornerTreatment4;
             Builder.compatCornerTreatmentSize(createCornerTreatment4);
-            builder.bottomLeftCornerSize = cornerSize5;
+            builder.bottomLeftCornerSize = cornerSize6;
             return builder;
         } finally {
             obtainStyledAttributes.recycle();

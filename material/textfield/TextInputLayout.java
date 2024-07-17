@@ -8,7 +8,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
-import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Typeface;
@@ -39,8 +38,8 @@ import android.widget.TextView;
 import androidx.appcompat.widget.AppCompatDrawableManager;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.DrawableUtils;
-import androidx.appcompat.widget.ResourceManagerInternal;
 import androidx.compose.runtime.Anchor$$ExternalSyntheticOutline0;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.ColorUtils;
 import androidx.core.text.BidiFormatter;
 import androidx.core.view.AccessibilityDelegateCompat;
@@ -65,7 +64,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.WeakHashMap;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class TextInputLayout extends LinearLayout {
     public static final int[][] EDIT_TEXT_BACKGROUND_RIPPLE_STATE = {new int[]{16842919}, new int[0]};
     public ValueAnimator animator;
@@ -141,7 +140,7 @@ public class TextInputLayout extends LinearLayout {
     public final Rect tmpRect;
     public final RectF tmpRectF;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class AccessibilityDelegate extends AccessibilityDelegateCompat {
         public final TextInputLayout layout;
 
@@ -245,14 +244,14 @@ public class TextInputLayout extends LinearLayout {
         }
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class SavedState extends AbsSavedState {
         public static final Parcelable.Creator CREATOR = new Object();
         public CharSequence error;
         public boolean isEndIconChecked;
 
         /* renamed from: com.google.android.material.textfield.TextInputLayout$SavedState$1  reason: invalid class name */
-        /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+        /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
         public final class AnonymousClass1 implements Parcelable.ClassLoaderCreator {
             public final Object createFromParcel(Parcel parcel, ClassLoader classLoader) {
                 return new SavedState(parcel, classLoader);
@@ -455,7 +454,6 @@ public class TextInputLayout extends LinearLayout {
         ColorStateList colorStateList;
         int i;
         int i2;
-        int i3;
         MaterialShapeDrawable materialShapeDrawable = this.boxBackground;
         if (materialShapeDrawable != null) {
             ShapeAppearanceModel shapeAppearanceModel2 = materialShapeDrawable.drawableState.shapeAppearanceModel;
@@ -463,35 +461,18 @@ public class TextInputLayout extends LinearLayout {
             if (shapeAppearanceModel2 != shapeAppearanceModel3) {
                 materialShapeDrawable.setShapeAppearanceModel(shapeAppearanceModel3);
             }
-            if (this.boxBackgroundMode == 2 && (i2 = this.boxStrokeWidthPx) > -1 && (i3 = this.boxStrokeColor) != 0) {
+            if (this.boxBackgroundMode == 2 && (i = this.boxStrokeWidthPx) > -1 && (i2 = this.boxStrokeColor) != 0) {
                 MaterialShapeDrawable materialShapeDrawable2 = this.boxBackground;
-                materialShapeDrawable2.drawableState.strokeWidth = (float) i2;
+                materialShapeDrawable2.drawableState.strokeWidth = (float) i;
                 materialShapeDrawable2.invalidateSelf();
-                ColorStateList valueOf = ColorStateList.valueOf(i3);
-                MaterialShapeDrawable.MaterialShapeDrawableState materialShapeDrawableState = materialShapeDrawable2.drawableState;
-                if (materialShapeDrawableState.strokeColor != valueOf) {
-                    materialShapeDrawableState.strokeColor = valueOf;
-                    materialShapeDrawable2.onStateChange(materialShapeDrawable2.getState());
-                }
+                materialShapeDrawable2.setStrokeColor(ColorStateList.valueOf(i2));
             }
-            int i4 = this.boxBackgroundColor;
+            int i3 = this.boxBackgroundColor;
             if (this.boxBackgroundMode == 1) {
-                Context context = getContext();
-                TypedValue resolve = MaterialAttributes.resolve(2130968887, context);
-                if (resolve != null) {
-                    int i5 = resolve.resourceId;
-                    if (i5 != 0) {
-                        i = context.getColor(i5);
-                    } else {
-                        i = resolve.data;
-                    }
-                } else {
-                    i = 0;
-                }
-                i4 = ColorUtils.compositeColors(this.boxBackgroundColor, i);
+                i3 = ColorUtils.compositeColors(this.boxBackgroundColor, MaterialColors.getColor(getContext(), 2130968887, 0));
             }
-            this.boxBackgroundColor = i4;
-            this.boxBackground.setFillColor(ColorStateList.valueOf(i4));
+            this.boxBackgroundColor = i3;
+            this.boxBackground.setFillColor(ColorStateList.valueOf(i3));
             MaterialShapeDrawable materialShapeDrawable3 = this.boxUnderlineDefault;
             if (!(materialShapeDrawable3 == null || this.boxUnderlineFocused == null)) {
                 if (this.boxStrokeWidthPx > -1 && this.boxStrokeColor != 0) {
@@ -641,7 +622,7 @@ public class TextInputLayout extends LinearLayout {
             android.widget.EditText r2 = r4.editText
             if (r2 == 0) goto L_0x0047
             java.util.WeakHashMap r2 = androidx.core.view.ViewCompat.sViewPropertyAnimatorMap
-            boolean r2 = r4.isLaidOut()
+            boolean r2 = androidx.core.view.ViewCompat.Api19Impl.isLaidOut(r4)
             if (r2 == 0) goto L_0x0043
             boolean r2 = r4.isEnabled()
             if (r2 == 0) goto L_0x0043
@@ -684,7 +665,7 @@ public class TextInputLayout extends LinearLayout {
         float f;
         float f2;
         int i;
-        float dimensionPixelOffset = (float) getResources().getDimensionPixelOffset(2131166920);
+        float dimensionPixelOffset = (float) getResources().getDimensionPixelOffset(2131166878);
         if (z) {
             f = dimensionPixelOffset;
         } else {
@@ -694,9 +675,9 @@ public class TextInputLayout extends LinearLayout {
         if (editText2 instanceof MaterialAutoCompleteTextView) {
             f2 = ((MaterialAutoCompleteTextView) editText2).popupElevation;
         } else {
-            f2 = (float) getResources().getDimensionPixelOffset(2131166855);
+            f2 = (float) getResources().getDimensionPixelOffset(2131166813);
         }
-        int dimensionPixelOffset2 = getResources().getDimensionPixelOffset(2131166857);
+        int dimensionPixelOffset2 = getResources().getDimensionPixelOffset(2131166815);
         ? obj = new Object();
         ? obj2 = new Object();
         ? obj3 = new Object();
@@ -728,6 +709,7 @@ public class TextInputLayout extends LinearLayout {
         TypedValue resolveTypedValueOrThrow = MaterialAttributes.resolveTypedValueOrThrow(context, "MaterialShapeDrawable", 2130968887);
         int i2 = resolveTypedValueOrThrow.resourceId;
         if (i2 != 0) {
+            Object obj10 = ContextCompat.sLock;
             i = context.getColor(i2);
         } else {
             i = resolveTypedValueOrThrow.data;
@@ -806,20 +788,20 @@ public class TextInputLayout extends LinearLayout {
         updateTextInputBoxState();
         if (this.boxBackgroundMode == 1) {
             if (getContext().getResources().getConfiguration().fontScale >= 2.0f) {
-                this.boxCollapsedPaddingTopPx = getResources().getDimensionPixelSize(2131166681);
+                this.boxCollapsedPaddingTopPx = getResources().getDimensionPixelSize(2131166639);
             } else if (MaterialResources.isFontScaleAtLeast1_3(getContext())) {
-                this.boxCollapsedPaddingTopPx = getResources().getDimensionPixelSize(2131166680);
+                this.boxCollapsedPaddingTopPx = getResources().getDimensionPixelSize(2131166638);
             }
         }
         if (this.editText != null && this.boxBackgroundMode == 1) {
             if (getContext().getResources().getConfiguration().fontScale >= 2.0f) {
                 EditText editText2 = this.editText;
                 WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-                editText2.setPaddingRelative(editText2.getPaddingStart(), getResources().getDimensionPixelSize(2131166679), this.editText.getPaddingEnd(), getResources().getDimensionPixelSize(2131166678));
+                ViewCompat.Api17Impl.setPaddingRelative(editText2, ViewCompat.Api17Impl.getPaddingStart(editText2), getResources().getDimensionPixelSize(2131166637), ViewCompat.Api17Impl.getPaddingEnd(this.editText), getResources().getDimensionPixelSize(2131166636));
             } else if (MaterialResources.isFontScaleAtLeast1_3(getContext())) {
                 EditText editText3 = this.editText;
                 WeakHashMap weakHashMap2 = ViewCompat.sViewPropertyAnimatorMap;
-                editText3.setPaddingRelative(editText3.getPaddingStart(), getResources().getDimensionPixelSize(2131166677), this.editText.getPaddingEnd(), getResources().getDimensionPixelSize(2131166676));
+                ViewCompat.Api17Impl.setPaddingRelative(editText3, ViewCompat.Api17Impl.getPaddingStart(editText3), getResources().getDimensionPixelSize(2131166635), ViewCompat.Api17Impl.getPaddingEnd(this.editText), getResources().getDimensionPixelSize(2131166634));
             }
         }
         if (this.boxBackgroundMode != 0) {
@@ -1120,13 +1102,13 @@ public class TextInputLayout extends LinearLayout {
                 f2 = cornerSize3;
             }
             MaterialShapeDrawable materialShapeDrawable = this.boxBackground;
-            if (materialShapeDrawable != null && materialShapeDrawable.drawableState.shapeAppearanceModel.topLeftCornerSize.getCornerSize(materialShapeDrawable.getBoundsAsRectF()) == f3) {
+            if (materialShapeDrawable != null && materialShapeDrawable.getTopLeftCornerResolvedSize() == f3) {
                 MaterialShapeDrawable materialShapeDrawable2 = this.boxBackground;
-                if (materialShapeDrawable2.drawableState.shapeAppearanceModel.topRightCornerSize.getCornerSize(materialShapeDrawable2.getBoundsAsRectF()) == f) {
+                if (materialShapeDrawable2.drawableState.shapeAppearanceModel.topRightCornerSize.getCornerSize(materialShapeDrawable2.getBoundsAsRectF$1()) == f) {
                     MaterialShapeDrawable materialShapeDrawable3 = this.boxBackground;
-                    if (materialShapeDrawable3.drawableState.shapeAppearanceModel.bottomLeftCornerSize.getCornerSize(materialShapeDrawable3.getBoundsAsRectF()) == f4) {
+                    if (materialShapeDrawable3.drawableState.shapeAppearanceModel.bottomLeftCornerSize.getCornerSize(materialShapeDrawable3.getBoundsAsRectF$1()) == f4) {
                         MaterialShapeDrawable materialShapeDrawable4 = this.boxBackground;
-                        if (materialShapeDrawable4.drawableState.shapeAppearanceModel.bottomRightCornerSize.getCornerSize(materialShapeDrawable4.getBoundsAsRectF()) == f2) {
+                        if (materialShapeDrawable4.drawableState.shapeAppearanceModel.bottomRightCornerSize.getCornerSize(materialShapeDrawable4.getBoundsAsRectF$1()) == f2) {
                             return;
                         }
                     }
@@ -1342,13 +1324,13 @@ public class TextInputLayout extends LinearLayout {
             if (z) {
                 AppCompatTextView appCompatTextView = new AppCompatTextView(indicatorViewController2.context);
                 indicatorViewController2.errorView = appCompatTextView;
-                appCompatTextView.setId(2131363853);
+                appCompatTextView.setId(2131363819);
                 indicatorViewController2.errorView.setTextAlignment(5);
                 int i = indicatorViewController2.errorTextAppearance;
                 indicatorViewController2.errorTextAppearance = i;
                 AppCompatTextView appCompatTextView2 = indicatorViewController2.errorView;
                 if (appCompatTextView2 != null) {
-                    textInputLayout.setTextAppearanceCompatWithErrorFallback(appCompatTextView2, i);
+                    textInputLayout.setTextAppearanceCompatWithErrorFallback(i, appCompatTextView2);
                 }
                 ColorStateList colorStateList = indicatorViewController2.errorViewTextColor;
                 indicatorViewController2.errorViewTextColor = colorStateList;
@@ -1365,11 +1347,11 @@ public class TextInputLayout extends LinearLayout {
                 indicatorViewController2.errorView.setVisibility(4);
                 AppCompatTextView appCompatTextView5 = indicatorViewController2.errorView;
                 WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-                appCompatTextView5.setAccessibilityLiveRegion(1);
-                indicatorViewController2.addIndicator(indicatorViewController2.errorView, 0);
+                ViewCompat.Api19Impl.setAccessibilityLiveRegion(appCompatTextView5, 1);
+                indicatorViewController2.addIndicator(0, indicatorViewController2.errorView);
             } else {
                 indicatorViewController2.hideError();
-                indicatorViewController2.removeIndicator(indicatorViewController2.errorView, 0);
+                indicatorViewController2.removeIndicator(0, indicatorViewController2.errorView);
                 indicatorViewController2.errorView = null;
                 textInputLayout.updateEditTextBackground();
                 textInputLayout.updateTextInputBoxState();
@@ -1385,12 +1367,12 @@ public class TextInputLayout extends LinearLayout {
             if (z) {
                 AppCompatTextView appCompatTextView = new AppCompatTextView(indicatorViewController2.context);
                 indicatorViewController2.helperTextView = appCompatTextView;
-                appCompatTextView.setId(2131363854);
+                appCompatTextView.setId(2131363820);
                 indicatorViewController2.helperTextView.setTextAlignment(5);
                 indicatorViewController2.helperTextView.setVisibility(4);
                 AppCompatTextView appCompatTextView2 = indicatorViewController2.helperTextView;
                 WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-                appCompatTextView2.setAccessibilityLiveRegion(1);
+                ViewCompat.Api19Impl.setAccessibilityLiveRegion(appCompatTextView2, 1);
                 int i = indicatorViewController2.helperTextTextAppearance;
                 indicatorViewController2.helperTextTextAppearance = i;
                 AppCompatTextView appCompatTextView3 = indicatorViewController2.helperTextView;
@@ -1403,7 +1385,7 @@ public class TextInputLayout extends LinearLayout {
                 if (!(appCompatTextView4 == null || colorStateList == null)) {
                     appCompatTextView4.setTextColor(colorStateList);
                 }
-                indicatorViewController2.addIndicator(indicatorViewController2.helperTextView, 1);
+                indicatorViewController2.addIndicator(1, indicatorViewController2.helperTextView);
                 indicatorViewController2.helperTextView.setAccessibilityDelegate(new View.AccessibilityDelegate() {
                     public final void onInitializeAccessibilityNodeInfo(
 /*
@@ -1487,7 +1469,7 @@ Method generation error in method: com.google.android.material.textfield.Indicat
                     indicatorViewController2.captionToShow = 0;
                 }
                 indicatorViewController2.updateCaptionViewsVisibility(i2, indicatorViewController2.captionToShow, indicatorViewController2.shouldAnimateCaptionView(indicatorViewController2.helperTextView, ""));
-                indicatorViewController2.removeIndicator(indicatorViewController2.helperTextView, 1);
+                indicatorViewController2.removeIndicator(1, indicatorViewController2.helperTextView);
                 indicatorViewController2.helperTextView = null;
                 TextInputLayout textInputLayout = indicatorViewController2.textInputView;
                 textInputLayout.updateEditTextBackground();
@@ -1539,7 +1521,7 @@ Method generation error in method: com.google.android.material.textfield.Indicat
         }
     }
 
-    public final void setTextAppearanceCompatWithErrorFallback(TextView textView, int i) {
+    public final void setTextAppearanceCompatWithErrorFallback(int i, TextView textView) {
         try {
             textView.setTextAppearance(i);
             if (textView.getTextColors().getDefaultColor() != -65281) {
@@ -1547,8 +1529,10 @@ Method generation error in method: com.google.android.material.textfield.Indicat
             }
         } catch (Exception unused) {
         }
-        textView.setTextAppearance(2132017900);
-        textView.setTextColor(getContext().getColor(2131099852));
+        textView.setTextAppearance(2132017899);
+        Context context = getContext();
+        Object obj = ContextCompat.sLock;
+        textView.setTextColor(context.getColor(2131099844));
     }
 
     public final boolean shouldShowError() {
@@ -1586,15 +1570,15 @@ Method generation error in method: com.google.android.material.textfield.Indicat
             AppCompatTextView appCompatTextView = this.counterView;
             int i4 = this.counterMaxLength;
             if (this.counterOverflowed) {
-                i2 = 2131952199;
+                i2 = 2131952187;
             } else {
-                i2 = 2131952198;
+                i2 = 2131952186;
             }
             appCompatTextView.setContentDescription(context.getString(i2, new Object[]{Integer.valueOf(i), Integer.valueOf(i4)}));
             if (z2 != this.counterOverflowed) {
                 updateCounterTextAppearanceAndColor();
             }
-            this.counterView.setText(BidiFormatter.getInstance().unicodeWrap(getContext().getString(2131952200, new Object[]{Integer.valueOf(i), Integer.valueOf(this.counterMaxLength)})));
+            this.counterView.setText(BidiFormatter.getInstance().unicodeWrap(getContext().getString(2131952188, new Object[]{Integer.valueOf(i), Integer.valueOf(this.counterMaxLength)})));
         }
         if (this.editText != null && z2 != this.counterOverflowed) {
             updateLabelState(false, false);
@@ -1614,7 +1598,7 @@ Method generation error in method: com.google.android.material.textfield.Indicat
             } else {
                 i = this.counterTextAppearance;
             }
-            setTextAppearanceCompatWithErrorFallback(appCompatTextView, i);
+            setTextAppearanceCompatWithErrorFallback(i, appCompatTextView);
             if (!this.counterOverflowed && (colorStateList2 = this.counterTextColor) != null) {
                 this.counterView.setTextColor(colorStateList2);
             }
@@ -1818,9 +1802,7 @@ Method generation error in method: com.google.android.material.textfield.Indicat
     public final void updateEditTextBackground() {
         Drawable background;
         AppCompatTextView appCompatTextView;
-        PorterDuffColorFilter porterDuffColorFilter;
         int i;
-        PorterDuffColorFilter porterDuffColorFilter2;
         EditText editText2 = this.editText;
         if (editText2 != null && this.boxBackgroundMode == 0 && (background = editText2.getBackground()) != null) {
             Rect rect = DrawableUtils.INSETS_NONE;
@@ -1832,23 +1814,12 @@ Method generation error in method: com.google.android.material.textfield.Indicat
                 } else {
                     i = -1;
                 }
-                PorterDuff.Mode mode = PorterDuff.Mode.SRC_IN;
-                PorterDuff.Mode mode2 = AppCompatDrawableManager.DEFAULT_MODE;
-                synchronized (AppCompatDrawableManager.class) {
-                    porterDuffColorFilter2 = ResourceManagerInternal.getPorterDuffColorFilter(i, mode);
-                }
-                mutate.setColorFilter(porterDuffColorFilter2);
+                mutate.setColorFilter(AppCompatDrawableManager.getPorterDuffColorFilter(i, PorterDuff.Mode.SRC_IN));
             } else if (!this.counterOverflowed || (appCompatTextView = this.counterView) == null) {
                 mutate.clearColorFilter();
                 this.editText.refreshDrawableState();
             } else {
-                int currentTextColor = appCompatTextView.getCurrentTextColor();
-                PorterDuff.Mode mode3 = PorterDuff.Mode.SRC_IN;
-                PorterDuff.Mode mode4 = AppCompatDrawableManager.DEFAULT_MODE;
-                synchronized (AppCompatDrawableManager.class) {
-                    porterDuffColorFilter = ResourceManagerInternal.getPorterDuffColorFilter(currentTextColor, mode3);
-                }
-                mutate.setColorFilter(porterDuffColorFilter);
+                mutate.setColorFilter(AppCompatDrawableManager.getPorterDuffColorFilter(appCompatTextView.getCurrentTextColor(), PorterDuff.Mode.SRC_IN));
             }
         }
     }
@@ -1872,6 +1843,7 @@ Method generation error in method: com.google.android.material.textfield.Indicat
                         TypedValue resolveTypedValueOrThrow = MaterialAttributes.resolveTypedValueOrThrow(context, "TextInputLayout", 2130968887);
                         int i3 = resolveTypedValueOrThrow.resourceId;
                         if (i3 != 0) {
+                            Object obj = ContextCompat.sLock;
                             i = context.getColor(i3);
                         } else {
                             i = resolveTypedValueOrThrow.data;
@@ -1893,7 +1865,7 @@ Method generation error in method: com.google.android.material.textfield.Indicat
                     }
                 }
                 WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-                editText3.setBackground(drawable);
+                ViewCompat.Api16Impl.setBackground(editText3, drawable);
                 this.boxBackgroundApplied = true;
             }
         }
@@ -2153,6 +2125,8 @@ Method generation error in method: com.google.android.material.textfield.Indicat
     }
 
     /* JADX WARNING: type inference failed for: r1v2, types: [androidx.core.view.DifferentialMotionFlingController$$ExternalSyntheticLambda0, java.lang.Object] */
+    /* JADX WARNING: type inference failed for: r3v87, types: [androidx.transition.Transition, androidx.transition.Fade, androidx.transition.Visibility] */
+    /* JADX WARNING: type inference failed for: r3v88, types: [androidx.transition.Transition, androidx.transition.Fade, androidx.transition.Visibility] */
     /* JADX WARNING: Illegal instructions before constructor call */
     /* Code decompiled incorrectly, please refer to instructions dump. */
     public TextInputLayout(android.content.Context r21, android.util.AttributeSet r22, int r23) {
@@ -2161,7 +2135,7 @@ Method generation error in method: com.google.android.material.textfield.Indicat
             r0 = r20
             r7 = r22
             r8 = r23
-            r9 = 2132018537(0x7f140569, float:1.9675383E38)
+            r9 = 2132018531(0x7f140563, float:1.9675371E38)
             r1 = r21
             android.content.Context r1 = com.google.android.material.theme.overlay.MaterialThemeOverlay.wrap(r1, r7, r8, r9)
             r0.<init>(r1, r7, r8)
@@ -2212,548 +2186,544 @@ Method generation error in method: com.google.android.material.textfield.Indicat
             r12.collapsedTextGravity = r2
             r12.recalculate(r15)
         L_0x007d:
-            int[] r4 = com.google.android.material.R$styleable.TextInputLayout
-            r3 = 22
+            int[] r3 = com.google.android.material.R$styleable.TextInputLayout
+            r4 = 22
             r2 = 20
             r1 = 35
             r15 = 40
             r9 = 44
-            int[] r17 = new int[]{r3, r2, r1, r15, r9}
-            r15 = 2132018537(0x7f140569, float:1.9675383E38)
-            com.google.android.material.internal.ThemeEnforcement.checkCompatibleTheme(r13, r7, r8, r15)
+            int[] r16 = new int[]{r4, r2, r1, r15, r9}
+            r17 = 2132018531(0x7f140563, float:1.9675371E38)
+            r15 = r1
             r1 = r13
             r2 = r22
-            r3 = r4
-            r9 = r4
             r4 = r23
             r18 = r5
-            r5 = r15
+            r5 = r17
             r19 = r6
-            r6 = r17
-            com.google.android.material.internal.ThemeEnforcement.checkTextAppearance(r1, r2, r3, r4, r5, r6)
-            androidx.appcompat.widget.TintTypedArray r1 = new androidx.appcompat.widget.TintTypedArray
-            android.content.res.TypedArray r2 = r13.obtainStyledAttributes(r7, r9, r8, r15)
-            r1.<init>(r13, r2)
-            com.google.android.material.textfield.StartCompoundLayout r3 = new com.google.android.material.textfield.StartCompoundLayout
-            r3.<init>(r0, r1)
-            r0.startLayout = r3
-            r4 = 43
-            boolean r4 = r2.getBoolean(r4, r14)
-            r0.hintEnabled = r4
-            r4 = 4
-            java.lang.CharSequence r4 = r2.getText(r4)
-            r0.setHint(r4)
-            r4 = 42
-            boolean r4 = r2.getBoolean(r4, r14)
-            r0.hintAnimationEnabled = r4
-            r4 = 37
-            boolean r4 = r2.getBoolean(r4, r14)
-            r0.expandedHintEnabled = r4
-            r4 = 6
-            boolean r5 = r2.hasValue(r4)
-            if (r5 == 0) goto L_0x00eb
-            int r4 = r2.getInt(r4, r10)
-            r0.minEms = r4
+            r6 = r16
+            androidx.appcompat.widget.TintTypedArray r1 = com.google.android.material.internal.ThemeEnforcement.obtainTintedStyledAttributes(r1, r2, r3, r4, r5, r6)
+            com.google.android.material.textfield.StartCompoundLayout r2 = new com.google.android.material.textfield.StartCompoundLayout
+            r2.<init>(r0, r1)
+            r0.startLayout = r2
+            r3 = 43
+            android.content.res.TypedArray r4 = r1.mWrapped
+            boolean r3 = r4.getBoolean(r3, r14)
+            r0.hintEnabled = r3
+            r3 = 4
+            java.lang.CharSequence r3 = r4.getText(r3)
+            r0.setHint(r3)
+            r3 = 42
+            boolean r3 = r4.getBoolean(r3, r14)
+            r0.hintAnimationEnabled = r3
+            r3 = 37
+            boolean r3 = r4.getBoolean(r3, r14)
+            r0.expandedHintEnabled = r3
+            r3 = 6
+            boolean r5 = r4.hasValue(r3)
+            if (r5 == 0) goto L_0x00e2
+            int r3 = r4.getInt(r3, r10)
+            r0.minEms = r3
             android.widget.EditText r5 = r0.editText
-            if (r5 == 0) goto L_0x0101
-            if (r4 == r10) goto L_0x0101
-            r5.setMinEms(r4)
-            goto L_0x0101
-        L_0x00eb:
-            r4 = 3
-            boolean r5 = r2.hasValue(r4)
-            if (r5 == 0) goto L_0x0101
-            int r4 = r2.getDimensionPixelSize(r4, r10)
-            r0.minWidth = r4
+            if (r5 == 0) goto L_0x00f8
+            if (r3 == r10) goto L_0x00f8
+            r5.setMinEms(r3)
+            goto L_0x00f8
+        L_0x00e2:
+            r3 = 3
+            boolean r5 = r4.hasValue(r3)
+            if (r5 == 0) goto L_0x00f8
+            int r3 = r4.getDimensionPixelSize(r3, r10)
+            r0.minWidth = r3
             android.widget.EditText r5 = r0.editText
-            if (r5 == 0) goto L_0x0101
-            if (r4 == r10) goto L_0x0101
-            r5.setMinWidth(r4)
-        L_0x0101:
-            r4 = 5
-            boolean r5 = r2.hasValue(r4)
+            if (r5 == 0) goto L_0x00f8
+            if (r3 == r10) goto L_0x00f8
+            r5.setMinWidth(r3)
+        L_0x00f8:
+            r3 = 5
+            boolean r5 = r4.hasValue(r3)
             r6 = 2
-            if (r5 == 0) goto L_0x011c
-            int r4 = r2.getInt(r4, r10)
-            r0.maxEms = r4
+            if (r5 == 0) goto L_0x0113
+            int r3 = r4.getInt(r3, r10)
+            r0.maxEms = r3
             android.widget.EditText r5 = r0.editText
-            if (r5 == 0) goto L_0x0118
-            if (r4 == r10) goto L_0x0118
-            r5.setMaxEms(r4)
-        L_0x0118:
-            r4 = 2132018537(0x7f140569, float:1.9675383E38)
-            goto L_0x0132
-        L_0x011c:
-            boolean r4 = r2.hasValue(r6)
-            if (r4 == 0) goto L_0x0118
-            int r4 = r2.getDimensionPixelSize(r6, r10)
-            r0.maxWidth = r4
+            if (r5 == 0) goto L_0x010f
+            if (r3 == r10) goto L_0x010f
+            r5.setMaxEms(r3)
+        L_0x010f:
+            r3 = 2132018531(0x7f140563, float:1.9675371E38)
+            goto L_0x0129
+        L_0x0113:
+            boolean r3 = r4.hasValue(r6)
+            if (r3 == 0) goto L_0x010f
+            int r3 = r4.getDimensionPixelSize(r6, r10)
+            r0.maxWidth = r3
             android.widget.EditText r5 = r0.editText
-            if (r5 == 0) goto L_0x0118
-            if (r4 == r10) goto L_0x0118
-            r5.setMaxWidth(r4)
-            goto L_0x0118
-        L_0x0132:
-            com.google.android.material.shape.ShapeAppearanceModel$Builder r4 = com.google.android.material.shape.ShapeAppearanceModel.builder((android.content.Context) r13, (android.util.AttributeSet) r7, (int) r8, (int) r4)
-            com.google.android.material.shape.ShapeAppearanceModel r4 = r4.build()
-            r0.shapeAppearanceModel = r4
-            android.content.res.Resources r4 = r13.getResources()
-            r5 = 2131166943(0x7f0706df, float:1.7948146E38)
-            int r4 = r4.getDimensionPixelOffset(r5)
-            r0.boxLabelCutoutPaddingPx = r4
-            r4 = 9
+            if (r5 == 0) goto L_0x010f
+            if (r3 == r10) goto L_0x010f
+            r5.setMaxWidth(r3)
+            goto L_0x010f
+        L_0x0129:
+            com.google.android.material.shape.ShapeAppearanceModel$Builder r3 = com.google.android.material.shape.ShapeAppearanceModel.builder((android.content.Context) r13, (android.util.AttributeSet) r7, (int) r8, (int) r3)
+            com.google.android.material.shape.ShapeAppearanceModel r3 = r3.build()
+            r0.shapeAppearanceModel = r3
+            android.content.res.Resources r3 = r13.getResources()
+            r5 = 2131166901(0x7f0706b5, float:1.794806E38)
+            int r3 = r3.getDimensionPixelOffset(r5)
+            r0.boxLabelCutoutPaddingPx = r3
+            r3 = 9
             r5 = 0
-            int r4 = r2.getDimensionPixelOffset(r4, r5)
-            r0.boxCollapsedPaddingTopPx = r4
-            android.content.res.Resources r4 = r13.getResources()
-            r5 = 2131166944(0x7f0706e0, float:1.7948148E38)
-            int r4 = r4.getDimensionPixelSize(r5)
+            int r3 = r4.getDimensionPixelOffset(r3, r5)
+            r0.boxCollapsedPaddingTopPx = r3
+            android.content.res.Resources r3 = r13.getResources()
+            r5 = 2131166902(0x7f0706b6, float:1.7948062E38)
+            int r3 = r3.getDimensionPixelSize(r5)
             r5 = 16
-            int r4 = r2.getDimensionPixelSize(r5, r4)
-            r0.boxStrokeWidthDefaultPx = r4
+            int r3 = r4.getDimensionPixelSize(r5, r3)
+            r0.boxStrokeWidthDefaultPx = r3
             android.content.res.Resources r5 = r13.getResources()
-            r7 = 2131166945(0x7f0706e1, float:1.794815E38)
+            r7 = 2131166903(0x7f0706b7, float:1.7948064E38)
             int r5 = r5.getDimensionPixelSize(r7)
             r7 = 17
-            int r5 = r2.getDimensionPixelSize(r7, r5)
+            int r5 = r4.getDimensionPixelSize(r7, r5)
             r0.boxStrokeWidthFocusedPx = r5
-            r0.boxStrokeWidthPx = r4
-            r4 = 13
+            r0.boxStrokeWidthPx = r3
+            r3 = 13
             r5 = -1082130432(0xffffffffbf800000, float:-1.0)
-            float r4 = r2.getDimension(r4, r5)
+            float r3 = r4.getDimension(r3, r5)
             r7 = 12
-            float r7 = r2.getDimension(r7, r5)
+            float r7 = r4.getDimension(r7, r5)
             r8 = 10
-            float r8 = r2.getDimension(r8, r5)
-            r9 = 11
-            float r5 = r2.getDimension(r9, r5)
-            com.google.android.material.shape.ShapeAppearanceModel r9 = r0.shapeAppearanceModel
-            com.google.android.material.shape.ShapeAppearanceModel$Builder r9 = r9.toBuilder()
-            r15 = 0
-            int r16 = (r4 > r15 ? 1 : (r4 == r15 ? 0 : -1))
-            if (r16 < 0) goto L_0x01a6
-            com.google.android.material.shape.AbsoluteCornerSize r6 = new com.google.android.material.shape.AbsoluteCornerSize
-            r6.<init>(r4)
-            r9.topLeftCornerSize = r6
-        L_0x01a6:
-            int r4 = (r7 > r15 ? 1 : (r7 == r15 ? 0 : -1))
-            if (r4 < 0) goto L_0x01b1
-            com.google.android.material.shape.AbsoluteCornerSize r4 = new com.google.android.material.shape.AbsoluteCornerSize
-            r4.<init>(r7)
-            r9.topRightCornerSize = r4
-        L_0x01b1:
-            int r4 = (r8 > r15 ? 1 : (r8 == r15 ? 0 : -1))
-            if (r4 < 0) goto L_0x01bc
-            com.google.android.material.shape.AbsoluteCornerSize r4 = new com.google.android.material.shape.AbsoluteCornerSize
-            r4.<init>(r8)
-            r9.bottomRightCornerSize = r4
-        L_0x01bc:
-            int r4 = (r5 > r15 ? 1 : (r5 == r15 ? 0 : -1))
-            if (r4 < 0) goto L_0x01c7
-            com.google.android.material.shape.AbsoluteCornerSize r4 = new com.google.android.material.shape.AbsoluteCornerSize
-            r4.<init>(r5)
-            r9.bottomLeftCornerSize = r4
-        L_0x01c7:
-            com.google.android.material.shape.ShapeAppearanceModel r4 = r9.build()
-            r0.shapeAppearanceModel = r4
-            r4 = 7
-            android.content.res.ColorStateList r4 = com.google.android.material.resources.MaterialResources.getColorStateList((android.content.Context) r13, (androidx.appcompat.widget.TintTypedArray) r1, (int) r4)
+            float r8 = r4.getDimension(r8, r5)
+            r6 = 11
+            float r5 = r4.getDimension(r6, r5)
+            com.google.android.material.shape.ShapeAppearanceModel r6 = r0.shapeAppearanceModel
+            com.google.android.material.shape.ShapeAppearanceModel$Builder r6 = r6.toBuilder()
+            r16 = 0
+            int r17 = (r3 > r16 ? 1 : (r3 == r16 ? 0 : -1))
+            if (r17 < 0) goto L_0x019e
+            com.google.android.material.shape.AbsoluteCornerSize r15 = new com.google.android.material.shape.AbsoluteCornerSize
+            r15.<init>(r3)
+            r6.topLeftCornerSize = r15
+        L_0x019e:
+            int r3 = (r7 > r16 ? 1 : (r7 == r16 ? 0 : -1))
+            if (r3 < 0) goto L_0x01a9
+            com.google.android.material.shape.AbsoluteCornerSize r3 = new com.google.android.material.shape.AbsoluteCornerSize
+            r3.<init>(r7)
+            r6.topRightCornerSize = r3
+        L_0x01a9:
+            int r3 = (r8 > r16 ? 1 : (r8 == r16 ? 0 : -1))
+            if (r3 < 0) goto L_0x01b4
+            com.google.android.material.shape.AbsoluteCornerSize r3 = new com.google.android.material.shape.AbsoluteCornerSize
+            r3.<init>(r8)
+            r6.bottomRightCornerSize = r3
+        L_0x01b4:
+            int r3 = (r5 > r16 ? 1 : (r5 == r16 ? 0 : -1))
+            if (r3 < 0) goto L_0x01bf
+            com.google.android.material.shape.AbsoluteCornerSize r3 = new com.google.android.material.shape.AbsoluteCornerSize
+            r3.<init>(r5)
+            r6.bottomLeftCornerSize = r3
+        L_0x01bf:
+            com.google.android.material.shape.ShapeAppearanceModel r3 = r6.build()
+            r0.shapeAppearanceModel = r3
+            r3 = 7
+            android.content.res.ColorStateList r3 = com.google.android.material.resources.MaterialResources.getColorStateList((android.content.Context) r13, (androidx.appcompat.widget.TintTypedArray) r1, (int) r3)
             r5 = 16842908(0x101009c, float:2.3693995E-38)
-            r6 = 16843623(0x1010367, float:2.3696E-38)
-            r7 = 16842910(0x101009e, float:2.3694E-38)
+            r6 = 16842910(0x101009e, float:2.3694E-38)
+            r7 = 16843623(0x1010367, float:2.3696E-38)
             r8 = -16842910(0xfffffffffefeff62, float:-1.6947497E38)
-            if (r4 == 0) goto L_0x022b
-            int r9 = r4.getDefaultColor()
-            r0.defaultFilledBackgroundColor = r9
-            r0.boxBackgroundColor = r9
-            boolean r15 = r4.isStateful()
-            if (r15 == 0) goto L_0x020d
-            int[] r9 = new int[]{r8}
-            int r9 = r4.getColorForState(r9, r10)
-            r0.disabledFilledBackgroundColor = r9
-            int[] r9 = new int[]{r5, r7}
-            int r9 = r4.getColorForState(r9, r10)
-            r0.focusedFilledBackgroundColor = r9
-            int[] r9 = new int[]{r6, r7}
-            int r4 = r4.getColorForState(r9, r10)
-            r0.hoveredFilledBackgroundColor = r4
-            goto L_0x0236
-        L_0x020d:
-            r0.focusedFilledBackgroundColor = r9
-            r4 = 2131100487(0x7f060347, float:1.7813357E38)
-            android.content.res.ColorStateList r4 = androidx.core.content.ContextCompat.getColorStateList(r4, r13)
-            int[] r9 = new int[]{r8}
-            int r9 = r4.getColorForState(r9, r10)
-            r0.disabledFilledBackgroundColor = r9
-            int[] r9 = new int[]{r6}
-            int r4 = r4.getColorForState(r9, r10)
-            r0.hoveredFilledBackgroundColor = r4
-            goto L_0x0236
-        L_0x022b:
-            r4 = 0
-            r0.boxBackgroundColor = r4
-            r0.defaultFilledBackgroundColor = r4
-            r0.disabledFilledBackgroundColor = r4
-            r0.focusedFilledBackgroundColor = r4
-            r0.hoveredFilledBackgroundColor = r4
-        L_0x0236:
-            boolean r4 = r2.hasValue(r14)
-            if (r4 == 0) goto L_0x0244
-            android.content.res.ColorStateList r4 = r1.getColorStateList(r14)
-            r0.focusedTextColor = r4
-            r0.defaultHintTextColor = r4
-        L_0x0244:
-            r4 = 14
-            android.content.res.ColorStateList r9 = com.google.android.material.resources.MaterialResources.getColorStateList((android.content.Context) r13, (androidx.appcompat.widget.TintTypedArray) r1, (int) r4)
-            r15 = 0
-            int r4 = r2.getColor(r4, r15)
-            r0.focusedStrokeColor = r4
-            r4 = 2131100514(0x7f060362, float:1.7813412E38)
-            int r4 = r13.getColor(r4)
-            r0.defaultStrokeColor = r4
-            r4 = 2131100515(0x7f060363, float:1.7813414E38)
-            int r4 = r13.getColor(r4)
-            r0.disabledColor = r4
-            r4 = 2131100518(0x7f060366, float:1.781342E38)
-            int r4 = r13.getColor(r4)
-            r0.hoveredStrokeColor = r4
-            if (r9 == 0) goto L_0x02aa
-            boolean r4 = r9.isStateful()
-            if (r4 == 0) goto L_0x0299
-            int r4 = r9.getDefaultColor()
-            r0.defaultStrokeColor = r4
-            int[] r4 = new int[]{r8}
-            int r4 = r9.getColorForState(r4, r10)
-            r0.disabledColor = r4
-            int[] r4 = new int[]{r6, r7}
-            int r4 = r9.getColorForState(r4, r10)
-            r0.hoveredStrokeColor = r4
-            int[] r4 = new int[]{r5, r7}
-            int r4 = r9.getColorForState(r4, r10)
-            r0.focusedStrokeColor = r4
-            goto L_0x02a7
-        L_0x0299:
-            int r4 = r0.focusedStrokeColor
-            int r5 = r9.getDefaultColor()
-            if (r4 == r5) goto L_0x02a7
-            int r4 = r9.getDefaultColor()
-            r0.focusedStrokeColor = r4
-        L_0x02a7:
+            if (r3 == 0) goto L_0x0223
+            int r15 = r3.getDefaultColor()
+            r0.defaultFilledBackgroundColor = r15
+            r0.boxBackgroundColor = r15
+            boolean r16 = r3.isStateful()
+            if (r16 == 0) goto L_0x0205
+            int[] r15 = new int[]{r8}
+            int r15 = r3.getColorForState(r15, r10)
+            r0.disabledFilledBackgroundColor = r15
+            int[] r15 = new int[]{r5, r6}
+            int r15 = r3.getColorForState(r15, r10)
+            r0.focusedFilledBackgroundColor = r15
+            int[] r15 = new int[]{r7, r6}
+            int r3 = r3.getColorForState(r15, r10)
+            r0.hoveredFilledBackgroundColor = r3
+            goto L_0x022e
+        L_0x0205:
+            r0.focusedFilledBackgroundColor = r15
+            r3 = 2131100472(0x7f060338, float:1.7813326E38)
+            android.content.res.ColorStateList r3 = androidx.core.content.ContextCompat.getColorStateList(r3, r13)
+            int[] r15 = new int[]{r8}
+            int r15 = r3.getColorForState(r15, r10)
+            r0.disabledFilledBackgroundColor = r15
+            int[] r15 = new int[]{r7}
+            int r3 = r3.getColorForState(r15, r10)
+            r0.hoveredFilledBackgroundColor = r3
+            goto L_0x022e
+        L_0x0223:
+            r3 = 0
+            r0.boxBackgroundColor = r3
+            r0.defaultFilledBackgroundColor = r3
+            r0.disabledFilledBackgroundColor = r3
+            r0.focusedFilledBackgroundColor = r3
+            r0.hoveredFilledBackgroundColor = r3
+        L_0x022e:
+            boolean r3 = r4.hasValue(r14)
+            if (r3 == 0) goto L_0x023c
+            android.content.res.ColorStateList r3 = r1.getColorStateList(r14)
+            r0.focusedTextColor = r3
+            r0.defaultHintTextColor = r3
+        L_0x023c:
+            r3 = 14
+            android.content.res.ColorStateList r15 = com.google.android.material.resources.MaterialResources.getColorStateList((android.content.Context) r13, (androidx.appcompat.widget.TintTypedArray) r1, (int) r3)
+            r14 = 0
+            int r3 = r4.getColor(r3, r14)
+            r0.focusedStrokeColor = r3
+            java.lang.Object r3 = androidx.core.content.ContextCompat.sLock
+            r3 = 2131100499(0x7f060353, float:1.7813381E38)
+            int r3 = r13.getColor(r3)
+            r0.defaultStrokeColor = r3
+            r3 = 2131100500(0x7f060354, float:1.7813383E38)
+            int r3 = r13.getColor(r3)
+            r0.disabledColor = r3
+            r3 = 2131100503(0x7f060357, float:1.781339E38)
+            int r3 = r13.getColor(r3)
+            r0.hoveredStrokeColor = r3
+            if (r15 == 0) goto L_0x02a4
+            boolean r3 = r15.isStateful()
+            if (r3 == 0) goto L_0x0293
+            int r3 = r15.getDefaultColor()
+            r0.defaultStrokeColor = r3
+            int[] r3 = new int[]{r8}
+            int r3 = r15.getColorForState(r3, r10)
+            r0.disabledColor = r3
+            int[] r3 = new int[]{r7, r6}
+            int r3 = r15.getColorForState(r3, r10)
+            r0.hoveredStrokeColor = r3
+            int[] r3 = new int[]{r5, r6}
+            int r3 = r15.getColorForState(r3, r10)
+            r0.focusedStrokeColor = r3
+            goto L_0x02a1
+        L_0x0293:
+            int r3 = r0.focusedStrokeColor
+            int r5 = r15.getDefaultColor()
+            if (r3 == r5) goto L_0x02a1
+            int r3 = r15.getDefaultColor()
+            r0.focusedStrokeColor = r3
+        L_0x02a1:
             r20.updateTextInputBoxState()
-        L_0x02aa:
-            r4 = 15
-            boolean r5 = r2.hasValue(r4)
-            if (r5 == 0) goto L_0x02bf
-            android.content.res.ColorStateList r4 = com.google.android.material.resources.MaterialResources.getColorStateList((android.content.Context) r13, (androidx.appcompat.widget.TintTypedArray) r1, (int) r4)
+        L_0x02a4:
+            r3 = 15
+            boolean r5 = r4.hasValue(r3)
+            if (r5 == 0) goto L_0x02b9
+            android.content.res.ColorStateList r3 = com.google.android.material.resources.MaterialResources.getColorStateList((android.content.Context) r13, (androidx.appcompat.widget.TintTypedArray) r1, (int) r3)
             android.content.res.ColorStateList r5 = r0.strokeErrorColor
-            if (r5 == r4) goto L_0x02bf
-            r0.strokeErrorColor = r4
+            if (r5 == r3) goto L_0x02b9
+            r0.strokeErrorColor = r3
             r20.updateTextInputBoxState()
-        L_0x02bf:
-            r4 = 44
-            int r5 = r2.getResourceId(r4, r10)
-            if (r5 == r10) goto L_0x02e0
-            r5 = 0
-            int r4 = r2.getResourceId(r4, r5)
-            r12.setCollapsedTextAppearance(r4)
-            android.content.res.ColorStateList r4 = r12.collapsedTextColor
-            r0.focusedTextColor = r4
-            android.widget.EditText r4 = r0.editText
-            if (r4 == 0) goto L_0x02dd
-            r0.updateLabelState(r5, r5)
+        L_0x02b9:
+            int r3 = r4.getResourceId(r9, r10)
+            if (r3 == r10) goto L_0x02d8
+            r3 = 0
+            int r5 = r4.getResourceId(r9, r3)
+            r12.setCollapsedTextAppearance(r5)
+            android.content.res.ColorStateList r5 = r12.collapsedTextColor
+            r0.focusedTextColor = r5
+            android.widget.EditText r5 = r0.editText
+            if (r5 == 0) goto L_0x02d5
+            r0.updateLabelState(r3, r3)
             r20.updateInputLayoutMargins()
-        L_0x02dd:
-            r4 = 35
-            goto L_0x02e2
-        L_0x02e0:
-            r5 = 0
-            goto L_0x02dd
-        L_0x02e2:
-            int r4 = r2.getResourceId(r4, r5)
+        L_0x02d5:
+            r5 = 35
+            goto L_0x02da
+        L_0x02d8:
+            r3 = 0
+            goto L_0x02d5
+        L_0x02da:
+            int r5 = r4.getResourceId(r5, r3)
             r6 = 30
-            java.lang.CharSequence r6 = r2.getText(r6)
+            java.lang.CharSequence r6 = r4.getText(r6)
             r7 = 31
-            boolean r7 = r2.getBoolean(r7, r5)
+            boolean r7 = r4.getBoolean(r7, r3)
             r8 = 40
-            int r8 = r2.getResourceId(r8, r5)
+            int r8 = r4.getResourceId(r8, r3)
             r9 = 39
-            boolean r9 = r2.getBoolean(r9, r5)
+            boolean r9 = r4.getBoolean(r9, r3)
             r13 = 38
-            java.lang.CharSequence r13 = r2.getText(r13)
-            r15 = 52
-            int r15 = r2.getResourceId(r15, r5)
-            r14 = 51
-            java.lang.CharSequence r14 = r2.getText(r14)
+            java.lang.CharSequence r13 = r4.getText(r13)
+            r14 = 52
+            int r14 = r4.getResourceId(r14, r3)
+            r15 = 51
+            java.lang.CharSequence r15 = r4.getText(r15)
             r10 = 18
-            boolean r10 = r2.getBoolean(r10, r5)
-            r5 = 19
+            boolean r10 = r4.getBoolean(r10, r3)
+            r3 = 19
             r22 = r13
             r13 = -1
-            int r5 = r2.getInt(r5, r13)
+            int r3 = r4.getInt(r3, r13)
             int r13 = r0.counterMaxLength
             r23 = r10
-            if (r13 == r5) goto L_0x0342
-            if (r5 <= 0) goto L_0x032a
-            r0.counterMaxLength = r5
-            goto L_0x032d
-        L_0x032a:
-            r5 = -1
-            r0.counterMaxLength = r5
-        L_0x032d:
-            boolean r5 = r0.counterEnabled
-            if (r5 == 0) goto L_0x0342
-            androidx.appcompat.widget.AppCompatTextView r5 = r0.counterView
-            if (r5 == 0) goto L_0x0342
-            android.widget.EditText r5 = r0.editText
-            if (r5 != 0) goto L_0x033b
-            r5 = 0
-            goto L_0x033f
-        L_0x033b:
-            android.text.Editable r5 = r5.getText()
-        L_0x033f:
-            r0.updateCounter(r5)
-        L_0x0342:
-            r5 = 0
+            if (r13 == r3) goto L_0x033a
+            if (r3 <= 0) goto L_0x0322
+            r0.counterMaxLength = r3
+            goto L_0x0325
+        L_0x0322:
+            r3 = -1
+            r0.counterMaxLength = r3
+        L_0x0325:
+            boolean r3 = r0.counterEnabled
+            if (r3 == 0) goto L_0x033a
+            androidx.appcompat.widget.AppCompatTextView r3 = r0.counterView
+            if (r3 == 0) goto L_0x033a
+            android.widget.EditText r3 = r0.editText
+            if (r3 != 0) goto L_0x0333
+            r3 = 0
+            goto L_0x0337
+        L_0x0333:
+            android.text.Editable r3 = r3.getText()
+        L_0x0337:
+            r0.updateCounter(r3)
+        L_0x033a:
+            r3 = 0
             r13 = 22
-            int r13 = r2.getResourceId(r13, r5)
+            int r13 = r4.getResourceId(r13, r3)
             r0.counterTextAppearance = r13
             r13 = 20
-            int r13 = r2.getResourceId(r13, r5)
+            int r13 = r4.getResourceId(r13, r3)
             r0.counterOverflowTextAppearance = r13
             r13 = 8
-            int r13 = r2.getInt(r13, r5)
-            int r5 = r0.boxBackgroundMode
-            if (r13 != r5) goto L_0x035e
-            goto L_0x0367
-        L_0x035e:
+            int r13 = r4.getInt(r13, r3)
+            int r3 = r0.boxBackgroundMode
+            if (r13 != r3) goto L_0x0356
+            goto L_0x035f
+        L_0x0356:
             r0.boxBackgroundMode = r13
-            android.widget.EditText r5 = r0.editText
-            if (r5 == 0) goto L_0x0367
+            android.widget.EditText r3 = r0.editText
+            if (r3 == 0) goto L_0x035f
             r20.onApplyBoxBackgroundMode()
-        L_0x0367:
+        L_0x035f:
             r11.errorViewContentDescription = r6
-            androidx.appcompat.widget.AppCompatTextView r5 = r11.errorView
-            if (r5 == 0) goto L_0x0370
-            r5.setContentDescription(r6)
-        L_0x0370:
+            androidx.appcompat.widget.AppCompatTextView r3 = r11.errorView
+            if (r3 == 0) goto L_0x0368
+            r3.setContentDescription(r6)
+        L_0x0368:
             r11.helperTextTextAppearance = r8
-            androidx.appcompat.widget.AppCompatTextView r5 = r11.helperTextView
-            if (r5 == 0) goto L_0x0379
-            r5.setTextAppearance(r8)
-        L_0x0379:
-            r11.errorTextAppearance = r4
-            androidx.appcompat.widget.AppCompatTextView r5 = r11.errorView
-            if (r5 == 0) goto L_0x0384
+            androidx.appcompat.widget.AppCompatTextView r3 = r11.helperTextView
+            if (r3 == 0) goto L_0x0371
+            r3.setTextAppearance(r8)
+        L_0x0371:
+            r11.errorTextAppearance = r5
+            androidx.appcompat.widget.AppCompatTextView r3 = r11.errorView
+            if (r3 == 0) goto L_0x037c
             com.google.android.material.textfield.TextInputLayout r6 = r11.textInputView
-            r6.setTextAppearanceCompatWithErrorFallback(r5, r4)
-        L_0x0384:
-            androidx.appcompat.widget.AppCompatTextView r4 = r0.placeholderTextView
-            if (r4 != 0) goto L_0x03cc
-            androidx.appcompat.widget.AppCompatTextView r4 = new androidx.appcompat.widget.AppCompatTextView
+            r6.setTextAppearanceCompatWithErrorFallback(r5, r3)
+        L_0x037c:
+            androidx.appcompat.widget.AppCompatTextView r3 = r0.placeholderTextView
+            if (r3 != 0) goto L_0x03c4
+            androidx.appcompat.widget.AppCompatTextView r3 = new androidx.appcompat.widget.AppCompatTextView
             android.content.Context r5 = r20.getContext()
-            r4.<init>(r5)
-            r0.placeholderTextView = r4
-            r5 = 2131363855(0x7f0a080f, float:1.834753E38)
-            r4.setId(r5)
-            androidx.appcompat.widget.AppCompatTextView r4 = r0.placeholderTextView
+            r3.<init>(r5)
+            r0.placeholderTextView = r3
+            r5 = 2131363821(0x7f0a07ed, float:1.8347462E38)
+            r3.setId(r5)
+            androidx.appcompat.widget.AppCompatTextView r3 = r0.placeholderTextView
             java.util.WeakHashMap r5 = androidx.core.view.ViewCompat.sViewPropertyAnimatorMap
             r5 = 2
-            r4.setImportantForAccessibility(r5)
-            androidx.transition.Fade r4 = new androidx.transition.Fade
-            r4.<init>()
+            androidx.core.view.ViewCompat.Api16Impl.setImportantForAccessibility(r3, r5)
+            androidx.transition.Fade r3 = new androidx.transition.Fade
+            r3.<init>()
             r5 = 87
-            r4.mDuration = r5
+            r3.mDuration = r5
             r8 = r18
-            r4.mInterpolator = r8
-            r0.placeholderFadeIn = r4
+            r3.mInterpolator = r8
+            r0.placeholderFadeIn = r3
             r13 = r11
             r10 = 67
-            r4.mStartDelay = r10
-            androidx.transition.Fade r4 = new androidx.transition.Fade
-            r4.<init>()
-            r4.mDuration = r5
-            r4.mInterpolator = r8
-            r0.placeholderFadeOut = r4
-            int r4 = r0.placeholderTextAppearance
-            r0.placeholderTextAppearance = r4
+            r3.mStartDelay = r10
+            androidx.transition.Fade r3 = new androidx.transition.Fade
+            r3.<init>()
+            r3.mDuration = r5
+            r3.mInterpolator = r8
+            r0.placeholderFadeOut = r3
+            int r3 = r0.placeholderTextAppearance
+            r0.placeholderTextAppearance = r3
             androidx.appcompat.widget.AppCompatTextView r5 = r0.placeholderTextView
-            if (r5 == 0) goto L_0x03cd
-            r5.setTextAppearance(r4)
-            goto L_0x03cd
-        L_0x03cc:
+            if (r5 == 0) goto L_0x03c5
+            r5.setTextAppearance(r3)
+            goto L_0x03c5
+        L_0x03c4:
             r13 = r11
-        L_0x03cd:
-            boolean r4 = android.text.TextUtils.isEmpty(r14)
-            if (r4 == 0) goto L_0x03d8
-            r4 = 0
-            r0.setPlaceholderTextEnabled(r4)
-            goto L_0x03e2
+        L_0x03c5:
+            boolean r3 = android.text.TextUtils.isEmpty(r15)
+            if (r3 == 0) goto L_0x03d0
+            r3 = 0
+            r0.setPlaceholderTextEnabled(r3)
+            goto L_0x03da
+        L_0x03d0:
+            boolean r3 = r0.placeholderEnabled
+            if (r3 != 0) goto L_0x03d8
+            r3 = 1
+            r0.setPlaceholderTextEnabled(r3)
         L_0x03d8:
-            boolean r4 = r0.placeholderEnabled
-            if (r4 != 0) goto L_0x03e0
-            r4 = 1
-            r0.setPlaceholderTextEnabled(r4)
+            r0.placeholderText = r15
+        L_0x03da:
+            android.widget.EditText r3 = r0.editText
+            if (r3 != 0) goto L_0x03e0
+            r3 = 0
+            goto L_0x03e4
         L_0x03e0:
-            r0.placeholderText = r14
-        L_0x03e2:
-            android.widget.EditText r4 = r0.editText
-            if (r4 != 0) goto L_0x03e8
-            r4 = 0
-            goto L_0x03ec
-        L_0x03e8:
-            android.text.Editable r4 = r4.getText()
-        L_0x03ec:
-            r0.updatePlaceholderText(r4)
-            r0.placeholderTextAppearance = r15
-            androidx.appcompat.widget.AppCompatTextView r4 = r0.placeholderTextView
-            if (r4 == 0) goto L_0x03f8
-            r4.setTextAppearance(r15)
-        L_0x03f8:
-            r4 = 36
-            boolean r5 = r2.hasValue(r4)
-            if (r5 == 0) goto L_0x0411
-            android.content.res.ColorStateList r4 = r1.getColorStateList(r4)
+            android.text.Editable r3 = r3.getText()
+        L_0x03e4:
+            r0.updatePlaceholderText(r3)
+            r0.placeholderTextAppearance = r14
+            androidx.appcompat.widget.AppCompatTextView r3 = r0.placeholderTextView
+            if (r3 == 0) goto L_0x03f0
+            r3.setTextAppearance(r14)
+        L_0x03f0:
+            r3 = 36
+            boolean r5 = r4.hasValue(r3)
+            if (r5 == 0) goto L_0x0409
+            android.content.res.ColorStateList r3 = r1.getColorStateList(r3)
             r5 = r13
-            r5.errorViewTextColor = r4
+            r5.errorViewTextColor = r3
             androidx.appcompat.widget.AppCompatTextView r6 = r5.errorView
-            if (r6 == 0) goto L_0x0412
-            if (r4 == 0) goto L_0x0412
-            r6.setTextColor(r4)
-            goto L_0x0412
-        L_0x0411:
+            if (r6 == 0) goto L_0x040a
+            if (r3 == 0) goto L_0x040a
+            r6.setTextColor(r3)
+            goto L_0x040a
+        L_0x0409:
             r5 = r13
-        L_0x0412:
-            r4 = 41
-            boolean r6 = r2.hasValue(r4)
-            if (r6 == 0) goto L_0x0429
-            android.content.res.ColorStateList r4 = r1.getColorStateList(r4)
-            r5.helperTextViewTextColor = r4
+        L_0x040a:
+            r3 = 41
+            boolean r6 = r4.hasValue(r3)
+            if (r6 == 0) goto L_0x0421
+            android.content.res.ColorStateList r3 = r1.getColorStateList(r3)
+            r5.helperTextViewTextColor = r3
             androidx.appcompat.widget.AppCompatTextView r6 = r5.helperTextView
-            if (r6 == 0) goto L_0x0429
-            if (r4 == 0) goto L_0x0429
-            r6.setTextColor(r4)
-        L_0x0429:
-            r4 = 45
-            boolean r6 = r2.hasValue(r4)
-            if (r6 == 0) goto L_0x044a
-            android.content.res.ColorStateList r4 = r1.getColorStateList(r4)
+            if (r6 == 0) goto L_0x0421
+            if (r3 == 0) goto L_0x0421
+            r6.setTextColor(r3)
+        L_0x0421:
+            r3 = 45
+            boolean r6 = r4.hasValue(r3)
+            if (r6 == 0) goto L_0x0442
+            android.content.res.ColorStateList r3 = r1.getColorStateList(r3)
             android.content.res.ColorStateList r6 = r0.focusedTextColor
-            if (r6 == r4) goto L_0x044a
+            if (r6 == r3) goto L_0x0442
             android.content.res.ColorStateList r6 = r0.defaultHintTextColor
-            if (r6 != 0) goto L_0x0440
-            r12.setCollapsedTextColor(r4)
-        L_0x0440:
-            r0.focusedTextColor = r4
-            android.widget.EditText r4 = r0.editText
-            if (r4 == 0) goto L_0x044a
-            r4 = 0
-            r0.updateLabelState(r4, r4)
-        L_0x044a:
-            r4 = 23
-            boolean r6 = r2.hasValue(r4)
-            if (r6 == 0) goto L_0x045f
-            android.content.res.ColorStateList r4 = r1.getColorStateList(r4)
+            if (r6 != 0) goto L_0x0438
+            r12.setCollapsedTextColor(r3)
+        L_0x0438:
+            r0.focusedTextColor = r3
+            android.widget.EditText r3 = r0.editText
+            if (r3 == 0) goto L_0x0442
+            r3 = 0
+            r0.updateLabelState(r3, r3)
+        L_0x0442:
+            r3 = 23
+            boolean r6 = r4.hasValue(r3)
+            if (r6 == 0) goto L_0x0457
+            android.content.res.ColorStateList r3 = r1.getColorStateList(r3)
             android.content.res.ColorStateList r6 = r0.counterTextColor
-            if (r6 == r4) goto L_0x045f
-            r0.counterTextColor = r4
+            if (r6 == r3) goto L_0x0457
+            r0.counterTextColor = r3
             r20.updateCounterTextAppearanceAndColor()
-        L_0x045f:
-            r4 = 21
-            boolean r6 = r2.hasValue(r4)
-            if (r6 == 0) goto L_0x0474
-            android.content.res.ColorStateList r4 = r1.getColorStateList(r4)
+        L_0x0457:
+            r3 = 21
+            boolean r6 = r4.hasValue(r3)
+            if (r6 == 0) goto L_0x046c
+            android.content.res.ColorStateList r3 = r1.getColorStateList(r3)
             android.content.res.ColorStateList r6 = r0.counterOverflowTextColor
-            if (r6 == r4) goto L_0x0474
-            r0.counterOverflowTextColor = r4
+            if (r6 == r3) goto L_0x046c
+            r0.counterOverflowTextColor = r3
             r20.updateCounterTextAppearanceAndColor()
-        L_0x0474:
-            r4 = 53
-            boolean r6 = r2.hasValue(r4)
-            if (r6 == 0) goto L_0x048f
-            android.content.res.ColorStateList r4 = r1.getColorStateList(r4)
+        L_0x046c:
+            r3 = 53
+            boolean r6 = r4.hasValue(r3)
+            if (r6 == 0) goto L_0x0487
+            android.content.res.ColorStateList r3 = r1.getColorStateList(r3)
             android.content.res.ColorStateList r6 = r0.placeholderTextColor
-            if (r6 == r4) goto L_0x048f
-            r0.placeholderTextColor = r4
+            if (r6 == r3) goto L_0x0487
+            r0.placeholderTextColor = r3
             androidx.appcompat.widget.AppCompatTextView r6 = r0.placeholderTextView
-            if (r6 == 0) goto L_0x048f
-            if (r4 == 0) goto L_0x048f
-            r6.setTextColor(r4)
-        L_0x048f:
-            com.google.android.material.textfield.EndCompoundLayout r4 = new com.google.android.material.textfield.EndCompoundLayout
-            r4.<init>(r0, r1)
-            r0.endLayout = r4
+            if (r6 == 0) goto L_0x0487
+            if (r3 == 0) goto L_0x0487
+            r6.setTextColor(r3)
+        L_0x0487:
+            com.google.android.material.textfield.EndCompoundLayout r3 = new com.google.android.material.textfield.EndCompoundLayout
+            r3.<init>(r0, r1)
+            r0.endLayout = r3
             r6 = 1
             r8 = 0
-            boolean r2 = r2.getBoolean(r8, r6)
+            boolean r4 = r4.getBoolean(r8, r6)
             r1.recycle()
             java.util.WeakHashMap r1 = androidx.core.view.ViewCompat.sViewPropertyAnimatorMap
             r1 = 2
-            r0.setImportantForAccessibility(r1)
+            androidx.core.view.ViewCompat.Api16Impl.setImportantForAccessibility(r0, r1)
             androidx.core.view.ViewCompat.Api26Impl.setImportantForAutofill(r0, r6)
             r1 = r19
+            r1.addView(r2)
             r1.addView(r3)
-            r1.addView(r4)
             r0.addView(r1)
-            r0.setEnabled(r2)
+            r0.setEnabled(r4)
             r0.setHelperTextEnabled(r9)
             r0.setErrorEnabled(r7)
             boolean r1 = r0.counterEnabled
             r2 = r23
-            if (r1 == r2) goto L_0x0517
-            if (r2 == 0) goto L_0x050c
+            if (r1 == r2) goto L_0x050f
+            if (r2 == 0) goto L_0x0504
             androidx.appcompat.widget.AppCompatTextView r1 = new androidx.appcompat.widget.AppCompatTextView
             android.content.Context r3 = r20.getContext()
             r1.<init>(r3)
             r0.counterView = r1
-            r3 = 2131363852(0x7f0a080c, float:1.8347525E38)
+            r3 = 2131363818(0x7f0a07ea, float:1.8347456E38)
             r1.setId(r3)
             androidx.appcompat.widget.AppCompatTextView r1 = r0.counterView
             r3 = 1
             r1.setMaxLines(r3)
             androidx.appcompat.widget.AppCompatTextView r1 = r0.counterView
             r3 = 2
-            r5.addIndicator(r1, r3)
+            r5.addIndicator(r3, r1)
             androidx.appcompat.widget.AppCompatTextView r1 = r0.counterView
             android.view.ViewGroup$LayoutParams r1 = r1.getLayoutParams()
             android.view.ViewGroup$MarginLayoutParams r1 = (android.view.ViewGroup.MarginLayoutParams) r1
             android.content.res.Resources r3 = r20.getResources()
-            r4 = 2131166946(0x7f0706e2, float:1.7948152E38)
+            r4 = 2131166904(0x7f0706b8, float:1.7948067E38)
             int r3 = r3.getDimensionPixelOffset(r4)
             r1.setMarginStart(r3)
             r20.updateCounterTextAppearanceAndColor()
             androidx.appcompat.widget.AppCompatTextView r1 = r0.counterView
-            if (r1 == 0) goto L_0x0515
+            if (r1 == 0) goto L_0x050d
             android.widget.EditText r1 = r0.editText
-            if (r1 != 0) goto L_0x0504
+            if (r1 != 0) goto L_0x04fc
             r10 = 0
-            goto L_0x0508
-        L_0x0504:
+            goto L_0x0500
+        L_0x04fc:
             android.text.Editable r10 = r1.getText()
-        L_0x0508:
+        L_0x0500:
             r0.updateCounter(r10)
-            goto L_0x0515
-        L_0x050c:
+            goto L_0x050d
+        L_0x0504:
             androidx.appcompat.widget.AppCompatTextView r1 = r0.counterView
             r3 = 2
-            r5.removeIndicator(r1, r3)
+            r5.removeIndicator(r3, r1)
             r1 = 0
             r0.counterView = r1
-        L_0x0515:
+        L_0x050d:
             r0.counterEnabled = r2
-        L_0x0517:
+        L_0x050f:
             boolean r1 = android.text.TextUtils.isEmpty(r22)
-            if (r1 == 0) goto L_0x0526
+            if (r1 == 0) goto L_0x051e
             boolean r1 = r5.helperTextEnabled
-            if (r1 == 0) goto L_0x054c
+            if (r1 == 0) goto L_0x0544
             r1 = 0
             r0.setHelperTextEnabled(r1)
-            goto L_0x054c
-        L_0x0526:
+            goto L_0x0544
+        L_0x051e:
             boolean r1 = r5.helperTextEnabled
-            if (r1 != 0) goto L_0x052e
+            if (r1 != 0) goto L_0x0526
             r1 = 1
             r0.setHelperTextEnabled(r1)
-        L_0x052e:
+        L_0x0526:
             r5.cancelCaptionAnimator()
             r0 = r22
             r5.helperText = r0
@@ -2761,14 +2731,14 @@ Method generation error in method: com.google.android.material.textfield.Indicat
             r1.setText(r0)
             int r1 = r5.captionDisplayed
             r2 = 2
-            if (r1 == r2) goto L_0x0541
+            if (r1 == r2) goto L_0x0539
             r5.captionToShow = r2
-        L_0x0541:
+        L_0x0539:
             int r2 = r5.captionToShow
             androidx.appcompat.widget.AppCompatTextView r3 = r5.helperTextView
             boolean r0 = r5.shouldAnimateCaptionView(r3, r0)
             r5.updateCaptionViewsVisibility(r1, r2, r0)
-        L_0x054c:
+        L_0x0544:
             return
         */
         throw new UnsupportedOperationException("Method not decompiled: com.google.android.material.textfield.TextInputLayout.<init>(android.content.Context, android.util.AttributeSet, int):void");

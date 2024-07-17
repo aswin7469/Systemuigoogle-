@@ -6,7 +6,7 @@ import android.util.Log;
 import kotlin.enums.EnumEntriesKt;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public enum BatteryEventType implements Parcelable {
     UNKNOWN(0),
     FULL_CHARGED(1),
@@ -25,7 +25,7 @@ public enum BatteryEventType implements Parcelable {
     public static final CREATOR CREATOR = null;
     private final String typeName;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class CREATOR implements Parcelable.Creator {
         public final Object createFromParcel(Parcel parcel) {
             String str;

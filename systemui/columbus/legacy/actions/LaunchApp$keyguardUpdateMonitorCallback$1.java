@@ -3,7 +3,7 @@ package com.google.android.systemui.columbus.legacy.actions;
 import android.content.Context;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class LaunchApp$keyguardUpdateMonitorCallback$1 extends KeyguardUpdateMonitorCallback {
     public final /* synthetic */ Context $context;
     public final /* synthetic */ LaunchApp this$0;
@@ -17,7 +17,7 @@ public final class LaunchApp$keyguardUpdateMonitorCallback$1 extends KeyguardUpd
         if (z) {
             LaunchApp launchApp = this.this$0;
             launchApp.keyguardUpdateMonitor.removeCallback(this);
-            launchApp.mainHandler.post(new LaunchApp$keyguardUpdateMonitorCallback$1$onKeyguardBouncerFullyShowingChanged$1(launchApp, this.$context));
+            launchApp.mainHandler.post(new LaunchApp$updateAvailableAppsAndShortcutsAsync$$inlined$traceRunnable$1(launchApp, this.$context));
         }
     }
 }

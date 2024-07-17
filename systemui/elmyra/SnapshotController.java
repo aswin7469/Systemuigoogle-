@@ -10,7 +10,7 @@ import com.google.android.systemui.elmyra.sensors.GestureSensor;
 import com.google.protobuf.nano.MessageNano;
 import java.util.Random;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class SnapshotController implements GestureSensor.Listener {
     public final AnonymousClass1 mHandler = new Handler(Looper.getMainLooper()) {
         public final void handleMessage(Message message) {
@@ -49,7 +49,7 @@ public final class SnapshotController implements GestureSensor.Listener {
         r5.sendMessageDelayed(r5.obtainMessage(1, snapshotProtos$SnapshotHeader), (long) this.mSnapshotDelayAfterGesture);
     }
 
-    public final void onGestureProgress(int i, float f) {
+    public final void onGestureProgress(float f, int i) {
         if (this.mLastGestureStage == 2 && i != 2) {
             SnapshotProtos$SnapshotHeader snapshotProtos$SnapshotHeader = new SnapshotProtos$SnapshotHeader();
             snapshotProtos$SnapshotHeader.identifier = new Random().nextLong();

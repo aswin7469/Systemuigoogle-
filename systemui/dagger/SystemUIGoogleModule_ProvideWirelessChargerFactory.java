@@ -1,16 +1,15 @@
 package com.google.android.systemui.dagger;
 
-import android.content.Context;
 import com.google.android.systemui.dreamliner.WirelessChargerImpl;
 import dagger.internal.Preconditions;
 import java.util.Optional;
 import javax.inject.Provider;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public abstract class SystemUIGoogleModule_ProvideWirelessChargerFactory implements Provider {
-    public static Optional provideWirelessCharger(Context context) {
+    public static Optional provideWirelessCharger() {
         Optional optional;
-        WirelessChargerImpl wirelessChargerImpl = new WirelessChargerImpl(context);
+        WirelessChargerImpl wirelessChargerImpl = new WirelessChargerImpl();
         if (wirelessChargerImpl.initHALInterface()) {
             optional = Optional.of(wirelessChargerImpl);
         } else {

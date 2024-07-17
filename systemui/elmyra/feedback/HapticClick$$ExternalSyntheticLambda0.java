@@ -3,7 +3,7 @@ package com.google.android.systemui.elmyra.feedback;
 import android.os.Vibrator;
 import java.util.function.Consumer;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final /* synthetic */ class HapticClick$$ExternalSyntheticLambda0 implements Consumer {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ HapticClick f$0;

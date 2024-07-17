@@ -11,7 +11,7 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineStart;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 final class FlagEnabled$settingsChangeListener$1$onColumbusEnabledChange$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ boolean $isEnabled;
     int label;

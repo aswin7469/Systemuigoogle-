@@ -1,8 +1,25 @@
 package com.google.android.material.math;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public abstract class MathUtils {
-    public static float lerp(float f, float f2, float f3) {
-        return (f3 * f2) + ((1.0f - f3) * f);
+    public static float distanceToFurthestCorner(float f, float f2, float f3, float f4) {
+        double d = (double) (0.0f - f);
+        double d2 = (double) (0.0f - f2);
+        float hypot = (float) Math.hypot(d, d2);
+        double d3 = (double) (f3 - f);
+        float hypot2 = (float) Math.hypot(d3, d2);
+        double d4 = (double) (f4 - f2);
+        float hypot3 = (float) Math.hypot(d3, d4);
+        float hypot4 = (float) Math.hypot(d, d4);
+        if (hypot > hypot2 && hypot > hypot3 && hypot > hypot4) {
+            return hypot;
+        }
+        if (hypot2 > hypot3 && hypot2 > hypot4) {
+            return hypot2;
+        }
+        if (hypot3 > hypot4) {
+            return hypot3;
+        }
+        return hypot4;
     }
 }

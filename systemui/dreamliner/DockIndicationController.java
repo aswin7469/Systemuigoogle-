@@ -25,7 +25,7 @@ import com.android.systemui.statusbar.policy.ConfigurationController;
 import com.google.android.systemui.statusbar.KeyguardIndicationControllerGoogle;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class DockIndicationController implements StatusBarStateController.StateListener, View.OnClickListener, View.OnAttachStateChangeListener, ConfigurationController.ConfigurationListener {
     static final String ACTION_ASSISTANT_POODLE = "com.google.android.systemui.dreamliner.ASSISTANT_POODLE";
     public static final long KEYGUARD_INDICATION_TIMEOUT_MILLIS;
@@ -69,7 +69,7 @@ public final class DockIndicationController implements StatusBarStateController.
         this.mDisableLiveRegionRunnable = new DockIndicationController$$ExternalSyntheticLambda0(this, 1);
         Animation loadAnimation = AnimationUtils.loadAnimation(context, 2130772502);
         this.mShowPromoAnimation = loadAnimation;
-        loadAnimation.setAnimationListener(new Animation.AnimationListener(this, 0) {
+        loadAnimation.setAnimationListener(new PhotoAnimationListener(this, 0) {
             public final /* synthetic */ DockIndicationController this$0;
 
             {
@@ -99,17 +99,11 @@ public final class DockIndicationController implements StatusBarStateController.
                         this.this$0.mDockPromo.setVisibility(8);
                         return;
                 }
-            }
-
-            public final void onAnimationRepeat(Animation animation) {
-            }
-
-            public final void onAnimationStart(Animation animation) {
             }
         });
         Animation loadAnimation2 = AnimationUtils.loadAnimation(context, 2130772503);
         this.mHidePromoAnimation = loadAnimation2;
-        loadAnimation2.setAnimationListener(new Animation.AnimationListener(this, 1) {
+        loadAnimation2.setAnimationListener(new PhotoAnimationListener(this, 1) {
             public final /* synthetic */ DockIndicationController this$0;
 
             {
@@ -139,12 +133,6 @@ public final class DockIndicationController implements StatusBarStateController.
                         this.this$0.mDockPromo.setVisibility(8);
                         return;
                 }
-            }
-
-            public final void onAnimationRepeat(Animation animation) {
-            }
-
-            public final void onAnimationStart(Animation animation) {
             }
         });
         this.mAccessibilityManager = (AccessibilityManager) context.getSystemService("accessibility");
@@ -153,19 +141,19 @@ public final class DockIndicationController implements StatusBarStateController.
     public void initializeIconViews() {
         if (this.mViewAttached) {
             WindowRootView windowRootView = ((NotificationShadeWindowControllerImpl) this.mNotificationShadeWindowController).mWindowRootView;
-            ImageView imageView = (ImageView) windowRootView.findViewById(2131362463);
+            ImageView imageView = (ImageView) windowRootView.findViewById(2131362443);
             this.mDockedTopIcon = imageView;
-            imageView.setImageResource(2131232461);
+            imageView.setImageResource(2131232447);
             this.mDockedTopIcon.setContentDescription(this.mContext.getString(2131951680));
             this.mDockedTopIcon.setTooltipText(this.mContext.getString(2131951680));
             this.mDockedTopIcon.setOnClickListener(this);
-            this.mDockPromo = (FrameLayout) windowRootView.findViewById(2131362460);
-            TextView textView = (TextView) windowRootView.findViewById(2131363302);
+            this.mDockPromo = (FrameLayout) windowRootView.findViewById(2131362440);
+            TextView textView = (TextView) windowRootView.findViewById(2131363275);
             this.mPromoText = textView;
             textView.setAutoSizeTextTypeUniformWithConfiguration(10, 16, 1, 2);
-            windowRootView.findViewById(2131361966).addOnAttachStateChangeListener(this);
-            this.mTopIndicationView = (KeyguardIndicationTextView) windowRootView.findViewById(2131362808);
-            this.mAmbientIndicationContainer = (LinearLayout) windowRootView.findViewById(2131361969);
+            windowRootView.findViewById(2131361961).addOnAttachStateChangeListener(this);
+            this.mTopIndicationView = (KeyguardIndicationTextView) windowRootView.findViewById(2131362787);
+            this.mAmbientIndicationContainer = (LinearLayout) windowRootView.findViewById(2131361964);
             this.mIconViewsValidated = true;
             return;
         }
@@ -173,7 +161,7 @@ public final class DockIndicationController implements StatusBarStateController.
     }
 
     public final void onClick(View view) {
-        if (view.getId() == 2131362463) {
+        if (view.getId() == 2131362443) {
             Intent intent = new Intent(ACTION_ASSISTANT_POODLE);
             intent.addFlags(1073741824);
             try {
@@ -199,7 +187,7 @@ public final class DockIndicationController implements StatusBarStateController.
         if (!this.mIconViewsValidated && this.mViewAttached) {
             initializeIconViews();
         }
-        this.mPromoText.setText(this.mContext.getResources().getString(2131952474));
+        this.mPromoText.setText(this.mContext.getResources().getString(2131952453));
     }
 
     public final void onStateChanged(int i) {
@@ -327,5 +315,14 @@ public final class DockIndicationController implements StatusBarStateController.
             return
         */
         throw new UnsupportedOperationException("Method not decompiled: com.google.android.systemui.dreamliner.DockIndicationController.updateVisibility$8():void");
+    }
+
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
+    public abstract class PhotoAnimationListener implements Animation.AnimationListener {
+        public final void onAnimationRepeat(Animation animation) {
+        }
+
+        public final void onAnimationStart(Animation animation) {
+        }
     }
 }

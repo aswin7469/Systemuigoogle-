@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow;
 import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.StateFlow;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ColumbusSettingsFetcher$special$$inlined$map$1 implements Flow {
     public final /* synthetic */ int $r8$classId;
     public final /* synthetic */ Flow $this_unsafeTransform$inlined;
@@ -18,9 +18,12 @@ public final class ColumbusSettingsFetcher$special$$inlined$map$1 implements Flo
     }
 
     public final Object collect(final FlowCollector flowCollector, Continuation continuation) {
-        switch (this.$r8$classId) {
+        Unit unit = Unit.INSTANCE;
+        int i = this.$r8$classId;
+        Flow flow = this.$this_unsafeTransform$inlined;
+        switch (i) {
             case 0:
-                Object collect = this.$this_unsafeTransform$inlined.collect(new FlowCollector() {
+                Object collect = flow.collect(new FlowCollector() {
                     /* JADX WARNING: Removed duplicated region for block: B:12:0x002f  */
                     /* JADX WARNING: Removed duplicated region for block: B:8:0x0021  */
                     /* Code decompiled incorrectly, please refer to instructions dump. */
@@ -74,13 +77,13 @@ public final class ColumbusSettingsFetcher$special$$inlined$map$1 implements Flo
                 if (collect == CoroutineSingletons.COROUTINE_SUSPENDED) {
                     return collect;
                 }
-                return Unit.INSTANCE;
+                return unit;
             default:
-                Object collect2 = this.$this_unsafeTransform$inlined.collect(new ColumbusSettingsFetcher$special$$inlined$map$2$2(flowCollector), continuation);
+                Object collect2 = flow.collect(new ColumbusSettingsFetcher$special$$inlined$map$2$2(flowCollector), continuation);
                 if (collect2 == CoroutineSingletons.COROUTINE_SUSPENDED) {
                     return collect2;
                 }
-                return Unit.INSTANCE;
+                return unit;
         }
     }
 }

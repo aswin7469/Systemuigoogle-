@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import androidx.appcompat.content.res.AppCompatResources;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class PageIndicator extends LinearLayout {
     public int mCurrentPageIndex;
     public int mNumPages;
@@ -56,7 +56,7 @@ public class PageIndicator extends LinearLayout {
             for (int i5 = 0; i5 < childCount; i5++) {
                 removeViewAt(0);
             }
-            int dimensionPixelSize = getContext().getResources().getDimensionPixelSize(2131167189);
+            int dimensionPixelSize = getContext().getResources().getDimensionPixelSize(2131167147);
             for (int i6 = 0; i6 < this.mNumPages; i6++) {
                 if (i6 < getChildCount()) {
                     imageView = (ImageView) getChildAt(i6);
@@ -81,7 +81,7 @@ public class PageIndicator extends LinearLayout {
                 if (i6 < getChildCount()) {
                     imageView.setLayoutParams(layoutParams);
                 } else {
-                    Drawable drawable = AppCompatResources.getDrawable(2131233404, getContext());
+                    Drawable drawable = AppCompatResources.getDrawable(2131233348, getContext());
                     drawable.setTint(this.mPrimaryColor);
                     imageView.setImageDrawable(drawable);
                     addView(imageView, layoutParams);
@@ -93,7 +93,7 @@ public class PageIndicator extends LinearLayout {
                 }
                 imageView.setAlpha(f);
             }
-            setContentDescription(getContext().getString(2131951840, new Object[]{1, Integer.valueOf(this.mNumPages)}));
+            setContentDescription(getContext().getString(2131951836, new Object[]{1, Integer.valueOf(this.mNumPages)}));
         }
     }
 
@@ -121,10 +121,13 @@ public class PageIndicator extends LinearLayout {
                 imageView2.setAlpha((0.6f * f) + 0.4f);
             }
             Context context = getContext();
+            Object[] objArr = new Object[2];
             if (((double) f) >= 0.5d) {
                 i4 = i + 2;
             }
-            setContentDescription(context.getString(2131951840, new Object[]{Integer.valueOf(i4), Integer.valueOf(this.mNumPages)}));
+            objArr[0] = Integer.valueOf(i4);
+            objArr[1] = Integer.valueOf(this.mNumPages);
+            setContentDescription(context.getString(2131951836, objArr));
         }
     }
 

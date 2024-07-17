@@ -12,7 +12,7 @@ import com.google.android.setupcompat.R$styleable;
 import com.google.android.setupcompat.logging.CustomEvent;
 import com.google.android.setupcompat.template.FooterBarMixin;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class FooterButton implements View.OnClickListener {
     public FooterBarMixin.AnonymousClass1 buttonListener;
     public final int buttonType;
@@ -89,7 +89,7 @@ public final class FooterButton implements View.OnClickListener {
     }
 
     /* JADX WARNING: Code restructure failed: missing block: B:2:0x0006, code lost:
-        r0 = r3.this$0;
+        r0 = com.google.android.setupcompat.template.FooterBarMixin.this;
      */
     /* Code decompiled incorrectly, please refer to instructions dump. */
     public final void setEnabled(boolean r4) {

@@ -3,12 +3,13 @@ package com.google.android.systemui.assist.uihints;
 import android.os.Parcel;
 import android.os.RemoteException;
 import android.util.Log;
+import com.android.systemui.keyguard.data.repository.KeyguardRepositoryImpl;
 import com.android.systemui.keyguard.domain.interactor.KeyguardBottomAreaInteractor;
 import com.android.systemui.keyguard.domain.interactor.KeyguardInteractor;
 import com.android.systemui.recents.OverviewProxyService;
 import com.android.systemui.shared.recents.IOverviewProxy;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class OverlappedElementController {
     public float mAlpha = 1.0f;
     public final KeyguardBottomAreaInteractor mKeyguardBottomAreaInteractor;
@@ -48,7 +49,7 @@ public final class OverlappedElementController {
                 obtain.recycle();
                 throw th;
             }
-            this.mKeyguardBottomAreaInteractor.repository._bottomAreaAlpha.setValue(Float.valueOf(f));
+            ((KeyguardRepositoryImpl) this.mKeyguardBottomAreaInteractor.repository)._bottomAreaAlpha.setValue(Float.valueOf(f));
         }
     }
 }

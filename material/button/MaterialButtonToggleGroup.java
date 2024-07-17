@@ -36,7 +36,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.WeakHashMap;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class MaterialButtonToggleGroup extends LinearLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
     public Set checkedIds;
@@ -50,7 +50,7 @@ public class MaterialButtonToggleGroup extends LinearLayout {
     public final boolean singleSelection;
     public boolean skipCheckedStateTracker;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class CornerData {
         public static final AbsoluteCornerSize noCorner = new AbsoluteCornerSize(0.0f);
         public final CornerSize bottomLeft;
@@ -66,7 +66,7 @@ public class MaterialButtonToggleGroup extends LinearLayout {
         }
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class PressedStateTracker {
         public PressedStateTracker() {
         }
@@ -89,7 +89,7 @@ public class MaterialButtonToggleGroup extends LinearLayout {
         MaterialButton materialButton = (MaterialButton) view;
         if (materialButton.getId() == -1) {
             WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-            materialButton.setId(View.generateViewId());
+            materialButton.setId(ViewCompat.Api17Impl.generateViewId());
         }
         materialButton.setMaxLines(1);
         materialButton.setEllipsize(TextUtils.TruncateAt.END);
@@ -107,11 +107,7 @@ public class MaterialButtonToggleGroup extends LinearLayout {
                 ColorStateList colorStateList = materialButtonHelper.strokeColor;
                 materialShapeDrawable.drawableState.strokeWidth = (float) materialButtonHelper.strokeWidth;
                 materialShapeDrawable.invalidateSelf();
-                MaterialShapeDrawable.MaterialShapeDrawableState materialShapeDrawableState = materialShapeDrawable.drawableState;
-                if (materialShapeDrawableState.strokeColor != colorStateList) {
-                    materialShapeDrawableState.strokeColor = colorStateList;
-                    materialShapeDrawable.onStateChange(materialShapeDrawable.getState());
-                }
+                materialShapeDrawable.setStrokeColor(colorStateList);
                 if (materialShapeDrawable2 != null) {
                     float f = (float) materialButtonHelper.strokeWidth;
                     if (materialButtonHelper.shouldDrawSurfaceColorStroke) {
@@ -119,12 +115,7 @@ public class MaterialButtonToggleGroup extends LinearLayout {
                     }
                     materialShapeDrawable2.drawableState.strokeWidth = f;
                     materialShapeDrawable2.invalidateSelf();
-                    ColorStateList valueOf = ColorStateList.valueOf(i2);
-                    MaterialShapeDrawable.MaterialShapeDrawableState materialShapeDrawableState2 = materialShapeDrawable2.drawableState;
-                    if (materialShapeDrawableState2.strokeColor != valueOf) {
-                        materialShapeDrawableState2.strokeColor = valueOf;
-                        materialShapeDrawable2.onStateChange(materialShapeDrawable2.getState());
-                    }
+                    materialShapeDrawable2.setStrokeColor(ColorStateList.valueOf(i2));
                 }
             }
         }
@@ -134,11 +125,11 @@ public class MaterialButtonToggleGroup extends LinearLayout {
             this.originalCornerData.add(new CornerData(shapeAppearanceModel.topLeftCornerSize, shapeAppearanceModel.bottomLeftCornerSize, shapeAppearanceModel.topRightCornerSize, shapeAppearanceModel.bottomRightCornerSize));
             ViewCompat.setAccessibilityDelegate(materialButton, new AccessibilityDelegateCompat() {
                 public final void onInitializeAccessibilityNodeInfo(View view, AccessibilityNodeInfoCompat accessibilityNodeInfoCompat) {
+                    int i;
                     this.mOriginalDelegate.onInitializeAccessibilityNodeInfo(view, accessibilityNodeInfoCompat.mInfo);
-                    int i = MaterialButtonToggleGroup.$r8$clinit;
+                    int i2 = MaterialButtonToggleGroup.$r8$clinit;
                     MaterialButtonToggleGroup materialButtonToggleGroup = MaterialButtonToggleGroup.this;
                     materialButtonToggleGroup.getClass();
-                    int i2 = -1;
                     if (view instanceof MaterialButton) {
                         int i3 = 0;
                         int i4 = 0;
@@ -146,7 +137,7 @@ public class MaterialButtonToggleGroup extends LinearLayout {
                             if (i3 >= materialButtonToggleGroup.getChildCount()) {
                                 break;
                             } else if (materialButtonToggleGroup.getChildAt(i3) == view) {
-                                i2 = i4;
+                                i = i4;
                                 break;
                             } else {
                                 if ((materialButtonToggleGroup.getChildAt(i3) instanceof MaterialButton) && materialButtonToggleGroup.isChildVisible(i3)) {
@@ -156,7 +147,8 @@ public class MaterialButtonToggleGroup extends LinearLayout {
                             }
                         }
                     }
-                    accessibilityNodeInfoCompat.setCollectionItemInfo(AccessibilityNodeInfoCompat.RangeInfoCompat.obtain(((MaterialButton) view).checked, 0, 1, i2, 1));
+                    i = -1;
+                    accessibilityNodeInfoCompat.setCollectionItemInfo(AccessibilityNodeInfoCompat.CollectionInfoCompat.obtain(0, 1, i, 1, false, ((MaterialButton) view).checked));
                 }
             });
             return;
@@ -229,7 +221,7 @@ public class MaterialButtonToggleGroup extends LinearLayout {
 
     public final void checkInternal(int i, boolean z) {
         if (i == -1) {
-            ClockEventController$zenModeCallback$1$$ExternalSyntheticOutline0.m("Button ID is not valid: ", "MaterialButtonToggleGroup", i);
+            ClockEventController$zenModeCallback$1$$ExternalSyntheticOutline0.m("Button ID is not valid: ", i, "MaterialButtonToggleGroup");
             return;
         }
         HashSet hashSet = new HashSet(this.checkedIds);
@@ -296,7 +288,7 @@ public class MaterialButtonToggleGroup extends LinearLayout {
         } else {
             i = 2;
         }
-        accessibilityNodeInfo.setCollectionInfo((AccessibilityNodeInfo.CollectionInfo) AccessibilityNodeInfoCompat.RangeInfoCompat.obtain(1, i2, i).mInfo);
+        accessibilityNodeInfo.setCollectionInfo((AccessibilityNodeInfo.CollectionInfo) AccessibilityNodeInfoCompat.CollectionInfoCompat.obtain(1, i2, i).mInfo);
     }
 
     public final void onMeasure(int i, int i2) {
@@ -403,10 +395,7 @@ public class MaterialButtonToggleGroup extends LinearLayout {
                         cornerData2 = cornerData;
                     }
                     if (cornerData2 == null) {
-                        builder.topLeftCornerSize = new AbsoluteCornerSize(0.0f);
-                        builder.topRightCornerSize = new AbsoluteCornerSize(0.0f);
-                        builder.bottomRightCornerSize = new AbsoluteCornerSize(0.0f);
-                        builder.bottomLeftCornerSize = new AbsoluteCornerSize(0.0f);
+                        builder.setAllCornerSizes(0.0f);
                     } else {
                         builder.topLeftCornerSize = cornerData2.topLeft;
                         builder.bottomLeftCornerSize = cornerData2.bottomLeft;
@@ -426,7 +415,7 @@ public class MaterialButtonToggleGroup extends LinearLayout {
     }
 
     public MaterialButtonToggleGroup(Context context, AttributeSet attributeSet, int i) {
-        super(MaterialThemeOverlay.wrap(context, attributeSet, i, 2132018822), attributeSet, i);
+        super(MaterialThemeOverlay.wrap(context, attributeSet, i, 2132018816), attributeSet, i);
         this.originalCornerData = new ArrayList();
         this.pressedStateTracker = new PressedStateTracker();
         this.onButtonCheckedListeners = new LinkedHashSet();
@@ -447,7 +436,7 @@ public class MaterialButtonToggleGroup extends LinearLayout {
         };
         this.skipCheckedStateTracker = false;
         this.checkedIds = new HashSet();
-        TypedArray obtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(getContext(), attributeSet, R$styleable.MaterialButtonToggleGroup, i, 2132018822, new int[0]);
+        TypedArray obtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(getContext(), attributeSet, R$styleable.MaterialButtonToggleGroup, i, 2132018816, new int[0]);
         boolean z = obtainStyledAttributes.getBoolean(2, false);
         if (this.singleSelection != z) {
             this.singleSelection = z;
@@ -458,6 +447,6 @@ public class MaterialButtonToggleGroup extends LinearLayout {
         setChildrenDrawingOrderEnabled(true);
         obtainStyledAttributes.recycle();
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-        setImportantForAccessibility(1);
+        ViewCompat.Api16Impl.setImportantForAccessibility(this, 1);
     }
 }

@@ -3,9 +3,9 @@ package com.google.android.systemui.power.batteryhealth;
 import android.os.Parcel;
 import android.os.Parcelable;
 import androidx.compose.animation.graphics.vector.ObjectAnimator$$ExternalSyntheticOutline0;
-import androidx.compose.foundation.text.ValidatingOffsetMappingKt$$ExternalSyntheticOutline0;
+import androidx.compose.foundation.text.ValidatingOffsetMapping$$ExternalSyntheticOutline0;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class HealthData implements Parcelable {
     public static final CREATOR CREATOR = new Object();
     public final int capacityIndex;
@@ -13,7 +13,7 @@ public final class HealthData implements Parcelable {
     public final int healthStatus;
     public final int performanceIndex;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class CREATOR implements Parcelable.Creator {
         public final Object createFromParcel(Parcel parcel) {
             return new HealthData(parcel.readInt(), parcel.readInt(), parcel.readInt(), parcel.readInt());
@@ -58,7 +58,7 @@ public final class HealthData implements Parcelable {
         int i2 = this.performanceIndex;
         int i3 = this.capacityIndex;
         int i4 = this.healthStatus;
-        StringBuilder m = ValidatingOffsetMappingKt$$ExternalSyntheticOutline0.m("hi: ", i, ", pi: ", i2, ", ci: ");
+        StringBuilder m = ValidatingOffsetMapping$$ExternalSyntheticOutline0.m("hi: ", i, ", pi: ", i2, ", ci: ");
         m.append(i3);
         m.append(", hs: ");
         m.append(i4);

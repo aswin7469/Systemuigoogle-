@@ -6,20 +6,20 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
-import kotlin.collections.CollectionsKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class GateFetcher {
     public final Map blockingGateMap = new LinkedHashMap();
     public final CoroutineScope coroutineScope;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class GateCollectionKey {
         public final Set gateSet;
 
         public GateCollectionKey(Collection collection) {
-            this.gateSet = CollectionsKt.toSet(collection);
+            this.gateSet = CollectionsKt___CollectionsKt.toSet(collection);
         }
 
         public final boolean equals(Object obj) {

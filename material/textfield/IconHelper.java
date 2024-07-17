@@ -9,7 +9,7 @@ import com.google.android.material.internal.CheckableImageButton;
 import java.util.Arrays;
 import java.util.WeakHashMap;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public abstract class IconHelper {
     public static void applyIconTint(TextInputLayout textInputLayout, CheckableImageButton checkableImageButton, ColorStateList colorStateList, PorterDuff.Mode mode) {
         Drawable drawable = checkableImageButton.getDrawable();
@@ -52,7 +52,7 @@ public abstract class IconHelper {
     public static void setIconClickable(CheckableImageButton checkableImageButton, View.OnLongClickListener onLongClickListener) {
         boolean z;
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-        boolean hasOnClickListeners = checkableImageButton.hasOnClickListeners();
+        boolean hasOnClickListeners = ViewCompat.Api15Impl.hasOnClickListeners(checkableImageButton);
         boolean z2 = false;
         int i = 1;
         if (onLongClickListener != null) {
@@ -70,6 +70,6 @@ public abstract class IconHelper {
         if (!z2) {
             i = 2;
         }
-        checkableImageButton.setImportantForAccessibility(i);
+        ViewCompat.Api16Impl.setImportantForAccessibility(checkableImageButton, i);
     }
 }

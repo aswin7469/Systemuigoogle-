@@ -1,6 +1,7 @@
 package com.google.android.systemui.controls;
 
 import android.content.ComponentName;
+import com.android.systemui.controls.controller.ControlsController;
 import com.android.systemui.controls.controller.ControlsControllerImpl;
 import com.android.systemui.controls.controller.ControlsTileResourceConfiguration;
 import com.android.systemui.controls.dagger.ControlsComponent;
@@ -9,7 +10,7 @@ import dagger.Lazy;
 import kotlin.NoWhenBranchMatchedException;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class GoogleControlsTileResourceConfigurationImpl implements ControlsTileResourceConfiguration {
     public final Lazy controlsComponent;
 
@@ -22,7 +23,7 @@ public final class GoogleControlsTileResourceConfigurationImpl implements Contro
         if (!((ControlsComponent) lazy.get()).featureEnabled) {
             return new ComponentName("", "");
         }
-        SelectedItem preferredSelection = ((ControlsControllerImpl) ((ControlsComponent) lazy.get()).controlsController.get()).getPreferredSelection();
+        SelectedItem preferredSelection = ((ControlsControllerImpl) ((ControlsController) ((ControlsComponent) lazy.get()).controlsController.get())).getPreferredSelection();
         if (preferredSelection instanceof SelectedItem.StructureItem) {
             return preferredSelection.getComponentName();
         }
@@ -42,15 +43,15 @@ public final class GoogleControlsTileResourceConfigurationImpl implements Contro
 
     public final int getTileImageId() {
         if (Intrinsics.areEqual(getComponentName().getPackageName(), "com.google.android.apps.chromecast.app")) {
-            return 2131232426;
+            return 2131232413;
         }
-        return 2131232336;
+        return 2131232324;
     }
 
     public final int getTileTitleId() {
         if (Intrinsics.areEqual(getComponentName().getPackageName(), "com.google.android.apps.chromecast.app")) {
-            return 2131952677;
+            return 2131952652;
         }
-        return 2131953568;
+        return 2131953527;
     }
 }

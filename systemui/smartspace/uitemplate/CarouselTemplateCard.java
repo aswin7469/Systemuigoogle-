@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Constraints;
 import com.android.systemui.plugins.BcSmartspaceDataPlugin;
 import com.google.android.systemui.smartspace.BcSmartSpaceUtil;
 import com.google.android.systemui.smartspace.BcSmartspaceCardSecondary;
@@ -19,7 +20,7 @@ import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInf
 import java.util.List;
 import java.util.Locale;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class CarouselTemplateCard extends BcSmartspaceCardSecondary {
     public static final /* synthetic */ int $r8$clinit = 0;
 
@@ -33,12 +34,12 @@ public class CarouselTemplateCard extends BcSmartspaceCardSecondary {
         super.onFinishInflate();
         ConstraintLayout[] constraintLayoutArr = new ConstraintLayout[4];
         for (int i = 0; i < 4; i++) {
-            ConstraintLayout constraintLayout3 = (ConstraintLayout) ViewGroup.inflate(getContext(), 2131559035, (ViewGroup) null);
+            ConstraintLayout constraintLayout3 = (ConstraintLayout) ViewGroup.inflate(getContext(), 2131559029, (ViewGroup) null);
             constraintLayout3.setId(View.generateViewId());
             constraintLayoutArr[i] = constraintLayout3;
         }
         for (int i2 = 0; i2 < 4; i2++) {
-            ConstraintLayout.LayoutParams layoutParams = new ConstraintLayout.LayoutParams(0);
+            Constraints.LayoutParams layoutParams = new Constraints.LayoutParams(0);
             ConstraintLayout constraintLayout4 = constraintLayoutArr[i2];
             if (i2 > 0) {
                 constraintLayout = constraintLayoutArr[i2 - 1];
@@ -70,9 +71,9 @@ public class CarouselTemplateCard extends BcSmartspaceCardSecondary {
     public final void resetUi() {
         for (int i = 0; i < getChildCount(); i++) {
             View childAt = getChildAt(i);
-            BcSmartspaceTemplateDataUtils.updateVisibility(childAt.findViewById(2131363993), 8);
-            BcSmartspaceTemplateDataUtils.updateVisibility(childAt.findViewById(2131362711), 8);
-            BcSmartspaceTemplateDataUtils.updateVisibility(childAt.findViewById(2131362944), 8);
+            BcSmartspaceTemplateDataUtils.updateVisibility(childAt.findViewById(2131363955), 8);
+            BcSmartspaceTemplateDataUtils.updateVisibility(childAt.findViewById(2131362691), 8);
+            BcSmartspaceTemplateDataUtils.updateVisibility(childAt.findViewById(2131362920), 8);
         }
     }
 
@@ -110,9 +111,9 @@ public class CarouselTemplateCard extends BcSmartspaceCardSecondary {
             layoutParams.horizontalChainStyle = i;
         }
         for (int i6 = 0; i6 < intExact; i6++) {
-            TextView textView = (TextView) getChildAt(i6).findViewById(2131363993);
-            ImageView imageView = (ImageView) getChildAt(i6).findViewById(2131362711);
-            TextView textView2 = (TextView) getChildAt(i6).findViewById(2131362944);
+            TextView textView = (TextView) getChildAt(i6).findViewById(2131363955);
+            ImageView imageView = (ImageView) getChildAt(i6).findViewById(2131362691);
+            TextView textView2 = (TextView) getChildAt(i6).findViewById(2131362920);
             BcSmartspaceTemplateDataUtils.setText(textView, ((CarouselTemplateData.CarouselItem) carouselItems.get(i6)).getUpperText());
             BcSmartspaceTemplateDataUtils.updateVisibility(textView, 0);
             BcSmartspaceTemplateDataUtils.setIcon(imageView, ((CarouselTemplateData.CarouselItem) carouselItems.get(i6)).getImage());
@@ -133,8 +134,8 @@ public class CarouselTemplateCard extends BcSmartspaceCardSecondary {
 
     public final void setTextColor(int i) {
         for (int i2 = 0; i2 < getChildCount(); i2++) {
-            ((TextView) getChildAt(i2).findViewById(2131363993)).setTextColor(i);
-            ((TextView) getChildAt(i2).findViewById(2131362944)).setTextColor(i);
+            ((TextView) getChildAt(i2).findViewById(2131363955)).setTextColor(i);
+            ((TextView) getChildAt(i2).findViewById(2131362920)).setTextColor(i);
         }
     }
 

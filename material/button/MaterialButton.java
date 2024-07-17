@@ -30,7 +30,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.WeakHashMap;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class MaterialButton extends AppCompatButton implements Checkable, Shapeable {
     public static final int[] CHECKABLE_STATE_SET = {16842911};
     public static final int[] CHECKED_STATE_SET = {16842912};
@@ -48,13 +48,13 @@ public class MaterialButton extends AppCompatButton implements Checkable, Shapea
     public final LinkedHashSet onCheckedChangeListeners;
     public MaterialButtonToggleGroup.PressedStateTracker onPressedChangeListenerInternal;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class SavedState extends AbsSavedState {
         public static final Parcelable.Creator CREATOR = new Object();
         public boolean checked;
 
         /* renamed from: com.google.android.material.button.MaterialButton$SavedState$1  reason: invalid class name */
-        /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+        /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
         public final class AnonymousClass1 implements Parcelable.ClassLoaderCreator {
             public final Object createFromParcel(Parcel parcel, ClassLoader classLoader) {
                 return new SavedState(parcel, classLoader);
@@ -129,7 +129,7 @@ public class MaterialButton extends AppCompatButton implements Checkable, Shapea
         return true;
     }
 
-    public final void onAttachedToWindow() {
+    public void onAttachedToWindow() {
         super.onAttachedToWindow();
         if (isUsingOriginalBackground()) {
             MaterialShapeUtils.setParentAbsoluteElevation(this, this.materialButtonHelper.getMaterialShapeDrawable(false));
@@ -472,11 +472,11 @@ public class MaterialButton extends AppCompatButton implements Checkable, Shapea
                     i7 = Math.max(i7, Math.min((int) paint.measureText(charSequence), getLayout().getEllipsizedWidth()));
                 }
                 WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-                int paddingEnd = ((((i - i7) - getPaddingEnd()) - i6) - this.iconPadding) - getPaddingStart();
+                int paddingEnd = ((((i - i7) - ViewCompat.Api17Impl.getPaddingEnd(this)) - i6) - this.iconPadding) - ViewCompat.Api17Impl.getPaddingStart(this);
                 if (alignment == Layout.Alignment.ALIGN_CENTER) {
                     paddingEnd /= 2;
                 }
-                if (getLayoutDirection() == 1) {
+                if (ViewCompat.Api17Impl.getLayoutDirection(this) == 1) {
                     z2 = true;
                 } else {
                     z2 = false;
@@ -535,26 +535,27 @@ public class MaterialButton extends AppCompatButton implements Checkable, Shapea
             r0 = r20
             r7 = r22
             r8 = r23
-            r9 = 2132018790(0x7f140666, float:1.9675897E38)
+            r9 = 2
+            r10 = 2132018784(0x7f140660, float:1.9675884E38)
             r1 = r21
-            android.content.Context r1 = com.google.android.material.theme.overlay.MaterialThemeOverlay.wrap(r1, r7, r8, r9)
+            android.content.Context r1 = com.google.android.material.theme.overlay.MaterialThemeOverlay.wrap(r1, r7, r8, r10)
             r0.<init>(r1, r7, r8)
             java.util.LinkedHashSet r1 = new java.util.LinkedHashSet
             r1.<init>()
             r0.onCheckedChangeListeners = r1
-            r10 = 0
-            r0.checked = r10
-            r0.broadcasting = r10
-            android.content.Context r11 = r20.getContext()
+            r11 = 0
+            r0.checked = r11
+            r0.broadcasting = r11
+            android.content.Context r12 = r20.getContext()
             int[] r3 = com.google.android.material.R$styleable.MaterialButton
-            r5 = 2132018790(0x7f140666, float:1.9675897E38)
-            int[] r6 = new int[r10]
-            r1 = r11
+            r5 = 2132018784(0x7f140660, float:1.9675884E38)
+            int[] r6 = new int[r11]
+            r1 = r12
             r2 = r22
             r4 = r23
             android.content.res.TypedArray r1 = com.google.android.material.internal.ThemeEnforcement.obtainStyledAttributes(r1, r2, r3, r4, r5, r6)
             r2 = 12
-            int r2 = r1.getDimensionPixelSize(r2, r10)
+            int r2 = r1.getDimensionPixelSize(r2, r11)
             r0.iconPadding = r2
             r3 = 15
             r4 = -1
@@ -575,89 +576,77 @@ public class MaterialButton extends AppCompatButton implements Checkable, Shapea
             int r3 = r1.getInteger(r3, r6)
             r0.iconGravity = r3
             r3 = 13
-            int r3 = r1.getDimensionPixelSize(r3, r10)
+            int r3 = r1.getDimensionPixelSize(r3, r11)
             r0.iconSize = r3
-            com.google.android.material.shape.ShapeAppearanceModel$Builder r3 = com.google.android.material.shape.ShapeAppearanceModel.builder((android.content.Context) r11, (android.util.AttributeSet) r7, (int) r8, (int) r9)
+            com.google.android.material.shape.ShapeAppearanceModel$Builder r3 = com.google.android.material.shape.ShapeAppearanceModel.builder((android.content.Context) r12, (android.util.AttributeSet) r7, (int) r8, (int) r10)
             com.google.android.material.shape.ShapeAppearanceModel r3 = r3.build()
             com.google.android.material.button.MaterialButtonHelper r7 = new com.google.android.material.button.MaterialButtonHelper
             r7.<init>(r0, r3)
             r0.materialButtonHelper = r7
-            int r3 = r1.getDimensionPixelOffset(r6, r10)
+            int r3 = r1.getDimensionPixelOffset(r6, r11)
             r7.insetLeft = r3
-            r3 = 2
-            int r8 = r1.getDimensionPixelOffset(r3, r10)
-            r7.insetRight = r8
-            r8 = 3
-            int r8 = r1.getDimensionPixelOffset(r8, r10)
-            r7.insetTop = r8
-            r8 = 4
-            int r8 = r1.getDimensionPixelOffset(r8, r10)
-            r7.insetBottom = r8
-            r8 = 8
-            boolean r9 = r1.hasValue(r8)
-            if (r9 == 0) goto L_0x00d2
-            int r8 = r1.getDimensionPixelSize(r8, r4)
-            com.google.android.material.shape.ShapeAppearanceModel r9 = r7.shapeAppearanceModel
-            float r8 = (float) r8
-            com.google.android.material.shape.ShapeAppearanceModel$Builder r9 = r9.toBuilder()
-            com.google.android.material.shape.AbsoluteCornerSize r11 = new com.google.android.material.shape.AbsoluteCornerSize
-            r11.<init>(r8)
-            r9.topLeftCornerSize = r11
-            com.google.android.material.shape.AbsoluteCornerSize r11 = new com.google.android.material.shape.AbsoluteCornerSize
-            r11.<init>(r8)
-            r9.topRightCornerSize = r11
-            com.google.android.material.shape.AbsoluteCornerSize r11 = new com.google.android.material.shape.AbsoluteCornerSize
-            r11.<init>(r8)
-            r9.bottomRightCornerSize = r11
-            com.google.android.material.shape.AbsoluteCornerSize r11 = new com.google.android.material.shape.AbsoluteCornerSize
-            r11.<init>(r8)
-            r9.bottomLeftCornerSize = r11
-            com.google.android.material.shape.ShapeAppearanceModel r8 = r9.build()
-            r7.setShapeAppearanceModel(r8)
-        L_0x00d2:
-            r8 = 20
-            int r8 = r1.getDimensionPixelSize(r8, r10)
-            r7.strokeWidth = r8
-            r8 = 7
-            int r8 = r1.getInt(r8, r4)
-            android.graphics.PorterDuff$Mode r5 = com.google.android.material.internal.ViewUtils.parseTintMode(r8, r5)
-            r7.backgroundTintMode = r5
-            android.content.Context r5 = r20.getContext()
-            r8 = 6
-            android.content.res.ColorStateList r5 = com.google.android.material.resources.MaterialResources.getColorStateList((android.content.Context) r5, (android.content.res.TypedArray) r1, (int) r8)
-            r7.backgroundTint = r5
-            android.content.Context r5 = r20.getContext()
-            r8 = 19
-            android.content.res.ColorStateList r5 = com.google.android.material.resources.MaterialResources.getColorStateList((android.content.Context) r5, (android.content.res.TypedArray) r1, (int) r8)
-            r7.strokeColor = r5
-            android.content.Context r5 = r20.getContext()
-            r8 = 16
-            android.content.res.ColorStateList r5 = com.google.android.material.resources.MaterialResources.getColorStateList((android.content.Context) r5, (android.content.res.TypedArray) r1, (int) r8)
-            r7.rippleColor = r5
-            r5 = 5
-            boolean r5 = r1.getBoolean(r5, r10)
-            r7.checkable = r5
-            r5 = 9
-            int r5 = r1.getDimensionPixelSize(r5, r10)
-            r7.elevation = r5
-            r5 = 21
-            boolean r5 = r1.getBoolean(r5, r6)
-            r7.toggleCheckedStateOnClick = r5
-            java.util.WeakHashMap r5 = androidx.core.view.ViewCompat.sViewPropertyAnimatorMap
-            int r5 = r20.getPaddingStart()
-            int r8 = r20.getPaddingTop()
-            int r9 = r20.getPaddingEnd()
-            int r11 = r20.getPaddingBottom()
-            boolean r12 = r1.hasValue(r10)
-            if (r12 == 0) goto L_0x0146
+            int r3 = r1.getDimensionPixelOffset(r9, r11)
+            r7.insetRight = r3
+            r3 = 3
+            int r3 = r1.getDimensionPixelOffset(r3, r11)
+            r7.insetTop = r3
+            r3 = 4
+            int r3 = r1.getDimensionPixelOffset(r3, r11)
+            r7.insetBottom = r3
+            r3 = 8
+            boolean r8 = r1.hasValue(r3)
+            if (r8 == 0) goto L_0x00b9
+            int r3 = r1.getDimensionPixelSize(r3, r4)
+            com.google.android.material.shape.ShapeAppearanceModel r8 = r7.shapeAppearanceModel
+            float r3 = (float) r3
+            com.google.android.material.shape.ShapeAppearanceModel$Builder r8 = r8.toBuilder()
+            r8.setAllCornerSizes(r3)
+            com.google.android.material.shape.ShapeAppearanceModel r3 = r8.build()
+            r7.setShapeAppearanceModel(r3)
+        L_0x00b9:
+            r3 = 20
+            int r3 = r1.getDimensionPixelSize(r3, r11)
+            r7.strokeWidth = r3
+            r3 = 7
+            int r3 = r1.getInt(r3, r4)
+            android.graphics.PorterDuff$Mode r3 = com.google.android.material.internal.ViewUtils.parseTintMode(r3, r5)
+            r7.backgroundTintMode = r3
+            android.content.Context r3 = r20.getContext()
+            r5 = 6
+            android.content.res.ColorStateList r3 = com.google.android.material.resources.MaterialResources.getColorStateList((android.content.Context) r3, (android.content.res.TypedArray) r1, (int) r5)
+            r7.backgroundTint = r3
+            android.content.Context r3 = r20.getContext()
+            r5 = 19
+            android.content.res.ColorStateList r3 = com.google.android.material.resources.MaterialResources.getColorStateList((android.content.Context) r3, (android.content.res.TypedArray) r1, (int) r5)
+            r7.strokeColor = r3
+            android.content.Context r3 = r20.getContext()
+            r5 = 16
+            android.content.res.ColorStateList r3 = com.google.android.material.resources.MaterialResources.getColorStateList((android.content.Context) r3, (android.content.res.TypedArray) r1, (int) r5)
+            r7.rippleColor = r3
+            r3 = 5
+            boolean r3 = r1.getBoolean(r3, r11)
+            r7.checkable = r3
+            r3 = 9
+            int r3 = r1.getDimensionPixelSize(r3, r11)
+            r7.elevation = r3
+            r3 = 21
+            boolean r3 = r1.getBoolean(r3, r6)
+            r7.toggleCheckedStateOnClick = r3
+            java.util.WeakHashMap r3 = androidx.core.view.ViewCompat.sViewPropertyAnimatorMap
+            int r3 = androidx.core.view.ViewCompat.Api17Impl.getPaddingStart(r20)
+            int r5 = r20.getPaddingTop()
+            int r8 = androidx.core.view.ViewCompat.Api17Impl.getPaddingEnd(r20)
+            int r10 = r20.getPaddingBottom()
+            boolean r12 = r1.hasValue(r11)
+            if (r12 == 0) goto L_0x012d
             r7.backgroundOverwritten = r6
-            android.content.res.ColorStateList r3 = r7.backgroundTint
-            r0.setSupportBackgroundTintList(r3)
-            android.graphics.PorterDuff$Mode r3 = r7.backgroundTintMode
-            r0.setSupportBackgroundTintMode(r3)
-            r3 = r10
-            goto L_0x0206
-        L_0x0146:
+            android.content.res.ColorStateList r4 = r7.backgroundTint
+            r0.setSupportBackgroundTintList(r4)
+            android.graphics.PorterDuff$Mode r4 = r7.backgroundTintMode
+            r0.setSupportBackgroundTintMode(r4)
+            r4 = r11
+            goto L_0x01d2
+        L_0x012d:
             com.google.android.material.shape.MaterialShapeDrawable r12 = new com.google.android.material.shape.MaterialShapeDrawable
             com.google.android.material.shape.ShapeAppearanceModel r13 = r7.shapeAppearanceModel
             r12.<init>((com.google.android.material.shape.ShapeAppearanceModel) r13)
@@ -666,47 +655,35 @@ public class MaterialButton extends AppCompatButton implements Checkable, Shapea
             android.content.res.ColorStateList r13 = r7.backgroundTint
             r12.setTintList(r13)
             android.graphics.PorterDuff$Mode r13 = r7.backgroundTintMode
-            if (r13 == 0) goto L_0x0160
+            if (r13 == 0) goto L_0x0147
             r12.setTintMode(r13)
-        L_0x0160:
+        L_0x0147:
             int r13 = r7.strokeWidth
             float r13 = (float) r13
             android.content.res.ColorStateList r14 = r7.strokeColor
             com.google.android.material.shape.MaterialShapeDrawable$MaterialShapeDrawableState r15 = r12.drawableState
             r15.strokeWidth = r13
             r12.invalidateSelf()
-            com.google.android.material.shape.MaterialShapeDrawable$MaterialShapeDrawableState r13 = r12.drawableState
-            android.content.res.ColorStateList r15 = r13.strokeColor
-            if (r15 == r14) goto L_0x017b
-            r13.strokeColor = r14
-            int[] r13 = r12.getState()
-            r12.onStateChange(r13)
-        L_0x017b:
+            r12.setStrokeColor(r14)
             com.google.android.material.shape.MaterialShapeDrawable r13 = new com.google.android.material.shape.MaterialShapeDrawable
             com.google.android.material.shape.ShapeAppearanceModel r14 = r7.shapeAppearanceModel
             r13.<init>((com.google.android.material.shape.ShapeAppearanceModel) r14)
-            r13.setTint(r10)
+            r13.setTint(r11)
             int r14 = r7.strokeWidth
             float r14 = (float) r14
             boolean r15 = r7.shouldDrawSurfaceColorStroke
-            if (r15 == 0) goto L_0x0194
+            if (r15 == 0) goto L_0x016f
             r15 = 2130968887(0x7f040137, float:1.754644E38)
             int r15 = com.google.android.material.color.MaterialColors.getColor(r0, r15)
-            goto L_0x0195
-        L_0x0194:
-            r15 = r10
-        L_0x0195:
+            goto L_0x0170
+        L_0x016f:
+            r15 = r11
+        L_0x0170:
             com.google.android.material.shape.MaterialShapeDrawable$MaterialShapeDrawableState r6 = r13.drawableState
             r6.strokeWidth = r14
             r13.invalidateSelf()
             android.content.res.ColorStateList r6 = android.content.res.ColorStateList.valueOf(r15)
-            com.google.android.material.shape.MaterialShapeDrawable$MaterialShapeDrawableState r14 = r13.drawableState
-            android.content.res.ColorStateList r15 = r14.strokeColor
-            if (r15 == r6) goto L_0x01af
-            r14.strokeColor = r6
-            int[] r6 = r13.getState()
-            r13.onStateChange(r6)
-        L_0x01af:
+            r13.setStrokeColor(r6)
             com.google.android.material.shape.MaterialShapeDrawable r6 = new com.google.android.material.shape.MaterialShapeDrawable
             com.google.android.material.shape.ShapeAppearanceModel r14 = r7.shapeAppearanceModel
             r6.<init>((com.google.android.material.shape.ShapeAppearanceModel) r14)
@@ -714,60 +691,56 @@ public class MaterialButton extends AppCompatButton implements Checkable, Shapea
             r6.setTint(r4)
             android.graphics.drawable.RippleDrawable r4 = new android.graphics.drawable.RippleDrawable
             android.content.res.ColorStateList r6 = r7.rippleColor
-            if (r6 == 0) goto L_0x01c2
-            goto L_0x01c6
-        L_0x01c2:
-            android.content.res.ColorStateList r6 = android.content.res.ColorStateList.valueOf(r10)
-        L_0x01c6:
+            android.content.res.ColorStateList r6 = com.google.android.material.ripple.RippleUtils.sanitizeRippleDrawableColor(r6)
             android.graphics.drawable.LayerDrawable r15 = new android.graphics.drawable.LayerDrawable
-            android.graphics.drawable.Drawable[] r3 = new android.graphics.drawable.Drawable[r3]
-            r3[r10] = r13
+            android.graphics.drawable.Drawable[] r9 = new android.graphics.drawable.Drawable[r9]
+            r9[r11] = r13
             r13 = 1
-            r3[r13] = r12
-            r15.<init>(r3)
-            android.graphics.drawable.InsetDrawable r3 = new android.graphics.drawable.InsetDrawable
+            r9[r13] = r12
+            r15.<init>(r9)
+            android.graphics.drawable.InsetDrawable r9 = new android.graphics.drawable.InsetDrawable
             int r12 = r7.insetLeft
             int r14 = r7.insetTop
             int r13 = r7.insetRight
-            int r10 = r7.insetBottom
+            int r11 = r7.insetBottom
             r17 = r14
-            r14 = r3
+            r14 = r9
             r16 = r12
             r18 = r13
-            r19 = r10
+            r19 = r11
             r14.<init>(r15, r16, r17, r18, r19)
-            com.google.android.material.shape.MaterialShapeDrawable r10 = r7.maskDrawable
-            r4.<init>(r6, r3, r10)
+            com.google.android.material.shape.MaterialShapeDrawable r11 = r7.maskDrawable
+            r4.<init>(r6, r9, r11)
             r7.rippleDrawable = r4
             r0.setInternalBackground(r4)
-            r3 = 0
-            com.google.android.material.shape.MaterialShapeDrawable r4 = r7.getMaterialShapeDrawable(r3)
-            if (r4 == 0) goto L_0x0206
-            int r6 = r7.elevation
-            float r6 = (float) r6
-            r4.setElevation(r6)
-            int[] r6 = r20.getDrawableState()
-            r4.setState(r6)
-        L_0x0206:
-            int r4 = r7.insetLeft
-            int r5 = r5 + r4
-            int r4 = r7.insetTop
-            int r8 = r8 + r4
-            int r4 = r7.insetRight
-            int r9 = r9 + r4
-            int r4 = r7.insetBottom
-            int r11 = r11 + r4
-            r0.setPaddingRelative(r5, r8, r9, r11)
+            r4 = 0
+            com.google.android.material.shape.MaterialShapeDrawable r6 = r7.getMaterialShapeDrawable(r4)
+            if (r6 == 0) goto L_0x01d2
+            int r9 = r7.elevation
+            float r9 = (float) r9
+            r6.setElevation(r9)
+            int[] r9 = r20.getDrawableState()
+            r6.setState(r9)
+        L_0x01d2:
+            int r6 = r7.insetLeft
+            int r3 = r3 + r6
+            int r6 = r7.insetTop
+            int r5 = r5 + r6
+            int r6 = r7.insetRight
+            int r8 = r8 + r6
+            int r6 = r7.insetBottom
+            int r10 = r10 + r6
+            androidx.core.view.ViewCompat.Api17Impl.setPaddingRelative(r0, r3, r5, r8, r10)
             r1.recycle()
             r0.setCompoundDrawablePadding(r2)
             android.graphics.drawable.Drawable r1 = r0.icon
-            if (r1 == 0) goto L_0x0221
-            r10 = 1
-            goto L_0x0222
-        L_0x0221:
-            r10 = r3
-        L_0x0222:
-            r0.updateIcon(r10)
+            if (r1 == 0) goto L_0x01ed
+            r11 = 1
+            goto L_0x01ee
+        L_0x01ed:
+            r11 = r4
+        L_0x01ee:
+            r0.updateIcon(r11)
             return
         */
         throw new UnsupportedOperationException("Method not decompiled: com.google.android.material.button.MaterialButton.<init>(android.content.Context, android.util.AttributeSet, int):void");

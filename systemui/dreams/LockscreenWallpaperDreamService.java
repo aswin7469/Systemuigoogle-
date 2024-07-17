@@ -1,18 +1,19 @@
 package com.google.android.systemui.dreams;
 
+import android.os.Bundle;
 import android.service.dreams.DreamService;
-import com.android.systemui.flags.FeatureFlagsClassic;
-import com.android.systemui.flags.Flags;
-import com.android.systemui.flags.UnreleasedFlag;
 import com.android.systemui.keyguard.KeyguardViewMediator;
+import com.android.systemui.keyguard.data.repository.KeyguardRepositoryImpl;
 import com.android.systemui.keyguard.domain.interactor.KeyguardInteractor;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class LockscreenWallpaperDreamService extends DreamService {
-    public final FeatureFlagsClassic mFeatureFlags;
+    public final KeyguardInteractor mKeyguardInteractor;
+    public final KeyguardViewMediator mKeyguardViewMediator;
 
-    public LockscreenWallpaperDreamService(KeyguardInteractor keyguardInteractor, KeyguardViewMediator keyguardViewMediator, FeatureFlagsClassic featureFlagsClassic) {
-        this.mFeatureFlags = featureFlagsClassic;
+    public LockscreenWallpaperDreamService(KeyguardInteractor keyguardInteractor, KeyguardViewMediator keyguardViewMediator) {
+        this.mKeyguardInteractor = keyguardInteractor;
+        this.mKeyguardViewMediator = keyguardViewMediator;
     }
 
     public final void onCreate() {
@@ -22,15 +23,16 @@ public class LockscreenWallpaperDreamService extends DreamService {
 
     public final void onDreamingStarted() {
         super.onDreamingStarted();
-        FeatureFlagsClassic featureFlagsClassic = this.mFeatureFlags;
-        UnreleasedFlag unreleasedFlag = Flags.NULL_FLAG;
-        featureFlagsClassic.getClass();
+        ((KeyguardRepositoryImpl) this.mKeyguardInteractor.repository)._isActiveDreamLockscreenHosted.setValue(Boolean.TRUE);
+        Bundle bundle = new Bundle();
+        bundle.putBoolean("force_show", true);
+        KeyguardViewMediator.AnonymousClass12 r3 = this.mKeyguardViewMediator.mHandler;
+        r3.removeMessages(10);
+        r3.sendMessageAtFrontOfQueue(r3.obtainMessage(10, bundle));
     }
 
     public final void onDreamingStopped() {
         super.onDreamingStopped();
-        FeatureFlagsClassic featureFlagsClassic = this.mFeatureFlags;
-        UnreleasedFlag unreleasedFlag = Flags.NULL_FLAG;
-        featureFlagsClassic.getClass();
+        ((KeyguardRepositoryImpl) this.mKeyguardInteractor.repository)._isActiveDreamLockscreenHosted.setValue(Boolean.FALSE);
     }
 }

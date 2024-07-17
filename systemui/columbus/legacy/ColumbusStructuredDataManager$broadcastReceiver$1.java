@@ -5,12 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import java.util.List;
-import kotlin.collections.CollectionsKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
-import kotlin.text.StringsKt;
+import kotlin.text.StringsKt__StringsKt;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ColumbusStructuredDataManager$broadcastReceiver$1 extends BroadcastReceiver {
     public final /* synthetic */ ColumbusStructuredDataManager this$0;
 
@@ -21,9 +21,9 @@ public final class ColumbusStructuredDataManager$broadcastReceiver$1 extends Bro
     public final void onReceive(Context context, Intent intent) {
         String dataString;
         if (intent != null && (dataString = intent.getDataString()) != null) {
-            List split$default = StringsKt.split$default(dataString, new String[]{":"}, 0, 6);
+            List split$default = StringsKt__StringsKt.split$default(dataString, new String[]{":"}, 0, 6);
             if (split$default.size() != 2) {
-                Log.e("Columbus/StructuredData", "Unexpected package name tokens: ".concat(CollectionsKt.joinToString$default(split$default, ",", (CharSequence) null, (CharSequence) null, (Function1) null, 62)));
+                Log.e("Columbus/StructuredData", "Unexpected package name tokens: ".concat(CollectionsKt___CollectionsKt.joinToString$default(split$default, ",", (CharSequence) null, (CharSequence) null, (Function1) null, 62)));
                 return;
             }
             String str = (String) split$default.get(1);

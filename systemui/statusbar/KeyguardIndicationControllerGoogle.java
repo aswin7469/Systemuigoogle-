@@ -24,7 +24,7 @@ import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.keyguard.logging.KeyguardLogger;
 import com.android.settingslib.fuelgauge.BatteryStatus;
 import com.android.systemui.biometrics.AuthController;
-import com.android.systemui.biometrics.FaceHelpMessageDeferralFactory;
+import com.android.systemui.biometrics.FaceHelpMessageDeferral;
 import com.android.systemui.bouncer.domain.interactor.AlternateBouncerInteractor;
 import com.android.systemui.bouncer.domain.interactor.BouncerMessageInteractor;
 import com.android.systemui.broadcast.BroadcastDispatcher;
@@ -40,7 +40,7 @@ import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.settings.UserTracker;
 import com.android.systemui.statusbar.KeyguardIndicationController;
-import com.android.systemui.statusbar.KeyguardIndicationController$$ExternalSyntheticLambda12;
+import com.android.systemui.statusbar.KeyguardIndicationController$$ExternalSyntheticLambda7;
 import com.android.systemui.statusbar.phone.KeyguardBypassController;
 import com.android.systemui.statusbar.policy.KeyguardStateController;
 import com.android.systemui.statusbar.policy.KeyguardStateControllerImpl;
@@ -55,7 +55,7 @@ import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.TimeUnit;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class KeyguardIndicationControllerGoogle extends KeyguardIndicationController {
     public boolean mAdaptiveChargingActive;
     public boolean mAdaptiveChargingEnabledInSettings;
@@ -101,7 +101,7 @@ public final class KeyguardIndicationControllerGoogle extends KeyguardIndication
     public final TunerService mTunerService;
     public KeyguardUpdateMonitorCallback mUpdateMonitorCallback;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public class GoogleKeyguardCallback extends KeyguardIndicationController.BaseKeyguardCallback {
         public GoogleKeyguardCallback() {
             super();
@@ -198,8 +198,8 @@ public final class KeyguardIndicationControllerGoogle extends KeyguardIndication
     }
 
     /* JADX INFO: super call moved to the top of the method (can break code semantics) */
-    public KeyguardIndicationControllerGoogle(Context context, Looper looper, WakeLock.Builder builder, KeyguardStateController keyguardStateController, StatusBarStateController statusBarStateController, KeyguardUpdateMonitor keyguardUpdateMonitor, DockManager dockManager, BroadcastDispatcher broadcastDispatcher, DevicePolicyManager devicePolicyManager, IBatteryStats iBatteryStats, UserManager userManager, TunerService tunerService, DeviceConfigProxy deviceConfigProxy, DelayableExecutor delayableExecutor, DelayableExecutor delayableExecutor2, FalsingManager falsingManager, AuthController authController, LockPatternUtils lockPatternUtils, ScreenLifecycle screenLifecycle, KeyguardBypassController keyguardBypassController, AccessibilityManager accessibilityManager, FaceHelpMessageDeferralFactory faceHelpMessageDeferralFactory, KeyguardLogger keyguardLogger, GlobalSettings globalSettings, AlternateBouncerInteractor alternateBouncerInteractor, AlarmManager alarmManager, UserTracker userTracker, BouncerMessageInteractor bouncerMessageInteractor, FeatureFlags featureFlags, IndicationHelper indicationHelper, KeyguardInteractor keyguardInteractor) {
-        super(context, looper, builder, keyguardStateController, statusBarStateController, keyguardUpdateMonitor, dockManager, broadcastDispatcher, devicePolicyManager, iBatteryStats, userManager, delayableExecutor, delayableExecutor2, falsingManager, authController, lockPatternUtils, screenLifecycle, keyguardBypassController, accessibilityManager, faceHelpMessageDeferralFactory, keyguardLogger, alternateBouncerInteractor, alarmManager, userTracker, bouncerMessageInteractor, featureFlags, indicationHelper, keyguardInteractor);
+    public KeyguardIndicationControllerGoogle(Context context, Looper looper, WakeLock.Builder builder, KeyguardStateController keyguardStateController, StatusBarStateController statusBarStateController, KeyguardUpdateMonitor keyguardUpdateMonitor, DockManager dockManager, BroadcastDispatcher broadcastDispatcher, DevicePolicyManager devicePolicyManager, IBatteryStats iBatteryStats, UserManager userManager, TunerService tunerService, DeviceConfigProxy deviceConfigProxy, DelayableExecutor delayableExecutor, DelayableExecutor delayableExecutor2, FalsingManager falsingManager, AuthController authController, LockPatternUtils lockPatternUtils, ScreenLifecycle screenLifecycle, KeyguardBypassController keyguardBypassController, AccessibilityManager accessibilityManager, FaceHelpMessageDeferral faceHelpMessageDeferral, KeyguardLogger keyguardLogger, GlobalSettings globalSettings, AlternateBouncerInteractor alternateBouncerInteractor, AlarmManager alarmManager, UserTracker userTracker, BouncerMessageInteractor bouncerMessageInteractor, FeatureFlags featureFlags, IndicationHelper indicationHelper, KeyguardInteractor keyguardInteractor) {
+        super(context, looper, builder, keyguardStateController, statusBarStateController, keyguardUpdateMonitor, dockManager, broadcastDispatcher, devicePolicyManager, iBatteryStats, userManager, delayableExecutor, delayableExecutor2, falsingManager, authController, lockPatternUtils, screenLifecycle, keyguardBypassController, accessibilityManager, faceHelpMessageDeferral, keyguardLogger, alternateBouncerInteractor, alarmManager, userTracker, bouncerMessageInteractor, featureFlags, indicationHelper, keyguardInteractor);
         Context context2 = context;
         Context context3 = context;
         this.mContext = context3;
@@ -240,7 +240,7 @@ public final class KeyguardIndicationControllerGoogle extends KeyguardIndication
             java.lang.String r1 = r2.format(r3)
             android.content.Context r8 = r8.mContext
             android.content.res.Resources r8 = r8.getResources()
-            r2 = 2131951879(0x7f130107, float:1.9540185E38)
+            r2 = 2131951871(0x7f1300ff, float:1.9540169E38)
             java.lang.Object[] r0 = new java.lang.Object[]{r1, r0}
             java.lang.String r8 = r8.getString(r2, r0)
             return r8
@@ -256,7 +256,7 @@ public final class KeyguardIndicationControllerGoogle extends KeyguardIndication
             java.lang.String r8 = r0.format(r1)
             android.content.res.Resources r0 = r3.getResources()
             java.lang.Object[] r8 = new java.lang.Object[]{r8}
-            r1 = 2131952845(0x7f1304cd, float:1.9542144E38)
+            r1 = 2131952810(0x7f1304aa, float:1.9542073E38)
             java.lang.String r8 = r0.getString(r1, r8)
             goto L_0x0110
         L_0x0059:
@@ -271,14 +271,14 @@ public final class KeyguardIndicationControllerGoogle extends KeyguardIndication
             java.lang.String r8 = r0.format(r1)
             android.content.res.Resources r0 = r3.getResources()
             java.lang.Object[] r8 = new java.lang.Object[]{r8}
-            r1 = 2131952848(0x7f1304d0, float:1.954215E38)
+            r1 = 2131952813(0x7f1304ad, float:1.954208E38)
             java.lang.String r8 = r0.getString(r1, r8)
             goto L_0x0110
         L_0x007d:
             boolean r0 = r8.mPowerCharged
             if (r0 == 0) goto L_0x008e
             android.content.res.Resources r8 = r3.getResources()
-            r0 = 2131952815(0x7f1304af, float:1.9542083E38)
+            r0 = 2131952780(0x7f13048c, float:1.9542012E38)
             java.lang.String r8 = r8.getString(r0)
             goto L_0x0110
         L_0x008e:
@@ -292,8 +292,8 @@ public final class KeyguardIndicationControllerGoogle extends KeyguardIndication
             r0 = 0
         L_0x0099:
             boolean r2 = r8.mPowerPluggedInWired
-            r4 = 2131952843(0x7f1304cb, float:1.954214E38)
-            r5 = 2131952833(0x7f1304c1, float:1.954212E38)
+            r4 = 2131952808(0x7f1304a8, float:1.954207E38)
+            r5 = 2131952798(0x7f13049e, float:1.9542049E38)
             if (r2 == 0) goto L_0x00c3
             int r2 = r8.mChargingSpeed
             if (r2 == 0) goto L_0x00b9
@@ -305,37 +305,37 @@ public final class KeyguardIndicationControllerGoogle extends KeyguardIndication
             goto L_0x00e2
         L_0x00ae:
             if (r0 == 0) goto L_0x00b5
-            r2 = 2131952835(0x7f1304c3, float:1.9542124E38)
+            r2 = 2131952800(0x7f1304a0, float:1.9542053E38)
         L_0x00b3:
             r4 = r2
             goto L_0x00e2
         L_0x00b5:
-            r2 = 2131952844(0x7f1304cc, float:1.9542142E38)
+            r2 = 2131952809(0x7f1304a9, float:1.9542071E38)
             goto L_0x00b3
         L_0x00b9:
             if (r0 == 0) goto L_0x00bf
-            r2 = 2131952836(0x7f1304c4, float:1.9542126E38)
+            r2 = 2131952801(0x7f1304a1, float:1.9542055E38)
             goto L_0x00b3
         L_0x00bf:
-            r2 = 2131952846(0x7f1304ce, float:1.9542146E38)
+            r2 = 2131952811(0x7f1304ab, float:1.9542075E38)
             goto L_0x00b3
         L_0x00c3:
             boolean r2 = r8.mPowerPluggedInWireless
             if (r2 == 0) goto L_0x00d1
             if (r0 == 0) goto L_0x00cd
-            r2 = 2131952837(0x7f1304c5, float:1.9542128E38)
+            r2 = 2131952802(0x7f1304a2, float:1.9542057E38)
             goto L_0x00b3
         L_0x00cd:
-            r2 = 2131952849(0x7f1304d1, float:1.9542152E38)
+            r2 = 2131952814(0x7f1304ae, float:1.9542081E38)
             goto L_0x00b3
         L_0x00d1:
             boolean r2 = r8.mPowerPluggedInDock
             if (r2 == 0) goto L_0x00df
             if (r0 == 0) goto L_0x00db
-            r2 = 2131952834(0x7f1304c2, float:1.9542122E38)
+            r2 = 2131952799(0x7f13049f, float:1.954205E38)
             goto L_0x00b3
         L_0x00db:
-            r2 = 2131952847(0x7f1304cf, float:1.9542148E38)
+            r2 = 2131952812(0x7f1304ac, float:1.9542077E38)
             goto L_0x00b3
         L_0x00df:
             if (r0 == 0) goto L_0x00e2
@@ -367,13 +367,13 @@ public final class KeyguardIndicationControllerGoogle extends KeyguardIndication
     public final void init() {
         if (!this.mInited) {
             this.mInited = true;
-            KeyguardIndicationController$$ExternalSyntheticLambda12 keyguardIndicationController$$ExternalSyntheticLambda12 = new KeyguardIndicationController$$ExternalSyntheticLambda12(this);
+            KeyguardIndicationController$$ExternalSyntheticLambda7 keyguardIndicationController$$ExternalSyntheticLambda7 = new KeyguardIndicationController$$ExternalSyntheticLambda7(this);
             DockObserver dockObserver = (DockObserver) this.mDockManager;
             dockObserver.getClass();
-            Log.d("DLObserver", "add alignment listener: " + keyguardIndicationController$$ExternalSyntheticLambda12);
+            Log.d("DLObserver", "add alignment listener: " + keyguardIndicationController$$ExternalSyntheticLambda7);
             List list = dockObserver.mAlignmentStateListeners;
-            if (!list.contains(keyguardIndicationController$$ExternalSyntheticLambda12)) {
-                list.add(keyguardIndicationController$$ExternalSyntheticLambda12);
+            if (!list.contains(keyguardIndicationController$$ExternalSyntheticLambda7)) {
+                list.add(keyguardIndicationController$$ExternalSyntheticLambda7);
             }
             if (this.mUpdateMonitorCallback == null) {
                 this.mUpdateMonitorCallback = new GoogleKeyguardCallback();

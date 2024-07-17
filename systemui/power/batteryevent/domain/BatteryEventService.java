@@ -14,7 +14,7 @@ import com.android.systemui.broadcast.BroadcastSender;
 import com.google.android.systemui.power.batteryevent.aidl.SurfaceType;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
-import kotlin.collections.SetsKt;
+import kotlin.collections.SetsKt__SetsKt;
 import kotlin.coroutines.Continuation;
 import kotlin.jvm.internal.Intrinsics;
 import kotlinx.coroutines.BuildersKt;
@@ -25,9 +25,9 @@ import kotlinx.coroutines.ExceptionsKt;
 import kotlinx.coroutines.sync.MutexImpl;
 import kotlinx.coroutines.sync.MutexKt;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class BatteryEventService extends LifecycleService {
-    public static final Set supportedCallers = SetsKt.setOf("com.android.settings", "com.android.systemui", "com.google.android.settings.intelligence");
+    public static final Set supportedCallers = SetsKt__SetsKt.setOf("com.android.settings", "com.android.systemui", "com.google.android.settings.intelligence");
     public final BatteryEventService$aidlBatteryEventsCallbackListener$1 aidlBatteryEventsCallbackListener = new BatteryEventService$aidlBatteryEventsCallbackListener$1(this);
     public final CoroutineDispatcher backgroundDispatcher;
     public final ArrayMap batteryEventsBroadcastCache = new SimpleArrayMap(0);
@@ -39,7 +39,7 @@ public final class BatteryEventService extends LifecycleService {
     public final BroadcastSender broadcastSender;
     public final BatteryEventStateController eventStateController;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class BatteryEventsBroadcastData {
         public final ComponentName componentName;
         public final String indexKey;
@@ -77,7 +77,7 @@ public final class BatteryEventService extends LifecycleService {
         }
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class BatteryEventsCallbackData {
         public final Set subscribedEvents;
         public final SurfaceType surfaceType;
@@ -118,7 +118,7 @@ public final class BatteryEventService extends LifecycleService {
         }
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class CachedBatteryEvents {
         public final int batteryLevel;
         public final Set needNotifiedEvents;
@@ -242,7 +242,7 @@ public final class BatteryEventService extends LifecycleService {
         L_0x0068:
             java.util.Set r0 = r9.needNotifiedEvents     // Catch:{ RemoteException -> 0x0030 }
             java.lang.Iterable r0 = (java.lang.Iterable) r0     // Catch:{ RemoteException -> 0x0030 }
-            java.util.List r0 = kotlin.collections.CollectionsKt.toList(r0)     // Catch:{ RemoteException -> 0x0030 }
+            java.util.List r0 = kotlin.collections.CollectionsKt___CollectionsKt.toList(r0)     // Catch:{ RemoteException -> 0x0030 }
             int r1 = r9.batteryLevel     // Catch:{ RemoteException -> 0x0030 }
             int r9 = r9.pluggedType     // Catch:{ RemoteException -> 0x0030 }
             r8.onBatteryEventChanged(r1, r9, r0)     // Catch:{ RemoteException -> 0x0030 }
@@ -271,7 +271,7 @@ public final class BatteryEventService extends LifecycleService {
     /* JADX DEBUG: Multi-variable search result rejected for TypeSearchVarInfo{r7v3, resolved type: com.google.android.systemui.power.batteryevent.common.BatteryEvents} */
     /* JADX WARNING: type inference failed for: r5v6, types: [kotlinx.coroutines.sync.Mutex] */
     /* JADX WARNING: Code restructure failed: missing block: B:13:0x0060, code lost:
-        if (r9.lock((java.lang.Object) null, r0) == r1) goto L_0x0091;
+        if (r9.lock((java.lang.Object) null, r0) == r1) goto L_0x0093;
      */
     /* JADX WARNING: Multi-variable type inference failed */
     /* JADX WARNING: Removed duplicated region for block: B:12:0x004b  */
@@ -336,7 +336,7 @@ public final class BatteryEventService extends LifecycleService {
             r0.label = r3
             java.lang.Object r0 = r9.lock(r4, r0)
             if (r0 != r1) goto L_0x0063
-            goto L_0x0091
+            goto L_0x0093
         L_0x0063:
             androidx.collection.ArrayMap r0 = r5.batteryEventsBroadcastCache     // Catch:{ all -> 0x007b }
             java.lang.String r1 = r6.indexKey     // Catch:{ all -> 0x007b }
@@ -351,7 +351,7 @@ public final class BatteryEventService extends LifecycleService {
             goto L_0x008e
         L_0x007b:
             r5 = move-exception
-            goto L_0x0092
+            goto L_0x0094
         L_0x007d:
             com.google.android.systemui.power.batteryevent.domain.BatteryEventService$CachedBatteryEvents r0 = new com.google.android.systemui.power.batteryevent.domain.BatteryEventService$CachedBatteryEvents     // Catch:{ all -> 0x007b }
             int r1 = r7.batteryLevel     // Catch:{ all -> 0x007b }
@@ -362,10 +362,12 @@ public final class BatteryEventService extends LifecycleService {
             r5.put(r6, r0)     // Catch:{ all -> 0x007b }
             r1 = r0
         L_0x008e:
+            kotlinx.coroutines.sync.MutexImpl r9 = (kotlinx.coroutines.sync.MutexImpl) r9
             r9.unlock(r4)
-        L_0x0091:
+        L_0x0093:
             return r1
-        L_0x0092:
+        L_0x0094:
+            kotlinx.coroutines.sync.MutexImpl r9 = (kotlinx.coroutines.sync.MutexImpl) r9
             r9.unlock(r4)
             throw r5
         */
@@ -468,7 +470,7 @@ public final class BatteryEventService extends LifecycleService {
             java.lang.Iterable r6 = (java.lang.Iterable) r6     // Catch:{ all -> 0x0082 }
             java.util.Set r0 = r7.eventTypes     // Catch:{ all -> 0x0082 }
             java.lang.Iterable r0 = (java.lang.Iterable) r0     // Catch:{ all -> 0x0082 }
-            java.util.Set r6 = kotlin.collections.CollectionsKt.intersect(r6, r0)     // Catch:{ all -> 0x0082 }
+            java.util.Set r6 = kotlin.collections.CollectionsKt___CollectionsKt.intersect(r6, r0)     // Catch:{ all -> 0x0082 }
             androidx.collection.ArrayMap r0 = r5.batteryEventsCallbackCache     // Catch:{ all -> 0x0082 }
             java.lang.Object r0 = r0.get(r8)     // Catch:{ all -> 0x0082 }
             com.google.android.systemui.power.batteryevent.domain.BatteryEventService$CachedBatteryEvents r0 = (com.google.android.systemui.power.batteryevent.domain.BatteryEventService.CachedBatteryEvents) r0     // Catch:{ all -> 0x0082 }
@@ -481,16 +483,18 @@ public final class BatteryEventService extends LifecycleService {
             goto L_0x008e
         L_0x0082:
             r5 = move-exception
-            goto L_0x0092
+            goto L_0x0094
         L_0x0084:
             com.google.android.systemui.power.batteryevent.domain.BatteryEventService$CachedBatteryEvents r0 = new com.google.android.systemui.power.batteryevent.domain.BatteryEventService$CachedBatteryEvents     // Catch:{ all -> 0x0082 }
             r0.<init>(r6, r7, r1)     // Catch:{ all -> 0x0082 }
             androidx.collection.ArrayMap r5 = r5.batteryEventsCallbackCache     // Catch:{ all -> 0x0082 }
             r5.put(r8, r0)     // Catch:{ all -> 0x0082 }
         L_0x008e:
+            kotlinx.coroutines.sync.MutexImpl r9 = (kotlinx.coroutines.sync.MutexImpl) r9
             r9.unlock(r4)
             return r0
-        L_0x0092:
+        L_0x0094:
+            kotlinx.coroutines.sync.MutexImpl r9 = (kotlinx.coroutines.sync.MutexImpl) r9
             r9.unlock(r4)
             throw r5
         */

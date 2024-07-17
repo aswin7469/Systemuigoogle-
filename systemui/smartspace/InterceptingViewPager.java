@@ -6,13 +6,13 @@ import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import androidx.viewpager.widget.ViewPager;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class InterceptingViewPager extends ViewPager {
     public boolean mHasPerformedLongPress;
     public boolean mHasPostedLongPress;
-    public final Runnable mLongPressCallback = new InterceptingViewPager$$ExternalSyntheticLambda2(this);
-    public final InterceptingViewPager$$ExternalSyntheticLambda0 mSuperOnIntercept = new InterceptingViewPager$$ExternalSyntheticLambda0(this, 1);
-    public final InterceptingViewPager$$ExternalSyntheticLambda0 mSuperOnTouch = new InterceptingViewPager$$ExternalSyntheticLambda0(this, 0);
+    public final InterceptingViewPager$$ExternalSyntheticLambda1 mLongPressCallback = new InterceptingViewPager$$ExternalSyntheticLambda1(this, 1);
+    public final InterceptingViewPager$$ExternalSyntheticLambda0 mSuperOnIntercept = new InterceptingViewPager$$ExternalSyntheticLambda0(this, 3);
+    public final InterceptingViewPager$$ExternalSyntheticLambda0 mSuperOnTouch = new InterceptingViewPager$$ExternalSyntheticLambda0(this, 2);
 
     public InterceptingViewPager(Context context) {
         super(context);
@@ -26,6 +26,7 @@ public class InterceptingViewPager extends ViewPager {
     }
 
     public final boolean handleTouchOverride(MotionEvent motionEvent, InterceptingViewPager$$ExternalSyntheticLambda0 interceptingViewPager$$ExternalSyntheticLambda0) {
+        boolean z;
         int action = motionEvent.getAction();
         if (action == 0) {
             this.mHasPerformedLongPress = false;
@@ -40,12 +41,23 @@ public class InterceptingViewPager extends ViewPager {
         if (this.mHasPerformedLongPress) {
             cancelScheduledLongPress();
             return true;
-        } else if (!interceptingViewPager$$ExternalSyntheticLambda0.delegateEvent(motionEvent)) {
-            return false;
-        } else {
-            cancelScheduledLongPress();
-            return true;
         }
+        int i = interceptingViewPager$$ExternalSyntheticLambda0.$r8$classId;
+        InterceptingViewPager interceptingViewPager = interceptingViewPager$$ExternalSyntheticLambda0.f$0;
+        switch (i) {
+            case 0:
+            case 2:
+                z = super.onTouchEvent(motionEvent);
+                break;
+            default:
+                z = super.onInterceptTouchEvent(motionEvent);
+                break;
+        }
+        if (!z) {
+            return false;
+        }
+        cancelScheduledLongPress();
+        return true;
     }
 
     public final boolean onInterceptTouchEvent(MotionEvent motionEvent) {

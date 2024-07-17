@@ -8,6 +8,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
 import android.graphics.drawable.RippleDrawable;
+import android.os.Bundle;
 import android.text.TextPaint;
 import android.text.TextUtils;
 import android.util.AttributeSet;
@@ -16,9 +17,10 @@ import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.PointerIcon;
+import android.view.View;
+import android.view.ViewParent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.CheckBox;
-import android.widget.Checkable;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import androidx.appcompat.widget.AppCompatCheckBox;
@@ -28,8 +30,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.customview.widget.ExploreByTouchHelper;
 import com.google.android.material.chip.ChipDrawable;
+import com.google.android.material.internal.CheckableGroup;
+import com.google.android.material.internal.MaterialCheckable;
 import com.google.android.material.internal.TextDrawableHelper;
 import com.google.android.material.resources.TextAppearance;
+import com.google.android.material.ripple.RippleUtils;
 import com.google.android.material.shape.MaterialShapeUtils;
 import com.google.android.material.shape.ShapeAppearanceModel;
 import com.google.android.material.shape.Shapeable;
@@ -37,8 +42,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.WeakHashMap;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
-public class Chip extends AppCompatCheckBox implements ChipDrawable.Delegate, Shapeable, Checkable {
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
+public class Chip extends AppCompatCheckBox implements ChipDrawable.Delegate, Shapeable, MaterialCheckable {
     public static final int[] CHECKABLE_STATE_SET = {16842911};
     public static final Rect EMPTY_BOUNDS = new Rect();
     public static final int[] SELECTED_STATE = {16842913};
@@ -54,11 +59,12 @@ public class Chip extends AppCompatCheckBox implements ChipDrawable.Delegate, Sh
     public int lastLayoutDirection;
     public int minTouchTargetSize;
     public CompoundButton.OnCheckedChangeListener onCheckedChangeListener;
+    public CheckableGroup.AnonymousClass1 onCheckedChangeListenerInternal;
     public final Rect rect;
     public final RectF rectF;
     public RippleDrawable ripple;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class ChipTouchHelper extends ExploreByTouchHelper {
         public ChipTouchHelper(Chip chip) {
             super(chip);
@@ -79,7 +85,7 @@ public class Chip extends AppCompatCheckBox implements ChipDrawable.Delegate, Sh
             Chip.this.hasCloseIcon();
         }
 
-        public final boolean onPerformActionForVirtualView(int i, int i2) {
+        public final boolean onPerformActionForVirtualView(int i, int i2, Bundle bundle) {
             if (i2 == 16) {
                 Chip chip = Chip.this;
                 if (i == 0) {
@@ -107,10 +113,12 @@ public class Chip extends AppCompatCheckBox implements ChipDrawable.Delegate, Sh
                 ChipDrawable chipDrawable = chip.chipDrawable;
                 CharSequence text = chip.getText();
                 Context context = chip.getContext();
+                Object[] objArr = new Object[1];
                 if (!TextUtils.isEmpty(text)) {
                     charSequence = text;
                 }
-                accessibilityNodeInfoCompat.setContentDescription(context.getString(2131953291, new Object[]{charSequence}).trim());
+                objArr[0] = charSequence;
+                accessibilityNodeInfoCompat.setContentDescription(context.getString(2131953250, objArr).trim());
                 RectF closeIconTouchBounds = chip.getCloseIconTouchBounds();
                 chip.rect.set((int) closeIconTouchBounds.left, (int) closeIconTouchBounds.top, (int) closeIconTouchBounds.right, (int) closeIconTouchBounds.bottom);
                 accessibilityNodeInfoCompat.setBoundsInParent(chip.rect);
@@ -262,8 +270,11 @@ public class Chip extends AppCompatCheckBox implements ChipDrawable.Delegate, Sh
             return this.accessibilityClassName;
         }
         if (isCheckable()) {
-            getParent();
-            return "android.widget.Button";
+            ViewParent parent = getParent();
+            if (!(parent instanceof ChipGroup) || !((ChipGroup) parent).checkableGroup.singleSelection) {
+                return "android.widget.Button";
+            }
+            return "android.widget.RadioButton";
         } else if (isClickable()) {
             return "android.widget.Button";
         } else {
@@ -349,11 +360,41 @@ public class Chip extends AppCompatCheckBox implements ChipDrawable.Delegate, Sh
     }
 
     public final void onInitializeAccessibilityNodeInfo(AccessibilityNodeInfo accessibilityNodeInfo) {
+        int i;
         super.onInitializeAccessibilityNodeInfo(accessibilityNodeInfo);
         accessibilityNodeInfo.setClassName(getAccessibilityClassName());
         accessibilityNodeInfo.setCheckable(isCheckable());
         accessibilityNodeInfo.setClickable(isClickable());
-        getParent();
+        if (getParent() instanceof ChipGroup) {
+            ChipGroup chipGroup = (ChipGroup) getParent();
+            int i2 = -1;
+            if (chipGroup.singleLine) {
+                int i3 = 0;
+                int i4 = 0;
+                while (true) {
+                    if (i3 >= chipGroup.getChildCount()) {
+                        i4 = -1;
+                        break;
+                    }
+                    View childAt = chipGroup.getChildAt(i3);
+                    if ((childAt instanceof Chip) && chipGroup.getChildAt(i3).getVisibility() == 0) {
+                        if (((Chip) childAt) == this) {
+                            break;
+                        }
+                        i4++;
+                    }
+                    i3++;
+                }
+                i = i4;
+            } else {
+                i = -1;
+            }
+            Object tag = getTag(2131363435);
+            if (tag instanceof Integer) {
+                i2 = ((Integer) tag).intValue();
+            }
+            accessibilityNodeInfo.setCollectionItemInfo((AccessibilityNodeInfo.CollectionItemInfo) AccessibilityNodeInfoCompat.CollectionInfoCompat.obtain(i2, 1, i, 1, false, isChecked()).mInfo);
+        }
     }
 
     public final PointerIcon onResolvePointerIcon(MotionEvent motionEvent, int i) {
@@ -638,7 +679,7 @@ public class Chip extends AppCompatCheckBox implements ChipDrawable.Delegate, Sh
         super.setTextAppearance(context, i);
         ChipDrawable chipDrawable2 = this.chipDrawable;
         if (chipDrawable2 != null) {
-            chipDrawable2.setTextAppearance(new TextAppearance(chipDrawable2.context, i));
+            chipDrawable2.textDrawableHelper.setTextAppearance(new TextAppearance(chipDrawable2.context, i), chipDrawable2.context);
         }
         updateTextPaintDrawState();
     }
@@ -653,23 +694,19 @@ public class Chip extends AppCompatCheckBox implements ChipDrawable.Delegate, Sh
             if (textAppearance != null) {
                 textAppearance.textSize = applyDimension;
                 textDrawableHelper.textPaint.setTextSize(applyDimension);
-                chipDrawable2.onSizeChange();
-                chipDrawable2.invalidateSelf();
+                chipDrawable2.onTextSizeChange();
             }
         }
         updateTextPaintDrawState();
     }
 
     public final void updateBackgroundDrawable() {
-        ColorStateList colorStateList = this.chipDrawable.rippleColor;
-        if (colorStateList == null) {
-            colorStateList = ColorStateList.valueOf(0);
-        }
+        ColorStateList sanitizeRippleDrawableColor = RippleUtils.sanitizeRippleDrawableColor(this.chipDrawable.rippleColor);
         Drawable drawable = this.insetBackgroundDrawable;
         if (drawable == null) {
             drawable = this.chipDrawable;
         }
-        this.ripple = new RippleDrawable(colorStateList, drawable, (Drawable) null);
+        this.ripple = new RippleDrawable(sanitizeRippleDrawableColor, drawable, (Drawable) null);
         ChipDrawable chipDrawable2 = this.chipDrawable;
         if (chipDrawable2.useCompatRipple) {
             chipDrawable2.useCompatRipple = false;
@@ -678,7 +715,7 @@ public class Chip extends AppCompatCheckBox implements ChipDrawable.Delegate, Sh
         }
         RippleDrawable rippleDrawable = this.ripple;
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-        setBackground(rippleDrawable);
+        ViewCompat.Api16Impl.setBackground(this, rippleDrawable);
         updatePaddingInternal();
     }
 
@@ -697,7 +734,7 @@ public class Chip extends AppCompatCheckBox implements ChipDrawable.Delegate, Sh
             int paddingTop = getPaddingTop();
             int paddingBottom = getPaddingBottom();
             WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-            setPaddingRelative(calculateChipIconWidth, paddingTop, calculateCloseIconWidth, paddingBottom);
+            ViewCompat.Api17Impl.setPaddingRelative(this, calculateChipIconWidth, paddingTop, calculateCloseIconWidth, paddingBottom);
         }
     }
 
@@ -731,7 +768,7 @@ public class Chip extends AppCompatCheckBox implements ChipDrawable.Delegate, Sh
             r0 = r16
             r7 = r18
             r8 = r19
-            r1 = 2132018804(0x7f140674, float:1.9675925E38)
+            r1 = 2132018798(0x7f14066e, float:1.9675913E38)
             r2 = r17
             android.content.Context r1 = com.google.android.material.theme.overlay.MaterialThemeOverlay.wrap(r2, r7, r8, r1)
             r0.<init>(r1, r7, r8)
@@ -760,29 +797,29 @@ public class Chip extends AppCompatCheckBox implements ChipDrawable.Delegate, Sh
         L_0x0043:
             java.lang.String r1 = "drawableLeft"
             java.lang.String r1 = r7.getAttributeValue(r2, r1)
-            if (r1 != 0) goto L_0x05f1
+            if (r1 != 0) goto L_0x05b2
             java.lang.String r1 = "drawableStart"
             java.lang.String r1 = r7.getAttributeValue(r2, r1)
-            if (r1 != 0) goto L_0x05e9
+            if (r1 != 0) goto L_0x05aa
             java.lang.String r1 = "drawableEnd"
             java.lang.String r1 = r7.getAttributeValue(r2, r1)
             java.lang.String r4 = "Please set end drawable using R.attr#closeIcon."
-            if (r1 != 0) goto L_0x05e3
+            if (r1 != 0) goto L_0x05a4
             java.lang.String r1 = "drawableRight"
             java.lang.String r1 = r7.getAttributeValue(r2, r1)
-            if (r1 != 0) goto L_0x05dd
+            if (r1 != 0) goto L_0x059e
             java.lang.String r1 = "singleLine"
             boolean r1 = r7.getAttributeBooleanValue(r2, r1, r10)
-            if (r1 == 0) goto L_0x05d5
+            if (r1 == 0) goto L_0x0596
             java.lang.String r1 = "lines"
             int r1 = r7.getAttributeIntValue(r2, r1, r10)
-            if (r1 != r10) goto L_0x05d5
+            if (r1 != r10) goto L_0x0596
             java.lang.String r1 = "minLines"
             int r1 = r7.getAttributeIntValue(r2, r1, r10)
-            if (r1 != r10) goto L_0x05d5
+            if (r1 != r10) goto L_0x0596
             java.lang.String r1 = "maxLines"
             int r1 = r7.getAttributeIntValue(r2, r1, r10)
-            if (r1 != r10) goto L_0x05d5
+            if (r1 != r10) goto L_0x0596
             java.lang.String r1 = "gravity"
             int r1 = r7.getAttributeIntValue(r2, r1, r11)
             if (r1 == r11) goto L_0x0092
@@ -795,7 +832,7 @@ public class Chip extends AppCompatCheckBox implements ChipDrawable.Delegate, Sh
             int[] r13 = com.google.android.material.R$styleable.Chip
             r14 = 0
             int[] r6 = new int[r14]
-            r5 = 2132018804(0x7f140674, float:1.9675925E38)
+            r5 = 2132018798(0x7f14066e, float:1.9675913E38)
             r2 = r18
             r3 = r13
             r4 = r19
@@ -833,257 +870,236 @@ public class Chip extends AppCompatCheckBox implements ChipDrawable.Delegate, Sh
         L_0x00f1:
             r2 = 12
             boolean r4 = r1.hasValue(r2)
-            if (r4 == 0) goto L_0x0130
+            if (r4 == 0) goto L_0x0117
             float r2 = r1.getDimension(r2, r3)
             float r4 = r12.chipCornerRadius
             int r4 = (r4 > r2 ? 1 : (r4 == r2 ? 0 : -1))
-            if (r4 == 0) goto L_0x0130
+            if (r4 == 0) goto L_0x0117
             r12.chipCornerRadius = r2
             com.google.android.material.shape.MaterialShapeDrawable$MaterialShapeDrawableState r4 = r12.drawableState
             com.google.android.material.shape.ShapeAppearanceModel r4 = r4.shapeAppearanceModel
             com.google.android.material.shape.ShapeAppearanceModel$Builder r4 = r4.toBuilder()
-            com.google.android.material.shape.AbsoluteCornerSize r5 = new com.google.android.material.shape.AbsoluteCornerSize
-            r5.<init>(r2)
-            r4.topLeftCornerSize = r5
-            com.google.android.material.shape.AbsoluteCornerSize r5 = new com.google.android.material.shape.AbsoluteCornerSize
-            r5.<init>(r2)
-            r4.topRightCornerSize = r5
-            com.google.android.material.shape.AbsoluteCornerSize r5 = new com.google.android.material.shape.AbsoluteCornerSize
-            r5.<init>(r2)
-            r4.bottomRightCornerSize = r5
-            com.google.android.material.shape.AbsoluteCornerSize r5 = new com.google.android.material.shape.AbsoluteCornerSize
-            r5.<init>(r2)
-            r4.bottomLeftCornerSize = r5
+            r4.setAllCornerSizes(r2)
             com.google.android.material.shape.ShapeAppearanceModel r2 = r4.build()
             r12.setShapeAppearanceModel(r2)
-        L_0x0130:
+        L_0x0117:
             android.content.Context r2 = r12.context
             r4 = 22
             android.content.res.ColorStateList r2 = com.google.android.material.resources.MaterialResources.getColorStateList((android.content.Context) r2, (android.content.res.TypedArray) r1, (int) r4)
             android.content.res.ColorStateList r4 = r12.chipStrokeColor
-            if (r4 == r2) goto L_0x0158
+            if (r4 == r2) goto L_0x0133
             r12.chipStrokeColor = r2
             boolean r4 = r12.isShapeThemingEnabled
-            if (r4 == 0) goto L_0x0151
-            com.google.android.material.shape.MaterialShapeDrawable$MaterialShapeDrawableState r4 = r12.drawableState
-            android.content.res.ColorStateList r5 = r4.strokeColor
-            if (r5 == r2) goto L_0x0151
-            r4.strokeColor = r2
+            if (r4 == 0) goto L_0x012c
+            r12.setStrokeColor(r2)
+        L_0x012c:
             int[] r2 = r12.getState()
             r12.onStateChange(r2)
-        L_0x0151:
-            int[] r2 = r12.getState()
-            r12.onStateChange(r2)
-        L_0x0158:
+        L_0x0133:
             r2 = 23
             float r2 = r1.getDimension(r2, r3)
             float r4 = r12.chipStrokeWidth
             int r4 = (r4 > r2 ? 1 : (r4 == r2 ? 0 : -1))
-            if (r4 == 0) goto L_0x0179
+            if (r4 == 0) goto L_0x0154
             r12.chipStrokeWidth = r2
             android.graphics.Paint r4 = r12.chipPaint
             r4.setStrokeWidth(r2)
             boolean r4 = r12.isShapeThemingEnabled
-            if (r4 == 0) goto L_0x0176
+            if (r4 == 0) goto L_0x0151
             com.google.android.material.shape.MaterialShapeDrawable$MaterialShapeDrawableState r4 = r12.drawableState
             r4.strokeWidth = r2
             r12.invalidateSelf()
-        L_0x0176:
+        L_0x0151:
             r12.invalidateSelf()
-        L_0x0179:
+        L_0x0154:
             android.content.Context r2 = r12.context
             r4 = 36
             android.content.res.ColorStateList r2 = com.google.android.material.resources.MaterialResources.getColorStateList((android.content.Context) r2, (android.content.res.TypedArray) r1, (int) r4)
             android.content.res.ColorStateList r4 = r12.rippleColor
-            if (r4 == r2) goto L_0x019d
+            if (r4 == r2) goto L_0x0175
             r12.rippleColor = r2
             boolean r4 = r12.useCompatRipple
-            if (r4 == 0) goto L_0x0193
-            if (r2 == 0) goto L_0x018e
-            goto L_0x0194
-        L_0x018e:
-            android.content.res.ColorStateList r2 = android.content.res.ColorStateList.valueOf(r14)
-            goto L_0x0194
-        L_0x0193:
+            if (r4 == 0) goto L_0x016b
+            android.content.res.ColorStateList r2 = com.google.android.material.ripple.RippleUtils.sanitizeRippleDrawableColor(r2)
+            goto L_0x016c
+        L_0x016b:
             r2 = 0
-        L_0x0194:
+        L_0x016c:
             r12.compatRippleColor = r2
             int[] r2 = r12.getState()
             r12.onStateChange(r2)
-        L_0x019d:
+        L_0x0175:
             r2 = 5
             java.lang.CharSequence r2 = r1.getText(r2)
-            if (r2 != 0) goto L_0x01a6
+            if (r2 != 0) goto L_0x017e
             java.lang.String r2 = ""
-        L_0x01a6:
+        L_0x017e:
             java.lang.CharSequence r4 = r12.text
             boolean r4 = android.text.TextUtils.equals(r4, r2)
-            if (r4 != 0) goto L_0x01ba
+            if (r4 != 0) goto L_0x0192
             r12.text = r2
             com.google.android.material.internal.TextDrawableHelper r2 = r12.textDrawableHelper
             r2.textWidthDirty = r10
             r12.invalidateSelf()
             r12.onSizeChange()
-        L_0x01ba:
+        L_0x0192:
             android.content.Context r2 = r12.context
             boolean r4 = r1.hasValue(r14)
-            if (r4 == 0) goto L_0x01ce
+            if (r4 == 0) goto L_0x01a6
             int r4 = r1.getResourceId(r14, r14)
-            if (r4 == 0) goto L_0x01ce
+            if (r4 == 0) goto L_0x01a6
             com.google.android.material.resources.TextAppearance r5 = new com.google.android.material.resources.TextAppearance
             r5.<init>(r2, r4)
-            goto L_0x01cf
-        L_0x01ce:
+            goto L_0x01a7
+        L_0x01a6:
             r5 = 0
-        L_0x01cf:
+        L_0x01a7:
             float r2 = r5.textSize
             float r2 = r1.getDimension(r10, r2)
             r5.textSize = r2
-            r12.setTextAppearance(r5)
+            com.google.android.material.internal.TextDrawableHelper r2 = r12.textDrawableHelper
+            android.content.Context r4 = r12.context
+            r2.setTextAppearance(r5, r4)
             r2 = 3
             int r4 = r1.getInt(r2, r14)
-            if (r4 == r10) goto L_0x01f1
+            if (r4 == r10) goto L_0x01cd
             r5 = 2
-            if (r4 == r5) goto L_0x01ec
-            if (r4 == r2) goto L_0x01e7
-            goto L_0x01f5
-        L_0x01e7:
+            if (r4 == r5) goto L_0x01c8
+            if (r4 == r2) goto L_0x01c3
+            goto L_0x01d1
+        L_0x01c3:
             android.text.TextUtils$TruncateAt r2 = android.text.TextUtils.TruncateAt.END
             r12.truncateAt = r2
-            goto L_0x01f5
-        L_0x01ec:
+            goto L_0x01d1
+        L_0x01c8:
             android.text.TextUtils$TruncateAt r2 = android.text.TextUtils.TruncateAt.MIDDLE
             r12.truncateAt = r2
-            goto L_0x01f5
-        L_0x01f1:
+            goto L_0x01d1
+        L_0x01cd:
             android.text.TextUtils$TruncateAt r2 = android.text.TextUtils.TruncateAt.START
             r12.truncateAt = r2
-        L_0x01f5:
+        L_0x01d1:
             r2 = 18
             boolean r2 = r1.getBoolean(r2, r14)
             r12.setChipIconVisible(r2)
             java.lang.String r2 = "http://schemas.android.com/apk/res-auto"
-            if (r7 == 0) goto L_0x021b
+            if (r7 == 0) goto L_0x01f7
             java.lang.String r4 = "chipIconEnabled"
             java.lang.String r4 = r7.getAttributeValue(r2, r4)
-            if (r4 == 0) goto L_0x021b
+            if (r4 == 0) goto L_0x01f7
             java.lang.String r4 = "chipIconVisible"
             java.lang.String r4 = r7.getAttributeValue(r2, r4)
-            if (r4 != 0) goto L_0x021b
+            if (r4 != 0) goto L_0x01f7
             r4 = 15
             boolean r4 = r1.getBoolean(r4, r14)
             r12.setChipIconVisible(r4)
-        L_0x021b:
+        L_0x01f7:
             android.content.Context r4 = r12.context
             r5 = 14
             android.graphics.drawable.Drawable r4 = com.google.android.material.resources.MaterialResources.getDrawable(r4, r1, r5)
             android.graphics.drawable.Drawable r5 = r12.chipIcon
-            if (r5 == 0) goto L_0x0232
+            if (r5 == 0) goto L_0x020e
             boolean r6 = r5 instanceof androidx.core.graphics.drawable.WrappedDrawable
-            if (r6 == 0) goto L_0x0233
+            if (r6 == 0) goto L_0x020f
             androidx.core.graphics.drawable.WrappedDrawable r5 = (androidx.core.graphics.drawable.WrappedDrawable) r5
             androidx.core.graphics.drawable.WrappedDrawableApi14 r5 = (androidx.core.graphics.drawable.WrappedDrawableApi14) r5
             android.graphics.drawable.Drawable r5 = r5.mDrawable
-            goto L_0x0233
-        L_0x0232:
+            goto L_0x020f
+        L_0x020e:
             r5 = 0
-        L_0x0233:
-            if (r5 == r4) goto L_0x025f
+        L_0x020f:
+            if (r5 == r4) goto L_0x023b
             float r6 = r12.calculateChipIconWidth()
-            if (r4 == 0) goto L_0x0240
+            if (r4 == 0) goto L_0x021c
             android.graphics.drawable.Drawable r4 = r4.mutate()
-            goto L_0x0241
-        L_0x0240:
+            goto L_0x021d
+        L_0x021c:
             r4 = 0
-        L_0x0241:
+        L_0x021d:
             r12.chipIcon = r4
             float r4 = r12.calculateChipIconWidth()
             com.google.android.material.chip.ChipDrawable.unapplyChildDrawable(r5)
             boolean r5 = r12.showsChipIcon()
-            if (r5 == 0) goto L_0x0255
+            if (r5 == 0) goto L_0x0231
             android.graphics.drawable.Drawable r5 = r12.chipIcon
             r12.applyChildDrawable(r5)
-        L_0x0255:
+        L_0x0231:
             r12.invalidateSelf()
             int r4 = (r6 > r4 ? 1 : (r6 == r4 ? 0 : -1))
-            if (r4 == 0) goto L_0x025f
+            if (r4 == 0) goto L_0x023b
             r12.onSizeChange()
-        L_0x025f:
+        L_0x023b:
             r4 = 17
             boolean r5 = r1.hasValue(r4)
-            if (r5 == 0) goto L_0x0287
+            if (r5 == 0) goto L_0x0263
             android.content.Context r5 = r12.context
             android.content.res.ColorStateList r4 = com.google.android.material.resources.MaterialResources.getColorStateList((android.content.Context) r5, (android.content.res.TypedArray) r1, (int) r4)
             r12.hasChipIconTint = r10
             android.content.res.ColorStateList r5 = r12.chipIconTint
-            if (r5 == r4) goto L_0x0287
+            if (r5 == r4) goto L_0x0263
             r12.chipIconTint = r4
             boolean r5 = r12.showsChipIcon()
-            if (r5 == 0) goto L_0x0280
+            if (r5 == 0) goto L_0x025c
             android.graphics.drawable.Drawable r5 = r12.chipIcon
             r5.setTintList(r4)
-        L_0x0280:
+        L_0x025c:
             int[] r4 = r12.getState()
             r12.onStateChange(r4)
-        L_0x0287:
+        L_0x0263:
             r4 = 16
             r5 = -1082130432(0xffffffffbf800000, float:-1.0)
             float r4 = r1.getDimension(r4, r5)
             float r5 = r12.chipIconSize
             int r5 = (r5 > r4 ? 1 : (r5 == r4 ? 0 : -1))
-            if (r5 == 0) goto L_0x02a9
+            if (r5 == 0) goto L_0x0285
             float r5 = r12.calculateChipIconWidth()
             r12.chipIconSize = r4
             float r4 = r12.calculateChipIconWidth()
             r12.invalidateSelf()
             int r4 = (r5 > r4 ? 1 : (r5 == r4 ? 0 : -1))
-            if (r4 == 0) goto L_0x02a9
+            if (r4 == 0) goto L_0x0285
             r12.onSizeChange()
-        L_0x02a9:
+        L_0x0285:
             r4 = 31
             boolean r4 = r1.getBoolean(r4, r14)
             r12.setCloseIconVisible(r4)
-            if (r7 == 0) goto L_0x02cd
+            if (r7 == 0) goto L_0x02a9
             java.lang.String r4 = "closeIconEnabled"
             java.lang.String r4 = r7.getAttributeValue(r2, r4)
-            if (r4 == 0) goto L_0x02cd
+            if (r4 == 0) goto L_0x02a9
             java.lang.String r4 = "closeIconVisible"
             java.lang.String r4 = r7.getAttributeValue(r2, r4)
-            if (r4 != 0) goto L_0x02cd
+            if (r4 != 0) goto L_0x02a9
             r4 = 26
             boolean r4 = r1.getBoolean(r4, r14)
             r12.setCloseIconVisible(r4)
-        L_0x02cd:
+        L_0x02a9:
             android.content.Context r4 = r12.context
             r5 = 25
             android.graphics.drawable.Drawable r4 = com.google.android.material.resources.MaterialResources.getDrawable(r4, r1, r5)
             android.graphics.drawable.Drawable r5 = r12.closeIcon
-            if (r5 == 0) goto L_0x02e4
+            if (r5 == 0) goto L_0x02c0
             boolean r6 = r5 instanceof androidx.core.graphics.drawable.WrappedDrawable
-            if (r6 == 0) goto L_0x02e5
+            if (r6 == 0) goto L_0x02c1
             androidx.core.graphics.drawable.WrappedDrawable r5 = (androidx.core.graphics.drawable.WrappedDrawable) r5
             androidx.core.graphics.drawable.WrappedDrawableApi14 r5 = (androidx.core.graphics.drawable.WrappedDrawableApi14) r5
             android.graphics.drawable.Drawable r5 = r5.mDrawable
-            goto L_0x02e5
-        L_0x02e4:
+            goto L_0x02c1
+        L_0x02c0:
             r5 = 0
-        L_0x02e5:
-            if (r5 == r4) goto L_0x0325
+        L_0x02c1:
+            if (r5 == r4) goto L_0x02fe
             float r6 = r12.calculateCloseIconWidth()
-            if (r4 == 0) goto L_0x02f2
+            if (r4 == 0) goto L_0x02ce
             android.graphics.drawable.Drawable r4 = r4.mutate()
-            goto L_0x02f3
-        L_0x02f2:
+            goto L_0x02cf
+        L_0x02ce:
             r4 = 0
-        L_0x02f3:
+        L_0x02cf:
             r12.closeIcon = r4
             android.graphics.drawable.RippleDrawable r4 = new android.graphics.drawable.RippleDrawable
             android.content.res.ColorStateList r11 = r12.rippleColor
-            if (r11 == 0) goto L_0x02fc
-            goto L_0x0300
-        L_0x02fc:
-            android.content.res.ColorStateList r11 = android.content.res.ColorStateList.valueOf(r14)
-        L_0x0300:
+            android.content.res.ColorStateList r11 = com.google.android.material.ripple.RippleUtils.sanitizeRippleDrawableColor(r11)
             android.graphics.drawable.Drawable r10 = r12.closeIcon
             android.graphics.drawable.ShapeDrawable r15 = com.google.android.material.chip.ChipDrawable.closeIconRippleMask
             r4.<init>(r11, r10, r15)
@@ -1091,76 +1107,76 @@ public class Chip extends AppCompatCheckBox implements ChipDrawable.Delegate, Sh
             float r4 = r12.calculateCloseIconWidth()
             com.google.android.material.chip.ChipDrawable.unapplyChildDrawable(r5)
             boolean r5 = r12.showsCloseIcon()
-            if (r5 == 0) goto L_0x031b
+            if (r5 == 0) goto L_0x02f4
             android.graphics.drawable.Drawable r5 = r12.closeIcon
             r12.applyChildDrawable(r5)
-        L_0x031b:
+        L_0x02f4:
             r12.invalidateSelf()
             int r4 = (r6 > r4 ? 1 : (r6 == r4 ? 0 : -1))
-            if (r4 == 0) goto L_0x0325
+            if (r4 == 0) goto L_0x02fe
             r12.onSizeChange()
-        L_0x0325:
+        L_0x02fe:
             android.content.Context r4 = r12.context
             r5 = 30
             android.content.res.ColorStateList r4 = com.google.android.material.resources.MaterialResources.getColorStateList((android.content.Context) r4, (android.content.res.TypedArray) r1, (int) r5)
             android.content.res.ColorStateList r5 = r12.closeIconTint
-            if (r5 == r4) goto L_0x0345
+            if (r5 == r4) goto L_0x031e
             r12.closeIconTint = r4
             boolean r5 = r12.showsCloseIcon()
-            if (r5 == 0) goto L_0x033e
+            if (r5 == 0) goto L_0x0317
             android.graphics.drawable.Drawable r5 = r12.closeIcon
             r5.setTintList(r4)
-        L_0x033e:
+        L_0x0317:
             int[] r4 = r12.getState()
             r12.onStateChange(r4)
-        L_0x0345:
+        L_0x031e:
             r4 = 28
             float r4 = r1.getDimension(r4, r3)
             float r5 = r12.closeIconSize
             int r5 = (r5 > r4 ? 1 : (r5 == r4 ? 0 : -1))
-            if (r5 == 0) goto L_0x035f
+            if (r5 == 0) goto L_0x0338
             r12.closeIconSize = r4
             r12.invalidateSelf()
             boolean r4 = r12.showsCloseIcon()
-            if (r4 == 0) goto L_0x035f
+            if (r4 == 0) goto L_0x0338
             r12.onSizeChange()
-        L_0x035f:
+        L_0x0338:
             r4 = 6
             boolean r4 = r1.getBoolean(r4, r14)
             boolean r5 = r12.checkable
-            if (r5 == r4) goto L_0x0384
+            if (r5 == r4) goto L_0x035d
             r12.checkable = r4
             float r5 = r12.calculateChipIconWidth()
-            if (r4 != 0) goto L_0x0376
+            if (r4 != 0) goto L_0x034f
             boolean r4 = r12.currentChecked
-            if (r4 == 0) goto L_0x0376
+            if (r4 == 0) goto L_0x034f
             r12.currentChecked = r14
-        L_0x0376:
+        L_0x034f:
             float r4 = r12.calculateChipIconWidth()
             r12.invalidateSelf()
             int r4 = (r5 > r4 ? 1 : (r5 == r4 ? 0 : -1))
-            if (r4 == 0) goto L_0x0384
+            if (r4 == 0) goto L_0x035d
             r12.onSizeChange()
-        L_0x0384:
+        L_0x035d:
             r4 = 10
             boolean r4 = r1.getBoolean(r4, r14)
             r12.setCheckedIconVisible(r4)
-            if (r7 == 0) goto L_0x03a8
+            if (r7 == 0) goto L_0x0381
             java.lang.String r4 = "checkedIconEnabled"
             java.lang.String r4 = r7.getAttributeValue(r2, r4)
-            if (r4 == 0) goto L_0x03a8
+            if (r4 == 0) goto L_0x0381
             java.lang.String r4 = "checkedIconVisible"
             java.lang.String r2 = r7.getAttributeValue(r2, r4)
-            if (r2 != 0) goto L_0x03a8
+            if (r2 != 0) goto L_0x0381
             r2 = 8
             boolean r2 = r1.getBoolean(r2, r14)
             r12.setCheckedIconVisible(r2)
-        L_0x03a8:
+        L_0x0381:
             android.content.Context r2 = r12.context
             r4 = 7
             android.graphics.drawable.Drawable r2 = com.google.android.material.resources.MaterialResources.getDrawable(r2, r1, r4)
             android.graphics.drawable.Drawable r4 = r12.checkedIcon
-            if (r4 == r2) goto L_0x03d1
+            if (r4 == r2) goto L_0x03aa
             float r4 = r12.calculateChipIconWidth()
             r12.checkedIcon = r2
             float r2 = r12.calculateChipIconWidth()
@@ -1170,135 +1186,125 @@ public class Chip extends AppCompatCheckBox implements ChipDrawable.Delegate, Sh
             r12.applyChildDrawable(r5)
             r12.invalidateSelf()
             int r2 = (r4 > r2 ? 1 : (r4 == r2 ? 0 : -1))
-            if (r2 == 0) goto L_0x03d1
+            if (r2 == 0) goto L_0x03aa
             r12.onSizeChange()
-        L_0x03d1:
+        L_0x03aa:
             r2 = 9
             boolean r4 = r1.hasValue(r2)
-            if (r4 == 0) goto L_0x03fb
+            if (r4 == 0) goto L_0x03d4
             android.content.Context r4 = r12.context
             android.content.res.ColorStateList r2 = com.google.android.material.resources.MaterialResources.getColorStateList((android.content.Context) r4, (android.content.res.TypedArray) r1, (int) r2)
             android.content.res.ColorStateList r4 = r12.checkedIconTint
-            if (r4 == r2) goto L_0x03fb
+            if (r4 == r2) goto L_0x03d4
             r12.checkedIconTint = r2
             boolean r4 = r12.checkedIconVisible
-            if (r4 == 0) goto L_0x03f4
+            if (r4 == 0) goto L_0x03cd
             android.graphics.drawable.Drawable r4 = r12.checkedIcon
-            if (r4 == 0) goto L_0x03f4
+            if (r4 == 0) goto L_0x03cd
             boolean r5 = r12.checkable
-            if (r5 == 0) goto L_0x03f4
+            if (r5 == 0) goto L_0x03cd
             r4.setTintList(r2)
-        L_0x03f4:
+        L_0x03cd:
             int[] r2 = r12.getState()
             r12.onStateChange(r2)
-        L_0x03fb:
+        L_0x03d4:
             android.content.Context r2 = r12.context
             r4 = 39
-            boolean r5 = r1.hasValue(r4)
-            if (r5 == 0) goto L_0x040e
-            int r4 = r1.getResourceId(r4, r14)
-            if (r4 == 0) goto L_0x040e
-            com.google.android.material.animation.MotionSpec.createFromResource(r4, r2)
-        L_0x040e:
+            com.google.android.material.animation.MotionSpec.createFromAttribute(r2, r1, r4)
             android.content.Context r2 = r12.context
             r4 = 33
-            boolean r5 = r1.hasValue(r4)
-            if (r5 == 0) goto L_0x0421
-            int r4 = r1.getResourceId(r4, r14)
-            if (r4 == 0) goto L_0x0421
-            com.google.android.material.animation.MotionSpec.createFromResource(r4, r2)
-        L_0x0421:
+            com.google.android.material.animation.MotionSpec.createFromAttribute(r2, r1, r4)
             r2 = 21
             float r2 = r1.getDimension(r2, r3)
             float r4 = r12.chipStartPadding
             int r4 = (r4 > r2 ? 1 : (r4 == r2 ? 0 : -1))
-            if (r4 == 0) goto L_0x0435
+            if (r4 == 0) goto L_0x03f6
             r12.chipStartPadding = r2
             r12.invalidateSelf()
             r12.onSizeChange()
-        L_0x0435:
+        L_0x03f6:
             r2 = 35
             float r2 = r1.getDimension(r2, r3)
             float r4 = r12.iconStartPadding
             int r4 = (r4 > r2 ? 1 : (r4 == r2 ? 0 : -1))
-            if (r4 == 0) goto L_0x0455
+            if (r4 == 0) goto L_0x0416
             float r4 = r12.calculateChipIconWidth()
             r12.iconStartPadding = r2
             float r2 = r12.calculateChipIconWidth()
             r12.invalidateSelf()
             int r2 = (r4 > r2 ? 1 : (r4 == r2 ? 0 : -1))
-            if (r2 == 0) goto L_0x0455
+            if (r2 == 0) goto L_0x0416
             r12.onSizeChange()
-        L_0x0455:
+        L_0x0416:
             r2 = 34
             float r2 = r1.getDimension(r2, r3)
             float r4 = r12.iconEndPadding
             int r4 = (r4 > r2 ? 1 : (r4 == r2 ? 0 : -1))
-            if (r4 == 0) goto L_0x0475
+            if (r4 == 0) goto L_0x0436
             float r4 = r12.calculateChipIconWidth()
             r12.iconEndPadding = r2
             float r2 = r12.calculateChipIconWidth()
             r12.invalidateSelf()
             int r2 = (r4 > r2 ? 1 : (r4 == r2 ? 0 : -1))
-            if (r2 == 0) goto L_0x0475
+            if (r2 == 0) goto L_0x0436
             r12.onSizeChange()
-        L_0x0475:
+        L_0x0436:
             r2 = 41
             float r2 = r1.getDimension(r2, r3)
             float r4 = r12.textStartPadding
             int r4 = (r4 > r2 ? 1 : (r4 == r2 ? 0 : -1))
-            if (r4 == 0) goto L_0x0489
+            if (r4 == 0) goto L_0x044a
             r12.textStartPadding = r2
             r12.invalidateSelf()
             r12.onSizeChange()
-        L_0x0489:
+        L_0x044a:
             r2 = 40
             float r2 = r1.getDimension(r2, r3)
             float r4 = r12.textEndPadding
             int r4 = (r4 > r2 ? 1 : (r4 == r2 ? 0 : -1))
-            if (r4 == 0) goto L_0x049d
+            if (r4 == 0) goto L_0x045e
             r12.textEndPadding = r2
             r12.invalidateSelf()
             r12.onSizeChange()
-        L_0x049d:
+        L_0x045e:
             r2 = 29
             float r2 = r1.getDimension(r2, r3)
             float r4 = r12.closeIconStartPadding
             int r4 = (r4 > r2 ? 1 : (r4 == r2 ? 0 : -1))
-            if (r4 == 0) goto L_0x04b7
+            if (r4 == 0) goto L_0x0478
             r12.closeIconStartPadding = r2
             r12.invalidateSelf()
             boolean r2 = r12.showsCloseIcon()
-            if (r2 == 0) goto L_0x04b7
+            if (r2 == 0) goto L_0x0478
             r12.onSizeChange()
-        L_0x04b7:
+        L_0x0478:
             r2 = 27
             float r2 = r1.getDimension(r2, r3)
             float r4 = r12.closeIconEndPadding
             int r4 = (r4 > r2 ? 1 : (r4 == r2 ? 0 : -1))
-            if (r4 == 0) goto L_0x04d1
+            if (r4 == 0) goto L_0x0492
             r12.closeIconEndPadding = r2
             r12.invalidateSelf()
             boolean r2 = r12.showsCloseIcon()
-            if (r2 == 0) goto L_0x04d1
+            if (r2 == 0) goto L_0x0492
             r12.onSizeChange()
-        L_0x04d1:
+        L_0x0492:
             r2 = 13
             float r2 = r1.getDimension(r2, r3)
             float r3 = r12.chipEndPadding
             int r3 = (r3 > r2 ? 1 : (r3 == r2 ? 0 : -1))
-            if (r3 == 0) goto L_0x04e5
+            if (r3 == 0) goto L_0x04a6
             r12.chipEndPadding = r2
             r12.invalidateSelf()
             r12.onSizeChange()
-        L_0x04e5:
+        L_0x04a6:
             r2 = 4
             r3 = 2147483647(0x7fffffff, float:NaN)
             int r2 = r1.getDimensionPixelSize(r2, r3)
             r12.maxWidth = r2
             r1.recycle()
             int[] r6 = new int[r14]
-            r10 = 2132018804(0x7f140674, float:1.9675925E38)
+            r10 = 2132018798(0x7f14066e, float:1.9675913E38)
             com.google.android.material.internal.ThemeEnforcement.checkCompatibleTheme(r9, r7, r8, r10)
             r1 = r9
             r2 = r18
@@ -1325,12 +1331,12 @@ public class Chip extends AppCompatCheckBox implements ChipDrawable.Delegate, Sh
             r0.minTouchTargetSize = r2
             r1.recycle()
             com.google.android.material.chip.ChipDrawable r1 = r0.chipDrawable
-            if (r1 == r12) goto L_0x054f
-            if (r1 == 0) goto L_0x053f
+            if (r1 == r12) goto L_0x0510
+            if (r1 == 0) goto L_0x0500
             java.lang.ref.WeakReference r2 = new java.lang.ref.WeakReference
             r2.<init>(r11)
             r1.delegate = r2
-        L_0x053f:
+        L_0x0500:
             r0.chipDrawable = r12
             r12.shouldDrawText = r14
             java.lang.ref.WeakReference r1 = new java.lang.ref.WeakReference
@@ -1338,12 +1344,12 @@ public class Chip extends AppCompatCheckBox implements ChipDrawable.Delegate, Sh
             r12.delegate = r1
             int r1 = r0.minTouchTargetSize
             r0.ensureAccessibleTouchTarget(r1)
-        L_0x054f:
+        L_0x0510:
             java.util.WeakHashMap r1 = androidx.core.view.ViewCompat.sViewPropertyAnimatorMap
             float r1 = androidx.core.view.ViewCompat.Api21Impl.getElevation(r16)
             r12.setElevation(r1)
             int[] r6 = new int[r14]
-            r10 = 2132018804(0x7f140674, float:1.9675925E38)
+            r10 = 2132018798(0x7f14066e, float:1.9675913E38)
             com.google.android.material.internal.ThemeEnforcement.checkCompatibleTheme(r9, r7, r8, r10)
             r1 = r9
             r2 = r18
@@ -1358,17 +1364,17 @@ public class Chip extends AppCompatCheckBox implements ChipDrawable.Delegate, Sh
             com.google.android.material.chip.Chip$ChipTouchHelper r1 = new com.google.android.material.chip.Chip$ChipTouchHelper
             r1.<init>(r0)
             boolean r1 = r16.hasCloseIcon()
-            if (r1 == 0) goto L_0x0588
+            if (r1 == 0) goto L_0x0549
             com.google.android.material.chip.ChipDrawable r1 = r0.chipDrawable
-            if (r1 == 0) goto L_0x0588
+            if (r1 == 0) goto L_0x0549
             boolean r1 = r1.closeIconVisible
-        L_0x0588:
+        L_0x0549:
             androidx.core.view.ViewCompat.setAccessibilityDelegate(r0, r11)
-            if (r2 != 0) goto L_0x0595
+            if (r2 != 0) goto L_0x0556
             com.google.android.material.chip.Chip$2 r1 = new com.google.android.material.chip.Chip$2
             r1.<init>()
             r0.setOutlineProvider(r1)
-        L_0x0595:
+        L_0x0556:
             boolean r1 = r0.deferredCheckedValue
             r0.setChecked(r1)
             java.lang.CharSequence r1 = r12.text
@@ -1378,44 +1384,44 @@ public class Chip extends AppCompatCheckBox implements ChipDrawable.Delegate, Sh
             r16.updateTextPaintDrawState()
             com.google.android.material.chip.ChipDrawable r1 = r0.chipDrawable
             boolean r1 = r1.shouldDrawText
-            if (r1 != 0) goto L_0x05b4
+            if (r1 != 0) goto L_0x0575
             r1 = 1
             r0.setLines(r1)
             r0.setHorizontallyScrolling(r1)
-        L_0x05b4:
+        L_0x0575:
             r1 = 8388627(0x800013, float:1.175497E-38)
             r0.setGravity(r1)
             r16.updatePaddingInternal()
             boolean r1 = r0.ensureMinTouchTargetSize
-            if (r1 == 0) goto L_0x05c6
+            if (r1 == 0) goto L_0x0587
             int r1 = r0.minTouchTargetSize
             r0.setMinHeight(r1)
-        L_0x05c6:
-            int r1 = r16.getLayoutDirection()
+        L_0x0587:
+            int r1 = androidx.core.view.ViewCompat.Api17Impl.getLayoutDirection(r16)
             r0.lastLayoutDirection = r1
             com.google.android.material.chip.Chip$$ExternalSyntheticLambda0 r1 = new com.google.android.material.chip.Chip$$ExternalSyntheticLambda0
             r1.<init>(r0)
             super.setOnCheckedChangeListener(r1)
             return
-        L_0x05d5:
+        L_0x0596:
             java.lang.UnsupportedOperationException r0 = new java.lang.UnsupportedOperationException
             java.lang.String r1 = "Chip does not support multi-line text"
             r0.<init>(r1)
             throw r0
-        L_0x05dd:
+        L_0x059e:
             java.lang.UnsupportedOperationException r0 = new java.lang.UnsupportedOperationException
             r0.<init>(r4)
             throw r0
-        L_0x05e3:
+        L_0x05a4:
             java.lang.UnsupportedOperationException r0 = new java.lang.UnsupportedOperationException
             r0.<init>(r4)
             throw r0
-        L_0x05e9:
+        L_0x05aa:
             java.lang.UnsupportedOperationException r0 = new java.lang.UnsupportedOperationException
             java.lang.String r1 = "Please set start drawable using R.attr#chipIcon."
             r0.<init>(r1)
             throw r0
-        L_0x05f1:
+        L_0x05b2:
             java.lang.UnsupportedOperationException r0 = new java.lang.UnsupportedOperationException
             java.lang.String r1 = "Please set left drawable using R.attr#chipIcon."
             r0.<init>(r1)
@@ -1448,7 +1454,7 @@ public class Chip extends AppCompatCheckBox implements ChipDrawable.Delegate, Sh
         super.setTextAppearance(i);
         ChipDrawable chipDrawable2 = this.chipDrawable;
         if (chipDrawable2 != null) {
-            chipDrawable2.setTextAppearance(new TextAppearance(chipDrawable2.context, i));
+            chipDrawable2.textDrawableHelper.setTextAppearance(new TextAppearance(chipDrawable2.context, i), chipDrawable2.context);
         }
         updateTextPaintDrawState();
     }

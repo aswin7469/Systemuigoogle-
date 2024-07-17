@@ -2,16 +2,17 @@ package com.google.android.systemui.columbus.legacy.actions;
 
 import android.content.Context;
 import com.android.internal.logging.UiEventLogger;
-import com.android.systemui.shade.BaseShadeControllerImpl;
 import com.android.systemui.shade.NotificationShadeWindowControllerImpl;
 import com.android.systemui.shade.ShadeController;
+import com.android.systemui.shade.ShadeControllerImpl;
+import com.android.systemui.shade.ShadeControllerImpl$$ExternalSyntheticLambda0;
 import com.android.systemui.statusbar.NotificationShadeWindowController;
 import com.google.android.systemui.columbus.ColumbusEvent;
 import com.google.android.systemui.columbus.legacy.sensors.GestureSensor;
 import dagger.Lazy;
 import java.util.Set;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class OpenNotificationShade extends UserAction {
     public final Lazy notificationShadeWindowController;
     public final ShadeController shadeController;
@@ -35,11 +36,13 @@ public final class OpenNotificationShade extends UserAction {
         UiEventLogger uiEventLogger2 = this.uiEventLogger;
         ShadeController shadeController2 = this.shadeController;
         if (z) {
-            shadeController2.postAnimateCollapseShade();
+            ShadeControllerImpl shadeControllerImpl = (ShadeControllerImpl) shadeController2;
+            shadeControllerImpl.getClass();
+            shadeControllerImpl.mMainExecutor.execute(new ShadeControllerImpl$$ExternalSyntheticLambda0(shadeControllerImpl, 1));
             uiEventLogger2.log(ColumbusEvent.COLUMBUS_INVOKED_NOTIFICATION_SHADE_CLOSE);
             return;
         }
-        ((BaseShadeControllerImpl) shadeController2).animateExpandShade();
+        ((ShadeControllerImpl) shadeController2).animateExpandShade();
         uiEventLogger2.log(ColumbusEvent.COLUMBUS_INVOKED_NOTIFICATION_SHADE_OPEN);
     }
 }

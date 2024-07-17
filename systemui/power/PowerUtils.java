@@ -12,7 +12,7 @@ import android.util.Log;
 import androidx.core.app.NotificationCompat$Builder;
 import java.util.Locale;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public abstract class PowerUtils {
     public static PendingIntent createBatterySettingsPendingIntent(Context context) {
         return PendingIntent.getActivity(context, 0, new Intent("android.intent.action.POWER_USAGE_SUMMARY"), 67108864);
@@ -41,15 +41,15 @@ public abstract class PowerUtils {
                 return false;
             }
             return true;
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             Log.e("PowerUtils", "isFlipendoEnabled() failed", e);
             return false;
         }
     }
 
-    public static void overrideNotificationAppName(Context context, NotificationCompat$Builder notificationCompat$Builder) {
+    public static void overrideNotificationAppName(Context context, NotificationCompat$Builder notificationCompat$Builder, int i) {
         Bundle bundle = new Bundle();
-        bundle.putString("android.substName", context.getString(17039674));
+        bundle.putString("android.substName", context.getString(i));
         Bundle bundle2 = notificationCompat$Builder.mExtras;
         if (bundle2 == null) {
             notificationCompat$Builder.mExtras = new Bundle(bundle);

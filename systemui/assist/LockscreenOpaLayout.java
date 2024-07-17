@@ -17,7 +17,7 @@ import com.google.android.systemui.elmyra.feedback.FeedbackEffect;
 import com.google.android.systemui.elmyra.sensors.GestureSensor;
 import java.util.ArrayList;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class LockscreenOpaLayout extends FrameLayout implements FeedbackEffect {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Interpolator INTERPOLATOR_5_100 = new PathInterpolator(1.0f, 0.0f, 0.95f, 1.0f);
@@ -34,14 +34,14 @@ public class LockscreenOpaLayout extends FrameLayout implements FeedbackEffect {
     public View mYellow;
 
     /* renamed from: com.google.android.systemui.assist.LockscreenOpaLayout$1  reason: invalid class name */
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class AnonymousClass1 extends AnimatorListenerAdapter {
         public final void onAnimationEnd(Animator animator) {
             switch (1) {
                 case 0:
                     LockscreenOpaLayout lockscreenOpaLayout = (LockscreenOpaLayout) this;
                     lockscreenOpaLayout.mGestureState = 1;
-                    lockscreenOpaLayout.mGestureAnimatorSet = LockscreenOpaLayout.m917$$Nest$mgetLineAnimatorSet(lockscreenOpaLayout);
+                    lockscreenOpaLayout.mGestureAnimatorSet = LockscreenOpaLayout.m829$$Nest$mgetLineAnimatorSet(lockscreenOpaLayout);
                     ((LockscreenOpaLayout) this).mGestureAnimatorSet.setCurrentPlayTime(0);
                     return;
                 case 1:
@@ -64,23 +64,23 @@ public class LockscreenOpaLayout extends FrameLayout implements FeedbackEffect {
                     return;
                 case 4:
                     LockscreenOpaLayout lockscreenOpaLayout4 = (LockscreenOpaLayout) this;
-                    lockscreenOpaLayout4.mGestureAnimatorSet = LockscreenOpaLayout.m917$$Nest$mgetLineAnimatorSet(lockscreenOpaLayout4);
+                    lockscreenOpaLayout4.mGestureAnimatorSet = LockscreenOpaLayout.m829$$Nest$mgetLineAnimatorSet(lockscreenOpaLayout4);
                     ((LockscreenOpaLayout) this).mGestureAnimatorSet.removeAllListeners();
                     ((LockscreenOpaLayout) this).mGestureAnimatorSet.addListener(new AnonymousClass1(6, this));
                     ((LockscreenOpaLayout) this).mGestureAnimatorSet.end();
                     return;
                 case 5:
-                    LockscreenOpaLayout.m918$$Nest$mstartCollapseAnimation((LockscreenOpaLayout) this);
+                    LockscreenOpaLayout.m830$$Nest$mstartCollapseAnimation((LockscreenOpaLayout) this);
                     return;
                 default:
-                    LockscreenOpaLayout.m918$$Nest$mstartCollapseAnimation((LockscreenOpaLayout) this);
+                    LockscreenOpaLayout.m830$$Nest$mstartCollapseAnimation((LockscreenOpaLayout) this);
                     return;
             }
         }
     }
 
     /* renamed from: -$$Nest$mgetLineAnimatorSet  reason: not valid java name */
-    public static AnimatorSet m917$$Nest$mgetLineAnimatorSet(LockscreenOpaLayout lockscreenOpaLayout) {
+    public static AnimatorSet m829$$Nest$mgetLineAnimatorSet(LockscreenOpaLayout lockscreenOpaLayout) {
         AnimatorSet animatorSet = lockscreenOpaLayout.mLineAnimatorSet;
         if (animatorSet != null) {
             animatorSet.removeAllListeners();
@@ -93,22 +93,22 @@ public class LockscreenOpaLayout extends FrameLayout implements FeedbackEffect {
         Interpolator interpolator = lockscreenOpaLayout.INTERPOLATOR_5_100;
         Resources resources = lockscreenOpaLayout.mResources;
         Interpolator interpolator2 = OpaUtils.INTERPOLATOR_40_40;
-        animatorSet2.play(OpaUtils.getTranslationObjectAnimatorX(view, interpolator, -((float) resources.getDimensionPixelOffset(2131167160)), lockscreenOpaLayout.mRed.getX(), 366)).with(OpaUtils.getTranslationObjectAnimatorX(lockscreenOpaLayout.mYellow, lockscreenOpaLayout.INTERPOLATOR_5_100, (float) lockscreenOpaLayout.mResources.getDimensionPixelOffset(2131167160), lockscreenOpaLayout.mYellow.getX(), 366)).with(OpaUtils.getTranslationObjectAnimatorX(lockscreenOpaLayout.mGreen, lockscreenOpaLayout.INTERPOLATOR_5_100, (float) lockscreenOpaLayout.mResources.getDimensionPixelOffset(2131167159), lockscreenOpaLayout.mGreen.getX(), 366)).with(OpaUtils.getTranslationObjectAnimatorX(lockscreenOpaLayout.mBlue, lockscreenOpaLayout.INTERPOLATOR_5_100, -((float) lockscreenOpaLayout.mResources.getDimensionPixelOffset(2131167159)), lockscreenOpaLayout.mBlue.getX(), 366));
+        animatorSet2.play(OpaUtils.getTranslationObjectAnimatorX(view, interpolator, -((float) resources.getDimensionPixelOffset(2131167118)), lockscreenOpaLayout.mRed.getX(), 366)).with(OpaUtils.getTranslationObjectAnimatorX(lockscreenOpaLayout.mYellow, lockscreenOpaLayout.INTERPOLATOR_5_100, (float) lockscreenOpaLayout.mResources.getDimensionPixelOffset(2131167118), lockscreenOpaLayout.mYellow.getX(), 366)).with(OpaUtils.getTranslationObjectAnimatorX(lockscreenOpaLayout.mGreen, lockscreenOpaLayout.INTERPOLATOR_5_100, (float) lockscreenOpaLayout.mResources.getDimensionPixelOffset(2131167117), lockscreenOpaLayout.mGreen.getX(), 366)).with(OpaUtils.getTranslationObjectAnimatorX(lockscreenOpaLayout.mBlue, lockscreenOpaLayout.INTERPOLATOR_5_100, -((float) lockscreenOpaLayout.mResources.getDimensionPixelOffset(2131167117)), lockscreenOpaLayout.mBlue.getX(), 366));
         return lockscreenOpaLayout.mLineAnimatorSet;
     }
 
     /* renamed from: -$$Nest$mstartCollapseAnimation  reason: not valid java name */
-    public static void m918$$Nest$mstartCollapseAnimation(final LockscreenOpaLayout lockscreenOpaLayout) {
+    public static void m830$$Nest$mstartCollapseAnimation(final LockscreenOpaLayout lockscreenOpaLayout) {
         if (lockscreenOpaLayout.isAttachedToWindow()) {
             lockscreenOpaLayout.mCurrentAnimators.clear();
             ArraySet arraySet = lockscreenOpaLayout.mCurrentAnimators;
             ArraySet arraySet2 = new ArraySet();
             View view = lockscreenOpaLayout.mRed;
             Interpolator interpolator = OpaUtils.INTERPOLATOR_40_OUT;
-            arraySet2.add(OpaUtils.getTranslationAnimatorX(133, view, interpolator));
-            arraySet2.add(OpaUtils.getTranslationAnimatorX(150, lockscreenOpaLayout.mBlue, interpolator));
-            arraySet2.add(OpaUtils.getTranslationAnimatorX(133, lockscreenOpaLayout.mYellow, interpolator));
-            arraySet2.add(OpaUtils.getTranslationAnimatorX(150, lockscreenOpaLayout.mGreen, interpolator));
+            arraySet2.add(OpaUtils.getTranslationAnimatorX(view, interpolator, 133));
+            arraySet2.add(OpaUtils.getTranslationAnimatorX(lockscreenOpaLayout.mBlue, interpolator, 150));
+            arraySet2.add(OpaUtils.getTranslationAnimatorX(lockscreenOpaLayout.mYellow, interpolator, 133));
+            arraySet2.add(OpaUtils.getTranslationAnimatorX(lockscreenOpaLayout.mGreen, interpolator, 150));
             OpaUtils.getLongestAnim(arraySet2).addListener(new AnonymousClass1(2));
             arraySet.addAll(arraySet2);
             ArraySet arraySet3 = lockscreenOpaLayout.mCurrentAnimators;
@@ -128,10 +128,10 @@ public class LockscreenOpaLayout extends FrameLayout implements FeedbackEffect {
     public final void onFinishInflate() {
         super.onFinishInflate();
         this.mResources = getResources();
-        this.mBlue = findViewById(2131362083);
-        this.mRed = findViewById(2131363412);
-        this.mYellow = findViewById(2131364153);
-        this.mGreen = findViewById(2131362639);
+        this.mBlue = findViewById(2131362078);
+        this.mRed = findViewById(2131363385);
+        this.mYellow = findViewById(2131364115);
+        this.mGreen = findViewById(2131362619);
         this.mAnimatedViews.add(this.mBlue);
         this.mAnimatedViews.add(this.mRed);
         this.mAnimatedViews.add(this.mYellow);
@@ -180,14 +180,14 @@ public class LockscreenOpaLayout extends FrameLayout implements FeedbackEffect {
                     this.mCannedAnimatorSet = new AnimatorSet();
                     View view = this.mRed;
                     Interpolator interpolator = OpaUtils.INTERPOLATOR_40_40;
-                    ObjectAnimator translationObjectAnimatorX = OpaUtils.getTranslationObjectAnimatorX(view, interpolator, -((float) this.mResources.getDimensionPixelOffset(2131167157)), this.mRed.getX(), 83);
+                    ObjectAnimator translationObjectAnimatorX = OpaUtils.getTranslationObjectAnimatorX(view, interpolator, -((float) this.mResources.getDimensionPixelOffset(2131167115)), this.mRed.getX(), 83);
                     translationObjectAnimatorX.setStartDelay(17);
-                    ObjectAnimator translationObjectAnimatorX2 = OpaUtils.getTranslationObjectAnimatorX(this.mYellow, interpolator, (float) this.mResources.getDimensionPixelOffset(2131167157), this.mYellow.getX(), 83);
+                    ObjectAnimator translationObjectAnimatorX2 = OpaUtils.getTranslationObjectAnimatorX(this.mYellow, interpolator, (float) this.mResources.getDimensionPixelOffset(2131167115), this.mYellow.getX(), 83);
                     translationObjectAnimatorX2.setStartDelay(17);
-                    AnimatorSet.Builder with = this.mCannedAnimatorSet.play(translationObjectAnimatorX).with(translationObjectAnimatorX2).with(OpaUtils.getTranslationObjectAnimatorX(this.mBlue, interpolator, -((float) this.mResources.getDimensionPixelOffset(2131167156)), this.mBlue.getX(), 167)).with(OpaUtils.getTranslationObjectAnimatorX(this.mGreen, interpolator, (float) this.mResources.getDimensionPixelOffset(2131167156), this.mGreen.getX(), 167));
+                    AnimatorSet.Builder with = this.mCannedAnimatorSet.play(translationObjectAnimatorX).with(translationObjectAnimatorX2).with(OpaUtils.getTranslationObjectAnimatorX(this.mBlue, interpolator, -((float) this.mResources.getDimensionPixelOffset(2131167114)), this.mBlue.getX(), 167)).with(OpaUtils.getTranslationObjectAnimatorX(this.mGreen, interpolator, (float) this.mResources.getDimensionPixelOffset(2131167114), this.mGreen.getX(), 167));
                     View view2 = this.mRed;
                     Interpolator interpolator2 = Interpolators.LINEAR;
-                    with.with(OpaUtils.getAlphaObjectAnimator(130, view2, interpolator2)).with(OpaUtils.getAlphaObjectAnimator(130, this.mYellow, interpolator2)).with(OpaUtils.getAlphaObjectAnimator(113, this.mBlue, interpolator2)).with(OpaUtils.getAlphaObjectAnimator(113, this.mGreen, interpolator2));
+                    with.with(OpaUtils.getAlphaObjectAnimator(view2, 130, interpolator2)).with(OpaUtils.getAlphaObjectAnimator(this.mYellow, 130, interpolator2)).with(OpaUtils.getAlphaObjectAnimator(this.mBlue, 113, interpolator2)).with(OpaUtils.getAlphaObjectAnimator(this.mGreen, 113, interpolator2));
                     animatorSet = this.mCannedAnimatorSet;
                 }
                 this.mGestureAnimatorSet = animatorSet;
@@ -258,10 +258,10 @@ public class LockscreenOpaLayout extends FrameLayout implements FeedbackEffect {
             ArraySet arraySet2 = new ArraySet();
             View view = this.mRed;
             Interpolator interpolator = OpaUtils.INTERPOLATOR_40_OUT;
-            arraySet2.add(OpaUtils.getTranslationAnimatorX(190, view, interpolator));
-            arraySet2.add(OpaUtils.getTranslationAnimatorX(190, this.mBlue, interpolator));
-            arraySet2.add(OpaUtils.getTranslationAnimatorX(190, this.mGreen, interpolator));
-            arraySet2.add(OpaUtils.getTranslationAnimatorX(190, this.mYellow, interpolator));
+            arraySet2.add(OpaUtils.getTranslationAnimatorX(view, interpolator, 190));
+            arraySet2.add(OpaUtils.getTranslationAnimatorX(this.mBlue, interpolator, 190));
+            arraySet2.add(OpaUtils.getTranslationAnimatorX(this.mGreen, interpolator, 190));
+            arraySet2.add(OpaUtils.getTranslationAnimatorX(this.mYellow, interpolator, 190));
             OpaUtils.getLongestAnim(arraySet2).addListener(new AnonymousClass1(1));
             arraySet.addAll(arraySet2);
             ArraySet arraySet3 = this.mCurrentAnimators;

@@ -4,9 +4,8 @@ import com.android.systemui.qs.pipeline.domain.autoaddable.CallbackControllerAut
 import com.android.systemui.qs.pipeline.domain.model.AutoAddTracking;
 import com.android.systemui.qs.pipeline.shared.TileSpec;
 import com.android.systemui.statusbar.policy.BatteryController;
-import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ReverseChargingAutoAddable extends CallbackControllerAutoAddable {
     public final String description;
     public final TileSpec spec = TileSpec.Companion.create("reverse");
@@ -15,10 +14,6 @@ public final class ReverseChargingAutoAddable extends CallbackControllerAutoAdda
         super(batteryController);
         AutoAddTracking autoAddTracking = getAutoAddTracking();
         this.description = "ReverseChargingAutoAddable (" + autoAddTracking + ")";
-    }
-
-    public final Object getCallback(ProducerScope producerScope) {
-        return new ReverseChargingAutoAddable$getCallback$1(this, producerScope);
     }
 
     public final String getDescription() {

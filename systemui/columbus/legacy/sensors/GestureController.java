@@ -13,7 +13,7 @@ import java.util.Set;
 import kotlin.jvm.functions.Function0;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class GestureController implements Dumpable {
     public ColumbusService$gestureListener$1 gestureListener;
     public final GestureSensor gestureSensor;
@@ -24,7 +24,7 @@ public final class GestureController implements Dumpable {
     public final Set softGates;
     public final UiEventLogger uiEventLogger;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class ColumbusCommand implements Command {
         public ColumbusCommand() {
         }

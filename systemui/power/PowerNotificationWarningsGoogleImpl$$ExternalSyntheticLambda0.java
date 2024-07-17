@@ -19,7 +19,7 @@ import kotlin.coroutines.Continuation;
 import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineStart;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final /* synthetic */ class PowerNotificationWarningsGoogleImpl$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ PowerNotificationWarningsGoogleImpl f$0;
     public final /* synthetic */ Context f$1;
@@ -36,9 +36,8 @@ public final /* synthetic */ class PowerNotificationWarningsGoogleImpl$$External
         Context context = this.f$1;
         UiEventLogger uiEventLogger = this.f$2;
         Executor executor = powerNotificationWarningsGoogleImpl.mExecutor;
-        Context context2 = context;
-        powerNotificationWarningsGoogleImpl.mBatteryInfoBroadcast = new BatteryInfoBroadcast(context2, powerNotificationWarningsGoogleImpl.mBroadcastSender, powerNotificationWarningsGoogleImpl.mEnhancedEstimates, executor, powerNotificationWarningsGoogleImpl.mUserTracker);
-        powerNotificationWarningsGoogleImpl.mLowPowerWarningsController = new LowPowerWarningsController(context2, (SevereLowBatteryNotification) powerNotificationWarningsGoogleImpl.mSevereLowBatteryNotificationProvider.get(), powerNotificationWarningsGoogleImpl.mGlobalSettings, uiEventLogger, executor);
+        powerNotificationWarningsGoogleImpl.mBatteryInfoBroadcast = new BatteryInfoBroadcast(context, powerNotificationWarningsGoogleImpl.mBroadcastSender, powerNotificationWarningsGoogleImpl.mEnhancedEstimates, executor, powerNotificationWarningsGoogleImpl.mUserTracker);
+        powerNotificationWarningsGoogleImpl.mLowPowerWarningsController = new LowPowerWarningsController(context, new SevereLowBatteryDialog(context, uiEventLogger, powerNotificationWarningsGoogleImpl.mKeyguardStateController, powerNotificationWarningsGoogleImpl.mIDreamManager), powerNotificationWarningsGoogleImpl.mGlobalSettings, uiEventLogger, executor);
         SurfaceType surfaceType = SurfaceType.NOTIFICATION;
         ArrayList arrayList = new ArrayList(Arrays.asList(new BatteryEventType[]{BatteryEventType.LOW_BATTERY, BatteryEventType.SEVERE_LOW_BATTERY, BatteryEventType.EXTREME_LOW_BATTERY, BatteryEventType.WIRED_INCOMPATIBLE_CHARGING, BatteryEventType.TEMP_DEFEND_BATTERY, BatteryEventType.DWELL_DEFEND_BATTERY, BatteryEventType.DOCK_DEFEND_BATTERY}));
         PowerNotificationWarningsGoogleImpl$$ExternalSyntheticLambda2 powerNotificationWarningsGoogleImpl$$ExternalSyntheticLambda2 = new PowerNotificationWarningsGoogleImpl$$ExternalSyntheticLambda2(powerNotificationWarningsGoogleImpl);
@@ -67,7 +66,6 @@ public final /* synthetic */ class PowerNotificationWarningsGoogleImpl$$External
         intentFilter.addAction("android.bluetooth.a2dp.profile.action.CONNECTION_STATE_CHANGED");
         intentFilter.addAction("android.bluetooth.headset.profile.action.CONNECTION_STATE_CHANGED");
         intentFilter.addAction("android.bluetooth.hearingaid.profile.action.CONNECTION_STATE_CHANGED");
-        intentFilter.addAction("systemui.power.action.START_FLIPENDO");
         Resources resources = context.getResources();
         if (resources.getBoolean(2131034119)) {
             powerNotificationWarningsGoogleImpl.mBatteryDefenderNotificationHandler = new BatteryDefenderNotificationHandler(context, uiEventLogger, executor);
@@ -84,11 +82,6 @@ public final /* synthetic */ class PowerNotificationWarningsGoogleImpl$$External
         if (resources.getBoolean(2131034150)) {
             powerNotificationWarningsGoogleImpl.mIncompatibleChargerNotification = new IncompatibleChargerNotification(context, uiEventLogger);
             intentFilter.addAction("systemui.power.action.dismissIncompatibleChargerWarning");
-        }
-        if (resources.getBoolean(2131034202)) {
-            powerNotificationWarningsGoogleImpl.mWirelessChargingNotification = new WirelessChargingNotification(context, uiEventLogger);
-            intentFilter.addAction("systemui.power.action.dismissWirelessChargingNotification");
-            intentFilter.addAction("systemui.power.action.disableWirelessChargingNotification");
         }
         BroadcastReceiver broadcastReceiver = powerNotificationWarningsGoogleImpl.mBroadcastReceiver;
         Handler handler = powerNotificationWarningsGoogleImpl.mHandler;

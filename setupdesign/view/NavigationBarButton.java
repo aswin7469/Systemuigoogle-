@@ -8,10 +8,10 @@ import android.graphics.drawable.LayerDrawable;
 import android.util.AttributeSet;
 import android.widget.Button;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class NavigationBarButton extends Button {
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class TintedDrawable extends LayerDrawable {
         public ColorStateList tintList;
 
@@ -107,12 +107,16 @@ public class NavigationBarButton extends Button {
         ColorStateList textColors = getTextColors();
         if (textColors != null) {
             Drawable[] compoundDrawables = getCompoundDrawables();
+            Drawable drawable = compoundDrawables[0];
+            Drawable drawable2 = compoundDrawables[1];
+            Drawable drawable3 = compoundDrawables[2];
+            Drawable drawable4 = compoundDrawables[3];
             Drawable[] compoundDrawablesRelative = getCompoundDrawablesRelative();
-            Drawable[] drawableArr = {compoundDrawables[0], compoundDrawables[1], compoundDrawables[2], compoundDrawables[3], compoundDrawablesRelative[0], compoundDrawablesRelative[2]};
+            Drawable[] drawableArr = {drawable, drawable2, drawable3, drawable4, compoundDrawablesRelative[0], compoundDrawablesRelative[2]};
             for (int i = 0; i < 6; i++) {
-                Drawable drawable = drawableArr[i];
-                if (drawable instanceof TintedDrawable) {
-                    TintedDrawable tintedDrawable = (TintedDrawable) drawable;
+                Drawable drawable5 = drawableArr[i];
+                if (drawable5 instanceof TintedDrawable) {
+                    TintedDrawable tintedDrawable = (TintedDrawable) drawable5;
                     tintedDrawable.tintList = textColors;
                     tintedDrawable.setColorFilter(textColors.getColorForState(tintedDrawable.getState(), 0), PorterDuff.Mode.SRC_IN);
                     tintedDrawable.invalidateSelf();

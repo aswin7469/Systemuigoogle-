@@ -5,7 +5,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.provider.Settings;
 import androidx.appcompat.app.AppCompatDelegateImpl$$ExternalSyntheticOutline0;
+import com.android.systemui.assist.AssistManager;
 import com.android.systemui.shade.ShadeController;
+import com.android.systemui.shade.ShadeControllerImpl;
 import com.android.systemui.tuner.TunerService;
 import com.google.android.systemui.assist.AssistManagerGoogle;
 import com.google.android.systemui.assist.OpaEnabledListener;
@@ -16,9 +18,9 @@ import com.google.android.systemui.elmyra.sensors.GestureSensor;
 import java.util.Collections;
 import java.util.concurrent.Executor;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class LaunchOpa extends Action implements TunerService.Tunable {
-    public final AssistManagerGoogle mAssistManager;
+    public final AssistManager mAssistManager;
     public final Context mContext;
     public boolean mEnableForAnyAssistant;
     public boolean mIsGestureEnabled;
@@ -27,7 +29,7 @@ public final class LaunchOpa extends Action implements TunerService.Tunable {
     public final AnonymousClass1 mOpaEnabledListener;
     public final ShadeController mShadeController;
 
-    public LaunchOpa(Context context, Executor executor, ShadeController shadeController, AssistManagerGoogle assistManagerGoogle, KeyguardManager keyguardManager, TunerService tunerService, AssistInvocationEffect assistInvocationEffect) {
+    public LaunchOpa(Context context, Executor executor, ShadeController shadeController, AssistManager assistManager, KeyguardManager keyguardManager, TunerService tunerService, AssistInvocationEffect assistInvocationEffect) {
         super(executor, Collections.singletonList(assistInvocationEffect));
         boolean z;
         AnonymousClass1 r4 = new OpaEnabledListener() {
@@ -51,7 +53,7 @@ public final class LaunchOpa extends Action implements TunerService.Tunable {
         };
         this.mContext = context;
         this.mShadeController = shadeController;
-        this.mAssistManager = assistManagerGoogle;
+        this.mAssistManager = assistManager;
         this.mKeyguardManager = keyguardManager;
         boolean z2 = true;
         if (Settings.Secure.getIntForUser(context.getContentResolver(), "assist_gesture_enabled", 1, -2) != 0) {
@@ -63,7 +65,7 @@ public final class LaunchOpa extends Action implements TunerService.Tunable {
         new UserContentObserver(context, Settings.Secure.getUriFor("assist_gesture_enabled"), new LaunchOpa$$ExternalSyntheticLambda0(this), true);
         tunerService.addTunable(this, "assist_gesture_any_assistant");
         this.mEnableForAnyAssistant = Settings.Secure.getInt(context.getContentResolver(), "assist_gesture_any_assistant", 0) != 1 ? false : z2;
-        assistManagerGoogle.addOpaEnabledListener(r4);
+        ((AssistManagerGoogle) assistManager).addOpaEnabledListener(r4);
     }
 
     public final boolean isAvailable() {
@@ -93,7 +95,7 @@ public final class LaunchOpa extends Action implements TunerService.Tunable {
 
     public final void onTrigger(GestureSensor.DetectionProperties detectionProperties) {
         long j;
-        this.mShadeController.cancelExpansionAndCollapseShade();
+        ((ShadeControllerImpl) this.mShadeController).cancelExpansionAndCollapseShade();
         triggerFeedbackEffects(detectionProperties);
         if (detectionProperties != null) {
             j = detectionProperties.mActionId;
@@ -106,7 +108,7 @@ public final class LaunchOpa extends Action implements TunerService.Tunable {
     public final void onTuningChanged(String str, String str2) {
         if ("assist_gesture_any_assistant".equals(str)) {
             this.mEnableForAnyAssistant = "1".equals(str2);
-            OpaEnabledReceiver opaEnabledReceiver = this.mAssistManager.mOpaEnabledReceiver;
+            OpaEnabledReceiver opaEnabledReceiver = ((AssistManagerGoogle) this.mAssistManager).mOpaEnabledReceiver;
             opaEnabledReceiver.dispatchOpaEnabledState(opaEnabledReceiver.mContext);
         }
     }

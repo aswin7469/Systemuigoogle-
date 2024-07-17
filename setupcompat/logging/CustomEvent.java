@@ -7,7 +7,7 @@ import com.google.android.setupcompat.internal.Preconditions;
 import com.google.android.setupcompat.internal.Validations;
 import java.util.Arrays;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class CustomEvent implements Parcelable {
     public static final Parcelable.Creator CREATOR = new Object();
     static final int MAX_STR_LENGTH = 50;
@@ -18,7 +18,7 @@ public final class CustomEvent implements Parcelable {
     public final long timestampMillis;
 
     /* renamed from: com.google.android.setupcompat.logging.CustomEvent$1  reason: invalid class name */
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class AnonymousClass1 implements Parcelable.Creator {
         public final Object createFromParcel(Parcel parcel) {
             return new CustomEvent(parcel.readLong(), (MetricKey) parcel.readParcelable(MetricKey.class.getClassLoader()), parcel.readPersistableBundle(MetricKey.class.getClassLoader()), parcel.readPersistableBundle(MetricKey.class.getClassLoader()));

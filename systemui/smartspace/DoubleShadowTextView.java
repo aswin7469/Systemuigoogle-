@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 import androidx.core.graphics.ColorUtils;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class DoubleShadowTextView extends TextView {
     public final float mAmbientShadowBlur;
     public final int mAmbientShadowColor;
@@ -53,10 +53,10 @@ public class DoubleShadowTextView extends TextView {
     public DoubleShadowTextView(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
         this.mDrawShadow = ColorUtils.calculateLuminance(getCurrentTextColor()) > 0.5d;
-        this.mKeyShadowBlur = (float) context.getResources().getDimensionPixelSize(2131166028);
-        this.mKeyShadowOffsetX = (float) context.getResources().getDimensionPixelSize(2131166026);
-        this.mKeyShadowOffsetY = (float) context.getResources().getDimensionPixelSize(2131166027);
-        this.mKeyShadowColor = context.getResources().getColor(2131099920);
+        this.mKeyShadowBlur = (float) context.getResources().getDimensionPixelSize(2131165992);
+        this.mKeyShadowOffsetX = (float) context.getResources().getDimensionPixelSize(2131165990);
+        this.mKeyShadowOffsetY = (float) context.getResources().getDimensionPixelSize(2131165991);
+        this.mKeyShadowColor = context.getResources().getColor(2131099905);
         this.mAmbientShadowBlur = (float) context.getResources().getDimensionPixelSize(2131165334);
         this.mAmbientShadowColor = context.getResources().getColor(2131099706);
     }

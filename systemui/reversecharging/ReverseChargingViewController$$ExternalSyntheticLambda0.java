@@ -1,6 +1,5 @@
 package com.google.android.systemui.reversecharging;
 
-import android.content.res.Resources;
 import android.text.TextUtils;
 import android.util.Log;
 import com.android.settingslib.Utils;
@@ -9,10 +8,9 @@ import com.android.systemui.statusbar.phone.StatusBarIconControllerImpl;
 import com.android.systemui.statusbar.policy.BatteryControllerImpl;
 import com.google.android.systemui.ambientmusic.AmbientIndicationContainer;
 import com.google.android.systemui.statusbar.KeyguardIndicationControllerGoogle;
-import java.text.NumberFormat;
 import java.util.Objects;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final /* synthetic */ class ReverseChargingViewController$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ ReverseChargingViewController f$0;
 
@@ -56,11 +54,7 @@ public final /* synthetic */ class ReverseChargingViewController$$ExternalSynthe
                     Log.d("ReverseChargingViewCtrl", sb.toString());
                 }
             } else {
-                Resources resources = reverseChargingViewController.mContext.getResources();
-                String str4 = reverseChargingViewController.mName;
-                int i = reverseChargingViewController.mLevel;
-                int i2 = Utils.$r8$clinit;
-                String string = resources.getString(2131953700, new Object[]{str4, NumberFormat.getPercentInstance().format(((double) i) / 100.0d)});
+                String string = reverseChargingViewController.mContext.getResources().getString(2131953659, new Object[]{reverseChargingViewController.mName, Utils.formatPercentage(reverseChargingViewController.mLevel)});
                 if (ReverseChargingViewController.DEBUG) {
                     Log.d("ReverseChargingViewCtrl", "updateMessage(): rtx=" + (reverseChargingViewController.mReverse ? 1 : 0) + " wlcString=" + string);
                 }
@@ -75,7 +69,7 @@ public final /* synthetic */ class ReverseChargingViewController$$ExternalSynthe
         }
         StatusBarIconController statusBarIconController = reverseChargingViewController.mStatusBarIconController;
         StatusBarIconControllerImpl statusBarIconControllerImpl = (StatusBarIconControllerImpl) statusBarIconController;
-        statusBarIconControllerImpl.setIcon(reverseChargingViewController.mContentDescription, reverseChargingViewController.mSlotReverseCharging, 2131233030);
+        statusBarIconControllerImpl.setIcon(reverseChargingViewController.mContentDescription, reverseChargingViewController.mSlotReverseCharging, 2131232988);
         ((StatusBarIconControllerImpl) reverseChargingViewController.mStatusBarIconController).setIconVisibility(reverseChargingViewController.mSlotReverseCharging, reverseChargingViewController.mProvidingBattery);
     }
 }

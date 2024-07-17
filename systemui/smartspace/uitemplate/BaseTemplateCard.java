@@ -33,7 +33,7 @@ import com.google.android.systemui.smartspace.logging.BcSmartspaceSubcardLogging
 import com.google.android.systemui.smartspace.utils.ContentDescriptionUtil;
 import java.util.List;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class BaseTemplateCard extends ConstraintLayout {
     public IcuDateTextView mDateView;
     public float mDozeAmount;
@@ -96,17 +96,17 @@ public class BaseTemplateCard extends ConstraintLayout {
 
     public final void onFinishInflate() {
         super.onFinishInflate();
-        this.mTextGroup = (ViewGroup) findViewById(2131363843);
-        this.mSecondaryCardPane = (ViewGroup) findViewById(2131363567);
-        this.mDateView = (IcuDateTextView) findViewById(2131362381);
-        this.mTitleTextView = (DoubleShadowTextView) findViewById(2131363874);
-        this.mSubtitleGroup = (ViewGroup) findViewById(2131363663);
-        this.mSubtitleTextView = (DoubleShadowTextView) findViewById(2131363741);
-        this.mSubtitleSupplementalView = (DoubleShadowTextView) findViewById(2131362065);
-        ViewGroup viewGroup = (ViewGroup) findViewById(2131363661);
+        this.mTextGroup = (ViewGroup) findViewById(2131363809);
+        this.mSecondaryCardPane = (ViewGroup) findViewById(2131363538);
+        this.mDateView = (IcuDateTextView) findViewById(2131362361);
+        this.mTitleTextView = (DoubleShadowTextView) findViewById(2131363840);
+        this.mSubtitleGroup = (ViewGroup) findViewById(2131363631);
+        this.mSubtitleTextView = (DoubleShadowTextView) findViewById(2131363708);
+        this.mSubtitleSupplementalView = (DoubleShadowTextView) findViewById(2131362060);
+        ViewGroup viewGroup = (ViewGroup) findViewById(2131363629);
         this.mExtrasGroup = viewGroup;
         if (viewGroup != null) {
-            this.mSupplementalLineTextView = (DoubleShadowTextView) viewGroup.findViewById(2131363792);
+            this.mSupplementalLineTextView = (DoubleShadowTextView) viewGroup.findViewById(2131363758);
         }
     }
 
@@ -116,7 +116,7 @@ public class BaseTemplateCard extends ConstraintLayout {
             doubleShadowTextView.setOnClickListener((View.OnClickListener) null);
             doubleShadowTextView.setContentDescription((CharSequence) null);
             doubleShadowTextView.setText((CharSequence) null);
-            BcSmartspaceTemplateDataUtils.offsetTextViewForIcon(doubleShadowTextView, (DoubleShadowIconDrawable) null, isRtl$1());
+            BcSmartspaceTemplateDataUtils.offsetTextViewForIcon(doubleShadowTextView, (DoubleShadowIconDrawable) null, isRtl$2());
         }
     }
 
@@ -152,7 +152,7 @@ public class BaseTemplateCard extends ConstraintLayout {
                 return;
             }
             ViewGroup viewGroup3 = this.mTextGroup;
-            if (!isRtl$1()) {
+            if (!isRtl$2()) {
                 i = -1;
             }
             viewGroup3.setTranslationX(((PathInterpolator) Interpolators.EMPHASIZED).getInterpolation(this.mDozeAmount) * ((float) (this.mSecondaryCardPane.getWidth() * i)));
@@ -215,7 +215,7 @@ public class BaseTemplateCard extends ConstraintLayout {
             DoubleShadowIconDrawable doubleShadowIconDrawable = new DoubleShadowIconDrawable(getContext());
             android.graphics.drawable.Icon icon2 = icon.getIcon();
             Context context = getContext();
-            doubleShadowIconDrawable.setIcon(BcSmartSpaceUtil.getIconDrawableWithCustomSize(icon2, context, context.getResources().getDimensionPixelSize(2131165919)));
+            doubleShadowIconDrawable.setIcon(BcSmartSpaceUtil.getIconDrawableWithCustomSize(icon2, context, context.getResources().getDimensionPixelSize(2131165887)));
             doubleShadowTextView.setCompoundDrawablesRelative(doubleShadowIconDrawable, (Drawable) null, (Drawable) null, (Drawable) null);
             if (SmartspaceUtils.isEmpty(text)) {
                 charSequence = "";
@@ -224,7 +224,7 @@ public class BaseTemplateCard extends ConstraintLayout {
             }
             ContentDescriptionUtil.setFormattedContentDescription("SsBaseTemplateCard", doubleShadowTextView, charSequence, icon.getContentDescription());
             updateTextViewIconTint(doubleShadowTextView, icon.shouldTint());
-            BcSmartspaceTemplateDataUtils.offsetTextViewForIcon(doubleShadowTextView, doubleShadowIconDrawable, isRtl$1());
+            BcSmartspaceTemplateDataUtils.offsetTextViewForIcon(doubleShadowTextView, doubleShadowIconDrawable, isRtl$2());
         }
         BcSmartspaceTemplateDataUtils.updateVisibility(doubleShadowTextView, 0);
         BcSmartSpaceUtil.setOnClickListener((View) doubleShadowTextView, this.mTarget, subItemInfo.getTapAction(), (BcSmartspaceDataPlugin.SmartspaceEventNotifier) cardPagerAdapter$onBindViewHolder$1, "SsBaseTemplateCard", this.mLoggingInfo, getSubcardIndex(subItemInfo));
@@ -268,6 +268,6 @@ public class BaseTemplateCard extends ConstraintLayout {
         this.mSubtitleSupplementalView = null;
         this.mExtrasGroup = null;
         this.mSupplementalLineTextView = null;
-        context.getTheme().applyStyle(2132017753, false);
+        context.getTheme().applyStyle(2132017752, false);
     }
 }

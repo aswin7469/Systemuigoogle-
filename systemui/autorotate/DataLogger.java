@@ -14,13 +14,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class DataLogger {
     public Queue mDataQueue;
     public long mLastPullTimeNanos;
     public StatsManager mStatsManager;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class StatsPullAtomCallbackImpl implements StatsManager.StatsPullAtomCallback {
         public StatsPullAtomCallbackImpl() {
         }
@@ -83,7 +83,7 @@ public final class DataLogger {
                 }
                 return 0;
             }
-            throw new UnsupportedOperationException(VendorAtomValue$1$$ExternalSyntheticOutline0.m(i3, "Unknown tagId: "));
+            throw new UnsupportedOperationException(VendorAtomValue$1$$ExternalSyntheticOutline0.m("Unknown tagId: ", i3));
         }
     }
 }

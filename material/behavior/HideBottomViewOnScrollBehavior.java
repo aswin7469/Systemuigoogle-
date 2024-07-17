@@ -13,14 +13,16 @@ import com.google.android.material.animation.AnimationUtils;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class HideBottomViewOnScrollBehavior extends CoordinatorLayout.Behavior {
+    public int additionalHiddenOffsetY = 0;
     public ViewPropertyAnimator currentAnimator;
     public int currentState = 2;
     public int height = 0;
     public final LinkedHashSet onScrollStateChangedListeners = new LinkedHashSet();
 
-    public HideBottomViewOnScrollBehavior() {
+    public HideBottomViewOnScrollBehavior(Context context, AttributeSet attributeSet) {
+        super(context, attributeSet);
     }
 
     public boolean onLayoutChild(CoordinatorLayout coordinatorLayout, View view, int i) {
@@ -40,7 +42,7 @@ public class HideBottomViewOnScrollBehavior extends CoordinatorLayout.Behavior {
                 this.currentState = 1;
                 Iterator it = linkedHashSet.iterator();
                 if (!it.hasNext()) {
-                    int i4 = this.height;
+                    int i4 = this.height + this.additionalHiddenOffsetY;
                     this.currentAnimator = view.animate().translationY((float) i4).setInterpolator(AnimationUtils.FAST_OUT_LINEAR_IN_INTERPOLATOR).setDuration(175).setListener(new AnimatorListenerAdapter() {
                         public final void onAnimationEnd(Animator animator) {
                             HideBottomViewOnScrollBehavior.this.currentAnimator = null;
@@ -72,13 +74,13 @@ public class HideBottomViewOnScrollBehavior extends CoordinatorLayout.Behavior {
         }
     }
 
-    public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, View view, View view2, int i, int i2) {
+    public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, View view, View view2, View view3, int i, int i2) {
         if (i == 2) {
             return true;
         }
         return false;
     }
 
-    public HideBottomViewOnScrollBehavior(Context context, AttributeSet attributeSet) {
+    public HideBottomViewOnScrollBehavior() {
     }
 }

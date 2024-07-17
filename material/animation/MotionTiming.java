@@ -1,15 +1,33 @@
 package com.google.android.material.animation;
 
+import android.animation.Animator;
 import android.animation.TimeInterpolator;
+import android.animation.ValueAnimator;
 import androidx.compose.runtime.Anchor$$ExternalSyntheticOutline0;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class MotionTiming {
     public long delay;
     public long duration;
-    public TimeInterpolator interpolator;
-    public int repeatCount;
-    public int repeatMode;
+    public TimeInterpolator interpolator = null;
+    public int repeatCount = 0;
+    public int repeatMode = 1;
+
+    public MotionTiming(long j) {
+        this.delay = j;
+        this.duration = 150;
+    }
+
+    public final void apply(Animator animator) {
+        animator.setStartDelay(this.delay);
+        animator.setDuration(this.duration);
+        animator.setInterpolator(getInterpolator());
+        if (animator instanceof ValueAnimator) {
+            ValueAnimator valueAnimator = (ValueAnimator) animator;
+            valueAnimator.setRepeatCount(this.repeatCount);
+            valueAnimator.setRepeatMode(this.repeatMode);
+        }
+    }
 
     public final boolean equals(Object obj) {
         if (this == obj) {

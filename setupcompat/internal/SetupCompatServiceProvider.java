@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicReference;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class SetupCompatServiceProvider {
     static final Intent COMPAT_SERVICE_INTENT = new Intent().setPackage(PartnerConfigHelper.SUW_PACKAGE_NAME).setAction("com.google.android.setupcompat.SetupCompatService.BIND");
     public static final Logger LOG = new Logger("SetupCompatServiceProvider");
@@ -63,7 +63,7 @@ public final class SetupCompatServiceProvider {
     };
     public volatile ServiceContext serviceContext = new ServiceContext(State.NOT_STARTED);
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     enum State {
     }
 
@@ -270,7 +270,7 @@ public final class SetupCompatServiceProvider {
         throw new TimeoutException("Failed to acquire connection after [" + j + " " + timeUnit + "]");
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     final class ServiceContext {
         public final ISetupCompatService compatService;
         public final State state;

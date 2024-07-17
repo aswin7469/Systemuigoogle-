@@ -13,7 +13,7 @@ import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
-import androidx.compose.foundation.text.ValidatingOffsetMappingKt$$ExternalSyntheticOutline0;
+import androidx.compose.foundation.text.ValidatingOffsetMapping$$ExternalSyntheticOutline0;
 import androidx.exifinterface.media.ExifInterface$$ExternalSyntheticOutline0;
 import com.android.internal.logging.MetricsLogger;
 import com.android.settingslib.bluetooth.LocalBluetoothLeBroadcast$3$$ExternalSyntheticOutline0;
@@ -23,13 +23,13 @@ import com.android.systemui.plugins.FalsingManager;
 import com.android.systemui.plugins.qs.QSTile;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.qs.QSHost;
-import com.android.systemui.qs.QsEventLoggerImpl;
+import com.android.systemui.qs.QsEventLogger;
 import com.android.systemui.qs.logging.QSLogger;
 import com.android.systemui.qs.tileimpl.QSTileImpl;
 import com.android.systemui.statusbar.policy.BatteryController;
 import com.android.systemui.statusbar.policy.BatteryControllerImpl;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ReverseChargingTile extends QSTileImpl implements BatteryController.BatteryStateChangeCallback {
     public static final boolean DEBUG = Log.isLoggable("ReverseChargingTile", 3);
     public final BatteryController mBatteryController;
@@ -55,15 +55,15 @@ public final class ReverseChargingTile extends QSTileImpl implements BatteryCont
             }
             reverseChargingTile.mOverHeat = z;
             if (ReverseChargingTile.DEBUG) {
-                ExifInterface$$ExternalSyntheticOutline0.m("notifyThrottling(): status=", "ReverseChargingTile", status);
+                ExifInterface$$ExternalSyntheticOutline0.m("notifyThrottling(): status=", status, "ReverseChargingTile");
             }
         }
     };
     public final IThermalService mThermalService;
     public int mThresholdLevel;
 
-    public ReverseChargingTile(QSHost qSHost, QsEventLoggerImpl qsEventLoggerImpl, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, BatteryController batteryController, IThermalService iThermalService) {
-        super(qSHost, qsEventLoggerImpl, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
+    public ReverseChargingTile(QSHost qSHost, QsEventLogger qsEventLogger, Looper looper, Handler handler, FalsingManager falsingManager, MetricsLogger metricsLogger, StatusBarStateController statusBarStateController, ActivityStarter activityStarter, QSLogger qSLogger, BatteryController batteryController, IThermalService iThermalService) {
+        super(qSHost, qsEventLogger, looper, handler, falsingManager, metricsLogger, statusBarStateController, activityStarter, qSLogger);
         this.mBatteryController = batteryController;
         batteryController.observe(this.mLifecycle, this);
         this.mThermalService = iThermalService;
@@ -80,7 +80,7 @@ public final class ReverseChargingTile extends QSTileImpl implements BatteryCont
     }
 
     public final CharSequence getTileLabel() {
-        return this.mContext.getString(2131953703);
+        return this.mContext.getString(2131953662);
     }
 
     public final void handleClick(View view) {
@@ -180,9 +180,9 @@ public final class ReverseChargingTile extends QSTileImpl implements BatteryCont
         }
         booleanState.state = i3;
         if (z) {
-            i2 = 2131233465;
+            i2 = 2131233410;
         } else {
-            i2 = 2131233464;
+            i2 = 2131233409;
         }
         booleanState.icon = QSTileImpl.ResourceIcon.get(i2);
         CharSequence tileLabel = getTileLabel();
@@ -192,13 +192,13 @@ public final class ReverseChargingTile extends QSTileImpl implements BatteryCont
         boolean z4 = this.mOverHeat;
         Context context = this.mContext;
         if (z4) {
-            str = context.getString(2131954009);
+            str = context.getString(2131953957);
         } else if (this.mPowerSave) {
-            str = context.getString(2131953605);
+            str = context.getString(2131953564);
         } else if (z2) {
-            str = context.getString(2131954368);
+            str = context.getString(2131954311);
         } else if (i != 0) {
-            str = context.getString(2131953025);
+            str = context.getString(2131952989);
         } else {
             str = null;
         }
@@ -237,7 +237,7 @@ public final class ReverseChargingTile extends QSTileImpl implements BatteryCont
 
     public final void onReverseChanged(int i, String str, boolean z) {
         if (DEBUG) {
-            StringBuilder m = ValidatingOffsetMappingKt$$ExternalSyntheticOutline0.m("onReverseChanged(): rtx=", z ? 1 : 0, ",level=", i, ",name=");
+            StringBuilder m = ValidatingOffsetMapping$$ExternalSyntheticOutline0.m("onReverseChanged(): rtx=", z ? 1 : 0, ",level=", i, ",name=");
             m.append(str);
             m.append(",this=");
             m.append(this);

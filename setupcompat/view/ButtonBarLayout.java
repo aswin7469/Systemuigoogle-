@@ -10,7 +10,7 @@ import com.google.android.setupcompat.util.Logger;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class ButtonBarLayout extends LinearLayout {
     public static final Logger LOG = new Logger("ButtonBarLayout");
     public int originalPaddingLeft;
@@ -72,11 +72,11 @@ public class ButtonBarLayout extends LinearLayout {
                 View childAt = getChildAt(i2);
                 LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) childAt.getLayoutParams();
                 if (z) {
-                    childAt.setTag(2131363742, Float.valueOf(layoutParams.weight));
+                    childAt.setTag(2131363709, Float.valueOf(layoutParams.weight));
                     layoutParams.weight = 0.0f;
                     layoutParams.leftMargin = 0;
                 } else {
-                    Float f = (Float) childAt.getTag(2131363742);
+                    Float f = (Float) childAt.getTag(2131363709);
                     if (f != null) {
                         layoutParams.weight = f.floatValue();
                     } else {

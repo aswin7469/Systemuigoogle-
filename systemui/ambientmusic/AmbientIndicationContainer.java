@@ -35,13 +35,15 @@ import com.android.systemui.plugins.ActivityStarter;
 import com.android.systemui.plugins.statusbar.StatusBarStateController;
 import com.android.systemui.power.domain.interactor.PowerInteractor;
 import com.android.systemui.shade.NotificationPanelViewController;
+import com.android.systemui.shade.ShadeSurface;
 import com.android.systemui.shade.ShadeViewController;
 import com.android.systemui.statusbar.NotificationMediaManager;
+import com.android.systemui.util.wakelock.DelayedWakeLock;
 import com.android.systemui.util.wakelock.WakeLock;
-import com.google.android.systemui.dagger.DaggerSysUIGoogleGlobalRootComponent$SysUIGoogleSysUIComponentImpl$SwitchingProvider$11;
+import com.android.systemui.util.wakelock.WakeLockLogger;
 import java.util.Objects;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class AmbientIndicationContainer extends AutoReinflateContainer implements DozeReceiver, StatusBarStateController.StateListener, NotificationMediaManager.MediaListener {
     public static final /* synthetic */ int $r8$clinit = 0;
     public ActivityStarter mActivityStarter;
@@ -54,10 +56,9 @@ public class AmbientIndicationContainer extends AutoReinflateContainer implement
     public CharSequence mAmbientMusicText;
     public boolean mAmbientSkipUnlock;
     public int mBottomMarginPx;
-    public DaggerSysUIGoogleGlobalRootComponent$SysUIGoogleSysUIComponentImpl$SwitchingProvider$11 mDelayedWakeLockFactory;
     public boolean mDozing;
     public PendingIntent mFavoritingIntent;
-    public final Handler mHandler = new Handler(Looper.getMainLooper());
+    public final Handler mHandler;
     public final Rect mIconBounds = new Rect();
     public String mIconDescription;
     public int mIconOverride = -1;
@@ -75,13 +76,13 @@ public class AmbientIndicationContainer extends AutoReinflateContainer implement
     public int mTextColor;
     public ValueAnimator mTextColorAnimator;
     public TextView mTextView;
-    public WakeLock mWakeLock;
+    public final WakeLock mWakeLock;
     public CharSequence mWirelessChargingMessage;
 
     public static void $r8$lambda$DFan0h9JQgIimo3ogLWaY_C9MMU(AmbientIndicationContainer ambientIndicationContainer) {
-        ambientIndicationContainer.mTextView = (TextView) ambientIndicationContainer.findViewById(2131361970);
-        ambientIndicationContainer.mIconView = (ImageView) ambientIndicationContainer.findViewById(2131361968);
-        ambientIndicationContainer.mAmbientIndicationContainer = (ConstraintLayout) ambientIndicationContainer.findViewById(2131361966);
+        ambientIndicationContainer.mTextView = (TextView) ambientIndicationContainer.findViewById(2131361965);
+        ambientIndicationContainer.mIconView = (ImageView) ambientIndicationContainer.findViewById(2131361963);
+        ambientIndicationContainer.mAmbientIndicationContainer = (ConstraintLayout) ambientIndicationContainer.findViewById(2131361961);
         ConstraintSet constraintSet = new ConstraintSet();
         if (ambientIndicationContainer.mKeyguardUpdateMonitor.mAuthController.isUdfpsSupported()) {
             constraintSet.load(2132213760, ambientIndicationContainer.mContext);
@@ -106,6 +107,9 @@ public class AmbientIndicationContainer extends AutoReinflateContainer implement
 
     public AmbientIndicationContainer(Context context, AttributeSet attributeSet) {
         super(context, attributeSet);
+        Handler handler = new Handler(Looper.getMainLooper());
+        this.mHandler = handler;
+        this.mWakeLock = createWakeLock(this.mContext, handler);
     }
 
     public static void sendBroadcastWithoutDismissingKeyguard(PendingIntent pendingIntent) {
@@ -118,21 +122,19 @@ public class AmbientIndicationContainer extends AutoReinflateContainer implement
         }
     }
 
-    public WakeLock createWakeLock() {
-        return this.mDelayedWakeLockFactory.create("AmbientIndication");
+    public WakeLock createWakeLock(Context context, Handler handler) {
+        return new DelayedWakeLock(handler, WakeLock.createPartial(context, (WakeLockLogger) null, "AmbientIndication", 20000));
     }
 
     public final void dozeTimeTick() {
         updatePill();
     }
 
-    public final void initializeView(ShadeViewController shadeViewController, PowerInteractor powerInteractor, KeyguardUpdateMonitor keyguardUpdateMonitor, ActivityStarter activityStarter, DaggerSysUIGoogleGlobalRootComponent$SysUIGoogleSysUIComponentImpl$SwitchingProvider$11 daggerSysUIGoogleGlobalRootComponent$SysUIGoogleSysUIComponentImpl$SwitchingProvider$11) {
-        this.mShadeViewController = shadeViewController;
+    public final void initializeView(ShadeSurface shadeSurface, PowerInteractor powerInteractor, KeyguardUpdateMonitor keyguardUpdateMonitor, ActivityStarter activityStarter) {
+        this.mShadeViewController = shadeSurface;
         this.mPowerInteractor = powerInteractor;
         this.mKeyguardUpdateMonitor = keyguardUpdateMonitor;
         this.mActivityStarter = activityStarter;
-        this.mDelayedWakeLockFactory = daggerSysUIGoogleGlobalRootComponent$SysUIGoogleSysUIComponentImpl$SwitchingProvider$11;
-        this.mWakeLock = createWakeLock();
         this.mInflateListeners.add(new AmbientIndicationContainer$$ExternalSyntheticLambda2(this));
         getChildAt(0);
         $r8$lambda$DFan0h9JQgIimo3ogLWaY_C9MMU(this);
@@ -223,25 +225,25 @@ public class AmbientIndicationContainer extends AutoReinflateContainer implement
             Context context = this.mContext;
             switch (i) {
                 case 1:
-                    drawable = context.getDrawable(2131232984);
+                    drawable = context.getDrawable(2131232942);
                     break;
                 case 3:
-                    drawable = context.getDrawable(2131232981);
+                    drawable = context.getDrawable(2131232940);
                     break;
                 case 4:
-                    drawable = context.getDrawable(2131232517);
+                    drawable = context.getDrawable(2131232500);
                     break;
                 case 5:
-                    drawable = context.getDrawable(2131232686);
+                    drawable = context.getDrawable(2131232668);
                     break;
                 case 6:
-                    drawable = context.getDrawable(2131232687);
+                    drawable = context.getDrawable(2131232669);
                     break;
                 case ViewNode.WIDTH_FIELD_NUMBER:
-                    drawable = context.getDrawable(2131232679);
+                    drawable = context.getDrawable(2131232662);
                     break;
                 case 8:
-                    drawable = context.getDrawable(2131232688);
+                    drawable = context.getDrawable(2131232670);
                     break;
                 default:
                     drawable = null;
@@ -323,8 +325,6 @@ public class AmbientIndicationContainer extends AutoReinflateContainer implement
         this.mTextColorAnimator.start();
     }
 
-    /* JADX WARNING: type inference failed for: r2v2, types: [java.lang.Object, java.lang.Runnable] */
-    /* JADX WARNING: type inference failed for: r2v4, types: [java.lang.Object, java.lang.Runnable] */
     public final void updatePill() {
         boolean z;
         boolean z2;
@@ -332,16 +332,16 @@ public class AmbientIndicationContainer extends AutoReinflateContainer implement
         boolean z4;
         CharSequence charSequence;
         Drawable drawable;
+        boolean z5;
         int i;
         int i2;
+        int i3;
         Drawable drawable2;
         TextView textView = this.mTextView;
         if (textView != null) {
-            int i3 = this.mIndicationTextMode;
-            boolean z5 = true;
+            int i4 = this.mIndicationTextMode;
             this.mIndicationTextMode = 1;
             CharSequence charSequence2 = this.mAmbientMusicText;
-            int i4 = 0;
             if (textView.getVisibility() == 0) {
                 z = true;
             } else {
@@ -395,7 +395,7 @@ public class AmbientIndicationContainer extends AutoReinflateContainer implement
             } else if ((!TextUtils.isEmpty(charSequence2) || z2) && (drawable3 = this.mAmbientIconOverride) == null) {
                 if (z) {
                     if (this.mAmbientMusicNoteIcon == null) {
-                        this.mAmbientMusicNoteIcon = this.mContext.getDrawable(2131232982);
+                        this.mAmbientMusicNoteIcon = this.mContext.getDrawable(2131232941);
                     }
                     drawable2 = this.mAmbientMusicNoteIcon;
                 } else {
@@ -413,11 +413,11 @@ public class AmbientIndicationContainer extends AutoReinflateContainer implement
                 this.mIconBounds.set(0, 0, drawable3.getIntrinsicWidth(), drawable3.getIntrinsicHeight());
                 Rect rect = this.mIconBounds;
                 if (drawable3 == this.mAmbientMusicNoteIcon) {
-                    i = this.mAmbientMusicNoteIconIconSize;
+                    i2 = this.mAmbientMusicNoteIconIconSize;
                 } else {
-                    i = this.mAmbientIndicationIconSize;
+                    i2 = this.mAmbientIndicationIconSize;
                 }
-                MathUtils.fitRect(rect, i);
+                MathUtils.fitRect(rect, i2);
                 drawable = new DrawableWrapper(drawable3) {
                     public final int getIntrinsicHeight() {
                         return AmbientIndicationContainer.this.mIconBounds.height();
@@ -428,36 +428,40 @@ public class AmbientIndicationContainer extends AutoReinflateContainer implement
                     }
                 };
                 if (!TextUtils.isEmpty(charSequence2)) {
-                    i2 = (int) (getResources().getDisplayMetrics().density * 24.0f);
+                    i3 = (int) (getResources().getDisplayMetrics().density * 24.0f);
                 } else {
-                    i2 = 0;
+                    i3 = 0;
                 }
                 TextView textView3 = this.mTextView;
-                textView3.setPaddingRelative(textView3.getPaddingStart(), this.mTextView.getPaddingTop(), i2, this.mTextView.getPaddingBottom());
+                textView3.setPaddingRelative(textView3.getPaddingStart(), this.mTextView.getPaddingTop(), i3, this.mTextView.getPaddingBottom());
             } else {
                 TextView textView4 = this.mTextView;
                 textView4.setPaddingRelative(textView4.getPaddingStart(), this.mTextView.getPaddingTop(), 0, this.mTextView.getPaddingBottom());
                 drawable = drawable3;
             }
             this.mIconView.setImageDrawable(drawable);
-            if (TextUtils.isEmpty(charSequence2) && !z2) {
+            if (!TextUtils.isEmpty(charSequence2) || z2) {
+                z5 = true;
+            } else {
                 z5 = false;
             }
-            if (!z5) {
-                i4 = 8;
+            if (z5) {
+                i = 0;
+            } else {
+                i = 8;
             }
-            this.mTextView.setVisibility(i4);
+            this.mTextView.setVisibility(i);
             if (drawable3 == null) {
                 this.mIconView.setVisibility(8);
             } else {
-                this.mIconView.setVisibility(i4);
+                this.mIconView.setVisibility(i);
             }
             if (!z5) {
                 this.mTextView.animate().cancel();
                 if (drawable3 != null && (drawable3 instanceof AnimatedVectorDrawable)) {
                     ((AnimatedVectorDrawable) drawable3).reset();
                 }
-                this.mHandler.post(this.mWakeLock.wrap(new Object()));
+                this.mHandler.post(this.mWakeLock.wrap(new AmbientIndicationContainer$$ExternalSyntheticLambda1(1)));
             } else if (!z) {
                 this.mWakeLock.acquire("AmbientIndication");
                 if (drawable3 != null && (drawable3 instanceof AnimatedVectorDrawable)) {
@@ -485,8 +489,8 @@ public class AmbientIndicationContainer extends AutoReinflateContainer implement
                         }
                     }
                 }).setInterpolator(Interpolators.DECELERATE_QUINT).start();
-            } else if (i3 == this.mIndicationTextMode) {
-                this.mHandler.post(this.mWakeLock.wrap(new Object()));
+            } else if (i4 == this.mIndicationTextMode) {
+                this.mHandler.post(this.mWakeLock.wrap(new AmbientIndicationContainer$$ExternalSyntheticLambda1(0)));
             } else if (drawable3 != null && (drawable3 instanceof AnimatedVectorDrawable)) {
                 this.mWakeLock.acquire("AmbientIndication");
                 ((AnimatedVectorDrawable) drawable3).start();

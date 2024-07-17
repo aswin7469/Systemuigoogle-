@@ -4,10 +4,10 @@ import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.EditText;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class PasswordToggleEndIconDelegate extends EndIconDelegate {
     public EditText editText;
-    public final int iconResId = 2131232351;
+    public final int iconResId = 2131232339;
     public final PasswordToggleEndIconDelegate$$ExternalSyntheticLambda0 onIconClickListener = new PasswordToggleEndIconDelegate$$ExternalSyntheticLambda0(this);
 
     public PasswordToggleEndIconDelegate(EndCompoundLayout endCompoundLayout, int i) {
@@ -22,7 +22,7 @@ public final class PasswordToggleEndIconDelegate extends EndIconDelegate {
     }
 
     public final int getIconContentDescriptionResId() {
-        return 2131953447;
+        return 2131953407;
     }
 
     public final int getIconDrawableResId() {

@@ -13,7 +13,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.WeakHashMap;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class MonthAdapter extends BaseAdapter {
     public static final int MAXIMUM_GRID_CELLS = ((UtcDates.getUtcCalendarOf((Calendar) null).getMaximum(7) + UtcDates.getUtcCalendarOf((Calendar) null).getMaximum(5)) - 1);
     public static final int MAXIMUM_WEEKS = UtcDates.getUtcCalendarOf((Calendar) null).getMaximum(4);
@@ -70,7 +70,7 @@ public final class MonthAdapter extends BaseAdapter {
             if (r8 != 0) goto L_0x0027
             android.content.Context r8 = r9.getContext()
             android.view.LayoutInflater r8 = android.view.LayoutInflater.from(r8)
-            r0 = 2131558807(0x7f0d0197, float:1.874294E38)
+            r0 = 2131558800(0x7f0d0190, float:1.8742926E38)
             android.view.View r8 = r8.inflate(r0, r9, r1)
             r0 = r8
             android.widget.TextView r0 = (android.widget.TextView) r0
@@ -171,20 +171,14 @@ public final class MonthAdapter extends BaseAdapter {
                 materialShapeDrawable.setFillColor(calendarItemStyle.backgroundColor);
                 materialShapeDrawable.drawableState.strokeWidth = (float) calendarItemStyle.strokeWidth;
                 materialShapeDrawable.invalidateSelf();
-                MaterialShapeDrawable.MaterialShapeDrawableState materialShapeDrawableState = materialShapeDrawable.drawableState;
-                ColorStateList colorStateList = materialShapeDrawableState.strokeColor;
-                ColorStateList colorStateList2 = calendarItemStyle.strokeColor;
-                if (colorStateList != colorStateList2) {
-                    materialShapeDrawableState.strokeColor = colorStateList2;
-                    materialShapeDrawable.onStateChange(materialShapeDrawable.getState());
-                }
-                ColorStateList colorStateList3 = calendarItemStyle.textColor;
-                textView.setTextColor(colorStateList3);
-                RippleDrawable rippleDrawable = new RippleDrawable(colorStateList3.withAlpha(30), materialShapeDrawable, materialShapeDrawable2);
+                materialShapeDrawable.setStrokeColor(calendarItemStyle.strokeColor);
+                ColorStateList colorStateList = calendarItemStyle.textColor;
+                textView.setTextColor(colorStateList);
+                RippleDrawable rippleDrawable = new RippleDrawable(colorStateList.withAlpha(30), materialShapeDrawable, materialShapeDrawable2);
                 Rect rect = calendarItemStyle.insets;
                 InsetDrawable insetDrawable = new InsetDrawable(rippleDrawable, rect.left, rect.top, rect.right, rect.bottom);
                 WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-                textView.setBackground(insetDrawable);
+                ViewCompat.Api16Impl.setBackground(textView, insetDrawable);
                 return;
             }
             textView.setEnabled(true);

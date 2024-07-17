@@ -7,9 +7,9 @@ import com.google.android.systemui.assist.uihints.edgelights.EdgeLightsControlle
 import dagger.Lazy;
 import javax.inject.Provider;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public abstract class NgaUiController_Factory implements Provider {
-    public static NgaUiController newInstance(Context context, Object obj, TouchInsideHandler touchInsideHandler, Object obj2, EdgeLightsController edgeLightsController, GlowController glowController, ScrimController scrimController, TranscriptionController transcriptionController, IconController iconController, Object obj3, StatusBarStateController statusBarStateController, Lazy lazy, Object obj4, AssistantWarmer assistantWarmer, NavBarFadeController navBarFadeController, AssistLogger assistLogger) {
-        return new NgaUiController(context, (TimeoutManager) obj, touchInsideHandler, (OverlayUiHost) obj2, edgeLightsController, glowController, scrimController, transcriptionController, iconController, (LightnessProvider) obj3, statusBarStateController, lazy, (FlingVelocityWrapper) obj4, assistantWarmer, navBarFadeController, assistLogger);
+    public static NgaUiController newInstance(Context context, Object obj, AssistantPresenceHandler assistantPresenceHandler, TouchInsideHandler touchInsideHandler, ColorChangeHandler colorChangeHandler, Object obj2, EdgeLightsController edgeLightsController, GlowController glowController, ScrimController scrimController, TranscriptionController transcriptionController, IconController iconController, Object obj3, StatusBarStateController statusBarStateController, Lazy lazy, Object obj4, AssistantWarmer assistantWarmer, NavBarFadeController navBarFadeController, AssistLogger assistLogger) {
+        return new NgaUiController(context, (TimeoutManager) obj, assistantPresenceHandler, touchInsideHandler, colorChangeHandler, (OverlayUiHost) obj2, edgeLightsController, glowController, scrimController, transcriptionController, iconController, (LightnessProvider) obj3, statusBarStateController, lazy, (FlingVelocityWrapper) obj4, assistantWarmer, navBarFadeController, assistLogger);
     }
 }

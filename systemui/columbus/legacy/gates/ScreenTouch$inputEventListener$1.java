@@ -6,7 +6,7 @@ import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import com.android.systemui.shared.system.InputChannelCompat$InputEventListener;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ScreenTouch$inputEventListener$1 implements InputChannelCompat$InputEventListener {
     public final /* synthetic */ ScreenTouch this$0;
 
@@ -32,7 +32,7 @@ public final class ScreenTouch$inputEventListener$1 implements InputChannelCompa
                     if (action2 != 1) {
                         if (action2 != 5) {
                             if (action2 != 6) {
-                                throw new IllegalStateException(VendorAtomValue$1$$ExternalSyntheticOutline0.m(motionEvent.getAction(), "No valid delay for MotionEvent action: "));
+                                throw new IllegalStateException(VendorAtomValue$1$$ExternalSyntheticOutline0.m("No valid delay for MotionEvent action: ", motionEvent.getAction()));
                             }
                         }
                     }

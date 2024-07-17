@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class LauncherTileService$stub$1 extends Binder implements IInterface {
     public final /* synthetic */ LauncherTileService this$0;
 
@@ -19,7 +19,7 @@ public final class LauncherTileService$stub$1 extends Binder implements IInterfa
         attachInterface(this, "com.google.android.systemui.qs.launcher.ILauncherTileService");
     }
 
-    public final int getMaxTransactionId() {
+    public final /* bridge */ /* synthetic */ int getMaxTransactionId() {
         return 3;
     }
 
@@ -67,6 +67,7 @@ public final class LauncherTileService$stub$1 extends Binder implements IInterfa
         return createTile;
     }
 
+    /* renamed from: getTransactionName$com$google$android$systemui$qs$launcher$ILauncherTileService$Stub */
     public final String getTransactionName(int i) {
         if (i == 1) {
             return "addTileListener";
@@ -84,8 +85,9 @@ public final class LauncherTileService$stub$1 extends Binder implements IInterfa
     }
 
     /* JADX WARNING: type inference failed for: r0v4, types: [com.google.android.systemui.qs.launcher.ILauncherTileListener$Stub$Proxy, java.lang.Object] */
+    /* renamed from: onTransact$com$google$android$systemui$qs$launcher$ILauncherTileService$Stub */
     public final boolean onTransact(int i, Parcel parcel, Parcel parcel2, int i2) {
-        ILauncherTileListener$Stub$Proxy iLauncherTileListener$Stub$Proxy;
+        ILauncherTileListener iLauncherTileListener;
         if (i >= 1 && i <= 16777215) {
             parcel.enforceInterface("com.google.android.systemui.qs.launcher.ILauncherTileService");
         }
@@ -97,19 +99,19 @@ public final class LauncherTileService$stub$1 extends Binder implements IInterfa
             String readString = parcel.readString();
             IBinder readStrongBinder = parcel.readStrongBinder();
             if (readStrongBinder == null) {
-                iLauncherTileListener$Stub$Proxy = null;
+                iLauncherTileListener = null;
             } else {
                 IInterface queryLocalInterface = readStrongBinder.queryLocalInterface("com.google.android.systemui.qs.launcher.ILauncherTileListener");
-                if (queryLocalInterface == null || !(queryLocalInterface instanceof ILauncherTileListener$Stub$Proxy)) {
+                if (queryLocalInterface == null || !(queryLocalInterface instanceof ILauncherTileListener)) {
                     ? obj = new Object();
                     obj.mRemote = readStrongBinder;
-                    iLauncherTileListener$Stub$Proxy = obj;
+                    iLauncherTileListener = obj;
                 } else {
-                    iLauncherTileListener$Stub$Proxy = (ILauncherTileListener$Stub$Proxy) queryLocalInterface;
+                    iLauncherTileListener = (ILauncherTileListener) queryLocalInterface;
                 }
             }
             parcel.enforceNoDataAvail();
-            this.this$0.executor.execute(new LauncherTileService$stub$1$addTileListener$1(this, readString, iLauncherTileListener$Stub$Proxy));
+            this.this$0.executor.execute(new LauncherTileService$stub$1$addTileListener$1(this, readString, iLauncherTileListener));
             parcel2.writeNoException();
         } else if (i == 2) {
             String readString2 = parcel.readString();

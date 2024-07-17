@@ -9,14 +9,14 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
-import androidx.compose.foundation.text.input.internal.RecordingInputConnection$$ExternalSyntheticOutline0;
+import androidx.compose.ui.text.input.RecordingInputConnection$$ExternalSyntheticOutline0;
 import com.android.systemui.plugins.BcSmartspaceDataPlugin;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo;
 import java.util.Locale;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class BcSmartspaceCardShoppingList extends BcSmartspaceCardSecondary {
-    public static final int[] LIST_ITEM_TEXT_VIEW_IDS = {2131362909, 2131362910, 2131362911};
+    public static final int[] LIST_ITEM_TEXT_VIEW_IDS = {2131362887, 2131362888, 2131362889};
     public ImageView mCardPromptIconView;
     public TextView mCardPromptView;
     public TextView mEmptyListMessageView;
@@ -29,10 +29,10 @@ public class BcSmartspaceCardShoppingList extends BcSmartspaceCardSecondary {
 
     public final void onFinishInflate() {
         super.onFinishInflate();
-        this.mCardPromptView = (TextView) findViewById(2131362223);
-        this.mEmptyListMessageView = (TextView) findViewById(2131362524);
-        this.mCardPromptIconView = (ImageView) findViewById(2131362224);
-        this.mListIconView = (ImageView) findViewById(2131362907);
+        this.mCardPromptView = (TextView) findViewById(2131362207);
+        this.mEmptyListMessageView = (TextView) findViewById(2131362503);
+        this.mCardPromptIconView = (ImageView) findViewById(2131362208);
+        this.mListIconView = (ImageView) findViewById(2131362885);
         for (int i = 0; i < 3; i++) {
             this.mListItems[i] = (TextView) findViewById(LIST_ITEM_TEXT_VIEW_IDS[i]);
         }
@@ -103,7 +103,7 @@ public class BcSmartspaceCardShoppingList extends BcSmartspaceCardSecondary {
                     TextView textView3 = this.mListItems[i];
                     if (textView3 == null) {
                         Locale locale = Locale.US;
-                        RecordingInputConnection$$ExternalSyntheticOutline0.m("Missing list item view to update at row: ", "BcSmartspaceCardShoppingList", i + 1);
+                        RecordingInputConnection$$ExternalSyntheticOutline0.m("Missing list item view to update at row: ", i + 1, "BcSmartspaceCardShoppingList");
                         break;
                     }
                     if (i < stringArray.length) {
@@ -128,7 +128,7 @@ public class BcSmartspaceCardShoppingList extends BcSmartspaceCardSecondary {
             TextView textView = this.mListItems[i2];
             if (textView == null) {
                 Locale locale = Locale.US;
-                RecordingInputConnection$$ExternalSyntheticOutline0.m("Missing list item view to update at row: ", "BcSmartspaceCardShoppingList", i2 + 1);
+                RecordingInputConnection$$ExternalSyntheticOutline0.m("Missing list item view to update at row: ", i2 + 1, "BcSmartspaceCardShoppingList");
                 return;
             }
             textView.setTextColor(i);

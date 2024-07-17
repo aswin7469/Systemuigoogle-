@@ -27,7 +27,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.Executor;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ContentSuggestionsServiceClient {
     public static final Random random = new Random();
     public final BundleUtils bundleUtils;
@@ -37,7 +37,7 @@ public final class ContentSuggestionsServiceClient {
     public final UserManager userManager;
 
     /* renamed from: -$$Nest$smgenerateNotificationAction  reason: not valid java name */
-    public static Notification.Action m909$$Nest$smgenerateNotificationAction(Context context2, SuggestParcelables$Entity suggestParcelables$Entity, EntitiesData entitiesData, Uri uri) {
+    public static Notification.Action m819$$Nest$smgenerateNotificationAction(Context context2, SuggestParcelables$Entity suggestParcelables$Entity, EntitiesData entitiesData, Uri uri) {
         String str;
         String str2;
         List list = suggestParcelables$Entity.actions;

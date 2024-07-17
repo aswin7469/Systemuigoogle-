@@ -9,10 +9,10 @@ import kotlin.coroutines.Continuation;
 import kotlin.coroutines.intrinsics.CoroutineSingletons;
 import kotlin.coroutines.jvm.internal.SuspendLambda;
 import kotlin.jvm.functions.Function2;
-import kotlin.text.StringsKt__StringsJVMKt;
+import kotlin.text.StringsKt__StringsKt;
 import kotlinx.coroutines.CoroutineScope;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 final class CameraVisibility$isCameraInForeground$2 extends SuspendLambda implements Function2 {
     int label;
     final /* synthetic */ CameraVisibility this$0;
@@ -47,7 +47,7 @@ final class CameraVisibility$isCameraInForeground$2 extends SuspendLambda implem
                 }
                 obj2 = it.next();
                 ActivityManager.RunningAppProcessInfo runningAppProcessInfo = (ActivityManager.RunningAppProcessInfo) obj2;
-                if (runningAppProcessInfo.uid == i && StringsKt__StringsJVMKt.equals(runningAppProcessInfo.processName, "com.google.android.GoogleCamera", true)) {
+                if (runningAppProcessInfo.uid == i && StringsKt__StringsKt.equals(runningAppProcessInfo.processName, "com.google.android.GoogleCamera", true)) {
                     break;
                 }
             }

@@ -7,7 +7,7 @@ import com.android.keyguard.KeyguardUpdateMonitor;
 import com.android.keyguard.KeyguardUpdateMonitorCallback;
 import com.android.settingslib.fuelgauge.BatteryStatus;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ChargingStatusProvider {
     public final IBatteryStats mBatteryInfo;
     public final BatteryState mBatteryState = new Object();
@@ -17,7 +17,7 @@ public final class ChargingStatusProvider {
     public final KeyguardUpdateMonitor mKeyguardUpdateMonitor;
     public final Resources mResources;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class BatteryState {
         public BatteryStatus mBatteryStatus;
 
@@ -56,7 +56,7 @@ public final class ChargingStatusProvider {
         }
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     class ChargingStatusCallback extends KeyguardUpdateMonitorCallback {
         public ChargingStatusCallback() {
         }
@@ -161,7 +161,7 @@ public final class ChargingStatusProvider {
             double r6 = (double) r0
             java.lang.String r15 = r15.format(r6)
             java.lang.Object[] r15 = new java.lang.Object[]{r15}
-            r0 = 2131952845(0x7f1304cd, float:1.9542144E38)
+            r0 = 2131952810(0x7f1304aa, float:1.9542073E38)
             java.lang.String r15 = r8.getString(r0, r15)
             goto L_0x0186
         L_0x0088:
@@ -172,7 +172,7 @@ public final class ChargingStatusProvider {
             int r6 = r6.level
             boolean r6 = com.android.settingslib.fuelgauge.BatteryStatus.isCharged(r9, r6)
             if (r6 == 0) goto L_0x00a3
-            r15 = 2131952815(0x7f1304af, float:1.9542083E38)
+            r15 = 2131952780(0x7f13048c, float:1.9542012E38)
             java.lang.String r15 = r8.getString(r15)
             goto L_0x0186
         L_0x00a3:
@@ -203,8 +203,8 @@ public final class ChargingStatusProvider {
             r6 = r3
         L_0x00d3:
             boolean r11 = r0.isValid()
-            r12 = 2131952843(0x7f1304cb, float:1.954214E38)
-            r13 = 2131952833(0x7f1304c1, float:1.954212E38)
+            r12 = 2131952808(0x7f1304a8, float:1.954207E38)
+            r13 = 2131952798(0x7f13049e, float:1.9542049E38)
             android.content.Context r15 = r15.mContext
             if (r11 == 0) goto L_0x011b
             com.android.settingslib.fuelgauge.BatteryStatus r11 = r0.mBatteryStatus
@@ -231,19 +231,19 @@ public final class ChargingStatusProvider {
             goto L_0x0158
         L_0x0106:
             if (r6 == 0) goto L_0x010d
-            r2 = 2131952835(0x7f1304c3, float:1.9542124E38)
+            r2 = 2131952800(0x7f1304a0, float:1.9542053E38)
         L_0x010b:
             r12 = r2
             goto L_0x0158
         L_0x010d:
-            r2 = 2131952844(0x7f1304cc, float:1.9542142E38)
+            r2 = 2131952809(0x7f1304a9, float:1.9542071E38)
             goto L_0x010b
         L_0x0111:
             if (r6 == 0) goto L_0x0117
-            r2 = 2131952836(0x7f1304c4, float:1.9542126E38)
+            r2 = 2131952801(0x7f1304a1, float:1.9542055E38)
             goto L_0x010b
         L_0x0117:
-            r2 = 2131952846(0x7f1304ce, float:1.9542146E38)
+            r2 = 2131952811(0x7f1304ab, float:1.9542075E38)
             goto L_0x010b
         L_0x011b:
             boolean r2 = r0.isValid()
@@ -254,10 +254,10 @@ public final class ChargingStatusProvider {
             boolean r2 = r0.isChargingOrFull()
             if (r2 == 0) goto L_0x0137
             if (r6 == 0) goto L_0x0133
-            r2 = 2131952837(0x7f1304c5, float:1.9542128E38)
+            r2 = 2131952802(0x7f1304a2, float:1.9542057E38)
             goto L_0x010b
         L_0x0133:
-            r2 = 2131952849(0x7f1304d1, float:1.9542152E38)
+            r2 = 2131952814(0x7f1304ae, float:1.9542081E38)
             goto L_0x010b
         L_0x0137:
             boolean r2 = r0.isValid()
@@ -269,10 +269,10 @@ public final class ChargingStatusProvider {
             boolean r2 = r0.isChargingOrFull()
             if (r2 == 0) goto L_0x0155
             if (r6 == 0) goto L_0x0151
-            r2 = 2131952834(0x7f1304c2, float:1.9542122E38)
+            r2 = 2131952799(0x7f13049f, float:1.954205E38)
             goto L_0x010b
         L_0x0151:
-            r2 = 2131952847(0x7f1304cf, float:1.9542148E38)
+            r2 = 2131952812(0x7f1304ac, float:1.9542077E38)
             goto L_0x010b
         L_0x0155:
             if (r6 == 0) goto L_0x0158

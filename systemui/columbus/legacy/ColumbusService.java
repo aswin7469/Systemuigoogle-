@@ -18,7 +18,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ColumbusService implements Dumpable {
     public final ColumbusService$actionListener$1 actionListener;
     public final List actions;
@@ -120,7 +120,7 @@ public final class ColumbusService implements Dumpable {
             executionToken2.run();
         }
         ((SystemClockImpl) this.systemClock).getClass();
-        this.removeStopListeningRunnable = this.delayableExecutor.executeDelayed(Math.max(0, 1000 - (android.os.SystemClock.elapsedRealtime() - this.lastStateChangeTimestamp)), this.stopListeningRunnable);
+        this.removeStopListeningRunnable = this.delayableExecutor.executeDelayed(this.stopListeningRunnable, Math.max(0, 1000 - (android.os.SystemClock.elapsedRealtime() - this.lastStateChangeTimestamp)));
     }
 
     public final Action updateActiveAction() {
@@ -191,6 +191,6 @@ public final class ColumbusService implements Dumpable {
             executionToken2.run();
         }
         ((SystemClockImpl) this.systemClock).getClass();
-        this.removeStartListeningRunnable = this.delayableExecutor.executeDelayed(Math.max(0, 1000 - (android.os.SystemClock.elapsedRealtime() - this.lastStateChangeTimestamp)), this.startListeningRunnable);
+        this.removeStartListeningRunnable = this.delayableExecutor.executeDelayed(this.startListeningRunnable, Math.max(0, 1000 - (android.os.SystemClock.elapsedRealtime() - this.lastStateChangeTimestamp)));
     }
 }

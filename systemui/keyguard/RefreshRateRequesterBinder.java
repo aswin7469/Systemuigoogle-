@@ -11,7 +11,7 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineStart;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class RefreshRateRequesterBinder implements CoreStartable {
     public final Lazy interactor;
     public final Resources resources;
@@ -24,11 +24,11 @@ public final class RefreshRateRequesterBinder implements CoreStartable {
     }
 
     public final void dump(PrintWriter printWriter, String[] strArr) {
-        ActiveUnlockConfig$$ExternalSyntheticOutline0.m("enabled: ", this.resources.getBoolean(2131034172), printWriter);
+        ActiveUnlockConfig$$ExternalSyntheticOutline0.m("enabled: ", this.resources.getBoolean(2131034174), printWriter);
     }
 
     public final void start() {
-        if (this.resources.getBoolean(2131034172)) {
+        if (this.resources.getBoolean(2131034174)) {
             BuildersKt.launch$default(this.scope, (CoroutineContext) null, (CoroutineStart) null, new RefreshRateRequesterBinder$start$1(this, (Continuation) null), 3);
         }
     }

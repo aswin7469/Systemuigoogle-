@@ -17,7 +17,7 @@ import com.google.android.material.internal.ThemeEnforcement;
 import com.google.android.material.theme.overlay.MaterialThemeOverlay;
 import java.util.Locale;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class TextInputEditText extends AppCompatEditText {
     public final Rect parentRect;
     public final boolean textInputLayoutFocusedRectEnabled;
@@ -106,9 +106,9 @@ public class TextInputEditText extends AppCompatEditText {
         super(MaterialThemeOverlay.wrap(context, attributeSet, i, 0), attributeSet, i);
         this.parentRect = new Rect();
         int[] iArr = R$styleable.TextInputEditText;
-        ThemeEnforcement.checkCompatibleTheme(context, attributeSet, i, 2132018536);
-        ThemeEnforcement.checkTextAppearance(context, attributeSet, iArr, i, 2132018536, new int[0]);
-        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, iArr, i, 2132018536);
+        ThemeEnforcement.checkCompatibleTheme(context, attributeSet, i, 2132018530);
+        ThemeEnforcement.checkTextAppearance(context, attributeSet, iArr, i, 2132018530, new int[0]);
+        TypedArray obtainStyledAttributes = context.obtainStyledAttributes(attributeSet, iArr, i, 2132018530);
         this.textInputLayoutFocusedRectEnabled = obtainStyledAttributes.getBoolean(0, false);
         obtainStyledAttributes.recycle();
     }

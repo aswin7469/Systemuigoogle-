@@ -21,7 +21,7 @@ import com.android.systemui.plugins.FalsingManager;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLogger;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class DateSmartspaceView extends LinearLayout implements BcSmartspaceDataPlugin.SmartspaceView {
     public static final boolean DEBUG = Log.isLoggable("DateSmartspaceView", 3);
     public final AnonymousClass1 mAodSettingsObserver;
@@ -49,15 +49,16 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         DateSmartspaceView$$ExternalSyntheticLambda0 dateSmartspaceView$$ExternalSyntheticLambda0;
         super.onAttachedToWindow();
         if (TextUtils.equals(this.mUiSurface, BcSmartspaceDataPlugin.UI_SURFACE_LOCK_SCREEN_AOD)) {
-            boolean z = false;
             try {
                 getContext().getContentResolver().registerContentObserver(Settings.Secure.getUriFor("doze_always_on"), false, this.mAodSettingsObserver, -1);
             } catch (Exception e) {
                 Log.w("DateSmartspaceView", "Unable to register DOZE_ALWAYS_ON content observer: ", e);
             }
             Context context = getContext();
-            if (Settings.Secure.getIntForUser(context.getContentResolver(), "doze_always_on", 0, context.getUserId()) == 1) {
-                z = true;
+            int intForUser = Settings.Secure.getIntForUser(context.getContentResolver(), "doze_always_on", 0, context.getUserId());
+            boolean z = true;
+            if (intForUser != 1) {
+                z = false;
             }
             this.mIsAodEnabled = z;
         }
@@ -76,7 +77,7 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         if (bcSmartspaceDataPlugin == null) {
             dateSmartspaceView$$ExternalSyntheticLambda0 = null;
         } else {
-            dateSmartspaceView$$ExternalSyntheticLambda0 = new DateSmartspaceView$$ExternalSyntheticLambda0(bcSmartspaceDataPlugin);
+            dateSmartspaceView$$ExternalSyntheticLambda0 = new DateSmartspaceView$$ExternalSyntheticLambda0(bcSmartspaceDataPlugin, 0);
         }
         BcSmartSpaceUtil.setOnClickListener((View) icuDateTextView, smartspaceTarget, smartspaceAction, (BcSmartspaceDataPlugin.SmartspaceEventNotifier) dateSmartspaceView$$ExternalSyntheticLambda0, "DateSmartspaceView", bcSmartspaceCardLoggingInfo, 0);
     }
@@ -88,9 +89,9 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
 
     public final void onFinishInflate() {
         super.onFinishInflate();
-        this.mDateView = (IcuDateTextView) findViewById(2131362381);
-        this.mNextAlarmTextView = (DoubleShadowTextView) findViewById(2131361941);
-        this.mDndImageView = (ImageView) findViewById(2131362459);
+        this.mDateView = (IcuDateTextView) findViewById(2131362361);
+        this.mNextAlarmTextView = (DoubleShadowTextView) findViewById(2131361940);
+        this.mDndImageView = (ImageView) findViewById(2131362439);
     }
 
     public final void registerDataProvider(BcSmartspaceDataPlugin bcSmartspaceDataPlugin) {
@@ -162,7 +163,7 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
         if (this.mNextAlarmData.mImage == null) {
             BcSmartspaceTemplateDataUtils.updateVisibility(this.mNextAlarmTextView, 8);
         } else {
-            this.mNextAlarmTextView.setContentDescription(getContext().getString(2131951785, new Object[]{str}));
+            this.mNextAlarmTextView.setContentDescription(getContext().getString(2131951782, new Object[]{str}));
             DoubleShadowTextView doubleShadowTextView = this.mNextAlarmTextView;
             BcNextAlarmData bcNextAlarmData2 = this.mNextAlarmData;
             bcNextAlarmData2.getClass();
@@ -175,7 +176,7 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
             doubleShadowTextView.setText(str2);
             DoubleShadowIconDrawable doubleShadowIconDrawable = this.mNextAlarmIconDrawable;
             Drawable drawable2 = this.mNextAlarmData.mImage;
-            int dimensionPixelSize = getContext().getResources().getDimensionPixelSize(2131165919);
+            int dimensionPixelSize = getContext().getResources().getDimensionPixelSize(2131165887);
             drawable2.setBounds(0, 0, dimensionPixelSize, dimensionPixelSize);
             doubleShadowIconDrawable.setIcon(drawable2);
             this.mNextAlarmTextView.setCompoundDrawablesRelative(this.mNextAlarmIconDrawable, (Drawable) null, (Drawable) null, (Drawable) null);
@@ -186,7 +187,7 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
             if (bcSmartspaceDataPlugin == null) {
                 dateSmartspaceView$$ExternalSyntheticLambda0 = null;
             } else {
-                dateSmartspaceView$$ExternalSyntheticLambda0 = new DateSmartspaceView$$ExternalSyntheticLambda0(bcSmartspaceDataPlugin);
+                dateSmartspaceView$$ExternalSyntheticLambda0 = new DateSmartspaceView$$ExternalSyntheticLambda0(bcSmartspaceDataPlugin, 1);
             }
             int loggingDisplaySurface = BcSmartSpaceUtil.getLoggingDisplaySurface(this.mDozeAmount, this.mUiSurface);
             bcNextAlarmData3.getClass();
@@ -195,7 +196,7 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
             DoubleShadowTextView doubleShadowTextView3 = this.mNextAlarmTextView;
             BcSmartspaceDataPlugin bcSmartspaceDataPlugin2 = this.mDataProvider;
             if (bcSmartspaceDataPlugin2 != null) {
-                dateSmartspaceView$$ExternalSyntheticLambda02 = new DateSmartspaceView$$ExternalSyntheticLambda0(bcSmartspaceDataPlugin2);
+                dateSmartspaceView$$ExternalSyntheticLambda02 = new DateSmartspaceView$$ExternalSyntheticLambda0(bcSmartspaceDataPlugin2, 2);
             }
             int loggingDisplaySurface2 = BcSmartSpaceUtil.getLoggingDisplaySurface(this.mDozeAmount, this.mUiSurface);
             bcNextAlarmData4.getClass();
@@ -268,7 +269,7 @@ public class DateSmartspaceView extends LinearLayout implements BcSmartspaceData
                 }
             }
         };
-        context.getTheme().applyStyle(2132017753, false);
+        context.getTheme().applyStyle(2132017752, false);
         this.mNextAlarmIconDrawable = new DoubleShadowIconDrawable(context);
         this.mDndIconDrawable = new DoubleShadowIconDrawable(context);
     }

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.android.systemui.plugins.BcSmartspaceDataPlugin;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class BcSmartspaceCardLoyalty extends BcSmartspaceCardGenericImage {
     public TextView mCardPromptView;
     public ImageView mLoyaltyProgramLogoView;
@@ -24,9 +24,9 @@ public class BcSmartspaceCardLoyalty extends BcSmartspaceCardGenericImage {
 
     public final void onFinishInflate() {
         super.onFinishInflate();
-        this.mLoyaltyProgramLogoView = (ImageView) findViewById(2131362945);
-        this.mLoyaltyProgramNameView = (TextView) findViewById(2131362946);
-        this.mCardPromptView = (TextView) findViewById(2131362223);
+        this.mLoyaltyProgramLogoView = (ImageView) findViewById(2131362921);
+        this.mLoyaltyProgramNameView = (TextView) findViewById(2131362922);
+        this.mCardPromptView = (TextView) findViewById(2131362207);
     }
 
     public final void resetUi() {

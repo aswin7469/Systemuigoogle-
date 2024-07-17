@@ -10,13 +10,13 @@ import com.google.android.systemui.columbus.legacy.ColumbusContentObserver;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import kotlin.collections.CollectionsKt;
-import kotlin.collections.CollectionsKt__IterablesKt;
-import kotlin.collections.SetsKt;
+import kotlin.collections.CollectionsKt__IteratorsJVMKt;
+import kotlin.collections.CollectionsKt___CollectionsKt;
+import kotlin.collections.SetsKt__SetsKt;
 import kotlin.jvm.functions.Function1;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ColumbusSettings {
     public static final Uri COLUMBUS_ACTION_URI;
     public static final Uri COLUMBUS_AP_SENSOR_URI;
@@ -47,7 +47,7 @@ public final class ColumbusSettings {
         COLUMBUS_LOW_SENSITIVITY_URI = uriFor6;
         Uri uriFor7 = Settings.Secure.getUriFor("columbus_silence_alerts");
         COLUMBUS_SILENCE_ALERTS_URI = uriFor7;
-        MONITORED_URIS = SetsKt.setOf(uriFor, uriFor2, uriFor3, uriFor4, uriFor5, uriFor6, uriFor7);
+        MONITORED_URIS = SetsKt__SetsKt.setOf(uriFor, uriFor2, uriFor3, uriFor4, uriFor5, uriFor6, uriFor7);
     }
 
     public ColumbusSettings(Context context, UserTracker userTracker2, ColumbusContentObserver.Factory factory) {
@@ -55,14 +55,14 @@ public final class ColumbusSettings {
         this.backupPackage = context.getBasePackageName();
         this.contentResolver = context.getContentResolver();
         Iterable<Uri> iterable = MONITORED_URIS;
-        ArrayList arrayList = new ArrayList(CollectionsKt__IterablesKt.collectionSizeOrDefault(iterable));
+        ArrayList arrayList = new ArrayList(CollectionsKt__IteratorsJVMKt.collectionSizeOrDefault(iterable));
         for (Uri uri : iterable) {
             Intrinsics.checkNotNull(uri);
             Function1 function1 = this.callback;
             factory.getClass();
             arrayList.add(new ColumbusContentObserver(factory.contentResolver, uri, function1, factory.userTracker, factory.executor, factory.handler));
         }
-        for (ColumbusContentObserver columbusContentObserver : CollectionsKt.toSet(arrayList)) {
+        for (ColumbusContentObserver columbusContentObserver : CollectionsKt___CollectionsKt.toSet(arrayList)) {
             ((UserTrackerImpl) columbusContentObserver.userTracker).addCallback(columbusContentObserver.userTrackerCallback, columbusContentObserver.executor);
             columbusContentObserver.contentResolver.contentResolver.unregisterContentObserver(columbusContentObserver);
             ContentResolverWrapper contentResolverWrapper = columbusContentObserver.contentResolver;
@@ -97,7 +97,7 @@ public final class ColumbusSettings {
         return stringForUser;
     }
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public interface ColumbusSettingsChangeListener {
         void onAlertSilenceEnabledChange(boolean z) {
         }

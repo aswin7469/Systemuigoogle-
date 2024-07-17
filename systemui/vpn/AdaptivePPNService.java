@@ -6,7 +6,7 @@ import com.android.systemui.CoreStartable;
 import dagger.Lazy;
 import java.util.concurrent.Executor;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class AdaptivePPNService implements CoreStartable {
     public final boolean isVpnFeatureEnabled;
     public final Executor uiExecutor;
@@ -19,7 +19,7 @@ public final class AdaptivePPNService implements CoreStartable {
         this.uiExecutor = executor;
         this.vpnNetworkMonitorWrapper = lazy;
         this.vpnPackageMonitorWrapper = lazy2;
-        boolean z = resources.getBoolean(2131034163);
+        boolean z = resources.getBoolean(2131034165);
         this.isVpnFeatureEnabled = z;
         Log.i("AdaptivePPNService", "Wildlife feature enabled is " + z);
     }

@@ -9,7 +9,7 @@ import com.android.systemui.settings.UserFileManagerImpl;
 import com.android.systemui.settings.UserTrackerImpl;
 import com.android.systemui.util.Assert;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class VpnNetworkMonitor$broadcastReceiver$1 extends BroadcastReceiver {
     public final /* synthetic */ VpnNetworkMonitor this$0;
 
@@ -29,7 +29,7 @@ public final class VpnNetworkMonitor$broadcastReceiver$1 extends BroadcastReceiv
             } else {
                 vpnNetworkMonitor.unregisterNetworkCallback();
             }
-            ((UserFileManagerImpl) vpnNetworkMonitor.userFileManager).getSharedPreferences$1(((UserTrackerImpl) vpnNetworkMonitor.userTracker).getUserId(), "network_monitor_index").edit().putBoolean("network_monitor_enabled", booleanExtra).apply();
+            ((UserFileManagerImpl) vpnNetworkMonitor.userFileManager).getSharedPreferences$1("network_monitor_index", ((UserTrackerImpl) vpnNetworkMonitor.userTracker).getUserId()).edit().putBoolean("network_monitor_enabled", booleanExtra).apply();
         }
     }
 }

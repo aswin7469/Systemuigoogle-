@@ -1,6 +1,6 @@
 package com.google.android.systemui.fingerprint;
 
-import com.android.systemui.biometrics.data.repository.FacePropertyRepositoryImpl$cameraInfo$1$callback$1$$ExternalSyntheticOutline0;
+import com.android.systemui.biometrics.data.repository.DisplayStateRepositoryImpl$currentRotation$1$callback$1$$ExternalSyntheticOutline0;
 import com.android.systemui.util.settings.SecureSettingsImpl;
 import kotlin.ResultKt;
 import kotlin.Unit;
@@ -13,7 +13,7 @@ import kotlinx.coroutines.channels.ChannelResult;
 import kotlinx.coroutines.channels.ProduceKt;
 import kotlinx.coroutines.channels.ProducerScope;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 final class FingerprintInteractiveToAuthProviderGoogle$enabledForCurrentUser$1$1 extends SuspendLambda implements Function2 {
     final /* synthetic */ Function0 $getCurrentSettingValue;
     private /* synthetic */ Object L$0;
@@ -46,9 +46,9 @@ final class FingerprintInteractiveToAuthProviderGoogle$enabledForCurrentUser$1$1
             final FingerprintInteractiveToAuthProviderGoogle$enabledForCurrentUser$1$1$callback$1 fingerprintInteractiveToAuthProviderGoogle$enabledForCurrentUser$1$1$callback$1 = new FingerprintInteractiveToAuthProviderGoogle$enabledForCurrentUser$1$1$callback$1(producerScope, this.$getCurrentSettingValue);
             SecureSettingsImpl secureSettingsImpl = (SecureSettingsImpl) this.this$0.secureSettings;
             secureSettingsImpl.registerContentObserver(secureSettingsImpl.getUriFor("sfps_performant_auth_enabled_v2"), true, fingerprintInteractiveToAuthProviderGoogle$enabledForCurrentUser$1$1$callback$1);
-            Object r3 = producerScope.m1783trySendJP2dKIU(this.$getCurrentSettingValue.invoke());
+            Object r3 = producerScope.m1741trySendJP2dKIU(this.$getCurrentSettingValue.invoke());
             if (r3 instanceof ChannelResult.Failed) {
-                FacePropertyRepositoryImpl$cameraInfo$1$callback$1$$ExternalSyntheticOutline0.m("Failed to send ", "emitting initial value", " - downstream canceled or failed.", "FingerprintInteractiveToAuthProviderGoogle", ChannelResult.m1775exceptionOrNullimpl(r3));
+                DisplayStateRepositoryImpl$currentRotation$1$callback$1$$ExternalSyntheticOutline0.m("Failed to send ", "emitting initial value", " - downstream canceled or failed.", "FingerprintInteractiveToAuthProviderGoogle", ChannelResult.m1733exceptionOrNullimpl(r3));
             }
             final FingerprintInteractiveToAuthProviderGoogle fingerprintInteractiveToAuthProviderGoogle = this.this$0;
             AnonymousClass1 r32 = new Function0() {

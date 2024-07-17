@@ -27,7 +27,7 @@ import java.util.Collections;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ScreenshotNotificationSmartActionsProviderGoogle extends ScreenshotNotificationSmartActionsProvider {
     public static final ImmutableMap SCREENSHOT_INTERACTION_TYPE_MAP;
     public static final ImmutableMap SCREENSHOT_OP_MAP;
@@ -35,7 +35,6 @@ public final class ScreenshotNotificationSmartActionsProviderGoogle extends Scre
     public final ContentSuggestionsServiceClient mClient;
 
     static {
-        int i = ImmutableMap.$r8$clinit;
         ImmutableMap.Builder builder = new ImmutableMap.Builder(4);
         builder.put(ScreenshotNotificationSmartActionsProvider.ScreenshotOp.RETRIEVE_SMART_ACTIONS, FeedbackParcelables$ScreenshotOp.RETRIEVE_SMART_ACTIONS);
         builder.put(ScreenshotNotificationSmartActionsProvider.ScreenshotOp.REQUEST_SMART_ACTIONS, FeedbackParcelables$ScreenshotOp.REQUEST_SMART_ACTIONS);
@@ -118,7 +117,7 @@ public final class ScreenshotNotificationSmartActionsProviderGoogle extends Scre
         return completableFuture;
     }
 
-    public final void notifyAction(String str, String str2, boolean z, Intent intent) {
+    public final void notifyAction(Intent intent, String str, String str2, boolean z) {
         ContentSuggestionsServiceClient contentSuggestionsServiceClient = this.mClient;
         contentSuggestionsServiceClient.getClass();
         ContentSuggestionsServiceClient$$ExternalSyntheticLambda0 contentSuggestionsServiceClient$$ExternalSyntheticLambda0 = new ContentSuggestionsServiceClient$$ExternalSyntheticLambda0(contentSuggestionsServiceClient, str, str2, z, intent);

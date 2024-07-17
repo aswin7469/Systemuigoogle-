@@ -16,7 +16,7 @@ import com.google.android.material.chip.Chip;
 import java.util.HashMap;
 import java.util.WeakHashMap;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 class TimePickerView extends ConstraintLayout {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final AnonymousClass1 selectionListener;
@@ -45,13 +45,13 @@ class TimePickerView extends ConstraintLayout {
             ConstraintSet constraintSet = new ConstraintSet();
             constraintSet.clone((ConstraintLayout) this);
             WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-            if (getLayoutDirection() == 0) {
+            if (ViewCompat.Api17Impl.getLayoutDirection(this) == 0) {
                 c = 2;
             } else {
                 c = 1;
             }
             HashMap hashMap = constraintSet.mConstraints;
-            if (hashMap.containsKey(2131362973) && (constraint = (ConstraintSet.Constraint) hashMap.get(2131362973)) != null) {
+            if (hashMap.containsKey(2131362949) && (constraint = (ConstraintSet.Constraint) hashMap.get(2131362949)) != null) {
                 ConstraintSet.Layout layout = constraint.layout;
                 switch (c) {
                     case 1:
@@ -123,14 +123,14 @@ class TimePickerView extends ConstraintLayout {
                 timePickerView.getClass();
             }
         };
-        LayoutInflater.from(context).inflate(2131558761, this);
-        ClockFaceView clockFaceView = (ClockFaceView) findViewById(2131362974);
-        MaterialButtonToggleGroup materialButtonToggleGroup = (MaterialButtonToggleGroup) findViewById(2131362978);
+        LayoutInflater.from(context).inflate(2131558755, this);
+        ClockFaceView clockFaceView = (ClockFaceView) findViewById(2131362950);
+        MaterialButtonToggleGroup materialButtonToggleGroup = (MaterialButtonToggleGroup) findViewById(2131362954);
         this.toggle = materialButtonToggleGroup;
         materialButtonToggleGroup.onButtonCheckedListeners.add(new TimePickerView$$ExternalSyntheticLambda0(this));
-        Chip chip = (Chip) findViewById(2131362983);
-        Chip chip2 = (Chip) findViewById(2131362980);
-        ClockHandView clockHandView = (ClockHandView) findViewById(2131362975);
+        Chip chip = (Chip) findViewById(2131362959);
+        Chip chip2 = (Chip) findViewById(2131362956);
+        ClockHandView clockHandView = (ClockHandView) findViewById(2131362951);
         final GestureDetector gestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
             public final boolean onDoubleTap(MotionEvent motionEvent) {
                 TimePickerView timePickerView = TimePickerView.this;
@@ -149,8 +149,8 @@ class TimePickerView extends ConstraintLayout {
         };
         chip.setOnTouchListener(r3);
         chip2.setOnTouchListener(r3);
-        chip.setTag(2131363589, 12);
-        chip2.setTag(2131363589, 10);
+        chip.setTag(2131363560, 12);
+        chip2.setTag(2131363560, 10);
         chip.setOnClickListener(r5);
         chip2.setOnClickListener(r5);
         chip.accessibilityClassName = "android.view.View";

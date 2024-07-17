@@ -16,14 +16,14 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ElmyraService implements Dumpable {
     public final AnonymousClass1 mActionListener = new Object() {
-        public void onGateChanged(Gate gate) {
+        public final void onGateChanged(Gate gate) {
             ElmyraService.this.updateSensorListener$1();
         }
 
-        public void onGestureDetected(GestureSensor.DetectionProperties detectionProperties) {
+        public final void onGestureDetected(GestureSensor.DetectionProperties detectionProperties) {
             int i;
             long j;
             ElmyraEvent elmyraEvent;
@@ -71,7 +71,7 @@ public final class ElmyraService implements Dumpable {
             elmyraService.mLogger.write(latency);
         }
 
-        public void onGestureProgress(int i, float f) {
+        public final void onGestureProgress(float f, int i) {
             ElmyraService elmyraService = ElmyraService.this;
             Action updateActiveAction = elmyraService.updateActiveAction();
             if (updateActiveAction != null) {
@@ -105,11 +105,11 @@ public final class ElmyraService implements Dumpable {
     public final List mActions;
     public final List mFeedbackEffects;
     public final AnonymousClass1 mGateListener = new Object() {
-        public void onGateChanged(Gate gate) {
+        public final void onGateChanged(Gate gate) {
             ElmyraService.this.updateSensorListener$1();
         }
 
-        public void onGestureDetected(GestureSensor.DetectionProperties detectionProperties) {
+        public final void onGestureDetected(GestureSensor.DetectionProperties detectionProperties) {
             int i;
             long j;
             ElmyraEvent elmyraEvent;
@@ -157,7 +157,7 @@ public final class ElmyraService implements Dumpable {
             elmyraService.mLogger.write(latency);
         }
 
-        public void onGestureProgress(int i, float f) {
+        public final void onGestureProgress(float f, int i) {
             ElmyraService elmyraService = ElmyraService.this;
             Action updateActiveAction = elmyraService.updateActiveAction();
             if (updateActiveAction != null) {
@@ -201,11 +201,11 @@ public final class ElmyraService implements Dumpable {
 
     public ElmyraService(Context context, ServiceConfigurationGoogle serviceConfigurationGoogle, UiEventLogger uiEventLogger) {
         AnonymousClass1 r0 = new Object() {
-            public void onGateChanged(Gate gate) {
+            public final void onGateChanged(Gate gate) {
                 ElmyraService.this.updateSensorListener$1();
             }
 
-            public void onGestureDetected(GestureSensor.DetectionProperties detectionProperties) {
+            public final void onGestureDetected(GestureSensor.DetectionProperties detectionProperties) {
                 int i;
                 long j;
                 ElmyraEvent elmyraEvent;
@@ -253,7 +253,7 @@ public final class ElmyraService implements Dumpable {
                 elmyraService.mLogger.write(latency);
             }
 
-            public void onGestureProgress(int i, float f) {
+            public final void onGestureProgress(float f, int i) {
                 ElmyraService elmyraService = ElmyraService.this;
                 Action updateActiveAction = elmyraService.updateActiveAction();
                 if (updateActiveAction != null) {

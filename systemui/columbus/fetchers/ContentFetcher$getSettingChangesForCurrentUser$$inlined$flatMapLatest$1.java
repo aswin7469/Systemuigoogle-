@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.FlowCollector;
 import kotlinx.coroutines.flow.FlowKt;
 import kotlinx.coroutines.flow.FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ContentFetcher$getSettingChangesForCurrentUser$$inlined$flatMapLatest$1 extends SuspendLambda implements Function3 {
     final /* synthetic */ Uri $settingUri$inlined;
     private /* synthetic */ Object L$0;
@@ -44,7 +44,7 @@ public final class ContentFetcher$getSettingChangesForCurrentUser$$inlined$flatM
             Uri uri = this.$settingUri$inlined;
             int identifier = userHandle.getIdentifier();
             contentFetcher.getClass();
-            FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new ContentFetcher$getSettingChangesForCurrentUser$1$1(userHandle, (Continuation) null), FlowKt.flowOn(FlowKt.buffer$default(FlowKt.callbackFlow(new ContentFetcher$getSettingChangesForUser$1(contentFetcher, uri, identifier, (Continuation) null)), -1), contentFetcher.bgDispatcher));
+            FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1 = new FlowKt__EmittersKt$onStart$$inlined$unsafeFlow$1(new ContentFetcher$getSettingChangesForCurrentUser$1$1(userHandle, (Continuation) null), FlowKt.buffer$default(FlowKt.callbackFlow(new ContentFetcher$getSettingChangesForUser$1(contentFetcher, uri, identifier, (Continuation) null)), -1));
             this.label = 1;
             if (FlowKt.emitAll(this, flowKt__EmittersKt$onStart$$inlined$unsafeFlow$1, (FlowCollector) this.L$0) == coroutineSingletons) {
                 return coroutineSingletons;

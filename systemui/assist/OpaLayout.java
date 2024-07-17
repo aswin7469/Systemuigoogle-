@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import com.android.app.animation.Interpolators;
 import com.android.settingslib.Utils;
 import com.android.systemui.Dependency;
+import com.android.systemui.assist.AssistManager;
 import com.android.systemui.navigationbar.buttons.ButtonInterface;
 import com.android.systemui.navigationbar.buttons.KeyButtonDrawable;
 import com.android.systemui.navigationbar.buttons.KeyButtonView;
@@ -33,7 +34,7 @@ import com.google.android.systemui.elmyra.feedback.FeedbackEffect;
 import com.google.android.systemui.elmyra.sensors.GestureSensor;
 import java.util.ArrayList;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class OpaLayout extends FrameLayout implements ButtonInterface, FeedbackEffect {
     public static final /* synthetic */ int $r8$clinit = 0;
     public final Interpolator HOME_DISAPPEAR_INTERPOLATOR;
@@ -74,7 +75,7 @@ public class OpaLayout extends FrameLayout implements ButtonInterface, FeedbackE
     public View mYellow;
 
     /* renamed from: com.google.android.systemui.assist.OpaLayout$3  reason: invalid class name */
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class AnonymousClass3 extends AnimatorListenerAdapter {
         public final /* synthetic */ OpaLayout this$0;
 
@@ -82,7 +83,7 @@ public class OpaLayout extends FrameLayout implements ButtonInterface, FeedbackE
             this.this$0 = r1;
         }
 
-        public void onAnimationCancel(Animator animator) {
+        public final void onAnimationCancel(Animator animator) {
             switch (1) {
                 case 0:
                     Trace.instant(4096, "OpaLayout.cancel.diamond");
@@ -120,40 +121,40 @@ public class OpaLayout extends FrameLayout implements ButtonInterface, FeedbackE
                             float y = view.getY();
                             Resources resources = opaLayout.mResources;
                             Interpolator interpolator = OpaUtils.INTERPOLATOR_40_40;
-                            float dimensionPixelOffset = y + ((float) resources.getDimensionPixelOffset(2131167154));
+                            float dimensionPixelOffset = y + ((float) resources.getDimensionPixelOffset(2131167112));
                             Interpolator interpolator2 = Interpolators.FAST_OUT_SLOW_IN;
                             arraySet2.add(OpaLayout.getPropertyAnimator(view, property, dimensionPixelOffset, 225, interpolator2));
                             View view2 = opaLayout.mRed;
                             Property property2 = View.X;
-                            arraySet2.add(OpaLayout.getPropertyAnimator(view2, property2, view2.getX() + ((float) opaLayout.mResources.getDimensionPixelOffset(2131167155)), 133, interpolator2));
+                            arraySet2.add(OpaLayout.getPropertyAnimator(view2, property2, view2.getX() + ((float) opaLayout.mResources.getDimensionPixelOffset(2131167113)), 133, interpolator2));
                             View view3 = opaLayout.mBlue;
-                            arraySet2.add(OpaLayout.getPropertyAnimator(view3, property, view3.getY() + ((float) opaLayout.mResources.getDimensionPixelOffset(2131167153)), 225, interpolator2));
+                            arraySet2.add(OpaLayout.getPropertyAnimator(view3, property, view3.getY() + ((float) opaLayout.mResources.getDimensionPixelOffset(2131167111)), 225, interpolator2));
                             View view4 = opaLayout.mYellow;
-                            arraySet2.add(OpaLayout.getPropertyAnimator(view4, property, view4.getY() + (-((float) opaLayout.mResources.getDimensionPixelOffset(2131167154))), 225, interpolator2));
+                            arraySet2.add(OpaLayout.getPropertyAnimator(view4, property, view4.getY() + (-((float) opaLayout.mResources.getDimensionPixelOffset(2131167112))), 225, interpolator2));
                             View view5 = opaLayout.mYellow;
-                            arraySet2.add(OpaLayout.getPropertyAnimator(view5, property2, view5.getX() + (-((float) opaLayout.mResources.getDimensionPixelOffset(2131167155))), 133, interpolator2));
+                            arraySet2.add(OpaLayout.getPropertyAnimator(view5, property2, view5.getX() + (-((float) opaLayout.mResources.getDimensionPixelOffset(2131167113))), 133, interpolator2));
                             View view6 = opaLayout.mGreen;
-                            arraySet2.add(OpaLayout.getPropertyAnimator(view6, property, view6.getY() + (-((float) opaLayout.mResources.getDimensionPixelOffset(2131167153))), 225, interpolator2));
+                            arraySet2.add(OpaLayout.getPropertyAnimator(view6, property, view6.getY() + (-((float) opaLayout.mResources.getDimensionPixelOffset(2131167111))), 225, interpolator2));
                         } else {
                             View view7 = opaLayout.mRed;
                             Property property3 = View.X;
                             float x = view7.getX();
                             Resources resources2 = opaLayout.mResources;
                             Interpolator interpolator3 = OpaUtils.INTERPOLATOR_40_40;
-                            float f = x + (-((float) resources2.getDimensionPixelOffset(2131167154)));
+                            float f = x + (-((float) resources2.getDimensionPixelOffset(2131167112)));
                             Interpolator interpolator4 = Interpolators.FAST_OUT_SLOW_IN;
                             arraySet2.add(OpaLayout.getPropertyAnimator(view7, property3, f, 225, interpolator4));
                             View view8 = opaLayout.mRed;
                             Property property4 = View.Y;
-                            arraySet2.add(OpaLayout.getPropertyAnimator(view8, property4, view8.getY() + ((float) opaLayout.mResources.getDimensionPixelOffset(2131167155)), 133, interpolator4));
+                            arraySet2.add(OpaLayout.getPropertyAnimator(view8, property4, view8.getY() + ((float) opaLayout.mResources.getDimensionPixelOffset(2131167113)), 133, interpolator4));
                             View view9 = opaLayout.mBlue;
-                            arraySet2.add(OpaLayout.getPropertyAnimator(view9, property3, view9.getX() + (-((float) opaLayout.mResources.getDimensionPixelOffset(2131167153))), 225, interpolator4));
+                            arraySet2.add(OpaLayout.getPropertyAnimator(view9, property3, view9.getX() + (-((float) opaLayout.mResources.getDimensionPixelOffset(2131167111))), 225, interpolator4));
                             View view10 = opaLayout.mYellow;
-                            arraySet2.add(OpaLayout.getPropertyAnimator(view10, property3, view10.getX() + ((float) opaLayout.mResources.getDimensionPixelOffset(2131167154)), 225, interpolator4));
+                            arraySet2.add(OpaLayout.getPropertyAnimator(view10, property3, view10.getX() + ((float) opaLayout.mResources.getDimensionPixelOffset(2131167112)), 225, interpolator4));
                             View view11 = opaLayout.mYellow;
-                            arraySet2.add(OpaLayout.getPropertyAnimator(view11, property4, view11.getY() + (-((float) opaLayout.mResources.getDimensionPixelOffset(2131167155))), 133, interpolator4));
+                            arraySet2.add(OpaLayout.getPropertyAnimator(view11, property4, view11.getY() + (-((float) opaLayout.mResources.getDimensionPixelOffset(2131167113))), 133, interpolator4));
                             View view12 = opaLayout.mGreen;
-                            arraySet2.add(OpaLayout.getPropertyAnimator(view12, property3, view12.getX() + ((float) opaLayout.mResources.getDimensionPixelOffset(2131167153)), 225, interpolator4));
+                            arraySet2.add(OpaLayout.getPropertyAnimator(view12, property3, view12.getX() + ((float) opaLayout.mResources.getDimensionPixelOffset(2131167111)), 225, interpolator4));
                         }
                         ImageView imageView = opaLayout.mWhite;
                         Property property5 = FrameLayout.SCALE_X;
@@ -185,18 +186,18 @@ public class OpaLayout extends FrameLayout implements ButtonInterface, FeedbackE
                     return;
                 case 3:
                     Trace.instant(4096, "OpaLayout.end.line");
-                    OpaLayout.m919$$Nest$mstartCollapseAnimation(this.this$0);
+                    OpaLayout.m831$$Nest$mstartCollapseAnimation(this.this$0);
                     return;
                 case 4:
-                    OpaLayout.m919$$Nest$mstartCollapseAnimation(this.this$0);
+                    OpaLayout.m831$$Nest$mstartCollapseAnimation(this.this$0);
                     return;
                 default:
-                    OpaLayout.m919$$Nest$mstartCollapseAnimation(this.this$0);
+                    OpaLayout.m831$$Nest$mstartCollapseAnimation(this.this$0);
                     return;
             }
         }
 
-        public void onAnimationStart(Animator animator) {
+        public final void onAnimationStart(Animator animator) {
             switch (1) {
                 case 0:
                     Trace.instant(4096, "OpaLayout.start.diamond");
@@ -218,7 +219,7 @@ public class OpaLayout extends FrameLayout implements ButtonInterface, FeedbackE
     }
 
     /* renamed from: -$$Nest$mstartCollapseAnimation  reason: not valid java name */
-    public static void m919$$Nest$mstartCollapseAnimation(OpaLayout opaLayout) {
+    public static void m831$$Nest$mstartCollapseAnimation(OpaLayout opaLayout) {
         Animator animator;
         Animator animator2;
         Animator animator3;
@@ -379,7 +380,7 @@ public class OpaLayout extends FrameLayout implements ButtonInterface, FeedbackE
 
     public final boolean getOpaEnabled() {
         if (this.mOpaEnabledNeedsUpdate) {
-            OpaEnabledReceiver opaEnabledReceiver = ((AssistManagerGoogle) Dependency.sDependency.getDependencyInner(AssistManagerGoogle.class)).mOpaEnabledReceiver;
+            OpaEnabledReceiver opaEnabledReceiver = ((AssistManagerGoogle) Dependency.sDependency.getDependencyInner(AssistManager.class)).mOpaEnabledReceiver;
             opaEnabledReceiver.dispatchOpaEnabledState(opaEnabledReceiver.mContext);
             if (this.mOpaEnabledNeedsUpdate) {
                 Log.w("OpaLayout", "mOpaEnabledNeedsUpdate not cleared by AssistManagerGoogle!");
@@ -408,20 +409,20 @@ public class OpaLayout extends FrameLayout implements ButtonInterface, FeedbackE
     public final void onFinishInflate() {
         super.onFinishInflate();
         this.mResources = getResources();
-        this.mBlue = findViewById(2131362083);
-        this.mRed = findViewById(2131363412);
-        this.mYellow = findViewById(2131364153);
-        this.mGreen = findViewById(2131362639);
-        this.mWhite = (ImageView) findViewById(2131364104);
-        this.mWhiteCutout = (ImageView) findViewById(2131364105);
-        this.mHalo = (ImageView) findViewById(2131362679);
-        this.mHome = (KeyButtonView) findViewById(2131362702);
-        ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(getContext(), 2132017515);
-        ContextThemeWrapper contextThemeWrapper2 = new ContextThemeWrapper(getContext(), 2132017514);
+        this.mBlue = findViewById(2131362078);
+        this.mRed = findViewById(2131363385);
+        this.mYellow = findViewById(2131364115);
+        this.mGreen = findViewById(2131362619);
+        this.mWhite = (ImageView) findViewById(2131364065);
+        this.mWhiteCutout = (ImageView) findViewById(2131364066);
+        this.mHalo = (ImageView) findViewById(2131362659);
+        this.mHome = (KeyButtonView) findViewById(2131362682);
+        ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(getContext(), 2132017514);
+        ContextThemeWrapper contextThemeWrapper2 = new ContextThemeWrapper(getContext(), 2132017513);
         ImageView imageView = this.mHalo;
         KeyButtonDrawable.AnonymousClass1 r3 = KeyButtonDrawable.KEY_DRAWABLE_ROTATE;
-        imageView.setImageDrawable(KeyButtonDrawable.create(contextThemeWrapper, Utils.getColorAttrDefaultColor(contextThemeWrapper, 2130969921, 0), Utils.getColorAttrDefaultColor(contextThemeWrapper2, 2130969921, 0), 2131232423, true));
-        this.mHomeDiameter = this.mResources.getDimensionPixelSize(2131167149);
+        imageView.setImageDrawable(KeyButtonDrawable.create(contextThemeWrapper, Utils.getColorAttrDefaultColor(contextThemeWrapper, 2130969921, 0), Utils.getColorAttrDefaultColor(contextThemeWrapper2, 2130969921, 0), 2131232410, true));
+        this.mHomeDiameter = this.mResources.getDimensionPixelSize(2131167107);
         Paint paint = new Paint();
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.DST_OUT));
         this.mWhiteCutout.setLayerType(2, paint);
@@ -436,39 +437,40 @@ public class OpaLayout extends FrameLayout implements ButtonInterface, FeedbackE
     }
 
     /* JADX WARNING: Code restructure failed: missing block: B:13:0x0031, code lost:
-        if (r0 != 3) goto L_0x00df;
+        if (r0 != 3) goto L_0x00e1;
      */
     /* Code decompiled incorrectly, please refer to instructions dump. */
     public final boolean onInterceptTouchEvent(android.view.MotionEvent r6) {
         /*
             r5 = this;
             com.android.systemui.Dependency r0 = com.android.systemui.Dependency.sDependency
-            java.lang.Class<com.google.android.systemui.assist.AssistManagerGoogle> r1 = com.google.android.systemui.assist.AssistManagerGoogle.class
+            java.lang.Class<com.android.systemui.assist.AssistManager> r1 = com.android.systemui.assist.AssistManager.class
             java.lang.Object r0 = r0.getDependencyInner(r1)
-            com.google.android.systemui.assist.AssistManagerGoogle r0 = (com.google.android.systemui.assist.AssistManagerGoogle) r0
+            com.android.systemui.assist.AssistManager r0 = (com.android.systemui.assist.AssistManager) r0
             boolean r1 = r5.getOpaEnabled()
             r2 = 0
-            if (r1 == 0) goto L_0x00df
+            if (r1 == 0) goto L_0x00e1
             boolean r1 = android.animation.ValueAnimator.areAnimatorsEnabled()
-            if (r1 == 0) goto L_0x00df
+            if (r1 == 0) goto L_0x00e1
             r1 = 5
             boolean r0 = r0.shouldOverrideAssist(r1)
-            if (r0 != 0) goto L_0x00df
+            if (r0 != 0) goto L_0x00e1
             int r0 = r5.mGestureState
             if (r0 == 0) goto L_0x0024
-            goto L_0x00df
+            goto L_0x00e1
         L_0x0024:
             int r0 = r6.getAction()
             r1 = 2
             r3 = 1
-            if (r0 == 0) goto L_0x00a7
-            if (r0 == r3) goto L_0x006a
+            if (r0 == 0) goto L_0x00a9
+            if (r0 == r3) goto L_0x006c
             if (r0 == r1) goto L_0x0035
             r6 = 3
-            if (r0 == r6) goto L_0x006a
-            goto L_0x00df
+            if (r0 == r6) goto L_0x006c
+            goto L_0x00e1
         L_0x0035:
             android.content.Context r0 = r5.getContext()
+            boolean r1 = com.android.systemui.shared.system.QuickStepContract.ALLOW_BACK_GESTURE_IN_SHADE
             android.view.ViewConfiguration r0 = android.view.ViewConfiguration.get(r0)
             int r0 = r0.getScaledTouchSlop()
             float r0 = (float) r0
@@ -480,29 +482,29 @@ public class OpaLayout extends FrameLayout implements ButtonInterface, FeedbackE
             float r1 = r1 - r3
             float r1 = java.lang.Math.abs(r1)
             int r1 = (r1 > r0 ? 1 : (r1 == r0 ? 0 : -1))
-            if (r1 > 0) goto L_0x0065
+            if (r1 > 0) goto L_0x0067
             float r6 = r6.getRawY()
             int r1 = r5.mTouchDownY
             float r1 = (float) r1
             float r6 = r6 - r1
             float r6 = java.lang.Math.abs(r6)
             int r6 = (r6 > r0 ? 1 : (r6 == r0 ? 0 : -1))
-            if (r6 <= 0) goto L_0x00df
-        L_0x0065:
+            if (r6 <= 0) goto L_0x00e1
+        L_0x0067:
             r5.abortCurrentGesture()
-            goto L_0x00df
-        L_0x006a:
+            goto L_0x00e1
+        L_0x006c:
             boolean r6 = r5.mDiamondAnimationDelayed
-            if (r6 == 0) goto L_0x007a
+            if (r6 == 0) goto L_0x007c
             boolean r6 = r5.mIsPressed
-            if (r6 == 0) goto L_0x00a4
+            if (r6 == 0) goto L_0x00a6
             com.google.android.systemui.assist.OpaLayout$1 r6 = r5.mRetract
             r0 = 200(0xc8, double:9.9E-322)
             r5.postDelayed(r6, r0)
-            goto L_0x00a4
-        L_0x007a:
+            goto L_0x00a6
+        L_0x007c:
             int r6 = r5.mAnimationState
-            if (r6 != r3) goto L_0x009b
+            if (r6 != r3) goto L_0x009d
             long r0 = android.os.SystemClock.elapsedRealtime()
             long r3 = r5.mStartTime
             long r0 = r0 - r3
@@ -516,15 +518,15 @@ public class OpaLayout extends FrameLayout implements ButtonInterface, FeedbackE
             r5.removeCallbacks(r6)
             r5.cancelLongPress()
             return r2
-        L_0x009b:
+        L_0x009d:
             boolean r6 = r5.mIsPressed
-            if (r6 == 0) goto L_0x00a4
+            if (r6 == 0) goto L_0x00a6
             com.google.android.systemui.assist.OpaLayout$1 r6 = r5.mRetract
             r6.run()
-        L_0x00a4:
+        L_0x00a6:
             r5.mIsPressed = r2
-            goto L_0x00df
-        L_0x00a7:
+            goto L_0x00e1
+        L_0x00a9:
             float r0 = r6.getRawX()
             int r0 = (int) r0
             r5.mTouchDownX = r0
@@ -533,15 +535,15 @@ public class OpaLayout extends FrameLayout implements ButtonInterface, FeedbackE
             r5.mTouchDownY = r6
             android.util.ArraySet r6 = r5.mCurrentAnimators
             boolean r6 = r6.isEmpty()
-            if (r6 != 0) goto L_0x00c8
+            if (r6 != 0) goto L_0x00ca
             int r6 = r5.mAnimationState
-            if (r6 != r1) goto L_0x00c7
+            if (r6 != r1) goto L_0x00c9
             java.lang.String r6 = "touchDown"
             r5.endCurrentAnimation(r6)
-            goto L_0x00c8
-        L_0x00c7:
+            goto L_0x00ca
+        L_0x00c9:
             return r2
-        L_0x00c8:
+        L_0x00ca:
             long r0 = android.os.SystemClock.elapsedRealtime()
             r5.mStartTime = r0
             r5.mIsPressed = r3
@@ -551,7 +553,7 @@ public class OpaLayout extends FrameLayout implements ButtonInterface, FeedbackE
             r5.removeCallbacks(r6)
             r5.mDiamondAnimationDelayed = r2
             r5.startDiamondAnimation()
-        L_0x00df:
+        L_0x00e1:
             return r2
         */
         throw new UnsupportedOperationException("Method not decompiled: com.google.android.systemui.assist.OpaLayout.onInterceptTouchEvent(android.view.MotionEvent):boolean");
@@ -585,19 +587,19 @@ public class OpaLayout extends FrameLayout implements ButtonInterface, FeedbackE
                         AnimatorSet.Builder with = this.mGestureLineSet.play(OpaUtils.getScaleObjectAnimator(view, 0.8f, 200, interpolator2)).with(scaleObjectAnimator);
                         View view2 = this.mRed;
                         Interpolator interpolator3 = Interpolators.LINEAR;
-                        with.with(OpaUtils.getAlphaObjectAnimator(130, view2, interpolator3)).with(OpaUtils.getAlphaObjectAnimator(130, this.mYellow, interpolator3)).with(OpaUtils.getAlphaObjectAnimator(113, this.mBlue, interpolator3)).with(OpaUtils.getAlphaObjectAnimator(113, this.mGreen, interpolator3)).with(OpaUtils.getScaleObjectAnimator(this.mBottom, 0.8f, 200, interpolator2)).with(OpaUtils.getScaleObjectAnimator(this.mLeft, 0.8f, 200, interpolator2)).with(OpaUtils.getScaleObjectAnimator(this.mRight, 0.8f, 200, interpolator2));
+                        with.with(OpaUtils.getAlphaObjectAnimator(view2, 130, interpolator3)).with(OpaUtils.getAlphaObjectAnimator(this.mYellow, 130, interpolator3)).with(OpaUtils.getAlphaObjectAnimator(this.mBlue, 113, interpolator3)).with(OpaUtils.getAlphaObjectAnimator(this.mGreen, 113, interpolator3)).with(OpaUtils.getScaleObjectAnimator(this.mBottom, 0.8f, 200, interpolator2)).with(OpaUtils.getScaleObjectAnimator(this.mLeft, 0.8f, 200, interpolator2)).with(OpaUtils.getScaleObjectAnimator(this.mRight, 0.8f, 200, interpolator2));
                         if (this.mIsVertical) {
                             View view3 = this.mRed;
                             Interpolator interpolator4 = OpaUtils.INTERPOLATOR_40_40;
-                            ObjectAnimator translationObjectAnimatorY = OpaUtils.getTranslationObjectAnimatorY(view3, interpolator4, (float) this.mResources.getDimensionPixelOffset(2131167154), this.mRed.getY() + 0.0f);
+                            ObjectAnimator translationObjectAnimatorY = OpaUtils.getTranslationObjectAnimatorY(view3, interpolator4, (float) this.mResources.getDimensionPixelOffset(2131167112), this.mRed.getY() + 0.0f);
                             translationObjectAnimatorY.addListener(new AnonymousClass3(this, 4));
-                            this.mGestureLineSet.play(translationObjectAnimatorY).with(scaleObjectAnimator3).with(OpaUtils.getTranslationObjectAnimatorY(this.mBlue, interpolator4, (float) this.mResources.getDimensionPixelOffset(2131167153), this.mBlue.getY() + ((float) this.mResources.getDimensionPixelOffset(2131167148)))).with(OpaUtils.getTranslationObjectAnimatorY(this.mYellow, interpolator4, -((float) this.mResources.getDimensionPixelOffset(2131167154)), this.mYellow.getY() + 0.0f)).with(OpaUtils.getTranslationObjectAnimatorY(this.mGreen, interpolator4, -((float) this.mResources.getDimensionPixelOffset(2131167153)), this.mGreen.getY() + (-((float) this.mResources.getDimensionPixelOffset(2131167148)))));
+                            this.mGestureLineSet.play(translationObjectAnimatorY).with(scaleObjectAnimator3).with(OpaUtils.getTranslationObjectAnimatorY(this.mBlue, interpolator4, (float) this.mResources.getDimensionPixelOffset(2131167111), this.mBlue.getY() + ((float) this.mResources.getDimensionPixelOffset(2131167106)))).with(OpaUtils.getTranslationObjectAnimatorY(this.mYellow, interpolator4, -((float) this.mResources.getDimensionPixelOffset(2131167112)), this.mYellow.getY() + 0.0f)).with(OpaUtils.getTranslationObjectAnimatorY(this.mGreen, interpolator4, -((float) this.mResources.getDimensionPixelOffset(2131167111)), this.mGreen.getY() + (-((float) this.mResources.getDimensionPixelOffset(2131167106)))));
                         } else {
                             View view4 = this.mRed;
                             Interpolator interpolator5 = OpaUtils.INTERPOLATOR_40_40;
-                            ObjectAnimator translationObjectAnimatorX = OpaUtils.getTranslationObjectAnimatorX(view4, interpolator5, -((float) this.mResources.getDimensionPixelOffset(2131167154)), this.mRed.getX() + 0.0f, 350);
+                            ObjectAnimator translationObjectAnimatorX = OpaUtils.getTranslationObjectAnimatorX(view4, interpolator5, -((float) this.mResources.getDimensionPixelOffset(2131167112)), this.mRed.getX() + 0.0f, 350);
                             translationObjectAnimatorX.addListener(new AnonymousClass3(this, 5));
-                            this.mGestureLineSet.play(translationObjectAnimatorX).with(scaleObjectAnimator).with(OpaUtils.getTranslationObjectAnimatorX(this.mBlue, interpolator5, -((float) this.mResources.getDimensionPixelOffset(2131167153)), this.mBlue.getX() + (-((float) this.mResources.getDimensionPixelOffset(2131167148))), 350)).with(OpaUtils.getTranslationObjectAnimatorX(this.mYellow, interpolator5, (float) this.mResources.getDimensionPixelOffset(2131167154), this.mYellow.getX() + 0.0f, 350)).with(OpaUtils.getTranslationObjectAnimatorX(this.mGreen, interpolator5, (float) this.mResources.getDimensionPixelOffset(2131167153), this.mGreen.getX() + ((float) this.mResources.getDimensionPixelOffset(2131167148)), 350));
+                            this.mGestureLineSet.play(translationObjectAnimatorX).with(scaleObjectAnimator).with(OpaUtils.getTranslationObjectAnimatorX(this.mBlue, interpolator5, -((float) this.mResources.getDimensionPixelOffset(2131167111)), this.mBlue.getX() + (-((float) this.mResources.getDimensionPixelOffset(2131167106))), 350)).with(OpaUtils.getTranslationObjectAnimatorX(this.mYellow, interpolator5, (float) this.mResources.getDimensionPixelOffset(2131167112), this.mYellow.getX() + 0.0f, 350)).with(OpaUtils.getTranslationObjectAnimatorX(this.mGreen, interpolator5, (float) this.mResources.getDimensionPixelOffset(2131167111), this.mGreen.getX() + ((float) this.mResources.getDimensionPixelOffset(2131167106)), 350));
                         }
                         animatorSet = this.mGestureLineSet;
                     }
@@ -749,7 +751,7 @@ public class OpaLayout extends FrameLayout implements ButtonInterface, FeedbackE
             float y = view.getY();
             Resources resources = this.mResources;
             Interpolator interpolator = OpaUtils.INTERPOLATOR_40_40;
-            arraySet2.add(getPropertyAnimator(view, property, y + (-((float) resources.getDimensionPixelOffset(2131167148))), 200, this.mDiamondInterpolator));
+            arraySet2.add(getPropertyAnimator(view, property, y + (-((float) resources.getDimensionPixelOffset(2131167106))), 200, this.mDiamondInterpolator));
             View view2 = this.mTop;
             Property property2 = FrameLayout.SCALE_X;
             Interpolator interpolator2 = Interpolators.FAST_OUT_SLOW_IN;
@@ -758,16 +760,16 @@ public class OpaLayout extends FrameLayout implements ButtonInterface, FeedbackE
             Property property3 = FrameLayout.SCALE_Y;
             arraySet2.add(getPropertyAnimator(view3, property3, 0.8f, 200, interpolator2));
             View view4 = this.mBottom;
-            arraySet2.add(getPropertyAnimator(view4, property, view4.getY() + ((float) this.mResources.getDimensionPixelOffset(2131167148)), 200, this.mDiamondInterpolator));
+            arraySet2.add(getPropertyAnimator(view4, property, view4.getY() + ((float) this.mResources.getDimensionPixelOffset(2131167106)), 200, this.mDiamondInterpolator));
             arraySet2.add(getPropertyAnimator(this.mBottom, property2, 0.8f, 200, interpolator2));
             arraySet2.add(getPropertyAnimator(this.mBottom, property3, 0.8f, 200, interpolator2));
             View view5 = this.mLeft;
             Property property4 = View.X;
-            arraySet2.add(getPropertyAnimator(view5, property4, view5.getX() + (-((float) this.mResources.getDimensionPixelOffset(2131167148))), 200, this.mDiamondInterpolator));
+            arraySet2.add(getPropertyAnimator(view5, property4, view5.getX() + (-((float) this.mResources.getDimensionPixelOffset(2131167106))), 200, this.mDiamondInterpolator));
             arraySet2.add(getPropertyAnimator(this.mLeft, property2, 0.8f, 200, interpolator2));
             arraySet2.add(getPropertyAnimator(this.mLeft, property3, 0.8f, 200, interpolator2));
             View view6 = this.mRight;
-            arraySet2.add(getPropertyAnimator(view6, property4, view6.getX() + ((float) this.mResources.getDimensionPixelOffset(2131167148)), 200, this.mDiamondInterpolator));
+            arraySet2.add(getPropertyAnimator(view6, property4, view6.getX() + ((float) this.mResources.getDimensionPixelOffset(2131167106)), 200, this.mDiamondInterpolator));
             arraySet2.add(getPropertyAnimator(this.mRight, property2, 0.8f, 200, interpolator2));
             arraySet2.add(getPropertyAnimator(this.mRight, property3, 0.8f, 200, interpolator2));
             arraySet2.add(getPropertyAnimator(this.mWhite, property2, 0.625f, 200, interpolator2));

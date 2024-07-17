@@ -19,13 +19,13 @@ import com.google.android.material.internal.TextWatcherAdapter;
 import com.google.android.material.textfield.TextInputLayout;
 import java.util.WeakHashMap;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 class ChipTextInputComboView extends FrameLayout implements Checkable {
     public final Chip chip;
     public final EditText editText;
     public final TextFormatter watcher;
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class TextFormatter extends TextWatcherAdapter {
         public TextFormatter() {
         }
@@ -178,10 +178,10 @@ Method generation error in method: com.google.android.material.internal.ViewUtil
     public ChipTextInputComboView(Context context, AttributeSet attributeSet, int i) {
         super(context, attributeSet, i);
         LayoutInflater from = LayoutInflater.from(context);
-        Chip chip2 = (Chip) from.inflate(2131558759, this, false);
+        Chip chip2 = (Chip) from.inflate(2131558753, this, false);
         this.chip = chip2;
         chip2.accessibilityClassName = "android.view.View";
-        TextInputLayout textInputLayout = (TextInputLayout) from.inflate(2131558760, this, false);
+        TextInputLayout textInputLayout = (TextInputLayout) from.inflate(2131558754, this, false);
         EditText editText2 = textInputLayout.editText;
         this.editText = editText2;
         editText2.setVisibility(4);
@@ -190,8 +190,8 @@ Method generation error in method: com.google.android.material.internal.ViewUtil
         addView(chip2);
         addView(textInputLayout);
         WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-        editText2.setId(View.generateViewId());
-        ((TextView) findViewById(2131362981)).setLabelFor(editText2.getId());
+        editText2.setId(ViewCompat.Api17Impl.generateViewId());
+        ViewCompat.Api17Impl.setLabelFor((TextView) findViewById(2131362957), editText2.getId());
         editText2.setSaveEnabled(false);
         editText2.setLongClickable(false);
     }

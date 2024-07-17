@@ -7,12 +7,12 @@ import com.android.systemui.backup.BackupHelper;
 import java.util.List;
 import kotlin.collections.CollectionsKt__CollectionsKt;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class BackupHelperGoogle extends BackupHelper {
     public static final List SECURE_SETTINGS_INT_KEYS = CollectionsKt__CollectionsKt.listOf("columbus_enabled", "columbus_low_sensitivity");
     public static final List SECURE_SETTINGS_STRING_KEYS = CollectionsKt__CollectionsKt.listOf("columbus_action", "columbus_launch_app", "columbus_launch_app_shortcut");
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class SecureSettingsBackupHelper extends BlobBackupHelper {
         public final ContentResolver contentResolver;
         public final UserHandle userHandle;
@@ -86,7 +86,7 @@ public final class BackupHelperGoogle extends BackupHelper {
             /*
                 r4 = this;
                 java.util.List r0 = com.google.android.systemui.backup.BackupHelperGoogle.SECURE_SETTINGS_INT_KEYS
-                boolean r0 = kotlin.collections.CollectionsKt.contains(r0, r5)
+                boolean r0 = kotlin.collections.CollectionsKt___CollectionsKt.contains(r0, r5)
                 java.lang.String r1 = "BackupHelper"
                 java.lang.String r2 = "Failed to restore "
                 if (r0 == 0) goto L_0x004b
@@ -124,7 +124,7 @@ public final class BackupHelperGoogle extends BackupHelper {
                 throw r4
             L_0x004b:
                 java.util.List r0 = com.google.android.systemui.backup.BackupHelperGoogle.SECURE_SETTINGS_STRING_KEYS
-                boolean r0 = kotlin.collections.CollectionsKt.contains(r0, r5)
+                boolean r0 = kotlin.collections.CollectionsKt___CollectionsKt.contains(r0, r5)
                 if (r0 == 0) goto L_0x0090
                 if (r5 == 0) goto L_0x0090
                 if (r6 == 0) goto L_0x0090
@@ -199,7 +199,7 @@ public final class BackupHelperGoogle extends BackupHelper {
             /*
                 r5 = this;
                 java.util.List r0 = com.google.android.systemui.backup.BackupHelperGoogle.SECURE_SETTINGS_INT_KEYS
-                boolean r0 = kotlin.collections.CollectionsKt.contains(r0, r6)
+                boolean r0 = kotlin.collections.CollectionsKt___CollectionsKt.contains(r0, r6)
                 java.lang.String r1 = "BackupHelper"
                 java.lang.String r2 = "Failed to backup "
                 r3 = 0
@@ -233,7 +233,7 @@ public final class BackupHelperGoogle extends BackupHelper {
                 throw r5
             L_0x0047:
                 java.util.List r0 = com.google.android.systemui.backup.BackupHelperGoogle.SECURE_SETTINGS_STRING_KEYS
-                boolean r0 = kotlin.collections.CollectionsKt.contains(r0, r6)
+                boolean r0 = kotlin.collections.CollectionsKt___CollectionsKt.contains(r0, r6)
                 if (r0 == 0) goto L_0x0089
                 android.content.ContentResolver r0 = r5.contentResolver
                 android.os.UserHandle r5 = r5.userHandle

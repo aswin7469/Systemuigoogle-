@@ -2,7 +2,7 @@ package com.google.android.systemui.power;
 
 import android.content.Intent;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final /* synthetic */ class BatteryInfoBroadcast$$ExternalSyntheticLambda0 implements Runnable {
     public final /* synthetic */ BatteryInfoBroadcast f$0;
     public final /* synthetic */ Intent f$1;
@@ -161,7 +161,7 @@ public final /* synthetic */ class BatteryInfoBroadcast$$ExternalSyntheticLambda
             boolean r2 = r0.mIsPowerSaveMode
             if (r2 == r1) goto L_0x0120
             r0.mIsPowerSaveMode = r1
-            r0.sendBatteryChangeIntent(r8, r7, r7)
+            r0.sendBatteryChangeIntent(r8, r7)
             goto L_0x0120
         L_0x00d4:
             r0.sendPluggedInStateIntent(r7)
@@ -194,12 +194,12 @@ public final /* synthetic */ class BatteryInfoBroadcast$$ExternalSyntheticLambda
             r0.mBatteryStatus = r2
             r0.mBatteryPlugged = r3
             r0.mBatteryChargingStatus = r4
-            r0.sendBatteryChangeIntent(r8, r7, r7)
+            r0.sendBatteryChangeIntent(r8, r7)
             goto L_0x0120
         L_0x0118:
             android.content.Intent r8 = new android.content.Intent
             r8.<init>(r5)
-            r0.sendBatteryChangeIntent(r8, r7, r7)
+            r0.sendBatteryChangeIntent(r8, r7)
         L_0x0120:
             return
         */

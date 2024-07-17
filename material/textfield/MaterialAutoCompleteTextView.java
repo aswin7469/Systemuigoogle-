@@ -29,8 +29,8 @@ import com.google.android.material.theme.overlay.MaterialThemeOverlay;
 import java.util.Locale;
 import java.util.WeakHashMap;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
-public final class MaterialAutoCompleteTextView extends AppCompatAutoCompleteTextView {
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
+public class MaterialAutoCompleteTextView extends AppCompatAutoCompleteTextView {
     public final AccessibilityManager accessibilityManager;
     public final ListPopupWindow modalListPopup;
     public final float popupElevation;
@@ -38,7 +38,7 @@ public final class MaterialAutoCompleteTextView extends AppCompatAutoCompleteTex
     public final ColorStateList simpleItemSelectedRippleColor;
     public final Rect tempRect = new Rect();
 
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class MaterialArrayAdapter extends ArrayAdapter {
         public final ColorStateList pressedRippleColor;
         public final ColorStateList selectedItemRippleOverlaidColor;
@@ -85,7 +85,7 @@ public final class MaterialAutoCompleteTextView extends AppCompatAutoCompleteTex
                     }
                 }
                 WeakHashMap weakHashMap = ViewCompat.sViewPropertyAnimatorMap;
-                textView.setBackground(rippleDrawable);
+                ViewCompat.Api16Impl.setBackground(textView, rippleDrawable);
             }
             return view2;
         }
@@ -94,16 +94,16 @@ public final class MaterialAutoCompleteTextView extends AppCompatAutoCompleteTex
     public MaterialAutoCompleteTextView(Context context, AttributeSet attributeSet) {
         super(MaterialThemeOverlay.wrap(context, attributeSet, 2130968655, 0), attributeSet, 2130968655);
         Context context2 = getContext();
-        TypedArray obtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context2, attributeSet, R$styleable.MaterialAutoCompleteTextView, 2130968655, 2132018454, new int[0]);
+        TypedArray obtainStyledAttributes = ThemeEnforcement.obtainStyledAttributes(context2, attributeSet, R$styleable.MaterialAutoCompleteTextView, 2130968655, 2132018448, new int[0]);
         if (obtainStyledAttributes.hasValue(0) && obtainStyledAttributes.getInt(0, 0) == 0) {
             setKeyListener((KeyListener) null);
         }
-        int resourceId = obtainStyledAttributes.getResourceId(2, 2131558806);
-        this.popupElevation = (float) obtainStyledAttributes.getDimensionPixelOffset(1, 2131166855);
+        int resourceId = obtainStyledAttributes.getResourceId(2, 2131558799);
+        this.popupElevation = (float) obtainStyledAttributes.getDimensionPixelOffset(1, 2131166813);
         this.simpleItemSelectedColor = obtainStyledAttributes.getColor(3, 0);
         this.simpleItemSelectedRippleColor = MaterialResources.getColorStateList(context2, obtainStyledAttributes, 4);
         this.accessibilityManager = (AccessibilityManager) context2.getSystemService("accessibility");
-        ListPopupWindow listPopupWindow = new ListPopupWindow(context2, (AttributeSet) null, 2130969475, 0);
+        ListPopupWindow listPopupWindow = new ListPopupWindow(context2);
         this.modalListPopup = listPopupWindow;
         listPopupWindow.mModal = true;
         listPopupWindow.mPopup.setFocusable(true);

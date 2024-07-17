@@ -4,7 +4,7 @@ import android.os.Handler;
 import android.os.Looper;
 import com.google.android.setupcompat.template.Mixin;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class RequireScrollMixin implements Mixin {
     public final boolean everScrolledToBottom;
     public final Handler handler;

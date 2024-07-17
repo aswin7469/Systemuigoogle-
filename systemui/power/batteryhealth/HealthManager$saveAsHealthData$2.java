@@ -11,7 +11,7 @@ import kotlin.jvm.functions.Function2;
 import kotlinx.coroutines.CoroutineScope;
 import kotlinx.coroutines.CoroutineScopeKt;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 final class HealthManager$saveAsHealthData$2 extends SuspendLambda implements Function2 {
     final /* synthetic */ Integer $capacity;
     final /* synthetic */ Integer $health;
@@ -22,7 +22,7 @@ final class HealthManager$saveAsHealthData$2 extends SuspendLambda implements Fu
     final /* synthetic */ HealthManager this$0;
 
     /* JADX INFO: super call moved to the top of the method (can break code semantics) */
-    public HealthManager$saveAsHealthData$2(Integer num, Integer num2, Integer num3, Integer num4, SharedPreferences sharedPreferences, HealthManager healthManager, Continuation continuation) {
+    public HealthManager$saveAsHealthData$2(SharedPreferences sharedPreferences, HealthManager healthManager, Integer num, Integer num2, Integer num3, Integer num4, Continuation continuation) {
         super(2, continuation);
         this.$health = num;
         this.$performance = num2;
@@ -33,7 +33,7 @@ final class HealthManager$saveAsHealthData$2 extends SuspendLambda implements Fu
     }
 
     public final Continuation create(Object obj, Continuation continuation) {
-        return new HealthManager$saveAsHealthData$2(this.$health, this.$performance, this.$capacity, this.$status, this.$healthPrefs, this.this$0, continuation);
+        return new HealthManager$saveAsHealthData$2(this.$healthPrefs, this.this$0, this.$health, this.$performance, this.$capacity, this.$status, continuation);
     }
 
     public final Object invoke(Object obj, Object obj2) {

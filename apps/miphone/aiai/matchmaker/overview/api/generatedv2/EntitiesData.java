@@ -11,7 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class EntitiesData implements Parcelable {
     public static final Parcelable.Creator CREATOR = new Object();
     private final Map bitmapMap;
@@ -19,7 +19,7 @@ public class EntitiesData implements Parcelable {
     private final Map pendingIntentMap;
 
     /* renamed from: com.google.android.apps.miphone.aiai.matchmaker.overview.api.generatedv2.EntitiesData$1  reason: invalid class name */
-    /* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+    /* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
     public final class AnonymousClass1 implements Parcelable.Creator {
         public final Object createFromParcel(Parcel parcel) {
             return EntitiesData.read(parcel);

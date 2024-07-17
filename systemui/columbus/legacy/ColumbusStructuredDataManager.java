@@ -10,13 +10,13 @@ import com.android.systemui.settings.UserTrackerImpl;
 import java.util.Arrays;
 import java.util.Set;
 import java.util.concurrent.Executor;
-import kotlin.collections.SetsKt;
+import kotlin.collections.SetsKt__SetsKt;
 import kotlin.jvm.internal.Intrinsics;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ColumbusStructuredDataManager {
     public final Set allowPackageList;
     public final ContentResolver contentResolver;
@@ -29,7 +29,7 @@ public final class ColumbusStructuredDataManager {
         this.userTracker = userTracker2;
         this.contentResolver = context.getContentResolver();
         String[] stringArray = context.getResources().getStringArray(2130903088);
-        this.allowPackageList = SetsKt.setOf(Arrays.copyOf(stringArray, stringArray.length));
+        this.allowPackageList = SetsKt__SetsKt.setOf(Arrays.copyOf(stringArray, stringArray.length));
         ColumbusStructuredDataManager$userTrackerCallback$1 columbusStructuredDataManager$userTrackerCallback$1 = new ColumbusStructuredDataManager$userTrackerCallback$1(this);
         this.userTrackerCallback = columbusStructuredDataManager$userTrackerCallback$1;
         ColumbusStructuredDataManager$broadcastReceiver$1 columbusStructuredDataManager$broadcastReceiver$1 = new ColumbusStructuredDataManager$broadcastReceiver$1(this);

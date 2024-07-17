@@ -6,9 +6,9 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
 import androidx.core.app.NotificationCompat$Builder;
-import com.android.settingslib.Utils$$ExternalSyntheticOutline0;
+import com.android.internal.logging.UiEventLogger;
 import com.android.settingslib.fuelgauge.BatteryStatus;
-import com.google.android.systemui.power.DwellTempDefenderNotification;
+import com.android.settingslib.mobile.MobileStatusTracker$MobileTelephonyCallback$$ExternalSyntheticOutline0;
 import com.google.android.systemui.power.batteryevent.aidl.BatteryEventType;
 import java.util.List;
 import kotlin.Lazy;
@@ -19,7 +19,7 @@ import kotlinx.coroutines.BuildersKt;
 import kotlinx.coroutines.CoroutineStart;
 import kotlinx.coroutines.internal.ContextScope;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final /* synthetic */ class PowerNotificationWarningsGoogleImpl$$ExternalSyntheticLambda2 implements Function3 {
     public final /* synthetic */ PowerNotificationWarningsGoogleImpl f$0;
 
@@ -27,7 +27,7 @@ public final /* synthetic */ class PowerNotificationWarningsGoogleImpl$$External
         this.f$0 = powerNotificationWarningsGoogleImpl;
     }
 
-    /* JADX WARNING: type inference failed for: r1v9, types: [java.lang.Object, androidx.core.app.NotificationCompat$BigTextStyle] */
+    /* JADX WARNING: type inference failed for: r2v12, types: [java.lang.Object, androidx.core.app.NotificationCompat$BigTextStyle] */
     public final Object invoke(Object obj, Object obj2, Object obj3) {
         boolean contains;
         String str;
@@ -39,7 +39,7 @@ public final /* synthetic */ class PowerNotificationWarningsGoogleImpl$$External
         Log.d("PowerNotificationWarningsGoogleImpl", "[onBatteryEventUpdate] " + list);
         IncompatibleChargerNotification incompatibleChargerNotification = powerNotificationWarningsGoogleImpl.mIncompatibleChargerNotification;
         if (!(incompatibleChargerNotification == null || (contains = list.contains(BatteryEventType.WIRED_INCOMPATIBLE_CHARGING)) == incompatibleChargerNotification.mContainsIncompatibleChargers)) {
-            Utils$$ExternalSyntheticOutline0.m("[refreshUsbState] isIncompatibleCharger: ", "IncompatibleChargerNotification", contains);
+            MobileStatusTracker$MobileTelephonyCallback$$ExternalSyntheticOutline0.m("[refreshUsbState] isIncompatibleCharger: ", contains, "IncompatibleChargerNotification");
             incompatibleChargerNotification.mMainHandler.post(new IncompatibleChargerNotification$$ExternalSyntheticLambda0(incompatibleChargerNotification, contains));
             if (contains) {
                 str = IncompatibleChargerNotification.KEY_INCOMPATIBLE_CHARGER_TIME;
@@ -64,17 +64,17 @@ public final /* synthetic */ class PowerNotificationWarningsGoogleImpl$$External
                 if (Settings.Global.getInt(context.getContentResolver(), "dock_defender_bypass", 0) != 1 && Settings.Global.getInt(context.getContentResolver(), "dock_defender_first_run", -1) == -1) {
                     z = true;
                 }
-                Utils$$ExternalSyntheticOutline0.m("onDockDefenderEvent: dockDefend1RunStatus: ", "BatteryDefenderNotification", z);
+                MobileStatusTracker$MobileTelephonyCallback$$ExternalSyntheticOutline0.m("onDockDefenderEvent: dockDefend1RunStatus: ", z, "BatteryDefenderNotification");
                 if (z) {
                     Settings.Global.putInt(context.getContentResolver(), "dock_defender_first_run", 1);
                     DockDefenderNotification dockDefenderNotification = (DockDefenderNotification) lazy.getValue();
                     dockDefenderNotification.getClass();
                     Log.d("DockDefenderNotification", "showNotification");
                     Context context2 = dockDefenderNotification.context;
-                    String string = context2.getString(2131952466);
+                    String string = context2.getString(2131952445);
                     NotificationCompat$Builder notificationCompat$Builder = new NotificationCompat$Builder(context2);
-                    notificationCompat$Builder.mNotification.icon = 2131232477;
-                    notificationCompat$Builder.mContentTitle = NotificationCompat$Builder.limitCharSequenceLength(context2.getString(2131952468));
+                    notificationCompat$Builder.mNotification.icon = 17303721;
+                    notificationCompat$Builder.mContentTitle = NotificationCompat$Builder.limitCharSequenceLength(context2.getString(2131952447));
                     notificationCompat$Builder.mContentText = NotificationCompat$Builder.limitCharSequenceLength(string);
                     notificationCompat$Builder.mContentIntent = PowerUtils.createBatterySettingsPendingIntent(context2);
                     ? obj4 = new Object();
@@ -82,47 +82,70 @@ public final /* synthetic */ class PowerNotificationWarningsGoogleImpl$$External
                     notificationCompat$Builder.setStyle(obj4);
                     notificationCompat$Builder.mSilent = true;
                     notificationCompat$Builder.setFlag(16, true);
-                    notificationCompat$Builder.addAction(context2.getString(2131951960), PowerUtils.createHelpArticlePendingIntent(2131952469, context2));
-                    notificationCompat$Builder.addAction(context2.getString(2131952467), PowerUtils.createBatterySettingsPendingIntent(context2));
-                    notificationCompat$Builder.mLocalOnly = true;
-                    PowerUtils.overrideNotificationAppName(context2, notificationCompat$Builder);
+                    notificationCompat$Builder.addAction(context2.getString(2131952446), PowerUtils.createBatterySettingsPendingIntent(context2));
+                    notificationCompat$Builder.addAction(context2.getString(2131951951), PowerUtils.createHelpArticlePendingIntent(2131952448, context2));
                     NotificationManager notificationManager = dockDefenderNotification.notificationManager;
                     if (notificationManager != null) {
-                        notificationManager.notifyAsUser("battery_defender", 2131952468, notificationCompat$Builder.build(), UserHandle.ALL);
+                        notificationManager.notifyAsUser("battery_defender", 2131952447, notificationCompat$Builder.build(), UserHandle.ALL);
                     }
                 }
-            } else if (list.contains(BatteryEventType.TEMP_DEFEND_BATTERY)) {
-                batteryDefenderNotificationHandler.onBatteryDefenderEvent(intValue2, DwellTempDefenderNotification.BatteryDefendType.TEMP_DEFEND);
-            } else if (list.contains(BatteryEventType.DWELL_DEFEND_BATTERY)) {
-                batteryDefenderNotificationHandler.onBatteryDefenderEvent(intValue2, DwellTempDefenderNotification.BatteryDefendType.DWELL_DEFEND);
             } else {
-                boolean isCharged = BatteryStatus.isCharged(1, batteryDefenderNotificationHandler.batteryLevel);
-                Utils$$ExternalSyntheticOutline0.m("onNonDefenderEvent: charged: ", "BatteryDefenderNotification", isCharged);
-                boolean z2 = batteryDefenderNotificationHandler.dockDefendEnabled;
+                boolean contains3 = list.contains(BatteryEventType.TEMP_DEFEND_BATTERY);
                 ContextScope contextScope = batteryDefenderNotificationHandler.backgroundCoroutineScope;
-                if (z2 && batteryDefenderNotificationHandler.inDefenderSection) {
-                    Log.d("BatteryDefenderNotification", "dockDefendEnabled:true, no post notification");
-                    batteryDefenderNotificationHandler.inDefenderSection = false;
-                    batteryDefenderNotificationHandler.getDwellTempDefenderNotification().cancelNotification();
-                    BuildersKt.launch$default(contextScope, (CoroutineContext) null, (CoroutineStart) null, new BatteryDefenderNotificationHandler$exitTempOrDwellDefendOnTablet$1(batteryDefenderNotificationHandler, (Continuation) null), 3);
-                } else if (!z2) {
-                    if (isCharged) {
-                        batteryDefenderNotificationHandler.getDwellTempDefenderNotification().cancelPostNotification();
-                    }
+                if (contains3 || list.contains(BatteryEventType.DWELL_DEFEND_BATTERY)) {
+                    boolean isPluggedIn = BatteryStatus.isPluggedIn(intValue2);
+                    Log.d("BatteryDefenderNotification", "onBatteryDefenderEvent, pluggedIn:" + isPluggedIn + ", inDefenderSection:" + batteryDefenderNotificationHandler.inDefenderSection);
                     if (batteryDefenderNotificationHandler.inDefenderSection) {
+                        DwellTempDefenderNotification dwellTempDefenderNotification = batteryDefenderNotificationHandler.getDwellTempDefenderNotification();
+                        MobileStatusTracker$MobileTelephonyCallback$$ExternalSyntheticOutline0.m("updateNotificationIfNeeded, notificationVisible:", dwellTempDefenderNotification.notificationVisible, "DwellTempDefenderNotification");
+                        if (dwellTempDefenderNotification.notificationVisible && isPluggedIn != dwellTempDefenderNotification.lastPlugged) {
+                            dwellTempDefenderNotification.lastPlugged = isPluggedIn;
+                            dwellTempDefenderNotification.sendDefenderNotification(isPluggedIn);
+                        }
+                    } else {
+                        batteryDefenderNotificationHandler.inDefenderSection = true;
+                        DwellTempDefenderNotification dwellTempDefenderNotification2 = batteryDefenderNotificationHandler.getDwellTempDefenderNotification();
+                        Log.d("DwellTempDefenderNotification", "showNotification, postNotificationVisible:" + dwellTempDefenderNotification2.postNotificationVisible + "->true");
+                        if (dwellTempDefenderNotification2.postNotificationVisible) {
+                            dwellTempDefenderNotification2.cancelPostNotification();
+                        }
+                        dwellTempDefenderNotification2.sendDefenderNotification(true);
+                        dwellTempDefenderNotification2.notificationVisible = true;
+                        dwellTempDefenderNotification2.lastPlugged = isPluggedIn;
+                        UiEventLogger uiEventLogger = batteryDefenderNotificationHandler.uiEventLogger;
+                        if (uiEventLogger != null) {
+                            uiEventLogger.log(BatteryMetricEvent.BATTERY_DEFENDER_NOTIFICATION);
+                        }
+                        BuildersKt.launch$default(contextScope, (CoroutineContext) null, (CoroutineStart) null, new BatteryDefenderNotificationHandler$onBatteryDefenderEvent$1(batteryDefenderNotificationHandler, (Continuation) null), 3);
+                    }
+                } else {
+                    boolean isCharged = BatteryStatus.isCharged(1, batteryDefenderNotificationHandler.batteryLevel);
+                    MobileStatusTracker$MobileTelephonyCallback$$ExternalSyntheticOutline0.m("onNonDefenderEvent: charged: ", isCharged, "BatteryDefenderNotification");
+                    boolean z2 = batteryDefenderNotificationHandler.dockDefendEnabled;
+                    if (z2 && batteryDefenderNotificationHandler.inDefenderSection) {
+                        Log.d("BatteryDefenderNotification", "dockDefendEnabled:true, no post notification");
                         batteryDefenderNotificationHandler.inDefenderSection = false;
                         batteryDefenderNotificationHandler.getDwellTempDefenderNotification().cancelNotification();
-                        BuildersKt.launch$default(contextScope, (CoroutineContext) null, (CoroutineStart) null, new BatteryDefenderNotificationHandler$exitTempOrDwellDefenderIfNeeded$1(batteryDefenderNotificationHandler, (Continuation) null), 3);
+                        BuildersKt.launch$default(contextScope, (CoroutineContext) null, (CoroutineStart) null, new BatteryDefenderNotificationHandler$exitTempOrDwellDefendOnTablet$1(batteryDefenderNotificationHandler, (Continuation) null), 3);
+                    } else if (!z2) {
+                        if (isCharged) {
+                            batteryDefenderNotificationHandler.getDwellTempDefenderNotification().cancelPostNotification();
+                        }
+                        if (batteryDefenderNotificationHandler.inDefenderSection) {
+                            batteryDefenderNotificationHandler.inDefenderSection = false;
+                            batteryDefenderNotificationHandler.getDwellTempDefenderNotification().cancelNotification();
+                            BuildersKt.launch$default(contextScope, (CoroutineContext) null, (CoroutineStart) null, new BatteryDefenderNotificationHandler$exitTempOrDwellDefenderIfNeeded$1(batteryDefenderNotificationHandler, (Continuation) null), 3);
+                        }
+                    } else if (intValue2 != 8) {
+                        DockDefenderNotification dockDefenderNotification2 = (DockDefenderNotification) lazy.getValue();
+                        dockDefenderNotification2.getClass();
+                        Log.d("DockDefenderNotification", "cancelNotification");
+                        NotificationManager notificationManager2 = dockDefenderNotification2.notificationManager;
+                        if (notificationManager2 != null) {
+                            notificationManager2.cancelAsUser("battery_defender", 2131952447, UserHandle.ALL);
+                        }
+                        BuildersKt.launch$default(contextScope, (CoroutineContext) null, (CoroutineStart) null, new BatteryDefenderNotificationHandler$exitDockDefenderIfNeeded$1(batteryDefenderNotificationHandler, (Continuation) null), 3);
                     }
-                } else if (intValue2 != 8) {
-                    DockDefenderNotification dockDefenderNotification2 = (DockDefenderNotification) lazy.getValue();
-                    dockDefenderNotification2.getClass();
-                    Log.d("DockDefenderNotification", "cancelNotification");
-                    NotificationManager notificationManager2 = dockDefenderNotification2.notificationManager;
-                    if (notificationManager2 != null) {
-                        notificationManager2.cancelAsUser("battery_defender", 2131952468, UserHandle.ALL);
-                    }
-                    BuildersKt.launch$default(contextScope, (CoroutineContext) null, (CoroutineStart) null, new BatteryDefenderNotificationHandler$exitDockDefenderIfNeeded$1(batteryDefenderNotificationHandler, (Continuation) null), 3);
                 }
             }
         }

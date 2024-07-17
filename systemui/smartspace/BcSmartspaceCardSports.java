@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.android.systemui.plugins.BcSmartspaceDataPlugin;
 import com.google.android.systemui.smartspace.logging.BcSmartspaceCardLoggingInfo;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class BcSmartspaceCardSports extends BcSmartspaceCardSecondary {
     public ImageView mFirstCompetitorLogo;
     public TextView mFirstCompetitorScore;
@@ -26,11 +26,11 @@ public class BcSmartspaceCardSports extends BcSmartspaceCardSecondary {
 
     public final void onFinishInflate() {
         super.onFinishInflate();
-        this.mSummaryView = (TextView) findViewById(2131362972);
-        this.mFirstCompetitorScore = (TextView) findViewById(2131362591);
-        this.mSecondCompetitorScore = (TextView) findViewById(2131363562);
-        this.mFirstCompetitorLogo = (ImageView) findViewById(2131362590);
-        this.mSecondCompetitorLogo = (ImageView) findViewById(2131363561);
+        this.mSummaryView = (TextView) findViewById(2131362948);
+        this.mFirstCompetitorScore = (TextView) findViewById(2131362571);
+        this.mSecondCompetitorScore = (TextView) findViewById(2131363533);
+        this.mFirstCompetitorLogo = (ImageView) findViewById(2131362570);
+        this.mSecondCompetitorLogo = (ImageView) findViewById(2131363532);
     }
 
     public final void resetUi() {

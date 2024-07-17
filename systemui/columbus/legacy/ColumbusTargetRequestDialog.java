@@ -6,7 +6,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.android.systemui.statusbar.phone.SystemUIDialog;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public final class ColumbusTargetRequestDialog extends SystemUIDialog {
     public TextView mContent;
     public Button mNegativeButton;
@@ -15,11 +15,11 @@ public final class ColumbusTargetRequestDialog extends SystemUIDialog {
 
     public final void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        setContentView(2131558526);
-        this.mTitle = (TextView) requireViewById(2131363868);
-        this.mContent = (TextView) requireViewById(2131362309);
-        this.mPositiveButton = (Button) requireViewById(2131363325);
-        this.mNegativeButton = (Button) requireViewById(2131363188);
+        setContentView(2131558520);
+        this.mTitle = (TextView) requireViewById(2131363834);
+        this.mContent = (TextView) requireViewById(2131362293);
+        this.mPositiveButton = (Button) requireViewById(2131363298);
+        this.mNegativeButton = (Button) requireViewById(2131363161);
     }
 
     public final void setMessage(CharSequence charSequence) {

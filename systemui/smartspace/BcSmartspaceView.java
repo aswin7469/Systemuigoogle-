@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import kotlin.jvm.internal.Intrinsics;
 
-/* compiled from: go/retraceme 2137a22d937c6ed93fd00fd873698000dad14919f0531176a184f8a975d2c6e7 */
+/* compiled from: go/retraceme db998610a30546cfb750cb42d68186f67be36966c6ca98c5d0200b062af37cac */
 public class BcSmartspaceView extends FrameLayout implements BcSmartspaceDataPlugin.SmartspaceTargetListener, BcSmartspaceDataPlugin.SmartspaceView {
     public static final boolean DEBUG = Log.isLoggable("BcSmartspaceView", 3);
     public final CardPagerAdapter mAdapter = new CardPagerAdapter(this, this.mConfigProvider);
@@ -130,7 +130,7 @@ public class BcSmartspaceView extends FrameLayout implements BcSmartspaceDataPlu
             constraintLayout.measure(View.MeasureSpec.makeMeasureSpec(this.mViewPager.getWidth(), 1073741824), View.MeasureSpec.makeMeasureSpec(this.mViewPager.getHeight(), 1073741824));
             constraintLayout.layout(this.mViewPager.getLeft(), this.mViewPager.getTop(), this.mViewPager.getRight(), this.mViewPager.getBottom());
             AnimatorSet animatorSet = new AnimatorSet();
-            float dimension = getContext().getResources().getDimension(2131165915);
+            float dimension = getContext().getResources().getDimension(2131165883);
             Property property = View.TRANSLATION_Y;
             animatorSet.play(ObjectAnimator.ofFloat(constraintLayout, property, new float[]{0.0f, ((float) (-getHeight())) - dimension}));
             animatorSet.play(ObjectAnimator.ofFloat(constraintLayout, View.ALPHA, new float[]{1.0f, 0.0f}));
@@ -277,13 +277,13 @@ public class BcSmartspaceView extends FrameLayout implements BcSmartspaceDataPlu
 
     public final void onFinishInflate() {
         super.onFinishInflate();
-        this.mViewPager = (ViewPager) findViewById(2131363659);
-        this.mPageIndicator = (PageIndicator) findViewById(2131363662);
+        this.mViewPager = (ViewPager) findViewById(2131363628);
+        this.mPageIndicator = (PageIndicator) findViewById(2131363630);
     }
 
     public final void onMeasure(int i, int i2) {
         int size = View.MeasureSpec.getSize(i2);
-        int dimensionPixelSize = getContext().getResources().getDimensionPixelSize(2131165916);
+        int dimensionPixelSize = getContext().getResources().getDimensionPixelSize(2131165884);
         if (size <= 0 || size >= dimensionPixelSize) {
             super.onMeasure(i, i2);
             setScaleX(1.0f);
